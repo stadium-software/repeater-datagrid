@@ -4,8 +4,8 @@ Using this module, you can use a *Repeater* control to create a server-side Data
 The module comes with two scripts and two CSS files. The scripts provide functionality to facilitate the rendering, sorting and paging features. The CSS makes a Stadium *Repeater* control look like a DataGrid. 
 
 ## Contents
-- [Repeater As DataGrid](#repeater-as-datagrid) <!-- omit -->
-  - [Contents](#contents) <!-- omit -->
+- [Repeater As DataGrid](#repeater-as-datagrid) <!-- omit in toc -->
+  - [Contents](#contents) <!-- omit in toc -->
 - [Version](#version)
 - [Database Setup](#database-setup)
   - [Application Setup](#application-setup)
