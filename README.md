@@ -19,15 +19,17 @@ To illustrate this module, it comes with a sample application that displays data
     - [Repeater](#repeater)
   - [Global Scripts](#global-scripts)
     - [Initialising the module](#initialising-the-module)
-    - [Querying the module](#querying-the-module)
+    - [Querying state of the DataGrid](#querying-state-of-the-datagrid)
   - [DataGrid Events](#datagrid-events)
     - [Sorting](#sorting)
     - [Paging](#paging)
     - [Link Columns](#link-columns)
   - [Page.Load](#pageload)
   - [CSS Setup](#css-setup)
+    - [Customising CSS](#customising-css)
+    - [CSS Upgrading](#css-upgrading)
 - [Custom Filters](#custom-filters)
-- [Showing Spinners](#showing-spinners)
+- [Loading Spinners](#loading-spinners)
 
 # Version
 1.0 initial
@@ -134,10 +136,233 @@ The final set of controls for the example application will look like this:
 ![](images/RepeaterColumns.png)
 
 ## Global Scripts
+The module requires two global scripts. The first one is used to set up the repeater to look and function like a DataGrid. The second one is used to query the module to find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. 
 
 ### Initialising the module
+1. Create a Global Script called "RepeaterDataGridInit"
+2. Add the input parameters below to the Global Script
+   1. ContainerClass
+   2. DefaultSortField
+   3. PageSize
+   4. TotalRecords
+3. Drag a *JavaScript* action into the script
+4. Add the Javascript below into the JavaScript code property
+```javascript
+/* Stadium Script v1.0 Init https://github.com/stadium-software/repeater-datagrid */
+let scope = this;
+let pageSize = parseInt(~.Parameters.Input.PageSize);
+let sortField = ~.Parameters.Input.DefaultSortField;
+let totalRecords = parseInt(~.Parameters.Input.TotalRecords);
+let containerClass = ~.Parameters.Input.ContainerClass;
+if (!containerClass) {
+     console.error("The ContainerClass parameter is required");
+     return false;
+}
+let container = document.querySelectorAll("." + containerClass);
+if (container.length == 0) {
+    console.error("The class '" + containerClass + "' is not assigned to any container");
+    return false;
+} else if (container.length > 1) {
+    console.error("The class '" + containerClass + "' is assigned to multiple containers");
+    return false;
+} else { 
+    container = container[0];
+}
+container.classList.add("stadium-dg-repeater");
+let getObjectName = (obj) => {
+    let objname = obj.id.replace("-container","");
+    do {
+        let arrNameParts = objname.split(/_(.*)/s);
+        objname = arrNameParts[1];
+    } while ((objname.match(/_/g) || []).length > 0 && !scope[`${objname}Classes`]);
+    return objname;
+};
+let sortEl = container.querySelector(".asc, .desc");
+if (sortEl) sortEl.classList.remove("asc", "desc");
+let cells = container.querySelectorAll(".grid-item");
+let headerCells = container.querySelectorAll(".grid-item:not(.grid-repeater-item)");
+let cellsPerRow = headerCells.length;
+let cellCount = 0;
+let alt = false;
+for (let i = 0; i < cells.length; i++) {
+    cellCount++;
+    if (alt) cells[i].classList.add("dg-alternate-row");
+    if (!alt) cells[i].classList.add("dg-row");
+    if (cellCount == 1) cells[i].classList.add("dg-first-cell");
+    if (cellCount == cellsPerRow) {
+        cells[i].classList.add("dg-last-cell");
+        cellCount = 0;
+        alt = !alt;
+    }
+}
+sessionStorage.setItem(containerClass + "_Page", 1);
+sessionStorage.setItem(containerClass + "_PageSize", pageSize);
+sessionStorage.setItem(containerClass + "_Offset", 0);
+sessionStorage.setItem(containerClass + "_TotalRecords", totalRecords);
+sessionStorage.setItem(containerClass + "_TotalPages", Math.ceil(totalRecords / pageSize));
+sessionStorage.setItem(containerClass + "_SortDirection", "");
+sessionStorage.setItem(containerClass + "_SortField", sortField);
+setPageLabel();
+setNextButton(1);
+setPrevButton(1);
 
-### Querying the module
+for (let i = 0; i < headerCells.length; i++) {
+    let inner = headerCells[i].querySelector(".link-container .btn-link");
+    if (inner) inner.addEventListener("mousedown", setSort);
+}
+if (container.querySelector(".previous-button")) { 
+    container.querySelector(".previous-button button").addEventListener("mousedown", previousPage);
+    container.querySelector(".previous-button").classList.add("disabled");
+}
+if (container.querySelector(".next-button")) { 
+    container.querySelector(".next-button button").addEventListener("mousedown", nextPage);
+}
+if (container.querySelector(".specific-page-go")) { 
+    container.querySelector(".specific-page-go button").addEventListener("mousedown", setPage);
+}
+function previousPage() {
+    let page = parseInt(sessionStorage.getItem(containerClass + "_Page"));
+    if (page > 1) { 
+        page = page - 1;
+        sessionStorage.setItem(containerClass + "_Page", page);
+        let offset = page * pageSize - pageSize;
+        sessionStorage.setItem(containerClass + "_Offset", offset);
+    }
+    setNextButton(page);
+    setPrevButton(page);
+    setPageLabel();
+}
+function setPrevButton(pg) { 
+    let previousButton = container.querySelector(".previous-button");
+    if (pg == 1) {
+        previousButton.classList.add("disabled");
+    } else { 
+        previousButton.classList.remove("disabled");
+    }
+}
+function nextPage() {
+    let page = parseInt(sessionStorage.getItem(containerClass + "_Page"));
+    if (page < parseInt(sessionStorage.getItem(containerClass + "_TotalPages"))) { 
+        page = page + 1;
+        sessionStorage.setItem(containerClass + "_Page", page);
+        let offset = page * pageSize - pageSize;
+        sessionStorage.setItem(containerClass + "_Offset", offset);
+    }
+    setNextButton(page);
+    setPrevButton(page);
+    setPageLabel();
+}
+function setNextButton(pg) { 
+    let nextButton = container.querySelector(".next-button");
+    if (pg == parseInt(sessionStorage.getItem(containerClass + "_TotalPages")) || parseInt(sessionStorage.getItem(containerClass + "_TotalPages")) < 2) {
+        nextButton.classList.add("disabled");
+    } else { 
+        nextButton.classList.remove("disabled");
+    }
+}
+function setPage() {
+    let pageInputContainer = container.querySelector(".specific-page");
+    let pageInput = pageInputContainer.querySelector("input");
+    let page = pageInput.value;
+    if (!isNaN(page) && page > 0 && page <= parseInt(sessionStorage.getItem(containerClass + "_TotalPages"))) {
+        sessionStorage.setItem(containerClass + "_Page", page);
+        let offset = page * pageSize - pageSize;
+        sessionStorage.setItem(containerClass + "_Offset", offset);
+        setNextButton(page);
+        setPrevButton(page);
+        setPageLabel();
+    }
+    setDMValues(pageInputContainer, "Text", "");
+}
+function setPageLabel() {
+    if (container.querySelector(".current-page") && parseInt(sessionStorage.getItem(containerClass + "_TotalPages")) > 0) {
+        container.querySelector(".current-page span").textContent = "Page " + parseInt(sessionStorage.getItem(containerClass + "_Page")).toLocaleString() + " of " + parseInt(sessionStorage.getItem(containerClass + "_TotalPages")).toLocaleString();
+    } else if (parseInt(sessionStorage.getItem(containerClass + "_TotalPages")) == 0) { 
+        container.querySelector(".current-page span").textContent = "No records found";
+    }
+}
+function setSort(e) { 
+    let clickedEl = e.target;
+    let colHead = clickedEl.textContent.toLowerCase();
+    sessionStorage.setItem(containerClass + "_SortField", clickedEl.textContent);
+    let currentSort = container.querySelector(".asc, .desc");
+    let allHeaders = container.querySelectorAll(".grid-item:not(.grid-repeater-item) .link-container");
+    if (!currentSort) {
+        for (let i = 0; i < allHeaders.length; i++) {
+            if (allHeaders[i].textContent.toLowerCase() == colHead.toLowerCase()) {
+                allHeaders[i].classList.add("asc");
+            }
+        }
+    } else if (currentSort.classList.contains("desc") && (currentSort.textContent.toLowerCase() == colHead.toLowerCase())) {
+        currentSort.classList.remove("desc");
+        currentSort.classList.add("asc");
+        sessionStorage.setItem(containerClass + "_SortDirection", "asc");
+    } else if (currentSort.classList.contains("asc") && (currentSort.textContent.toLowerCase() == colHead.toLowerCase())) {
+        currentSort.classList.remove("asc");
+        currentSort.classList.add("desc");
+        sessionStorage.setItem(containerClass + "_SortDirection", "desc");
+    } else if ((currentSort.classList.contains("asc") || currentSort.classList.contains("desc")) && (currentSort.textContent.toLowerCase() != colHead.toLowerCase())) {
+        currentSort.classList.remove("asc", "desc");
+        for (let i = 0; i < allHeaders.length; i++) {
+            if (allHeaders[i].textContent.toLowerCase() == colHead.toLowerCase()) {
+                allHeaders[i].classList.add("asc");
+                sessionStorage.setItem(containerClass + "_SortDirection", "asc");
+            }
+        }
+    }
+}
+function setDMValues(ob, property, value) {
+    let obname = getObjectName(ob);
+    scope[`${obname}${property}`] = value;
+}
+```
+
+### Querying state of the DataGrid
+1. Create a second Global Script called "RepeaterDataGridState"
+2. Add the input parameters below to the Global Script
+   1. ContainerClass
+3. Add the output parameters below to the Global Script
+   1. Values
+4. Drag a *JavaScript* action into the script
+5. Add the Javascript below into the JavaScript code property
+```javascript
+/* Stadium Script v1.0 GetData https://github.com/stadium-software/repeater-datagrid */
+let scope = this;
+let containerClass = ~.Parameters.Input.ContainerClass;
+if (!containerClass) {
+     console.error("The ContainerClass parameter is required");
+     return false;
+}
+let container = document.querySelector("." + containerClass);
+let getObjectName = (obj) => {
+     let objname = obj.id.replace("-item0-cell0-container", "");
+     do {
+          let arrNameParts = objname.split(/_(.*)/s);
+          objname = arrNameParts[1];
+     } while ((objname.match(/_/g) || []).length > 0 && !scope[`${objname}Classes`]);
+     return objname;
+};
+return { Page: sessionStorage.getItem(containerClass + "_Page"),
+     PageSize: sessionStorage.getItem(containerClass + "_PageSize"),
+     Offset: sessionStorage.getItem(containerClass + "_Offset"),
+     TotalRecords: sessionStorage.getItem(containerClass + "_TotalRecords"),
+     TotalPages: sessionStorage.getItem(containerClass + "_TotalPages"),
+     SortDirection: sessionStorage.getItem(containerClass + "_SortDirection"),
+     SortField: sessionStorage.getItem(containerClass + "_SortField"),
+     Data: getDMValues(container.querySelectorAll("." + containerClass + " .grid-repeater-item")[0], "List")
+};
+function getDMValues(ob, property) {
+     if (ob) {
+          let obname = getObjectName(ob);
+          return scope[`${obname}${property}`];
+     }
+}
+```
+6. Drag a *SetValue* under the *Javascript* action
+   1. Set ouput parameter called "Values" as the target 
+   2. Set the *Javascript* action as the source
+
+![](images/StateSetValue.png)
 
 ## DataGrid Events
 
@@ -150,8 +375,25 @@ The final set of controls for the example application will look like this:
 ## Page.Load
 
 ## CSS Setup
+The CSS below is required for the correct functioning of the module. Some elements can be [customised](#customising-css) using a variables CSS file. 
+
+**Stadium 6.6 or higher**
+1. Create a folder called "CSS" inside of your Embedded Files in your application
+2. Drag the two CSS files from this repo [*stadium-repeater-datagrid-variables.css*](stadium-repeater-datagrid-variables.css) and [*stadium-repeater-datagrid.css*](stadium-repeater-datagrid.css) into that folder
+3. Paste the link tags below into the *head* property of your application
+```html
+<link rel="stylesheet" href="{EmbeddedFiles}/CSS/stadium-repeater-datagrid.css">
+<link rel="stylesheet" href="{EmbeddedFiles}/CSS/stadium-repeater-datagrid-variables.css">
+``` 
+
+### Customising CSS
+1. Open the CSS file called [*stadium-repeater-datagrid-variables.css*](stadium-repeater-datagrid-variables.css) from this repo
+2. Adjust the variables in the *:root* element as you see fit
+3. Overwrite the file in the CSS folder of your application with the customised file
+
+### CSS Upgrading
+To upgrade the CSS in this module, follow the [steps outlined in this repo](https://github.com/stadium-software/samples-upgrading)
 
 # Custom Filters
 
-# Showing Spinners
-
+# Loading Spinners
