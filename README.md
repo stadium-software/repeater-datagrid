@@ -12,7 +12,9 @@ To illustrate this module, it comes with a sample application that displays data
   - [Application Properties](#application-properties)
   - [Connector](#connector)
     - [Queries](#queries)
-  - [Type](#type)
+  - [Types](#types)
+    - [DataSet Type](#dataset-type)
+    - [DataGridState Type](#datagridstate-type)
   - [Page](#page)
     - [Main Container](#main-container)
     - [Grid](#grid)
@@ -20,12 +22,14 @@ To illustrate this module, it comes with a sample application that displays data
     - [Paging Container](#paging-container)
   - [Global Scripts](#global-scripts)
     - [Initialising the module](#initialising-the-module)
-    - [Getting state of the DataGrid](#getting-state-of-the-datagrid)
+    - [The state of the DataGrid](#the-state-of-the-datagrid)
+    - [RepeaterDataGridState return object](#repeaterdatagridstate-return-object)
   - [Events](#events)
+    - [GetData Page Script](#getdata-page-script)
+    - [Page.Load](#pageload)
     - [Sorting](#sorting)
     - [Paging](#paging)
     - [Link Columns](#link-columns)
-  - [Page.Load](#pageload)
   - [CSS Setup](#css-setup)
     - [Customising CSS](#customising-css)
     - [CSS Upgrading](#css-upgrading)
@@ -93,7 +97,10 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 
 ![](images/DBQueries.png)
 
-## Type
+## Types
+Add the two types below
+
+### DataSet Type
 Add a new type that contains all the properties (columns) in your dataset. 
 
 The example dataset type is called "UserDG" and contains the following columns:
@@ -105,6 +112,19 @@ The example dataset type is called "UserDG" and contains the following columns:
 6. adddatetime (Any)
 
 ![](images/ColumnType.png)
+
+### DataGridState Type
+Add a second type with the following properties
+
+1. page (any)
+2. pageSize (any)
+3. offset (any)
+4. totalRecords (any)
+5. totalPages (any)
+6. sortDirection (any)
+7. sortField (any)
+
+![](images/DGStateType.png)
 
 ## Page
 To function correctly, the page must contain a number of controls. Some of these provide for DataGrid-specific functions, like paging, while others serve to simply display the data from your dataset. Each control set is defined in detail below. 
@@ -350,7 +370,7 @@ function setDMValues(ob, property, value) {
 }
 ```
 
-### Getting state of the DataGrid
+### The state of the DataGrid
 1. Create a second Global Script called "RepeaterDataGridState"
 2. Add the **input** parameters below to the Global Script
    1. ContainerClass
@@ -360,36 +380,20 @@ function setDMValues(ob, property, value) {
 5. Add the Javascript below into the JavaScript code property
 ```javascript
 /* Stadium Script v1.0 GetData https://github.com/stadium-software/repeater-datagrid */
-let scope = this;
 let containerClass = ~.Parameters.Input.ContainerClass;
 if (!containerClass) {
      console.error("The ContainerClass parameter is required");
      return false;
 }
-let container = document.querySelector("." + containerClass);
-let getObjectName = (obj) => {
-     let objname = obj.id.replace("-item0-cell0-container", "");
-     do {
-          let arrNameParts = objname.split(/_(.*)/s);
-          objname = arrNameParts[1];
-     } while ((objname.match(/_/g) || []).length > 0 && !scope[`${objname}Classes`]);
-     return objname;
+return { 
+    page: sessionStorage.getItem(containerClass + "_Page"),
+    pageSize: sessionStorage.getItem(containerClass + "_PageSize"),
+    offset: sessionStorage.getItem(containerClass + "_Offset"),
+    totalRecords: sessionStorage.getItem(containerClass + "_TotalRecords"),
+    totalPages: sessionStorage.getItem(containerClass + "_TotalPages"),
+    sortDirection: sessionStorage.getItem(containerClass + "_SortDirection"),
+    sortField: sessionStorage.getItem(containerClass + "_SortField")
 };
-return { Page: sessionStorage.getItem(containerClass + "_Page"),
-     PageSize: sessionStorage.getItem(containerClass + "_PageSize"),
-     Offset: sessionStorage.getItem(containerClass + "_Offset"),
-     TotalRecords: sessionStorage.getItem(containerClass + "_TotalRecords"),
-     TotalPages: sessionStorage.getItem(containerClass + "_TotalPages"),
-     SortDirection: sessionStorage.getItem(containerClass + "_SortDirection"),
-     SortField: sessionStorage.getItem(containerClass + "_SortField"),
-     Data: getDMValues(container.querySelectorAll("." + containerClass + " .grid-repeater-item")[0], "List")
-};
-function getDMValues(ob, property) {
-     if (ob) {
-          let obname = getObjectName(ob);
-          return scope[`${obname}${property}`];
-     }
-}
 ```
 6. Drag a *SetValue* under the *Javascript* action
    1. Set ouput parameter called "Values" as the **target**
@@ -397,16 +401,59 @@ function getDMValues(ob, property) {
 
 ![](images/StateSetValue.png)
 
-## Events
+### RepeaterDataGridState return object
+The "RepeaterDataGridState" script returns an object with the following properties
 
+1. Page: The page of data to show (int)
+2. PageSize: The number of records each page must contain (int)
+3. Offset: The number of rows to skip before starting to return rows from the query (PageSize * Page) (int)
+4. TotalRecords: The total number of records the dataset contains (int)
+5. TotalPages: the total number of pages the DataGrid will handle (TotalRecords / PageSize) (int)
+6. SortDirection: one of these values (string)
+   1. Empty (initial value)
+   2. 'asc'
+   3. 'desc'
+7. SortField: the field the data is currently sorted by (string)
+
+**Example "RepeaterDataGridState" Return Object**
+```javascript
+{ 
+    Page: 1,
+    PageSize: 10,
+    Offset: 410,
+    TotalRecords: 2000000,
+    TotalPages: 200000,
+    SortDirection: 'asc',
+    SortField: 'ID'
+}
+```
+
+## Events
+The "RepeaterDataGridInit" script allows for the initalisation of the *Repeater* as a DataGrid. Call this script to initialise the DataGrid and whenever the dataset changes, like when it is filtered for example. 
+
+Using the "RepeaterDataGridState" script, you can find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. You can then use this information when querying the data source and assigning the correct set of data to the *Repeater*. 
+
+In all sorting and paging events, the example application simply calls a Page Script called "GetData"
+
+### GetData Page Script
+1. Create a Script called "GetData" on the page
+2. Drag the "RepeaterDataGridState" script into the "GetData" script
+   1. Add the class you assigned to the Main Container to the input parameter of the "RepeaterDataGridState" script (e.g. server-side-datagrid)
+3. Drag the "Select" query under the "RepeaterDataGridState" script
+4. Complete the "Select" query input parameters
+   1. offsetRows: Assign the outp0ut from the "RepeaterDataGridState" script "= ~.RepeaterDataGridState.Values.Offset"
+   2. pageSize: 
+
+### Page.Load
 
 ### Sorting
+1. For all header *Link* controls
+   1. Create the *Click Event Handler*
+   2. Drag the "GetData" script into the control *Click Event Handler* script
 
 ### Paging
 
 ### Link Columns
-
-## Page.Load
 
 ## CSS Setup
 The CSS below is required for the correct functioning of the module. Some elements can be [customised](#customising-css) using a variables CSS file. 
