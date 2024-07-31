@@ -11,7 +11,7 @@ To illustrate this module, it comes with a sample application that displays data
 - [Application](#application)
   - [Application Properties](#application-properties)
   - [Connector](#connector)
-  - [Queries](#queries)
+    - [Queries](#queries)
   - [Type](#type)
   - [Page](#page)
     - [Container](#container)
@@ -49,13 +49,13 @@ Set up your connector as you normally would.
 
 To run the example application, create a database connector to the database you [created above](#database-setup). 
 
-## Queries
+### Queries
 The module requires two data sets: 
 
 1. The total number of records
-2. The data to be attached to the *Repeater*
+2. The data to be attached to the *Repeater* (a list of objects from a database or an API)
 
-Add the basic queries below to make the example application work complete with paging and sorting functions
+Add the basic queries below include parameters for paging and sorting
 
 Example "TotalRecords" Query
 ```sql
@@ -66,11 +66,11 @@ Example "Select" Query
 ```sql
 SELECT 
 	ID
-      ,name
-      ,gender
-      ,address
-      ,birthdate
-      ,adddatetime
+    ,name
+    ,gender
+    ,address
+    ,birthdate
+    ,adddatetime
   FROM [User]
   ORDER BY
   case when UPPER(@sortField) = 'ID' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN ID END ASC,
@@ -89,7 +89,7 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
 
 ## Type
-Add a new type that contains all the columns in your dataset. 
+Add a new type that contains all the properties (columns) in your dataset. 
 
 The example dataset type is called "UserDG" and contains the following columns:
 1. ID (Any)
@@ -124,7 +124,7 @@ The final set of controls for the example application will look like this:
 
 ### Repeater
 1. Drag a *Repeater* control into the *Grid* control (under the header row)
-2. Assign the *Type* you careated above to the *Repeater* *ListItem Type* property
+2. Assign the *Type* you created above to the *Repeater* *ListItem Type* property
 ![](images/RepeaterListItemType.png)
 3. For each column you wish to display
    1. Drag a *Label* control into the *Grid*
