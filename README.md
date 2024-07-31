@@ -14,13 +14,14 @@ To illustrate this module, it comes with a sample application that displays data
     - [Queries](#queries)
   - [Type](#type)
   - [Page](#page)
-    - [Container](#container)
+    - [Main Container](#main-container)
     - [Grid](#grid)
     - [Repeater](#repeater)
+    - [Paging Container](#paging-container)
   - [Global Scripts](#global-scripts)
     - [Initialising the module](#initialising-the-module)
-    - [Querying state of the DataGrid](#querying-state-of-the-datagrid)
-  - [DataGrid Events](#datagrid-events)
+    - [Getting state of the DataGrid](#getting-state-of-the-datagrid)
+  - [Events](#events)
     - [Sorting](#sorting)
     - [Paging](#paging)
     - [Link Columns](#link-columns)
@@ -112,7 +113,7 @@ The final set of controls for the example application will look like this:
 
 ![](images/PageControls.png)
 
-### Container
+### Main Container
 1. Drag a *Container* control to the page
 2. Give it a suitable name (e.g. ServerSideDataGridContainer)
 3. Add a class of your choice to the control *Classes* property to uniquely identify the control (e.g. server-side-datagrid)
@@ -122,23 +123,53 @@ The final set of controls for the example application will look like this:
 2. For each column you wish to display
    1. Drag a *Link* control into the *Grid* if the column must be sortable
    2. Drag a *Label* control into the *Grid* if the column should not be sortable
-   3. Leave the column empty if you don't want to display a column header
+   3. Leave the column empty if you don't want to display a column header (add a dummy control for now that you can remove later)
 
 ![](images/GridHeaders.png)
 
 ### Repeater
 1. Drag a *Repeater* control into the *Grid* control (under the header row)
 2. Assign the *Type* you created above to the *Repeater* *ListItem Type* property
+
 ![](images/RepeaterListItemType.png)
+
 3. For each column you wish to display
    1. Drag a *Label* control into the *Grid*
    2. Map the correct ListItem Property to the *Label Text* property (example shows the "ID" Label)
+
 ![](images/BindingControlsToRepeater.png)
 
 ![](images/RepeaterColumns.png)
 
+### Paging Container
+1. Drag a *Container* control below the *Grid* control, but inside the main container 
+2. Give it a suitable name (e.g. PagingContainer)
+3. Add the class "paging" to the *Container* classes property (it must be this exact class!)
+4. Drag a *Button* control into the PagingContainer
+   1. Name the Button "PreviousButton"
+   2. Add the text "<<" in the button text property
+   3. Add the class "previous-button" to the button classes property
+5. Drag another *Button* control into the PagingContainer and place it next to the PreviousButton
+   1. Name the Button "NextButton"
+   2. Add the text ">>" in the button text property
+   3. Add the class "next-button" to the button classes property
+6. Drag a *TextBox* into the the PagingContainer and place it next to the NextButton
+   1. Name the TextBox "SpecificPageTextBox"
+   2. Add the class "specific-page" to the SpecificPageTextBox classes property
+7. Drag a *Button* control into the PagingContainer and place it next to the SpecificPageTextBox control
+   1. Name the Button "SpecificPageGoButton"
+   2. Add the text "Go" in the button text property
+   3. Add the class "specific-page-go" to the button classes property
+8. Drag a *Label* control to the PagingContainer and place it next to the SpecificPageGoButton control
+   1. Name the Label "CurPageLabel"
+   2. Add the class "current-page" to the abel classes property
+
+![](images/PagingContainer.png)
+
 ## Global Scripts
-The module requires two global scripts. The first one is used to set up the repeater to look and function like a DataGrid. The second one is used to query the module to find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. 
+The module requires two global scripts. The first one is used to set up the repeater to look and function like a DataGrid. 
+
+The second one is used to query the module to find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. You will use this information when querying the data source. 
 
 ### Initialising the module
 1. Create a Global Script called "RepeaterDataGridInit"
@@ -319,11 +350,11 @@ function setDMValues(ob, property, value) {
 }
 ```
 
-### Querying state of the DataGrid
+### Getting state of the DataGrid
 1. Create a second Global Script called "RepeaterDataGridState"
-2. Add the input parameters below to the Global Script
+2. Add the **input** parameters below to the Global Script
    1. ContainerClass
-3. Add the output parameters below to the Global Script
+3. Add the **output** parameters below to the Global Script
    1. Values
 4. Drag a *JavaScript* action into the script
 5. Add the Javascript below into the JavaScript code property
@@ -361,12 +392,13 @@ function getDMValues(ob, property) {
 }
 ```
 6. Drag a *SetValue* under the *Javascript* action
-   1. Set ouput parameter called "Values" as the target 
+   1. Set ouput parameter called "Values" as the **target**
    2. Set the *Javascript* action as the source
 
 ![](images/StateSetValue.png)
 
-## DataGrid Events
+## Events
+
 
 ### Sorting
 
