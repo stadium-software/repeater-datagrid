@@ -7,24 +7,24 @@ To illustrate this module, it comes with a sample application that displays data
 
 ## Contents <!-- omit in toc -->
 - [Version](#version)
-- [Database Setup](#database-setup)
-- [Setup](#setup)
-  - [Application Setup](#application-setup)
-  - [Connector Setup](#connector-setup)
-  - [Queries Setup](#queries-setup)
-  - [Types Setup](#types-setup)
-  - [Page Setup](#page-setup)
+- [Database](#database)
+- [Application](#application)
+  - [Application Properties](#application-properties)
+  - [Connector](#connector)
+  - [Queries](#queries)
+  - [Type](#type)
+  - [Page](#page)
     - [Container](#container)
     - [Grid](#grid)
     - [Repeater](#repeater)
-  - [Global Script Setup](#global-script-setup)
+  - [Global Scripts](#global-scripts)
     - [Initialising the module](#initialising-the-module)
     - [Querying the module](#querying-the-module)
   - [DataGrid Events](#datagrid-events)
     - [Sorting](#sorting)
     - [Paging](#paging)
     - [Link Columns](#link-columns)
-  - [Page.Load Setup](#pageload-setup)
+  - [Page.Load](#pageload)
   - [CSS Setup](#css-setup)
 - [Custom Filters](#custom-filters)
 - [Showing Spinners](#showing-spinners)
@@ -32,24 +32,24 @@ To illustrate this module, it comes with a sample application that displays data
 # Version
 1.0 initial
 
-# Database Setup
+# Database
 The module can be configured to work with any data source and connector. 
 
 The attached example application uses a database connector and queries. To run the sample application, you need to:
 1. Create a database in a SQL Server instance called "StadiumLoadTest"
 2. The unzip and run the SQL script in the database folder in this repo (this will create a table called "User") [script file](database/script.zip)
 
-# Setup
+# Application
 
-## Application Setup
+## Application Properties
 1. Check the *Enable Style Sheet* checkbox in the application properties
 
-## Connector Setup
+## Connector
 Set up your connector as you normally would. 
 
 To run the example application, create a database connector to the database you [created above](#database-setup). 
 
-## Queries Setup
+## Queries
 The module requires two data sets: 
 
 1. The total number of records
@@ -88,7 +88,7 @@ SELECT
 OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
 
-## Types Setup
+## Type
 Add a new type that contains all the columns in your dataset. 
 
 The example dataset type is called "UserDG" and contains the following columns:
@@ -101,7 +101,7 @@ The example dataset type is called "UserDG" and contains the following columns:
 
 ![](images/ColumnType.png)
 
-## Page Setup
+## Page
 To function correctly, the page must contain a number of controls. Some of these provide for DataGrid-specific functions, like paging, while others serve to simply display the data from your dataset. Each control set is defined in detail below. 
 
 The final set of controls for the example application will look like this:
@@ -133,7 +133,7 @@ The final set of controls for the example application will look like this:
 
 ![](images/RepeaterColumns.png)
 
-## Global Script Setup
+## Global Scripts
 
 ### Initialising the module
 
@@ -147,7 +147,7 @@ The final set of controls for the example application will look like this:
 
 ### Link Columns
 
-## Page.Load Setup
+## Page.Load
 
 ## CSS Setup
 
