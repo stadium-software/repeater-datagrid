@@ -90,6 +90,8 @@ SELECT
 OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
 
+![](images/DBQueries.png)
+
 ## Type
 Add a new type that contains all the properties (columns) in your dataset. 
 
