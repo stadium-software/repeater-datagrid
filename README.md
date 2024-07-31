@@ -14,14 +14,15 @@ To illustrate this module, it comes with a sample application that displays data
     - [Container](#container)
     - [Grid](#grid)
     - [Repeater](#repeater)
-    - [Sorting](#sorting)
-    - [Paging](#paging)
-    - [Link Columns](#link-columns)
   - [Connector Setup](#connector-setup)
   - [Queries Setup](#queries-setup)
   - [Global Script Setup](#global-script-setup)
     - [Initialising the module](#initialising-the-module)
     - [Querying the module](#querying-the-module)
+  - [DataGrid Events](#datagrid-events)
+    - [Sorting](#sorting)
+    - [Paging](#paging)
+    - [Link Columns](#link-columns)
   - [Page.Load Setup](#pageload-setup)
   - [CSS Setup](#css-setup)
 - [Custom Filters](#custom-filters)
@@ -75,21 +76,18 @@ The final set of controls for the example application will look like this:
 
 ### Repeater
 1. Drag a *Repeater* control into the *Grid* control
-2. For each column you wish to display
+2. Assign the *Type* you careated above to the *Repeater* *ListItem Type* property
+![](images/RepeaterListItemType.png)
+3. For each column you wish to display
    1. Drag a *Label* control into the *Grid*
+   2. Map the correct ListItem Property to the *Label Text* property (example shows the "ID" Label)
+![](images/BindingControlsToRepeater.png)
 
 ![](images/RepeaterColumns.png)
-
-### Sorting
-
-### Paging
-
-### Link Columns
 
 ## Connector Setup
 
 ## Queries Setup
-
 
 Example "Select" Query
 ```sql
@@ -138,6 +136,14 @@ select count(ID) as total from [User]
 ### Initialising the module
 
 ### Querying the module
+
+## DataGrid Events
+
+### Sorting
+
+### Paging
+
+### Link Columns
 
 ## Page.Load Setup
 
