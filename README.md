@@ -10,7 +10,7 @@ To illustrate this module, it comes with a sample application that displays data
 - [Database Setup](#database-setup)
   - [Connector Setup](#connector-setup)
   - [Queries Setup](#queries-setup)
-  - [Application Setup](#application-setup)
+- [Application Setup](#application-setup)
   - [Types Setup](#types-setup)
   - [Page Setup](#page-setup)
     - [Container](#container)
@@ -69,7 +69,7 @@ SELECT
 OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
 
-## Application Setup
+# Application Setup
 1. Check the *Enable Style Sheet* checkbox in the application properties
 
 ## Types Setup
