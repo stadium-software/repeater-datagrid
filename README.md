@@ -1,16 +1,17 @@
 # Repeater As DataGrid <!-- omit in toc -->
 Using this module, you can use a *Repeater* control to create a server-side DataGrid that looks and works similar to the standard Stadium *DataGrid* control. 
 
-The module comes with two scripts and two CSS files. The scripts provide functionality to facilitate the rendering, sorting and paging features. The CSS makes a Stadium *Repeater* control look like a DataGrid. 
+The module comes with two scripts and two CSS files. The scripts provide functionality to facilitate the rendering, sorting and paging features. The CSS makes a Stadium *Repeater* control look like a DataGrid. The *Repeater* control must be custom built to look like the dataset that it will display. 
 
 To illustrate this module, it comes with a sample application that displays data from a database table with 2 million records. This module can be configured to use any connector and data source, and works with data sources of any size. 
 
 ## Contents <!-- omit in toc -->
 - [Version](#version)
 - [Database Setup](#database-setup)
+- [Setup](#setup)
+  - [Application Setup](#application-setup)
   - [Connector Setup](#connector-setup)
   - [Queries Setup](#queries-setup)
-- [Application Setup](#application-setup)
   - [Types Setup](#types-setup)
   - [Page Setup](#page-setup)
     - [Container](#container)
@@ -38,6 +39,11 @@ The attached example application uses a database connector and queries. To run t
 1. Create a database in a SQL Server instance called "StadiumLoadTest"
 2. The unzip and run the SQL script in the database folder in this repo (this will create a table called "User") [script file](database/script.zip)
 
+# Setup
+
+## Application Setup
+1. Check the *Enable Style Sheet* checkbox in the application properties
+
 ## Connector Setup
 Set up your connector as you normally would. 
 
@@ -49,7 +55,7 @@ The module requires two data sets:
 1. The total number of records
 2. The data to be attached to the *Repeater*
 
-Add the basic queries below to make the example work with paging functions, but not yet sorting ([sorting setup below](#sorting))
+Add the basic queries below to make the example application work complete with paging and sorting functions
 
 Example "TotalRecords" Query
 ```sql
@@ -66,11 +72,21 @@ SELECT
       ,birthdate
       ,adddatetime
   FROM [User]
+  ORDER BY
+  case when UPPER(@sortField) = 'ID' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN ID END ASC,
+  case when UPPER(@sortField) = 'ID' AND LOWER(@sortDirection) = 'desc' THEN ID END DESC,
+  case when LOWER(@sortField) = 'name' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN [name] END ASC,
+  case when LOWER(@sortField) = 'name' AND LOWER(@sortDirection) = 'desc' THEN [name] END DESC,
+  case when LOWER(@sortField) = 'gender' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN gender END ASC,
+  case when LOWER(@sortField) = 'gender' AND LOWER(@sortDirection) = 'desc' THEN gender END DESC,
+  case when LOWER(@sortField) = 'address' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN [address] END ASC,
+  case when LOWER(@sortField) = 'address' AND LOWER(@sortDirection) = 'desc' THEN [address] END DESC,
+  case when LOWER(@sortField) = 'birthdate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN birthdate END ASC,
+  case when LOWER(@sortField) = 'birthdate' AND LOWER(@sortDirection) = 'desc' THEN birthdate END DESC,
+  case when @sortField = '' then ID end ASC,
+  case when @sortField = 'undefined' then ID end ASC
 OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
-
-# Application Setup
-1. Check the *Enable Style Sheet* checkbox in the application properties
 
 ## Types Setup
 Add a new type that contains all the columns in your dataset. 
