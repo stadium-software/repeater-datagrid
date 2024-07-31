@@ -3,7 +3,7 @@ Using this module, you can use a *Repeater* control to create a server-side Data
 
 The module comes with two scripts and two CSS files. The scripts provide functionality to facilitate the rendering, sorting and paging features. The CSS makes a Stadium *Repeater* control look like a DataGrid. 
 
-To illustrate the purpose and power of this module, the example application fetches data from a database table that contains 2 million records. However, this module can be configured to use any connector and data source, and works independent of the number of records in the datasource. 
+To illustrate this module, it comes with a sample application that displays data from a database table with 2 million records. This module can be configured to use any connector and data source, and works with data sources of any size. 
 
 ## Contents <!-- omit in toc -->
 - [Version](#version)
@@ -31,9 +31,9 @@ To illustrate the purpose and power of this module, the example application fetc
 1.0 initial
 
 # Database Setup
-The attached example application uses a database connector and queries. However, the module also works with any other data source, such as a REST service for example. 
+The module can be configured to work with any data source and connector. 
 
-To run the sample application, you need to:
+The attached example application uses a database connector and queries. To run the sample application, you need to:
 1. Create a database in a SQL Server instance called "StadiumLoadTest"
 2. The unzip and run the SQL script in the database folder in this repo (this will create a table called "User") [script file](database/script.zip)
 
@@ -78,7 +78,7 @@ The final set of controls for the example application will look like this:
 2. For each column you wish to display
    1. Drag a *Label* control into the *Grid*
 
-![](images/GridRepeater.png)
+![](images/RepeaterColumns.png)
 
 ### Sorting
 
