@@ -8,14 +8,14 @@ To illustrate this module, it comes with a sample application that displays data
 ## Contents <!-- omit in toc -->
 - [Version](#version)
 - [Database Setup](#database-setup)
+  - [Connector Setup](#connector-setup)
+  - [Queries Setup](#queries-setup)
   - [Application Setup](#application-setup)
   - [Types Setup](#types-setup)
   - [Page Setup](#page-setup)
     - [Container](#container)
     - [Grid](#grid)
     - [Repeater](#repeater)
-  - [Connector Setup](#connector-setup)
-  - [Queries Setup](#queries-setup)
   - [Global Script Setup](#global-script-setup)
     - [Initialising the module](#initialising-the-module)
     - [Querying the module](#querying-the-module)
@@ -37,6 +37,37 @@ The module can be configured to work with any data source and connector.
 The attached example application uses a database connector and queries. To run the sample application, you need to:
 1. Create a database in a SQL Server instance called "StadiumLoadTest"
 2. The unzip and run the SQL script in the database folder in this repo (this will create a table called "User") [script file](database/script.zip)
+
+## Connector Setup
+Set up your connector as you normally would. 
+
+To run the example application, create a database connector to the database you [created above](#database-setup). 
+
+## Queries Setup
+The module requires two data sets: 
+
+1. The total number of records
+2. The data to be attached to the *Repeater*
+
+Add the basic queries below to make the example work with paging functions, but not yet sorting ([sorting setup below](#sorting))
+
+Example "TotalRecords" Query
+```sql
+select count(ID) as total from [User]
+```
+
+Example "Select" Query
+```sql
+SELECT 
+	ID
+      ,name
+      ,gender
+      ,address
+      ,birthdate
+      ,adddatetime
+  FROM [User]
+OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
+```
 
 ## Application Setup
 1. Check the *Enable Style Sheet* checkbox in the application properties
@@ -67,15 +98,16 @@ The final set of controls for the example application will look like this:
 3. Add a class of your choice to the control *Classes* property to uniquely identify the control (e.g. server-side-datagrid)
 
 ### Grid
-1. Drag a *Grid* control to the page
+1. Drag a *Grid* control into the *Container* control
 2. For each column you wish to display
    1. Drag a *Link* control into the *Grid* if the column must be sortable
    2. Drag a *Label* control into the *Grid* if the column should not be sortable
+   3. Leave the column empty if you don't want to display a column header
 
 ![](images/GridHeaders.png)
 
 ### Repeater
-1. Drag a *Repeater* control into the *Grid* control
+1. Drag a *Repeater* control into the *Grid* control (under the header row)
 2. Assign the *Type* you careated above to the *Repeater* *ListItem Type* property
 ![](images/RepeaterListItemType.png)
 3. For each column you wish to display
@@ -84,52 +116,6 @@ The final set of controls for the example application will look like this:
 ![](images/BindingControlsToRepeater.png)
 
 ![](images/RepeaterColumns.png)
-
-## Connector Setup
-
-## Queries Setup
-
-Example "Select" Query
-```sql
-SELECT 
-	ID
-      ,name
-      ,gender
-      ,address
-      ,birthdate
-      ,adddatetime
-  FROM [User]
-  where 
-  	ID = IsNull(nullif(@ID,''),ID) AND 
-    [name] like IsNull(nullif('%' + @name + '%',''),[name]) AND 
-    gender = IsNull(nullif(@gender,''),gender) AND 
-    (adddatetime >= IsNull(nullif(@fromadddatetime,''),'1900-01-01') AND 
-	adddatetime <= IsNull(nullif(@toadddatetime,''),'2100-01-01'))
-  ORDER BY
-  case when UPPER(@sortField) = 'ID' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN ID END ASC,
-  case when UPPER(@sortField) = 'ID' AND LOWER(@sortDirection) = 'desc' THEN ID END DESC,
-  case when LOWER(@sortField) = 'name' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN [name] END ASC,
-  case when LOWER(@sortField) = 'name' AND LOWER(@sortDirection) = 'desc' THEN [name] END DESC,
-  case when LOWER(@sortField) = 'gender' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN gender END ASC,
-  case when LOWER(@sortField) = 'gender' AND LOWER(@sortDirection) = 'desc' THEN gender END DESC,
-  case when LOWER(@sortField) = 'address' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN [address] END ASC,
-  case when LOWER(@sortField) = 'address' AND LOWER(@sortDirection) = 'desc' THEN [address] END DESC,
-  case when LOWER(@sortField) = 'birthdate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN birthdate END ASC,
-  case when LOWER(@sortField) = 'birthdate' AND LOWER(@sortDirection) = 'desc' THEN birthdate END DESC,
-  case when @sortField = '' then ID end ASC,
-  case when @sortField = 'undefined' then ID end ASC
-OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
-```
-Example "TotalRecords" Query
-```sql
-select count(ID) as total from [User]
-  where 
-  	ID = IsNull(nullif(@ID,''),ID) AND 
-    [name] like IsNull(nullif('%' + @name + '%',''),[name]) AND 
-    gender = IsNull(nullif(@gender,''),gender) AND 
-    (adddatetime >= IsNull(nullif(@fromadddatetime,''),'1900-01-01') AND 
-	adddatetime <= IsNull(nullif(@toadddatetime,''),'2100-01-01'))
-```
 
 ## Global Script Setup
 
