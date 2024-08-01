@@ -162,7 +162,9 @@ The final set of controls for the example application will look like this:
 ![](images/BindingControlsToRepeater.png)
 
 ### Paging Container
-To enable paging a specific set of controls with specific classnames is required as described below
+To enable paging a specific set of controls with specific classnames is required as depicted and described below
+
+![](images/PagingContainer.png)
 
 1. Drag a *Container* control below the *Grid* control, but inside the main container 
 2. Give it a suitable name (e.g. PagingContainer)
@@ -186,8 +188,7 @@ To enable paging a specific set of controls with specific classnames is required
    1. Name the Label "CurPageLabel"
    2. Add the class "current-page" to the label classes property
 
-![](images/PagingContainer.png)
-
+**Result**
 ![](images/PagingRendered.png)
 
 ## Global Scripts
