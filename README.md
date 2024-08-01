@@ -53,7 +53,7 @@ The attached example application uses a database connector and queries. To run t
 1. Check the *Enable Style Sheet* checkbox in the application properties
 
 ## Connector
-Set up your connector as you normally would. 
+Set up your connector to your datasource as you normally would. 
 
 To run the example application, create a database connector to the database you [created above](#database-setup). 
 
@@ -63,14 +63,14 @@ The module requires two data sets:
 1. The total number of records
 2. The data to be attached to the *Repeater* (a list of objects from a database or an API)
 
-Add the basic queries below include parameters for paging and sorting
+Create the queries below to run the example application. These queries include parameters to facilitate paging and sorting. 
 
-Example "TotalRecords" Query
+**Example "TotalRecords" Query**
 ```sql
 select count(ID) as total from [User]
 ```
 
-Example "Select" Query
+**Example "Select" Query**
 ```sql
 SELECT 
 	ID
@@ -194,9 +194,7 @@ To enable paging a specific set of controls with specific classnames is required
 ![](images/PagingRendered.png)
 
 ## Global Scripts
-The module requires two global scripts. The first one is used to set up the repeater to look and function like a DataGrid. 
-
-The second one is used to query the module to find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. You will use this information when querying the data source. 
+The module requires two global scripts. The first one is used to set up the repeater to look and function like a DataGrid. The second one is used to query the module to find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. 
 
 ### Initialisation Script
 1. Create a Global Script called "RepeaterDataGridInit"
