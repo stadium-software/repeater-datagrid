@@ -21,7 +21,7 @@ To illustrate this module, it comes with a sample application that displays data
     - [Repeater](#repeater)
     - [Paging Container](#paging-container)
   - [Global Scripts](#global-scripts)
-    - [Initialising the module](#initialising-the-module)
+    - [Initialisation Script](#initialisation-script)
     - [The state of the DataGrid](#the-state-of-the-datagrid)
     - [RepeaterDataGridState return object](#repeaterdatagridstate-return-object)
   - [Events](#events)
@@ -189,6 +189,7 @@ To enable paging a specific set of controls with specific classnames is required
    2. Add the class "current-page" to the label classes property
 
 **Result**
+
 ![](images/PagingRendered.png)
 
 ## Global Scripts
@@ -196,7 +197,7 @@ The module requires two global scripts. The first one is used to set up the repe
 
 The second one is used to query the module to find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. You will use this information when querying the data source. 
 
-### Initialising the module
+### Initialisation Script
 1. Create a Global Script called "RepeaterDataGridInit"
 2. Add the input parameters below to the Global Script
    1. ContainerClass
