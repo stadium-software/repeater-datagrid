@@ -22,8 +22,8 @@ To illustrate this module, it comes with a sample application that displays data
     - [Paging Container](#paging-container)
   - [Global Scripts](#global-scripts)
     - [Initialisation Script](#initialisation-script)
-    - [The state of the DataGrid](#the-state-of-the-datagrid)
-    - [RepeaterDataGridState return object](#repeaterdatagridstate-return-object)
+    - [DataGrid State Script](#datagrid-state-script)
+    - [RepeaterDataGridState Return Object](#repeaterdatagridstate-return-object)
   - [Events](#events)
     - [GetData Page Script](#getdata-page-script)
     - [Page.Load](#pageload)
@@ -377,7 +377,7 @@ function setDMValues(ob, property, value) {
 }
 ```
 
-### The state of the DataGrid
+### DataGrid State Script
 1. Create a second Global Script called "RepeaterDataGridState"
 2. Add the **input** parameters below to the Global Script
    1. ContainerClass
@@ -403,11 +403,11 @@ return { page: sessionStorage.getItem(containerClass + "_Page"),
 ```
 6. Drag a *SetValue* under the *Javascript* action
    1. Set ouput parameter called "Values" as the **target**
-   2. Set the *Javascript* action as the source
+   2. Set the *Javascript* action as the **source**
 
 ![](images/StateSetValue.png)
 
-### RepeaterDataGridState return object
+### RepeaterDataGridState Return Object
 The "RepeaterDataGridState" script returns an object called "Values" with the properties below. 
 
 To easily access the values, drag type called "DataGridState" to the script and assign the Values output from the "RepeaterDataGridState" script to the type. 
