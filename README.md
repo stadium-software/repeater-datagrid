@@ -501,11 +501,14 @@ Drag the "Initialise" script into the Page.Load event handler
 
 ### Link Columns
 To add a link columns to the Datagrid: 
-1. Drag an *Image* or *Link* control into the *Repeater* control
+1. Drag an *Image*, *Link* or *Button* control into the *Repeater* control
+
+![](images/EditLink.png)
+
 2. Create the *Click* Event Handler
 3. In the *Click* Event Handler, you have access to all the controls in that *Repeater* row in the *Controls* group in the properties dropdown 
 
-**Example shows how to access the ID.Label Text Property**
+**Example shows how to access the ID.Label Text Property in a CLICK event handler**
 
 ![](images/AccessColumnValues.png)
 
