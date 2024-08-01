@@ -1,4 +1,4 @@
-# Repeater As DataGrid <!-- omit in toc -->
+# DataGrid Repeater <!-- omit in toc -->
 Using this module, you can use a *Repeater* control to create a server-side DataGrid that looks and works similar to the standard Stadium *DataGrid* control. 
 
 The module comes with two scripts and two CSS files. The scripts provide functionality to facilitate the rendering, sorting and paging features. The CSS makes a Stadium *Repeater* control look like a DataGrid. The *Repeater* control must be custom built to look like the dataset that it will display. 
@@ -149,7 +149,7 @@ The final set of controls for the example application will look like this:
 
 ### Repeater
 1. Drag a *Repeater* control into the *Grid* control (under the header row)
-2. Assign the *Type* you created above to the *Repeater* *ListItem Type* property
+2. Assign the *Type* that contains the fields from your datasource you created above to the *Repeater* *ListItem Type* property
 
 ![](images/RepeaterListItemType.png)
 
@@ -157,9 +157,9 @@ The final set of controls for the example application will look like this:
    1. Drag a *Label* control into the *Grid*
    2. Map the correct ListItem Property to the *Label Text* property (example shows the "ID" Label)
 
-![](images/BindingControlsToRepeater.png)
-
 ![](images/RepeaterColumns.png)
+
+![](images/BindingControlsToRepeater.png)
 
 ### Paging Container
 To enable paging a specific set of controls with specific classnames is required as described below
@@ -184,9 +184,11 @@ To enable paging a specific set of controls with specific classnames is required
    3. Add the class "specific-page-go" to the button classes property
 8. Drag a *Label* control to the PagingContainer and place it next to the SpecificPageGoButton control
    1. Name the Label "CurPageLabel"
-   2. Add the class "current-page" to the abel classes property
+   2. Add the class "current-page" to the label classes property
 
 ![](images/PagingContainer.png)
+
+![](images/PagingRendered.png)
 
 ## Global Scripts
 The module requires two global scripts. The first one is used to set up the repeater to look and function like a DataGrid. 
