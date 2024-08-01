@@ -474,10 +474,10 @@ In all sorting and paging events, the example application simply calls a Page Sc
    1. Assign the output called "Values" from the "RepeaterDataGridState" script to the "DataGridState" type
 4. Drag the "Select" query into the script
 5. Complete the "Select" query input parameters by selecting the properties from the "DataGridState" type. If you are using your own datasource, you need to make use of these values to return the correct dataset to the *Repeater*
-   1. offsetRows
-   2. pageSize
-   3. sortField
-   4. sortDirection
+   1. offsetRows: = ~.DataGridState.offset
+   2. pageSize: = ~.DataGridState.pageSize
+   3. sortField: = ~.DataGridState.sortField
+   4. sortDirection: = ~.DataGridState.sortDirection
 6. Drag a *SetValue* to the script to set the Repeater data
    1. Target: The Repeater List Property
    2. Source: The data returned by the connector
