@@ -103,7 +103,7 @@ Add the two types below
 ### DataSet Type
 Add a new type that contains all the properties (columns) in your dataset. 
 
-The example dataset type is called "UserDG" and contains the following columns:
+The example dataset type is called "DataSet" and contains the following columns:
 1. ID (Any)
 2. name (Any)
 3. gender (Any)
@@ -162,6 +162,8 @@ The final set of controls for the example application will look like this:
 ![](images/RepeaterColumns.png)
 
 ### Paging Container
+To enable paging a specific set of controls with specific classnames is required as described below
+
 1. Drag a *Container* control below the *Grid* control, but inside the main container 
 2. Give it a suitable name (e.g. PagingContainer)
 3. Add the class "paging" to the *Container* classes property (it must be this exact class!)
@@ -230,20 +232,21 @@ let getObjectName = (obj) => {
     } while ((objname.match(/_/g) || []).length > 0 && !scope[`${objname}Classes`]);
     return objname;
 };
-let sortEl = container.querySelector(".asc, .desc");
-if (sortEl) sortEl.classList.remove("asc", "desc");
+let sortEl = container.querySelector(".dg-asc-sorting, .dg-desc-sorting");
+if (sortEl) sortEl.classList.remove("dg-asc-sorting", "dg-desc-sorting");
 let cells = container.querySelectorAll(".grid-item");
 let headerCells = container.querySelectorAll(".grid-item:not(.grid-repeater-item)");
 let cellsPerRow = headerCells.length;
+let styleText = document.querySelector('[href*="stadium-repeater-datagrid.css"]').sheet;
+let st = '.' + containerClass + '.stadium-dg-repeater {.grid-item:nth-child(' + cellsPerRow + 'n+1) {border-left: 1px solid var(--dg-border-color);}.grid-item:nth-child(' + cellsPerRow + 'n) {border-right: 1px solid var(--dg-border-color);}';
+styleText.insertRule(st, 0);
 let cellCount = 0;
 let alt = false;
 for (let i = 0; i < cells.length; i++) {
     cellCount++;
     if (alt) cells[i].classList.add("dg-alternate-row");
     if (!alt) cells[i].classList.add("dg-row");
-    if (cellCount == 1) cells[i].classList.add("dg-first-cell");
     if (cellCount == cellsPerRow) {
-        cells[i].classList.add("dg-last-cell");
         cellCount = 0;
         alt = !alt;
     }
@@ -338,27 +341,27 @@ function setSort(e) {
     let clickedEl = e.target;
     let colHead = clickedEl.textContent.toLowerCase();
     sessionStorage.setItem(containerClass + "_SortField", clickedEl.textContent);
-    let currentSort = container.querySelector(".asc, .desc");
+    let currentSort = container.querySelector(".dg-asc-sorting, .dg-desc-sorting");
     let allHeaders = container.querySelectorAll(".grid-item:not(.grid-repeater-item) .link-container");
     if (!currentSort) {
         for (let i = 0; i < allHeaders.length; i++) {
             if (allHeaders[i].textContent.toLowerCase() == colHead.toLowerCase()) {
-                allHeaders[i].classList.add("asc");
+                allHeaders[i].classList.add("dg-asc-sorting");
             }
         }
-    } else if (currentSort.classList.contains("desc") && (currentSort.textContent.toLowerCase() == colHead.toLowerCase())) {
-        currentSort.classList.remove("desc");
-        currentSort.classList.add("asc");
+    } else if (currentSort.classList.contains("dg-desc-sorting") && (currentSort.textContent.toLowerCase() == colHead.toLowerCase())) {
+        currentSort.classList.remove("dg-desc-sorting");
+        currentSort.classList.add("dg-asc-sorting");
         sessionStorage.setItem(containerClass + "_SortDirection", "asc");
-    } else if (currentSort.classList.contains("asc") && (currentSort.textContent.toLowerCase() == colHead.toLowerCase())) {
-        currentSort.classList.remove("asc");
-        currentSort.classList.add("desc");
+    } else if (currentSort.classList.contains("dg-asc-sorting") && (currentSort.textContent.toLowerCase() == colHead.toLowerCase())) {
+        currentSort.classList.remove("dg-asc-sorting");
+        currentSort.classList.add("dg-desc-sorting");
         sessionStorage.setItem(containerClass + "_SortDirection", "desc");
-    } else if ((currentSort.classList.contains("asc") || currentSort.classList.contains("desc")) && (currentSort.textContent.toLowerCase() != colHead.toLowerCase())) {
-        currentSort.classList.remove("asc", "desc");
+    } else if ((currentSort.classList.contains("dg-asc-sorting") || currentSort.classList.contains("dg-desc-sorting")) && (currentSort.textContent.toLowerCase() != colHead.toLowerCase())) {
+        currentSort.classList.remove("dg-asc-sorting", "dg-desc-sorting");
         for (let i = 0; i < allHeaders.length; i++) {
             if (allHeaders[i].textContent.toLowerCase() == colHead.toLowerCase()) {
-                allHeaders[i].classList.add("asc");
+                allHeaders[i].classList.add("dg-asc-sorting");
                 sessionStorage.setItem(containerClass + "_SortDirection", "asc");
             }
         }
@@ -385,14 +388,13 @@ if (!containerClass) {
      console.error("The ContainerClass parameter is required");
      return false;
 }
-return { 
-    page: sessionStorage.getItem(containerClass + "_Page"),
-    pageSize: sessionStorage.getItem(containerClass + "_PageSize"),
-    offset: sessionStorage.getItem(containerClass + "_Offset"),
-    totalRecords: sessionStorage.getItem(containerClass + "_TotalRecords"),
-    totalPages: sessionStorage.getItem(containerClass + "_TotalPages"),
-    sortDirection: sessionStorage.getItem(containerClass + "_SortDirection"),
-    sortField: sessionStorage.getItem(containerClass + "_SortField")
+return { page: sessionStorage.getItem(containerClass + "_Page"),
+     pageSize: sessionStorage.getItem(containerClass + "_PageSize"),
+     offset: sessionStorage.getItem(containerClass + "_Offset"),
+     totalRecords: sessionStorage.getItem(containerClass + "_TotalRecords"),
+     totalPages: sessionStorage.getItem(containerClass + "_TotalPages"),
+     sortDirection: sessionStorage.getItem(containerClass + "_SortDirection"),
+     sortField: sessionStorage.getItem(containerClass + "_SortField")
 };
 ```
 6. Drag a *SetValue* under the *Javascript* action

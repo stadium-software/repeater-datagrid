@@ -35,26 +35,18 @@
         font-size: var(--dg-header-font-size);
     }
 
-    .dg-first-cell {
-        border-left: 1px solid var(--dg-border-color);
-    }
-
-    .dg-last-cell {
-        border-right: 1px solid var(--dg-border-color);
-    }
-
     .dg-alternate-row {
         background-color: var(--dg-alternate-row-bg-color);
     }
 
-    .asc {
+    .dg-asc-sorting {
         background-image: var(--dg-sorting-asc-icon);
         background-repeat: no-repeat;
         background-position: right center;
         background-size: var(--dg-sorting-icon-size);
     }
 
-    .desc {
+    .dg-desc-sorting {
         background-image: var(--dg-sorting-desc-icon);
         background-repeat: no-repeat;
         background-position: right center;
