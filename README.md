@@ -491,6 +491,8 @@ In all sorting and paging events, the example application simply calls a Page Sc
 ### Page.Load
 Drag the "Initialise" script into the Page.Load event handler
 
+![](images/InitialisePageLoad.png)
+
 ### Sorting
 1. For all header *Link* controls
    1. Create the *Click Event Handler*
