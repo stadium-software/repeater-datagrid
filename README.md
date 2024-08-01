@@ -114,7 +114,7 @@ The example dataset type is called "DataSet" and contains the following columns:
 ![](images/ColumnType.png)
 
 ### DataGridState Type
-Add a second type with the following properties
+Add a second type called "DataGridState" with the following properties
 
 1. page (any)
 2. pageSize (any)
@@ -404,29 +404,31 @@ return { page: sessionStorage.getItem(containerClass + "_Page"),
 ![](images/StateSetValue.png)
 
 ### RepeaterDataGridState return object
-The "RepeaterDataGridState" script returns an object with the following properties
+The "RepeaterDataGridState" script returns an object called "Values" with the properties below. 
 
-1. Page: The page of data to show (int)
-2. PageSize: The number of records each page must contain (int)
-3. Offset: The number of rows to skip before starting to return rows from the query (PageSize * Page) (int)
-4. TotalRecords: The total number of records the dataset contains (int)
-5. TotalPages: the total number of pages the DataGrid will handle (TotalRecords / PageSize) (int)
-6. SortDirection: one of these values (string)
+To easily access the values, drag type called "DataGridState" to the script and assign the Values output from the "RepeaterDataGridState" script to the type. 
+
+1. page: The page of data to show (int)
+2. pageSize: The number of records each page must contain (int)
+3. offset: The number of rows to skip before starting to return rows from the query (PageSize * Page) (int)
+4. totalRecords: The total number of records the dataset contains (int)
+5. totalPages: the total number of pages the DataGrid will handle (TotalRecords / PageSize) (int)
+6. sortDirection: one of these values (string)
    1. Empty (initial value)
    2. 'asc'
    3. 'desc'
-7. SortField: the field the data is currently sorted by (string)
+7. sortField: the field the data is currently sorted by (string)
 
 **Example "RepeaterDataGridState" Return Object**
 ```javascript
 { 
-    Page: 1,
-    PageSize: 10,
-    Offset: 410,
-    TotalRecords: 2000000,
-    TotalPages: 200000,
-    SortDirection: 'asc',
-    SortField: 'ID'
+    page: 1,
+    pageSize: 10,
+    offset: 410,
+    totalRecords: 2000000,
+    totalPages: 200000,
+    sortDirection: 'asc',
+    sortField: 'ID'
 }
 ```
 
@@ -441,10 +443,19 @@ In all sorting and paging events, the example application simply calls a Page Sc
 1. Create a Script called "GetData" on the page
 2. Drag the "RepeaterDataGridState" script into the "GetData" script
    1. Add the class you assigned to the Main Container to the input parameter of the "RepeaterDataGridState" script (e.g. server-side-datagrid)
-3. Drag the "Select" query under the "RepeaterDataGridState" script
-4. Complete the "Select" query input parameters
-   1. offsetRows: Assign the outp0ut from the "RepeaterDataGridState" script "= ~.RepeaterDataGridState.Values.Offset"
-   2. pageSize: 
+3. Drag the type called "DataGridState" to the script
+   1. Assign the output called "Values" from the "RepeaterDataGridState" script to the "DataGridState" type
+4. Drag the "Select" query into the script
+5. Complete the "Select" query input parameters by selecting the properties from the "DataGridState" type. If you are using your own datasource, you need to make use of these values to return the correct dataset to the *Repeater*
+   1. offsetRows
+   2. pageSize
+   3. sortField
+   4. sortDirection
+6. Drag a *SetValue* to the script to set the Repeater data
+   1. Target: The Repeater List Property
+   2. Source: The data returned by the connector
+
+![](images/RepeaterListAssignment.png)
 
 ### Page.Load
 
