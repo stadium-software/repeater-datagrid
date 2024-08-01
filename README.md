@@ -458,6 +458,8 @@ In events that initialise or re-initialise the DataGrid, the example application
 
 5.  Drag the "RepeaterDataGridInit" script to the event Handler
 
+**Initialise Script**
+
 ![](images/InitialiseScript.png)
 
 ### GetData Page Script
@@ -481,6 +483,8 @@ In all sorting and paging events, the example application simply calls a Page Sc
    2. Source: The data returned by the connector
 
 ![](images/RepeaterListAssignment.png)
+
+**GetData Script**
 
 ![](images/GetDataScript.png)
 
