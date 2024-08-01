@@ -426,7 +426,7 @@ To easily access the values, drag type called "DataGridState" to the script and 
 **Example "RepeaterDataGridState" Return Object**
 ```javascript
 { 
-    page: 1,
+    page: 41,
     pageSize: 10,
     offset: 410,
     totalRecords: 2000000,
