@@ -25,6 +25,7 @@ To illustrate this module, it comes with a sample application that displays data
     - [DataGrid State Script](#datagrid-state-script)
     - [RepeaterDataGridState Return Object](#repeaterdatagridstate-return-object)
   - [Events](#events)
+  - [Initialise Page Script](#initialise-page-script)
     - [GetData Page Script](#getdata-page-script)
     - [Page.Load](#pageload)
     - [Sorting](#sorting)
@@ -437,14 +438,36 @@ To easily access the values, drag type called "DataGridState" to the script and 
 ```
 
 ## Events
-The "RepeaterDataGridInit" script allows for the initalisation of the *Repeater* as a DataGrid. Call this script to initialise the DataGrid and whenever the dataset changes, like when it is filtered for example. 
+Alll events in the example application either call a script to initialise the DataGrid or one to retreive the DataGrid state. 
 
-Using the "RepeaterDataGridState" script, you can find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. You can then use this information when querying the data source and assigning the correct set of data to the *Repeater*. 
+## Initialise Page Script
+The "RepeaterDataGridInit" script allows for the initalisation of the *Repeater* as a DataGrid. Call this script to initialise the DataGrid in the Page.Load script and whenever the dataset changes, like when it is filtered for example. 
+
+In events that initialise or re-initialise the DataGrid, the example application simply calls a Page Script called "Initialise"
+
+1. Create a Script called "Initialise" under the page
+2. Drag the "TotalRecords" query to the script
+3. Drag the "Select" query to the script and complete the input parameters
+   1. offsetRows: 0 (to start with the first record the initial offset 0)
+   2. pageSize: an interger that defines how many records the DataGrid shows (e.g. 10)
+   3. sortField: a string specifying the initial column by which the DataGrid is sorted (e.g. ID)
+   4. sortDirection: a string specifying initial sort direction of the DataGrid (e.g. asc)
+4. Drag a *SetValue* action into the script
+   1. Target: The List property of the *Repeater*
+   2. Source: the dataset returned by the query
+
+![](images/SetRepeaterData.png)
+
+5.  Drag the "RepeaterDataGridInit" script to the event Handler
+
+![](images/InitialiseScript.png)
+
+### GetData Page Script
+Using the "RepeaterDataGridState" script, you can find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. You can then use this information when querying the data source and assigning the correct set of data to the *Repeater*. Use this script in the Link.Click events that handle sorting as well as the Button.Click events that handle the paging of the DataGrid. 
 
 In all sorting and paging events, the example application simply calls a Page Script called "GetData"
 
-### GetData Page Script
-1. Create a Script called "GetData" on the page
+1. Create a Script called "GetData" under the page
 2. Drag the "RepeaterDataGridState" script into the "GetData" script
    1. Add the class you assigned to the Main Container to the input parameter of the "RepeaterDataGridState" script (e.g. server-side-datagrid)
 3. Drag the type called "DataGridState" to the script
@@ -461,7 +484,10 @@ In all sorting and paging events, the example application simply calls a Page Sc
 
 ![](images/RepeaterListAssignment.png)
 
+![](images/GetDataScript.png)
+
 ### Page.Load
+Drag the "Initialise" script into the Page.Load event handler
 
 ### Sorting
 1. For all header *Link* controls
@@ -469,8 +495,19 @@ In all sorting and paging events, the example application simply calls a Page Sc
    2. Drag the "GetData" script into the control *Click Event Handler* script
 
 ### Paging
+1. For all paging *Button* controls
+   1. Create the *Click Event Handler*
+   2. Drag the "GetData" script into the control *Click Event Handler* script
 
 ### Link Columns
+To add a link columns to the Datagrid: 
+1. Drag an *Image* or *Link* control into the *Repeater* control
+2. Create the *Click* Event Handler
+3. In the *Click* Event Handler, you have access to all the controls in that *Repeater* row in the *Controls* group in the properties dropdown 
+
+**Example shows how to access the ID.Label Text Property**
+
+![](images/AccessColumnValues.png)
 
 ## CSS Setup
 The CSS below is required for the correct functioning of the module. Some elements can be [customised](#customising-css) using a variables CSS file. 
