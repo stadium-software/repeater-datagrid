@@ -34,8 +34,8 @@ To illustrate this module, it comes with a sample application that displays data
   - [CSS Setup](#css-setup)
     - [Customising CSS](#customising-css)
     - [CSS Upgrading](#css-upgrading)
-- [Custom Filters](#custom-filters)
 - [Loading Spinners](#loading-spinners)
+- [Custom Filters](#custom-filters)
 
 # Version
 1.0 initial
@@ -494,10 +494,14 @@ Drag the "Initialise" script into the Page.Load event handler
    1. Create the *Click Event Handler*
    2. Drag the "GetData" script into the control *Click Event Handler* script
 
+![](images/SortingEventHandler.png)
+
 ### Paging
 1. For all paging *Button* controls
    1. Create the *Click Event Handler*
    2. Drag the "GetData" script into the control *Click Event Handler* script
+
+![](images/PagingEventHandler.png)
 
 ### Link Columns
 To add a link columns to the Datagrid: 
@@ -532,6 +536,7 @@ The CSS below is required for the correct functioning of the module. Some elemen
 ### CSS Upgrading
 To upgrade the CSS in this module, follow the [steps outlined in this repo](https://github.com/stadium-software/samples-upgrading)
 
-# Custom Filters
-
 # Loading Spinners
+
+
+# Custom Filters
