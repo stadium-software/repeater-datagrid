@@ -5,6 +5,8 @@ The module comes with two scripts and two CSS files. The scripts provide functio
 
 To illustrate this module, it comes with a sample application that displays data from a database table with 2 million records. This module can be configured to use any connector and data source, and works with data sources of any size. 
 
+https://github.com/user-attachments/assets/f81a7c90-6d37-46a6-ab27-01619f19d5d0
+
 ## Contents <!-- omit in toc -->
 - [Version](#version)
 - [Database](#database)
