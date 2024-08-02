@@ -27,7 +27,7 @@ https://github.com/user-attachments/assets/f81a7c90-6d37-46a6-ab27-01619f19d5d0
     - [DataGrid State Script](#datagrid-state-script)
     - [RepeaterDataGridState Return Object](#repeaterdatagridstate-return-object)
   - [Events](#events)
-  - [Initialise Page Script](#initialise-page-script)
+    - [Initialise Page Script](#initialise-page-script)
     - [GetData Page Script](#getdata-page-script)
     - [Page.Load](#pageload)
     - [Sorting](#sorting)
@@ -442,7 +442,7 @@ To easily access the values, drag type called "DataGridState" to the script and 
 ## Events
 Alll events in the example application either call a script to initialise the DataGrid or one to retreive the DataGrid state. 
 
-## Initialise Page Script
+### Initialise Page Script
 The "RepeaterDataGridInit" script allows for the initalisation of the *Repeater* as a DataGrid. Call this script to initialise the DataGrid in the Page.Load script and whenever the dataset changes, like when it is filtered for example. 
 
 In events that initialise or re-initialise the DataGrid, the example application simply calls a Page Script called "Initialise"
