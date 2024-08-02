@@ -36,6 +36,8 @@ To illustrate this module, it comes with a sample application that displays data
     - [CSS Upgrading](#css-upgrading)
 - [Loading Spinners](#loading-spinners)
 - [Custom Filters](#custom-filters)
+  - [Query Changes](#query-changes)
+  - [Page Changes](#page-changes)
 
 # Version
 1.0 initial
@@ -516,7 +518,7 @@ To add a link columns to the Datagrid:
 2. Create the *Click* Event Handler
 3. In the *Click* Event Handler, you have access to all the controls in that *Repeater* row in the *Controls* group in the properties dropdown 
 
-**Example shows how to access the ID.Label Text Property in a CLICK event handler**
+**Example shows how to access the ID.Label Text Property in a EditImage.Click event handler**
 
 ![](images/AccessColumnValues.png)
 
@@ -541,6 +543,127 @@ The CSS below is required for the correct functioning of the module. Some elemen
 To upgrade the CSS in this module, follow the [steps outlined in this repo](https://github.com/stadium-software/samples-upgrading)
 
 # Loading Spinners
+To add a loading spinner to the DataGrid
 
+1. Add the [Spinner Repo](https://github.com/stadium-software/spinners) to your application
+2. Drag a *Container* control anywhere into the "ServerSideDataGridContainer" and name it "Spinner"
+3. Add the classes "stadium-spinner spinner-contained" to the "Spinner"
+4. Add a class for the type of spinner you would like to display (e.g. spinner-type-1)
+5. Drag the "Spinner" Glopbal Script to the Page.Load for page that will use the spinner
+6. Add a *SetValue* action to any script when you want to show or hide the spinner
+   1. Set the "Spinner.Visible" property to "true" to show the spinner
+   2. Set the "Spinner.Visible" property to "false" to hide the spinner
 
 # Custom Filters
+Adding custom filters to the DataGrid requires twofold:
+
+1. Additional conditions must be added into the datasource, the query or API call
+2. Controls that enable users to provide filter criteria needs to eb added to the page
+
+## Query Changes
+For the example application, this means extending the sql queries as folows
+
+**Example "TotalRecords" Query**
+```sql
+select count(ID) as total from [User]
+  where 
+  	ID = IsNull(nullif(@ID,''),ID) AND 
+    [name] like IsNull(nullif('%' + @name + '%',''),[name]) AND 
+    gender = IsNull(nullif(@gender,''),gender) AND 
+    (adddatetime >= IsNull(nullif(@fromadddatetime,''),'1900-01-01') AND 
+	adddatetime <= IsNull(nullif(@toadddatetime,''),'2100-01-01'))
+```
+
+**Example "Select" Query**
+```sql
+SELECT 
+	ID
+      ,name
+      ,gender
+      ,address
+      ,birthdate
+      ,adddatetime
+  FROM [User]
+  where 
+  	ID = IsNull(nullif(@ID,''),ID) AND 
+    [name] like IsNull(nullif('%' + @name + '%',''),[name]) AND 
+    gender = IsNull(nullif(@gender,''),gender) AND 
+    (adddatetime >= IsNull(nullif(@fromadddatetime,''),'1900-01-01') AND 
+	adddatetime <= IsNull(nullif(@toadddatetime,''),'2100-01-01'))
+  ORDER BY
+  case when UPPER(@sortField) = 'ID' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN ID END ASC,
+  case when UPPER(@sortField) = 'ID' AND LOWER(@sortDirection) = 'desc' THEN ID END DESC,
+  case when LOWER(@sortField) = 'name' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN [name] END ASC,
+  case when LOWER(@sortField) = 'name' AND LOWER(@sortDirection) = 'desc' THEN [name] END DESC,
+  case when LOWER(@sortField) = 'gender' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN gender END ASC,
+  case when LOWER(@sortField) = 'gender' AND LOWER(@sortDirection) = 'desc' THEN gender END DESC,
+  case when LOWER(@sortField) = 'address' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN [address] END ASC,
+  case when LOWER(@sortField) = 'address' AND LOWER(@sortDirection) = 'desc' THEN [address] END DESC,
+  case when LOWER(@sortField) = 'birthdate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN birthdate END ASC,
+  case when LOWER(@sortField) = 'birthdate' AND LOWER(@sortDirection) = 'desc' THEN birthdate END DESC,
+  case when @sortField = '' then ID end ASC,
+  case when @sortField = 'undefined' then ID end ASC
+OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
+```
+
+## Page Changes
+The example application provides users with an opportunity to filter the results by
+
+1. An ID
+2. A Gender (chosen from a dropdown)
+3. Where the name contains a specific substring
+4. Records between two dates
+
+The resulting filter will look like this
+
+![](images/FilterControls.png)
+
+1. Add a *Grid* control above the "ServerSideDataGridContainer" container
+2. For the ID filter
+   1. Add a *Label* to the *Grid*
+   2. Add something suitable into the *Text* property
+   3. Place a *TextBox* control next to the *Label*
+   4. Name the TextBox "IDTextBox"
+3. For the Gender filter
+   1. Add a *Label* to the *Grid*
+   2. Add something suitable into the *Text* property
+   3. Place a *DropDown* control next to the *Label*
+   4. Name the TextBox "GenderDropDown"
+   5. Add the values below to the *Options* property
+```json
+= [{"text":"", "value":""},{"text":"Male","value":"1"},{"text":"Female","value":"2"},{"text":"Rather not say","value":"3"}]
+```
+1. For the Name filter
+   1. Add a *Label* to the *Grid*
+   2. Add something suitable into the *Text* property
+   3. Place a *TextBox* control next to the *Label*
+   4. Name the TextBox "NameTextBox"
+2. For the Date filter
+   1. Add a *Label* to the *Grid*
+   2. Add something suitable into the *Text* property
+   3. Place a *Container* control next to the *Label*
+      1. Add a *TextBox* into the *Container* control
+      2. Name the TextBox "AddDateFromTextBox"
+      3. Add a *TextBox* next to the first one inside the *Container* control
+      4. Name the TextBox "AddDateToTextBox"
+   4. Place a button below the *Grid* control
+      1. Name the *Button* "ApplyFilterButton"
+      2. Add "Apply" into the *Text* property
+      3. Create the Click event handler on the button
+      4. Drag the "Initialise" script into the click event handler
+   5. Place second button next to the first one
+      1. Name the second *Button* "ClearFilterButton"
+      2. Add "Cancel" into the *Text* property
+      3. Create the Click event handler on the button
+      4. Drag SetValues into the event handler that set each of the filter fields to empty (= '')
+      5. Drag the "Initialise" script into the click event handler
+   6. Open the "GetData" script and map the additional query parameters to the respective filter fields
+
+![](images/GetDataSelectInputs.png)
+
+   7. Open the "Initialise" script and map the additional query parameters for the two queries to the respective filter fields
+
+![](images/InitialiseSelectInputs.png)
+
+![](images/InitialiseTotalsInputs.png)
+
