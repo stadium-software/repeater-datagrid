@@ -36,8 +36,8 @@ To illustrate this module, it comes with a sample application that displays data
     - [CSS Upgrading](#css-upgrading)
 - [Loading Spinners](#loading-spinners)
 - [Custom Filters](#custom-filters)
-  - [Query Changes](#query-changes)
-  - [Page Changes](#page-changes)
+  - [Query](#query)
+  - [Page](#page-1)
 
 # Version
 1.0 initial
@@ -560,7 +560,7 @@ Adding custom filters to the DataGrid requires twofold:
 1. Additional conditions must be added into the datasource, the query or API call
 2. Controls that enable users to provide filter criteria needs to eb added to the page
 
-## Query Changes
+## Query
 For the example application, this means extending the sql queries as folows
 
 **Example "TotalRecords" Query**
@@ -606,7 +606,7 @@ SELECT
 OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
 
-## Page Changes
+## Page
 The example application provides users with an opportunity to filter the results by
 
 1. An ID
