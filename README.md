@@ -26,7 +26,7 @@ https://github.com/user-attachments/assets/f81a7c90-6d37-46a6-ab27-01619f19d5d0
     - [Initialisation Script](#initialisation-script)
     - [DataGrid State Script](#datagrid-state-script)
     - [RepeaterDataGridState Return Object](#repeaterdatagridstate-return-object)
-  - [Events](#events)
+  - [Scripts and Events](#scripts-and-events)
     - [Initialise Page Script](#initialise-page-script)
     - [GetData Page Script](#getdata-page-script)
     - [Page.Load](#pageload)
@@ -439,7 +439,7 @@ To easily access the values, drag type called "DataGridState" to the script and 
 }
 ```
 
-## Events
+## Scripts and Events
 Alll events in the example application either call a script to initialise the DataGrid or one to retreive the DataGrid state. 
 
 ### Initialise Page Script
