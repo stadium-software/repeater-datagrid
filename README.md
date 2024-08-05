@@ -68,7 +68,7 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
 # Database
 The module can be configured to work with any data source and connector. 
 
-The attached example application uses a database connector and queries. To run the sample application, you need to:
+The attached example application uses a database connector and queries. To run or rebuild the sample application, you need to:
 1. Create a database in a SQL Server instance called "StadiumLoadTest"
 2. The unzip and run the SQL script in the database folder in this repo (this will create a table called "User") [script file](database/script.zip)
 
