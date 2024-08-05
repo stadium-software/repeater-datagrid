@@ -2,6 +2,7 @@
 Using this module, you can configure a *Repeater* control to create a DataGrid that looks and works similar to the standard Stadium *DataGrid* control. Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
 
 **Notable features**
+
 - Configurable page size
 - Can be used with any connector
 - Supports [custom filters](#custom-filters)
@@ -9,15 +10,18 @@ Using this module, you can configure a *Repeater* control to create a DataGrid t
 ![](images/DataGridScreenShot.png)
 
 **Assets**
+
 The module comes with two [CSS files](#css-setup) and [two scripts](#global-scripts). 
 
 - The CSS makes a Stadium *Repeater* control look like a DataGrid. The *Repeater* control must contain a [variety of controls](#page). 
 - The scripts provide functionality to facilitate the rendering of data and keeping the DataGrid state. This includes recording when users use the controls to sort or page the data. 
 
 **Integration**
+
 When including this module in a Stadium application, functionality (SQL queries or API calls) must be added to retrieve and assign the correct data in control [event handlers](#scripts-and-events) when users load, sort or page through the grid data. Below are some [examples](#scripts-and-events) of how this can be done. 
 
 **Example Application**
+
 To illustrate how this module works, [create this database](#database) and open the [sample application](Stadium6/RepeaterDataGrid.sapz). It displays data from the database table with 2 million records. 
 
 https://github.com/user-attachments/assets/f81a7c90-6d37-46a6-ab27-01619f19d5d0
