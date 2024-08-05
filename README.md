@@ -1,6 +1,8 @@
 # DataGrid Repeater <!-- omit in toc -->
 Using this module, you can use a *Repeater* control to create a server-side DataGrid that looks and works similar to the standard Stadium *DataGrid* control. This module can be configured to use any connector and data source, and works with data sources of any size. 
 
+![](images/DataGridScreenShot.png)
+
 The module comes with two [CSS files](#css-setup) and [two scripts](#global-scripts). 
 
 - The CSS makes a Stadium *Repeater* control look like a DataGrid. The *Repeater* control must contain a [variety of controls](#page). 
