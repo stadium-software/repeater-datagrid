@@ -18,11 +18,13 @@ The module comes with two [CSS files](#css-setup) and [two scripts](#global-scri
 
 **Integration**
 
-When including this module in a Stadium application, functionality (SQL queries or API calls) must be added to retrieve and assign the correct data in control [event handlers](#scripts-and-events) when users load, sort or page through the grid data. Below are some [examples](#scripts-and-events) of how this can be done. 
+To use this module in a Stadium application
+1. Add link, label and other controls to a Grid and Repeater control to create the DataGrid columns
+2. Add SQL queries or API calls to retrieve and assign the correct data when loading the DataGrid data, when users sort the data or when they page through the data in the control [event handlers](#scripts-and-events). 
 
 **Example Application**
 
-To illustrate how this module works, [create this database](#database) and open the [sample application](Stadium6/RepeaterDataGrid.sapz). It displays data from the database table with 2 million records. 
+To illustrate how this module works, [create this database](#database) and open the [sample application](Stadium6/RepeaterDataGrid.sapz). It displays data from the database table with 2 million records. It contains [scripts](#scripts-and-events) to demonstrate how to configure the sorting and paging features.
 
 https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
 
