@@ -24,7 +24,7 @@ When including this module in a Stadium application, functionality (SQL queries 
 
 To illustrate how this module works, [create this database](#database) and open the [sample application](Stadium6/RepeaterDataGrid.sapz). It displays data from the database table with 2 million records. 
 
-https://github.com/user-attachments/assets/f81a7c90-6d37-46a6-ab27-01619f19d5d0
+https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
 
 ## Contents <!-- omit in toc -->
 - [Version](#version)
