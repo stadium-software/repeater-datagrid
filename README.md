@@ -3,8 +3,9 @@ Using this module, you can configure a *Repeater* control to create a DataGrid t
 
 **Notable features**
 
-- Configurable page size
 - Can be used with any connector
+- Configurable page size
+- Provides for sorting and paging
 - Supports [custom filters](#custom-filters)
 
 ![](images/DataGridScreenShot.png)
