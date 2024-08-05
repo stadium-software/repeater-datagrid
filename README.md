@@ -1,5 +1,5 @@
 # DataGrid Repeater <!-- omit in toc -->
-Using this module, you can configure a *Repeater* control to create a DataGrid that looks and works similar to the standard Stadium *DataGrid* control. Use this module to display data from data sources that contyain too many records to display in the standard (client-side) Stadium DataGrid. 
+Using this module, you can configure a *Repeater* control to create a DataGrid that looks and works similar to the standard Stadium *DataGrid* control. Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
 
 **Notable features**
 - Configurable page size
