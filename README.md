@@ -1,15 +1,16 @@
 # DataGrid Repeater <!-- omit in toc -->
-Using this module, you can use a *Repeater* control to create a server-side DataGrid that looks and works similar to the standard Stadium *DataGrid* control. 
+Using this module, you can use a *Repeater* control to create a server-side DataGrid that looks and works similar to the standard Stadium *DataGrid* control. This module can be configured to use any connector and data source, and works with data sources of any size. 
 
 The module comes with two [CSS files](#css-setup) and [two scripts](#global-scripts). 
 
 - The CSS makes a Stadium *Repeater* control look like a DataGrid. The *Repeater* control must contain a [variety of controls](#page). 
+- The scripts provide functionality to facilitate the rendering of data and keeping the DataGrid state. This includes recording when users use the controls to sort or page the data. 
 
-- The scripts provide functionality to facilitate the rendering of data and keeping the DataGrid state. This includes recording when users use the controls to sort or page the data. Developers using this module must add functionality (SQL queries or API calls) to retrieve and assign the correct data in control [event handlers](#scripts-and-events) when users load, sort or page through the grid data. 
+When including this module in a Stadium application, functionality (SQL queries or API calls) must be added to retrieve and assign the correct data in control [event handlers](#scripts-and-events) when users load, sort or page through the grid data. Below are some [examples](#scripts-and-events) of how this can be done. 
 
 The module spports [custom filters](#custom-filters) that can optionally be created by the developer. 
 
-To illustrate this module, it comes with a sample application that displays data from a database table with 2 million records. This module can be configured to use any connector and data source, and works with data sources of any size. 
+To illustrate how this module works, [create this database](#database) and open the [sample application](Stadium6/RepeaterDataGrid.sapz). It displays data from the database table with 2 million records. 
 
 https://github.com/user-attachments/assets/f81a7c90-6d37-46a6-ab27-01619f19d5d0
 
