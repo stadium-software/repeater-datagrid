@@ -94,6 +94,8 @@ The module requires two data sets:
 
 Create the queries below and press the "Fetch Fields & Parameters" button to run the example application. These queries include parameters to facilitate DataGrid *paging* and *sorting*. 
 
+![](images/DBQueries.png)
+
 **Example "TotalRecords" Query**
 ```sql
 select count(ID) as total from [User]
@@ -130,8 +132,6 @@ SELECT
   case when @sortField = 'undefined' then ID end ASC
 OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
-
-![](images/DBQueries.png)
 
 ## Types
 Add the two types below
