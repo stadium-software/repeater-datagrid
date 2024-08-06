@@ -100,6 +100,12 @@ select count(ID) as total from [User]
 ```
 
 **Example "Select" Query**
+
+NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64"
+ as shown below. 
+
+![](images/SQLErrorParameters.png)
+
 ```sql
 SELECT 
 	ID
