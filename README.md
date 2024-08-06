@@ -92,7 +92,7 @@ The module requires two data sets:
 1. The total number of records
 2. The data to be attached to the *Repeater* (a list of objects from a database or an API)
 
-Create the queries below to run the example application. These queries include parameters to facilitate DataGrid *paging* and *sorting*. 
+Create the queries below to run the example application and press the "Fetch Fields & Parameters" button. These queries include parameters to facilitate DataGrid *paging* and *sorting*. 
 
 **Example "TotalRecords" Query**
 ```sql
