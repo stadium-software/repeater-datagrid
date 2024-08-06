@@ -275,9 +275,12 @@ if (sortEl) sortEl.classList.remove("dg-asc-sorting", "dg-desc-sorting");
 let cells = container.querySelectorAll(".grid-item");
 let headerCells = container.querySelectorAll(".grid-item:not(.grid-repeater-item)");
 let cellsPerRow = headerCells.length;
-let styleText = document.querySelector('[href*="stadium-repeater-datagrid.css"]').sheet;
-let st = '.' + containerClass + '.stadium-dg-repeater {.grid-item:nth-child(' + cellsPerRow + 'n+1) {border-left: 1px solid var(--dg-border-color);}.grid-item:nth-child(' + cellsPerRow + 'n) {border-right: 1px solid var(--dg-border-color);}';
-styleText.insertRule(st, 0);
+let css = '#' + container.id + ' {.grid-item:nth-child(' + cellsPerRow + 'n+1) {border-left: 1px solid var(--dg-border-color);}.grid-item:nth-child(' + cellsPerRow + 'n) {border-right: 1px solid var(--dg-border-color);}';
+let head = document.head || document.getElementsByTagName('head')[0], style = document.createElement('style');
+head.appendChild(style);
+style.type = 'text/css';
+style.appendChild(document.createTextNode(css));
+
 let cellCount = 0;
 let alt = false;
 for (let i = 0; i < cells.length; i++) {
@@ -289,13 +292,13 @@ for (let i = 0; i < cells.length; i++) {
         alt = !alt;
     }
 }
-sessionStorage.setItem(containerClass + "_Page", 1);
-sessionStorage.setItem(containerClass + "_PageSize", pageSize);
-sessionStorage.setItem(containerClass + "_Offset", 0);
-sessionStorage.setItem(containerClass + "_TotalRecords", totalRecords);
-sessionStorage.setItem(containerClass + "_TotalPages", Math.ceil(totalRecords / pageSize));
-sessionStorage.setItem(containerClass + "_SortDirection", "");
-sessionStorage.setItem(containerClass + "_SortField", sortField);
+sessionStorage.setItem(container.id + "_Page", 1);
+sessionStorage.setItem(container.id + "_PageSize", pageSize);
+sessionStorage.setItem(container.id + "_Offset", 0);
+sessionStorage.setItem(container.id + "_TotalRecords", totalRecords);
+sessionStorage.setItem(container.id + "_TotalPages", Math.ceil(totalRecords / pageSize));
+sessionStorage.setItem(container.id + "_SortDirection", "");
+sessionStorage.setItem(container.id + "_SortField", sortField);
 setPageLabel();
 setNextButton(1);
 setPrevButton(1);
@@ -315,12 +318,12 @@ if (container.querySelector(".specific-page-go")) {
     container.querySelector(".specific-page-go button").addEventListener("mousedown", setPage);
 }
 function previousPage() {
-    let page = parseInt(sessionStorage.getItem(containerClass + "_Page"));
+    let page = parseInt(sessionStorage.getItem(container.id + "_Page"));
     if (page > 1) { 
         page = page - 1;
-        sessionStorage.setItem(containerClass + "_Page", page);
+        sessionStorage.setItem(container.id + "_Page", page);
         let offset = page * pageSize - pageSize;
-        sessionStorage.setItem(containerClass + "_Offset", offset);
+        sessionStorage.setItem(container.id + "_Offset", offset);
     }
     setNextButton(page);
     setPrevButton(page);
@@ -335,12 +338,12 @@ function setPrevButton(pg) {
     }
 }
 function nextPage() {
-    let page = parseInt(sessionStorage.getItem(containerClass + "_Page"));
-    if (page < parseInt(sessionStorage.getItem(containerClass + "_TotalPages"))) { 
+    let page = parseInt(sessionStorage.getItem(container.id + "_Page"));
+    if (page < parseInt(sessionStorage.getItem(container.id + "_TotalPages"))) { 
         page = page + 1;
-        sessionStorage.setItem(containerClass + "_Page", page);
+        sessionStorage.setItem(container.id + "_Page", page);
         let offset = page * pageSize - pageSize;
-        sessionStorage.setItem(containerClass + "_Offset", offset);
+        sessionStorage.setItem(container.id + "_Offset", offset);
     }
     setNextButton(page);
     setPrevButton(page);
@@ -348,7 +351,7 @@ function nextPage() {
 }
 function setNextButton(pg) { 
     let nextButton = container.querySelector(".next-button");
-    if (pg == parseInt(sessionStorage.getItem(containerClass + "_TotalPages")) || parseInt(sessionStorage.getItem(containerClass + "_TotalPages")) < 2) {
+    if (pg == parseInt(sessionStorage.getItem(container.id + "_TotalPages")) || parseInt(sessionStorage.getItem(container.id + "_TotalPages")) < 2) {
         nextButton.classList.add("disabled");
     } else { 
         nextButton.classList.remove("disabled");
@@ -358,10 +361,10 @@ function setPage() {
     let pageInputContainer = container.querySelector(".specific-page");
     let pageInput = pageInputContainer.querySelector("input");
     let page = pageInput.value;
-    if (!isNaN(page) && page > 0 && page <= parseInt(sessionStorage.getItem(containerClass + "_TotalPages"))) {
-        sessionStorage.setItem(containerClass + "_Page", page);
+    if (!isNaN(page) && page > 0 && page <= parseInt(sessionStorage.getItem(container.id + "_TotalPages"))) {
+        sessionStorage.setItem(container.id + "_Page", page);
         let offset = page * pageSize - pageSize;
-        sessionStorage.setItem(containerClass + "_Offset", offset);
+        sessionStorage.setItem(container.id + "_Offset", offset);
         setNextButton(page);
         setPrevButton(page);
         setPageLabel();
@@ -369,16 +372,16 @@ function setPage() {
     setDMValues(pageInputContainer, "Text", "");
 }
 function setPageLabel() {
-    if (container.querySelector(".current-page") && parseInt(sessionStorage.getItem(containerClass + "_TotalPages")) > 0) {
-        container.querySelector(".current-page span").textContent = "Page " + parseInt(sessionStorage.getItem(containerClass + "_Page")).toLocaleString() + " of " + parseInt(sessionStorage.getItem(containerClass + "_TotalPages")).toLocaleString();
-    } else if (parseInt(sessionStorage.getItem(containerClass + "_TotalPages")) == 0) { 
+    if (container.querySelector(".current-page") && parseInt(sessionStorage.getItem(container.id + "_TotalPages")) > 0) {
+        container.querySelector(".current-page span").textContent = "Page " + parseInt(sessionStorage.getItem(container.id + "_Page")).toLocaleString() + " of " + parseInt(sessionStorage.getItem(container.id + "_TotalPages")).toLocaleString();
+    } else if (parseInt(sessionStorage.getItem(container.id + "_TotalPages")) == 0) { 
         container.querySelector(".current-page span").textContent = "No records found";
     }
 }
 function setSort(e) { 
     let clickedEl = e.target;
     let colHead = clickedEl.textContent.toLowerCase();
-    sessionStorage.setItem(containerClass + "_SortField", clickedEl.textContent);
+    sessionStorage.setItem(container.id + "_SortField", clickedEl.textContent);
     let currentSort = container.querySelector(".dg-asc-sorting, .dg-desc-sorting");
     let allHeaders = container.querySelectorAll(".grid-item:not(.grid-repeater-item) .link-container");
     if (!currentSort) {
@@ -390,17 +393,17 @@ function setSort(e) {
     } else if (currentSort.classList.contains("dg-desc-sorting") && (currentSort.textContent.toLowerCase() == colHead.toLowerCase())) {
         currentSort.classList.remove("dg-desc-sorting");
         currentSort.classList.add("dg-asc-sorting");
-        sessionStorage.setItem(containerClass + "_SortDirection", "asc");
+        sessionStorage.setItem(container.id + "_SortDirection", "asc");
     } else if (currentSort.classList.contains("dg-asc-sorting") && (currentSort.textContent.toLowerCase() == colHead.toLowerCase())) {
         currentSort.classList.remove("dg-asc-sorting");
         currentSort.classList.add("dg-desc-sorting");
-        sessionStorage.setItem(containerClass + "_SortDirection", "desc");
+        sessionStorage.setItem(container.id + "_SortDirection", "desc");
     } else if ((currentSort.classList.contains("dg-asc-sorting") || currentSort.classList.contains("dg-desc-sorting")) && (currentSort.textContent.toLowerCase() != colHead.toLowerCase())) {
         currentSort.classList.remove("dg-asc-sorting", "dg-desc-sorting");
         for (let i = 0; i < allHeaders.length; i++) {
             if (allHeaders[i].textContent.toLowerCase() == colHead.toLowerCase()) {
                 allHeaders[i].classList.add("dg-asc-sorting");
-                sessionStorage.setItem(containerClass + "_SortDirection", "asc");
+                sessionStorage.setItem(container.id + "_SortDirection", "asc");
             }
         }
     }
@@ -426,13 +429,14 @@ if (!containerClass) {
      console.error("The ContainerClass parameter is required");
      return false;
 }
-return { page: sessionStorage.getItem(containerClass + "_Page"),
-     pageSize: sessionStorage.getItem(containerClass + "_PageSize"),
-     offset: sessionStorage.getItem(containerClass + "_Offset"),
-     totalRecords: sessionStorage.getItem(containerClass + "_TotalRecords"),
-     totalPages: sessionStorage.getItem(containerClass + "_TotalPages"),
-     sortDirection: sessionStorage.getItem(containerClass + "_SortDirection"),
-     sortField: sessionStorage.getItem(containerClass + "_SortField")
+let container = document.querySelector("." + containerClass);
+return { page: sessionStorage.getItem(container.id + "_Page"),
+     pageSize: sessionStorage.getItem(container.id + "_PageSize"),
+     offset: sessionStorage.getItem(container.id + "_Offset"),
+     totalRecords: sessionStorage.getItem(container.id + "_TotalRecords"),
+     totalPages: sessionStorage.getItem(container.id + "_TotalPages"),
+     sortDirection: sessionStorage.getItem(container.id + "_SortDirection"),
+     sortField: sessionStorage.getItem(container.id + "_SortField")
 };
 ```
 6. Drag a *SetValue* under the *Javascript* action
