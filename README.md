@@ -592,7 +592,7 @@ To add a loading spinner to the DataGrid
    2. Set the "Spinner.Visible" property to "false" to hide the spinner
 
 # Custom Filters
-Custom filters can be cu7stom created and can work with the DataGrid as follows:
+Custom filters can be manually created and can work with the DataGrid as follows:
 
 1. Additional conditions must be added into the datasource (by adding a custom where clause the query or API call)
 2. Controls that enable users to provide filter criteria needs to be added to the page (custom filter UI)
