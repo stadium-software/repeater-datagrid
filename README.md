@@ -29,7 +29,7 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
     - [Sorting](#sorting)
     - [Paging](#paging)
     - [Link Columns](#link-columns)
-  - [CSS Setup](#css-setup)
+  - [CSS](#css)
     - [Customising CSS](#customising-css)
     - [CSS Upgrading](#css-upgrading)
 - [Loading Spinners](#loading-spinners)
@@ -559,7 +559,7 @@ To add a link columns to the Datagrid:
 
 ![](images/AccessColumnValues.png)
 
-## CSS Setup
+## CSS
 The CSS below is required for the correct functioning of the module. Some elements can be [customised](#customising-css) using a variables CSS file. 
 
 **Stadium 6.6 or higher**
