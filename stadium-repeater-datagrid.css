@@ -3,9 +3,9 @@
     align-items: center;
 
     .grid-item {
-        display: table-cell;
+        display: flex;
+        align-items: center;
         border-bottom: 1px solid var(--dg-border-color);
-        height: 100%;
         padding: 5px;
 
         .control-container {

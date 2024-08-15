@@ -238,6 +238,7 @@ The module requires two global scripts. The first one is used to set up the repe
    2. DefaultSortField
    3. PageSize
    4. TotalRecords
+   5. InitialPage
 3. Drag a *JavaScript* action into the script
 4. Add the Javascript below into the JavaScript code property
 ```javascript
@@ -246,6 +247,13 @@ let scope = this;
 let pageSize = parseInt(~.Parameters.Input.PageSize);
 let sortField = ~.Parameters.Input.DefaultSortField;
 let totalRecords = parseInt(~.Parameters.Input.TotalRecords);
+let initialPage = parseInt(~.Parameters.Input.InitialPage);
+let initialOffset = 0;
+if (isNaN(initialPage)) {
+    initialPage = 1;
+} else { 
+    initialOffset = initialPage * pageSize - pageSize;
+}
 let containerClass = ~.Parameters.Input.ContainerClass;
 if (!containerClass) {
      console.error("The ContainerClass parameter is required");
@@ -292,16 +300,16 @@ for (let i = 0; i < cells.length; i++) {
         alt = !alt;
     }
 }
-sessionStorage.setItem(container.id + "_Page", 1);
+sessionStorage.setItem(container.id + "_Page", initialPage);
 sessionStorage.setItem(container.id + "_PageSize", pageSize);
-sessionStorage.setItem(container.id + "_Offset", 0);
+sessionStorage.setItem(container.id + "_Offset", initialOffset);
 sessionStorage.setItem(container.id + "_TotalRecords", totalRecords);
 sessionStorage.setItem(container.id + "_TotalPages", Math.ceil(totalRecords / pageSize));
 sessionStorage.setItem(container.id + "_SortDirection", "");
 sessionStorage.setItem(container.id + "_SortField", sortField);
 setPageLabel();
-setNextButton(1);
-setPrevButton(1);
+setNextButton(initialPage);
+setPrevButton(initialPage);
 
 for (let i = 0; i < headerCells.length; i++) {
     let inner = headerCells[i].querySelector(".link-container .btn-link");
@@ -309,7 +317,6 @@ for (let i = 0; i < headerCells.length; i++) {
 }
 if (container.querySelector(".previous-button")) { 
     container.querySelector(".previous-button button").addEventListener("mousedown", previousPage);
-    container.querySelector(".previous-button").classList.add("disabled");
 }
 if (container.querySelector(".next-button")) { 
     container.querySelector(".next-button button").addEventListener("mousedown", nextPage);
@@ -496,6 +503,12 @@ In events that initialise or re-initialise the DataGrid, the example application
 ![](images/SetRepeaterData.png)
 
 5.  Drag the "RepeaterDataGridInit" script to the event Handler
+6.  Enter values for the input parameters
+    1.  ContainerClass: The unique class you assigned to the container (e.g. ServerSideDataGridContainer)
+    2.  DefaultSortField: The SQL column of the default sort field (e.g. ID)
+    3.  InitialPage (optional): The page number to display (default is 1)
+    4.  PageSize: The number of records to display per page (e.g. 10)
+    5.  TotalRecords: The total number of records in the dataset (select count)
 
 **Initialise Script**
 
