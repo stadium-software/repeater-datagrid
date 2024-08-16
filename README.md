@@ -5,11 +5,9 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
 ## Contents <!-- omit in toc -->
 - [Overview](#overview)
 - [Version](#version)
-- [Databases](#databases)
+- [Databases \& Connectors](#databases--connectors)
   - [StadiumLoadTest Database](#stadiumloadtest-database)
   - [StadiumFilterData Database](#stadiumfilterdata-database)
-- [Application](#application)
-  - [Application Properties](#application-properties)
   - [Connector](#connector)
     - [StadiumLoadTest Queries](#stadiumloadtest-queries)
     - ["TotalRecords" Query](#totalrecords-query)
@@ -21,6 +19,8 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
     - ["TotalRecords" Query](#totalrecords-query-1)
     - ["Select" Query](#select-query)
   - [REST API](#rest-api)
+- [Application](#application)
+  - [Application Properties](#application-properties)
   - [Types](#types)
     - [DataSet Type](#dataset-type)
     - [DataGridState Type](#datagridstate-type)
@@ -80,7 +80,7 @@ To illustrate how this module works, [create this database](#database) and open 
 # Version
 1.0 initial
 
-# Databases
+# Databases & Connectors
 The module can be configured to work with any data source and connector. 
 
 The attached example application uses a two separate databases and a number of queries. 
@@ -92,11 +92,6 @@ To run or rebuild the sample application, you need to:
 
 ## StadiumFilterData Database
 1. Use the instructions from [this repo](https://github.com/stadium-software/samples-database) to setup the database and DataGrid for this sample
-
-# Application
-
-## Application Properties
-1. Check the *Enable Style Sheet* checkbox in the application properties
 
 ## Connector
 Set up your connector to your datasource as you normally would. 
@@ -304,6 +299,11 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 
 ## REST API
 In order to access the "LinxAPI" page in the application, it is also necessary to run the SimpleRESTHost service in the Linx applicaiton in this repo. The *Setting* called "DBConn" needs to be changed to point to your local SQL Server. 
+
+# Application
+
+## Application Properties
+1. Check the *Enable Style Sheet* checkbox in the application properties
 
 ## Types
 Add the two types below
