@@ -1,0 +1,51 @@
+{
+  "Properties": [
+    {
+      "Id": "o8Kw",
+      "Type": "Compiled:String",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "GenerateWhere",
+        "CompiledExpression": "={0}",
+        "Type": "Compiled:String"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "ParameterNameMapping",
+      "Type": "Compiled:System.Collections.Generic.IDictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+      "ValueUsage": "DesignTime",
+      "Value": {
+        "tk4S": "queryParameters",
+        "o8Kw": "whereClause"
+      },
+      "ValueType": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e"
+    },
+    {
+      "Id": "Process",
+      "Type": "Compiled:Linx.IProcessReference",
+      "ValueUsage": "DesignTime",
+      "Value": {
+        "Id": "4w0P",
+        "Name": "SelectQuery",
+        "Parameters": "Generated:GGhW",
+        "Result": "List:Custom:uN5J",
+        "IsValid": true,
+        "QualifiedPath": "PC:SelectQuery"
+      },
+      "ValueType": "Linx.ProcessReference"
+    },
+    {
+      "Id": "tk4S",
+      "Type": "Custom:2pZj",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "$.Parameters.body.queryParameters",
+        "CompiledExpression": "={0}",
+        "Type": "Generated:3alq"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    }
+  ],
+  "Result": "List:Custom:uN5J"
+}

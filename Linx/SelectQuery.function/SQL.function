@@ -1,0 +1,16 @@
+{
+  "Properties": [
+    {
+      "Id": "Value",
+      "Type": "Compiled:String",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "\"SELECT ID \" + \r\n\"      ,FirstName \" + \r\n\"      ,LastName \" + \r\n\"      ,NoOfChildren \" + \r\n\"      ,NoOfPets \" + \r\n\"      ,StartDate \" + \r\n\"      ,EndDate \" + \r\n\"      ,Healthy \" + \r\n\"      ,Happy \" + \r\n\"      ,Subscription \" + \r\n\"  FROM dbo.MyData \" + \r\n$.Parameters.whereClause + \r\n\"  ORDER BY \" + QueryParameters.sortField + \" \" + QueryParameters.sortDirection +\r\n\" OFFSET \" + QueryParameters.offsetRows + \" ROWS FETCH NEXT \" + QueryParameters.pageSize + \" ROWS ONLY\"",
+        "CompiledExpression": "=\"SELECT ID \"+\"      ,FirstName \"+\"      ,LastName \"+\"      ,NoOfChildren \"+\"      ,NoOfPets \"+\"      ,StartDate \"+\"      ,EndDate \"+\"      ,Healthy \"+\"      ,Happy \"+\"      ,Subscription \"+\"  FROM dbo.MyData \"+{4}+\"  ORDER BY \"+{3}+\" \"+{2}+\" OFFSET \"+{1}+\" ROWS FETCH NEXT \"+{0}+\" ROWS ONLY\"",
+        "Type": "Compiled:String"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    }
+  ],
+  "Result": "Compiled:String"
+}

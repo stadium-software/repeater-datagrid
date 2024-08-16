@@ -1,0 +1,16 @@
+{
+  "Id": "3reL",
+  "Name": "APIResponse",
+  "Properties": [
+    {
+      "Id": "dsqf",
+      "Name": "MyData",
+      "Type": "List:Custom:uN5J"
+    },
+    {
+      "Id": "OCBs",
+      "Name": "TotalRecords",
+      "Type": "Compiled:Int64"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "Id": "uN5J",
+  "Name": "Data",
+  "Properties": [
+    {
+      "Id": "DSe7",
+      "Name": "ID",
+      "Type": "Compiled:String"
+    },
+    {
+      "Id": "mJQo",
+      "Name": "FirstName",
+      "Type": "Compiled:String"
+    },
+    {
+      "Id": "dwW0",
+      "Name": "LastName",
+      "Type": "Compiled:String"
+    },
+    {
+      "Id": "r7DW",
+      "Name": "Happy",
+      "Type": "Compiled:Boolean"
+    },
+    {
+      "Id": "r8t2",
+      "Name": "Healthy",
+      "Type": "Compiled:Boolean"
+    },
+    {
+      "Id": "KtKc",
+      "Name": "StartDate",
+      "Type": "Compiled:DateTime"
+    },
+    {
+      "Id": "fjxj",
+      "Name": "EndDate",
+      "Type": "Compiled:DateTime"
+    },
+    {
+      "Id": "wsCg",
+      "Name": "NoOfPets",
+      "Type": "Compiled:Int64"
+    },
+    {
+      "Id": "1NDd",
+      "Name": "NoOfChildren",
+      "Type": "Compiled:Int64"
+    },
+    {
+      "Id": "KEot",
+      "Name": "Subscription",
+      "Type": "Compiled:String"
+    }
+  ]
+}

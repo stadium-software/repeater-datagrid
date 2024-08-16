@@ -1,0 +1,16 @@
+[
+  {
+    "Type": "Generated",
+    "Value": {
+      "Id": "A4u7",
+      "Properties": [
+        {
+          "Id": "v98m",
+          "Name": "whereParams",
+          "Type": "Custom:s2As",
+          "Access": "ReadWrite"
+        }
+      ]
+    }
+  }
+]

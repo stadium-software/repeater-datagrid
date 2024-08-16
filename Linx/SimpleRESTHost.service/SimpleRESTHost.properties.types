@@ -1,0 +1,254 @@
+[
+  {
+    "Type": "Generated",
+    "Value": {
+      "Id": "4Cea",
+      "Properties": [
+        {
+          "Id": "whereClause",
+          "Name": "whereClause",
+          "Type": "Generated:xy4C",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "queryParameters",
+          "Name": "queryParameters",
+          "Type": "Generated:3alq",
+          "Access": "ReadWrite"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "Generated",
+    "Value": {
+      "Id": "xy4C",
+      "Properties": [
+        {
+          "Id": "FirstName",
+          "Name": "FirstName",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "LastName",
+          "Name": "LastName",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "ID",
+          "Name": "ID",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "Subscription",
+          "Name": "Subscription",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "fromStartDate",
+          "Name": "fromStartDate",
+          "Type": "Compiled:DateTime",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "toStartDate",
+          "Name": "toStartDate",
+          "Type": "Compiled:DateTime",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "fromEndDate",
+          "Name": "fromEndDate",
+          "Type": "Compiled:DateTime",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "toEndDate",
+          "Name": "toEndDate",
+          "Type": "Compiled:DateTime",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "fromNoOfPets",
+          "Name": "fromNoOfPets",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "toNoOfPets",
+          "Name": "toNoOfPets",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "fromNoOfChildren",
+          "Name": "fromNoOfChildren",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "toNoOfChildren",
+          "Name": "toNoOfChildren",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "Happy",
+          "Name": "Happy",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "Healthy",
+          "Name": "Healthy",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "Generated",
+    "Value": {
+      "Id": "3alq",
+      "Properties": [
+        {
+          "Id": "offsetRows",
+          "Name": "offsetRows",
+          "Type": "Compiled:Int64",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "pageSize",
+          "Name": "pageSize",
+          "Type": "Compiled:Int64",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "sortField",
+          "Name": "sortField",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "sortDirection",
+          "Name": "sortDirection",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "Generated",
+    "Value": {
+      "Id": "7iAQ",
+      "Properties": [
+        {
+          "Id": "HttpContext",
+          "Name": "HttpContext",
+          "Type": "Compiled:Twenty57.Linx.Plugins.Rest.Shared.WebServiceWithDefinitionEditor.OpenAPI.Data.Out.HttpContext, Twenty57.Linx.Plugins.Rest.Shared, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "ResponseBody",
+          "Name": "ResponseBody",
+          "Type": "Generated:wo00",
+          "Access": "ReadWrite"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "Generated",
+    "Value": {
+      "Id": "wo00",
+      "Properties": [
+        {
+          "Id": "MyData",
+          "Name": "MyData",
+          "Type": "List:Generated:0xrR",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "TotalRecords",
+          "Name": "TotalRecords",
+          "Type": "Compiled:Int64",
+          "Access": "ReadWrite"
+        }
+      ]
+    }
+  },
+  {
+    "Type": "Generated",
+    "Value": {
+      "Id": "0xrR",
+      "Properties": [
+        {
+          "Id": "ID",
+          "Name": "ID",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "FirstName",
+          "Name": "FirstName",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "LastName",
+          "Name": "LastName",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "Happy",
+          "Name": "Happy",
+          "Type": "Compiled:Boolean",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "Healthy",
+          "Name": "Healthy",
+          "Type": "Compiled:Boolean",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "StartDate",
+          "Name": "StartDate",
+          "Type": "Compiled:DateTime",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "EndDate",
+          "Name": "EndDate",
+          "Type": "Compiled:DateTime",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "NoOfPets",
+          "Name": "NoOfPets",
+          "Type": "Compiled:Int64",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "NoOfChildren",
+          "Name": "NoOfChildren",
+          "Type": "Compiled:Int64",
+          "Access": "ReadWrite"
+        },
+        {
+          "Id": "Subscription",
+          "Name": "Subscription",
+          "Type": "Compiled:String",
+          "Access": "ReadWrite"
+        }
+      ]
+    }
+  }
+]

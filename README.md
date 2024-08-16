@@ -5,11 +5,22 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
 ## Contents <!-- omit in toc -->
 - [Overview](#overview)
 - [Version](#version)
-- [Database](#database)
+- [Databases](#databases)
+  - [StadiumLoadTest Database](#stadiumloadtest-database)
+  - [StadiumFilterData Database](#stadiumfilterdata-database)
 - [Application](#application)
   - [Application Properties](#application-properties)
   - [Connector](#connector)
-    - [Queries](#queries)
+    - [StadiumLoadTest Queries](#stadiumloadtest-queries)
+    - ["TotalRecords" Query](#totalrecords-query)
+    - [Example "Select" Query](#example-select-query)
+  - [StadiumFilterData Queries (unfiltered)](#stadiumfilterdata-queries-unfiltered)
+    - [Example "TotalRecords" Query](#example-totalrecords-query)
+    - [Example "Select" Query](#example-select-query-1)
+  - [StadiumFilterData Queries (filtered)](#stadiumfilterdata-queries-filtered)
+    - ["TotalRecords" Query](#totalrecords-query-1)
+    - ["Select" Query](#select-query)
+  - [REST API](#rest-api)
   - [Types](#types)
     - [DataSet Type](#dataset-type)
     - [DataGridState Type](#datagridstate-type)
@@ -69,12 +80,18 @@ To illustrate how this module works, [create this database](#database) and open 
 # Version
 1.0 initial
 
-# Database
+# Databases
 The module can be configured to work with any data source and connector. 
 
-The attached example application uses a database connector and queries. To run or rebuild the sample application, you need to:
+The attached example application uses a two separate databases and a number of queries. 
+
+## StadiumLoadTest Database
+To run or rebuild the sample application, you need to:
 1. Create a database in a SQL Server instance called "StadiumLoadTest"
-2. The unzip and run the SQL script in the database folder in this repo (this will create a table called "User") [script file](database/script.zip)
+2. Unzip and run the SQL script in the database folder in this repo (this will create a table called "User") [script file](database/script.zip)
+
+## StadiumFilterData Database
+1. Use the instructions from [this repo](https://github.com/stadium-software/samples-database) to setup the database and DataGrid for this sample
 
 # Application
 
@@ -84,9 +101,11 @@ The attached example application uses a database connector and queries. To run o
 ## Connector
 Set up your connector to your datasource as you normally would. 
 
-To run the example application, create a database connector to the database you [created above](#database-setup). 
+To run the example application, create
+1. A database connector to the "StadiumLoadTest" database you [created above](#database-setup)
+2. A database connector to the "StadiumFilterData"
 
-### Queries
+### StadiumLoadTest Queries
 The module requires two data sets: 
 
 1. The total number of records
@@ -96,12 +115,12 @@ Create the queries below and press the "Fetch Fields & Parameters" button to run
 
 ![](images/DBQueries.png)
 
-**Example "TotalRecords" Query**
+### "TotalRecords" Query
 ```sql
 select count(ID) as total from [User]
 ```
 
-**Example "Select" Query**
+### Example "Select" Query
 
 NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64"
  as shown below and press the "Fetch Fields & Parameters" button again. 
@@ -132,6 +151,159 @@ SELECT
   case when @sortField = 'undefined' then ID end ASC
 OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
+
+## StadiumFilterData Queries (unfiltered)
+The module requires four data sets: 
+
+1. The total number of records
+2. The data to be attached to the *Repeater* (a list of objects from a database or an API)
+
+Create the queries below and press the "Fetch Fields & Parameters" button to run the example application. These queries include parameters to facilitate DataGrid *paging* and *sorting*. 
+
+![](images/DBQueries.png)
+
+### Example "TotalRecords" Query
+```sql
+select count(ID) as total from MyData
+```
+
+### Example "Select" Query
+
+NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64"
+ as shown below and press the "Fetch Fields & Parameters" button again. 
+
+![](images/SQLErrorParameters.png)
+
+```sql
+SELECT ID
+      ,FirstName
+      ,LastName
+      ,NoOfChildren
+      ,NoOfPets
+      ,StartDate
+      ,EndDate
+      ,Healthy
+      ,Happy
+      ,Subscription
+  FROM dbo.MyData
+  ORDER BY
+  case when UPPER(@sortField) = 'ID' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN ID END ASC,
+  case when UPPER(@sortField) = 'ID' AND LOWER(@sortDirection) = 'desc' THEN ID END DESC,
+  case when LOWER(@sortField) = 'FirstName' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN FirstName END ASC,
+  case when LOWER(@sortField) = 'FirstName' AND LOWER(@sortDirection) = 'desc' THEN FirstName END DESC,
+  case when LOWER(@sortField) = 'LastName' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN LastName END ASC,
+  case when LOWER(@sortField) = 'LastName' AND LOWER(@sortDirection) = 'desc' THEN LastName END DESC,
+  case when LOWER(@sortField) = 'NoOfChildren' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN NoOfChildren END ASC,
+  case when LOWER(@sortField) = 'NoOfChildren' AND LOWER(@sortDirection) = 'desc' THEN NoOfChildren END DESC,
+  case when LOWER(@sortField) = 'NoOfPets' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN NoOfPets END ASC,
+  case when LOWER(@sortField) = 'NoOfPets' AND LOWER(@sortDirection) = 'desc' THEN NoOfPets END DESC,
+  case when LOWER(@sortField) = 'StartDate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN StartDate END ASC,
+  case when LOWER(@sortField) = 'StartDate' AND LOWER(@sortDirection) = 'desc' THEN StartDate END DESC,
+  case when LOWER(@sortField) = 'EndDate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN EndDate END ASC,
+  case when LOWER(@sortField) = 'EndDate' AND LOWER(@sortDirection) = 'desc' THEN EndDate END DESC,
+  case when LOWER(@sortField) = 'Healthy' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Healthy END ASC,
+  case when LOWER(@sortField) = 'Healthy' AND LOWER(@sortDirection) = 'desc' THEN Healthy END DESC,
+  case when LOWER(@sortField) = 'Happy' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Happy END ASC,
+  case when LOWER(@sortField) = 'Happy' AND LOWER(@sortDirection) = 'desc' THEN Happy END DESC,
+  case when LOWER(@sortField) = 'Subscription' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Subscription END ASC,
+  case when LOWER(@sortField) = 'Subscription' AND LOWER(@sortDirection) = 'desc' THEN Subscription END DESC,
+  case when @sortField = '' then ID end ASC,
+  case when @sortField = 'undefined' then ID end ASC
+OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
+```
+
+## StadiumFilterData Queries (filtered)
+The module requires four data sets: 
+
+1. The total number of records when filtered
+2. The data to be attached to the *Repeater* (a list of objects from a database or an API) when filtered
+
+Create the queries below and press the "Fetch Fields & Parameters" button to run the example application. These queries include parameters to facilitate DataGrid *paging* and *sorting*. 
+
+![](images/DBQueries.png)
+
+### "TotalRecords" Query
+```sql
+select count(ID) as total from MyData
+ WHERE 
+	ID = IsNull(nullif(@ID,''),ID) AND 
+	FirstName like IsNull(nullif('%' + @FirstName + '%',''),FirstName) AND 
+	LastName like IsNull(nullif('%' + @LastName + '%',''),LastName) AND 
+	IsNull(nullif(@Subscription,''),Subscription) like '%' + Subscription + '%' COLLATE Latin1_General_CS_AS  AND 
+	Healthy = IsNull(nullif(@Healthy,''),Healthy) AND 
+	Happy = IsNull(nullif(@Happy,''),Happy) AND 
+	(NoOfChildren >= IsNull(nullif(@fromNoOfChildren,''),0) AND 
+	NoOfChildren <= IsNull(nullif(@toNoOfChildren,''),1000000)) AND 
+	(NoOfPets >= IsNull(nullif(@fromNoOfPets,''),0) AND 
+	NoOfPets <= IsNull(nullif(@toNoOfPets,''),1000000)) AND 
+	(StartDate >= IsNull(nullif(CONVERT(datetime, @fromStartDate, 127),''),'1900-01-01') AND 
+	StartDate <= IsNull(nullif(CONVERT(datetime, @toStartDate, 127),''),'2100-01-01')) AND 
+	(EndDate >= IsNull(nullif(CONVERT(datetime, @fromEndDate, 127),''),'1900-01-01') AND 
+	EndDate <= IsNull(nullif(CONVERT(datetime, @toEndDate, 127),''),'2100-01-01'))
+```
+
+### "Select" Query
+
+NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64"
+ as shown below and press the "Fetch Fields & Parameters" button again. 
+
+![](images/SQLErrorParameters.png)
+
+```sql
+SELECT ID
+      ,FirstName
+      ,LastName
+      ,NoOfChildren
+      ,NoOfPets
+      ,StartDate
+      ,EndDate
+      ,Healthy
+      ,Happy
+      ,Subscription
+  FROM dbo.MyData
+  WHERE 
+	ID = IsNull(nullif(@ID,''),ID) AND 
+	FirstName like IsNull(nullif('%' + @FirstName + '%',''),FirstName) AND 
+	LastName like IsNull(nullif('%' + @LastName + '%',''),LastName) AND 
+	IsNull(nullif(@Subscription,''),Subscription) like '%' + Subscription + '%' COLLATE Latin1_General_CS_AS  AND 
+	Healthy = IsNull(nullif(@Healthy,''),Healthy) AND 
+	Happy = IsNull(nullif(@Happy,''),Happy) AND 
+	(NoOfChildren >= IsNull(nullif(@fromNoOfChildren,''),0) AND 
+	NoOfChildren <= IsNull(nullif(@toNoOfChildren,''),1000000)) AND 
+	(NoOfPets >= IsNull(nullif(@fromNoOfPets,''),0) AND 
+	NoOfPets <= IsNull(nullif(@toNoOfPets,''),1000000)) AND 
+	(StartDate >= IsNull(nullif(CONVERT(datetime, @fromStartDate, 127),''),'1900-01-01') AND 
+	StartDate <= IsNull(nullif(CONVERT(datetime, @toStartDate, 127),''),'2100-01-01')) AND 
+	(EndDate >= IsNull(nullif(CONVERT(datetime, @fromEndDate, 127),''),'1900-01-01') AND 
+	EndDate <= IsNull(nullif(CONVERT(datetime, @toEndDate, 127),''),'2100-01-01'))
+  ORDER BY
+  case when UPPER(@sortField) = 'ID' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN ID END ASC,
+  case when UPPER(@sortField) = 'ID' AND LOWER(@sortDirection) = 'desc' THEN ID END DESC,
+  case when LOWER(@sortField) = 'FirstName' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN FirstName END ASC,
+  case when LOWER(@sortField) = 'FirstName' AND LOWER(@sortDirection) = 'desc' THEN FirstName END DESC,
+  case when LOWER(@sortField) = 'LastName' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN LastName END ASC,
+  case when LOWER(@sortField) = 'LastName' AND LOWER(@sortDirection) = 'desc' THEN LastName END DESC,
+  case when LOWER(@sortField) = 'NoOfChildren' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN NoOfChildren END ASC,
+  case when LOWER(@sortField) = 'NoOfChildren' AND LOWER(@sortDirection) = 'desc' THEN NoOfChildren END DESC,
+  case when LOWER(@sortField) = 'NoOfPets' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN NoOfPets END ASC,
+  case when LOWER(@sortField) = 'NoOfPets' AND LOWER(@sortDirection) = 'desc' THEN NoOfPets END DESC,
+  case when LOWER(@sortField) = 'StartDate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN StartDate END ASC,
+  case when LOWER(@sortField) = 'StartDate' AND LOWER(@sortDirection) = 'desc' THEN StartDate END DESC,
+  case when LOWER(@sortField) = 'EndDate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN EndDate END ASC,
+  case when LOWER(@sortField) = 'EndDate' AND LOWER(@sortDirection) = 'desc' THEN EndDate END DESC,
+  case when LOWER(@sortField) = 'Healthy' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Healthy END ASC,
+  case when LOWER(@sortField) = 'Healthy' AND LOWER(@sortDirection) = 'desc' THEN Healthy END DESC,
+  case when LOWER(@sortField) = 'Happy' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Happy END ASC,
+  case when LOWER(@sortField) = 'Happy' AND LOWER(@sortDirection) = 'desc' THEN Happy END DESC,
+  case when LOWER(@sortField) = 'Subscription' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Subscription END ASC,
+  case when LOWER(@sortField) = 'Subscription' AND LOWER(@sortDirection) = 'desc' THEN Subscription END DESC,
+  case when @sortField = '' then ID end ASC,
+  case when @sortField = 'undefined' then ID end ASC
+OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
+```
+
+## REST API
+In order to access the "LinxAPI" page in the application, it is also necessary to run the SimpleRESTHost service in the Linx applicaiton in this repo. The *Setting* called "DBConn" needs to be changed to point to your local SQL Server. 
 
 ## Types
 Add the two types below

@@ -1,0 +1,43 @@
+{
+  "Properties": [
+    {
+      "Id": "Type",
+      "Type": "Compiled:Linx.ITypeReference",
+      "ValueUsage": "DesignTime",
+      "Value": "Custom:3reL",
+      "ValueType": "Linx.ValidCustomTypeReference"
+    },
+    {
+      "Id": "Value",
+      "Type": "Custom:3reL",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "ParsedExpression": "{\"MyData\":{\"LinxExpression\":\"[PARSED]\"}, \"TotalRecords\":{\"LinxExpression\":\"[PARSED]\"}}",
+        "ExpressionPlaceholders": [
+          {
+            "typePath": [
+              "MyData"
+            ],
+            "expression": {
+              "Expression": "SelectQuery",
+              "CompiledExpression": "={0}",
+              "Type": "List:Custom:uN5J"
+            }
+          },
+          {
+            "typePath": [
+              "TotalRecords"
+            ],
+            "expression": {
+              "Expression": "TotalsQuery",
+              "CompiledExpression": "={0}",
+              "Type": "Compiled:Int64"
+            }
+          }
+        ]
+      },
+      "ValueType": "Linx.JsonExpression"
+    }
+  ],
+  "Result": "Custom:3reL"
+}

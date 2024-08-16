@@ -1,0 +1,348 @@
+{
+  "Properties": [
+    {
+      "Id": "Conditions",
+      "Type": "Compiled:System.Collections.Generic.List`1[[Twenty57.Linx.Plugins.Standard.Shared.IfElse.Condition, Twenty57.Linx.Plugins.Standard.Shared, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+      "ValueUsage": "DesignTime",
+      "Value": [
+        {
+          "ExecutionPathId": "7MtS",
+          "Name": "ID"
+        },
+        {
+          "ExecutionPathId": "0uN4",
+          "Name": "FirstName"
+        },
+        {
+          "ExecutionPathId": "SPq3",
+          "Name": "LastName"
+        },
+        {
+          "ExecutionPathId": "EH3W",
+          "Name": "Subscription"
+        },
+        {
+          "ExecutionPathId": "lm4Q",
+          "Name": "Healthy"
+        },
+        {
+          "ExecutionPathId": "lM96",
+          "Name": "Happy"
+        },
+        {
+          "ExecutionPathId": "XoV6",
+          "Name": "fromNoOfChildren"
+        },
+        {
+          "ExecutionPathId": "vHvS",
+          "Name": "toNoOfChildren"
+        },
+        {
+          "ExecutionPathId": "zvai",
+          "Name": "fromNoOfPets"
+        },
+        {
+          "ExecutionPathId": "lY3N",
+          "Name": "toNoOfPets"
+        },
+        {
+          "ExecutionPathId": "0BsC",
+          "Name": "fromStartDate"
+        },
+        {
+          "ExecutionPathId": "lp67",
+          "Name": "toStartDate"
+        },
+        {
+          "ExecutionPathId": "zcoc",
+          "Name": "fromEndDate"
+        },
+        {
+          "ExecutionPathId": "p8uP",
+          "Name": "toEndDate"
+        }
+      ]
+    },
+    {
+      "Id": "Expression_0",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.ID != \"\"",
+        "CompiledExpression": "={0}!=\"\"",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_1",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.FirstName != \"\"",
+        "CompiledExpression": "={0}!=\"\"",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_10",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.fromStartDate.Year > 1",
+        "CompiledExpression": "={0}.Year>1",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_11",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.toStartDate.Year > 1",
+        "CompiledExpression": "={0}.Year>1",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_12",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.fromEndDate.Year > 1",
+        "CompiledExpression": "={0}.Year>1",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_13",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.toEndDate.Year > 1",
+        "CompiledExpression": "={0}.Year>1",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_2",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.LastName != \"\"",
+        "CompiledExpression": "={0}!=\"\"",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_3",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.Subscription != \"\"",
+        "CompiledExpression": "={0}!=\"\"",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_4",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.Healthy != \"\"",
+        "CompiledExpression": "={0}!=\"\"",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_5",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.Happy != \"\"",
+        "CompiledExpression": "={0}!=\"\"",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_6",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.fromNoOfChildren != \"\"",
+        "CompiledExpression": "={0}!=\"\"",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_7",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.toNoOfChildren != \"\"",
+        "CompiledExpression": "={0}!=\"\"",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_8",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.fromNoOfPets != \"\"",
+        "CompiledExpression": "={0}!=\"\"",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Expression_9",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "RuntimeRead",
+      "Value": {
+        "Expression": "WhereParameters.toNoOfPets != \"\"",
+        "CompiledExpression": "={0}!=\"\"",
+        "Type": "Compiled:Boolean"
+      },
+      "ValueType": "Linx.CSharpExpression"
+    },
+    {
+      "Id": "Show else",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "DesignTime",
+      "Value": false
+    },
+    {
+      "Id": "Stop when true",
+      "Type": "Compiled:Boolean",
+      "ValueUsage": "DesignTime",
+      "Value": false
+    }
+  ],
+  "ExecutionPaths": [
+    {
+      "PluginId": "7MtS",
+      "Name": "ID",
+      "Result": null,
+      "Order": 0,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "0uN4",
+      "Name": "FirstName",
+      "Result": null,
+      "Order": 1,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "SPq3",
+      "Name": "LastName",
+      "Result": null,
+      "Order": 2,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "EH3W",
+      "Name": "Subscription",
+      "Result": null,
+      "Order": 3,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "lm4Q",
+      "Name": "Healthy",
+      "Result": null,
+      "Order": 4,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "lM96",
+      "Name": "Happy",
+      "Result": null,
+      "Order": 5,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "XoV6",
+      "Name": "fromNoOfChildren",
+      "Result": null,
+      "Order": 6,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "vHvS",
+      "Name": "toNoOfChildren",
+      "Result": null,
+      "Order": 7,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "zvai",
+      "Name": "fromNoOfPets",
+      "Result": null,
+      "Order": 8,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "lY3N",
+      "Name": "toNoOfPets",
+      "Result": null,
+      "Order": 9,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "0BsC",
+      "Name": "fromStartDate",
+      "Result": null,
+      "Order": 10,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "lp67",
+      "Name": "toStartDate",
+      "Result": null,
+      "Order": 11,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "zcoc",
+      "Name": "fromEndDate",
+      "Result": null,
+      "Order": 12,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    },
+    {
+      "PluginId": "p8uP",
+      "Name": "toEndDate",
+      "Result": null,
+      "Order": 13,
+      "IterationHint": "ZeroOrOnce",
+      "ConstitutesControlFlow": true
+    }
+  ],
+  "Version": "1"
+}
