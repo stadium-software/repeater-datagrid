@@ -5,7 +5,7 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
 ## Contents <!-- omit in toc -->
 - [Overview](#overview)
 - [Version](#version)
-- [Databases \& Connectors](#databases--connectors)
+- [Sample Databases \& Connectors Setup](#sample-databases--connectors-setup)
   - [StadiumLoadTest Database](#stadiumloadtest-database)
   - [StadiumFilterData Database](#stadiumfilterdata-database)
   - [Connector](#connector)
@@ -45,7 +45,6 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
     - [CSS Upgrading](#css-upgrading)
 - [Loading Spinners](#loading-spinners)
 - [Custom Filters](#custom-filters)
-  - [Query](#query)
   - [Page](#page-1)
 
 # Overview
@@ -80,7 +79,7 @@ To illustrate how this module works, [create this database](#database) and open 
 # Version
 1.0 initial
 
-# Databases & Connectors
+# Sample Databases & Connectors Setup
 The module can be configured to work with any data source and connector. 
 
 The attached example application uses a two separate databases and a number of queries. 
@@ -94,11 +93,11 @@ To run or rebuild the sample application, you need to:
 1. Use the instructions from [this repo](https://github.com/stadium-software/samples-database) to setup the database and DataGrid for this sample
 
 ## Connector
-Set up your connector to your datasource as you normally would. 
+Set up your connector to your datasource as you normally would or change the sample connectors to connect to your database. 
 
-To run the example application, create
-1. A database connector to the "StadiumLoadTest" database you [created above](#database-setup)
-2. A database connector to the "StadiumFilterData"
+To run the example application, create / amend
+1. Database connector to the "StadiumLoadTest" database you [created above](#database-setup)
+2. Database connector to the "StadiumFilterData"
 
 ### StadiumLoadTest Queries
 The module requires two data sets: 
@@ -782,108 +781,37 @@ Custom filters can be manually created and can work with the DataGrid as follows
 1. Additional conditions must be added into the datasource (by adding a custom where clause the query or API call)
 2. Controls that enable users to provide filter criteria needs to be added to the page (custom filter UI)
 
-## Query
-For the example application, this means extending the sql queries as folows
-
-**Example "TotalRecords" Query**
-```sql
-select count(ID) as total from [User]
-  where 
-  	ID = IsNull(nullif(@ID,''),ID) AND 
-    [name] like IsNull(nullif('%' + @name + '%',''),[name]) AND 
-    gender = IsNull(nullif(@gender,''),gender) AND 
-    (adddatetime >= IsNull(nullif(@fromadddatetime,''),'1900-01-01') AND 
-	adddatetime <= IsNull(nullif(@toadddatetime,''),'2100-01-01'))
-```
-
-**Example "Select" Query**
-```sql
-SELECT 
-	ID
-      ,name
-      ,gender
-      ,address
-      ,birthdate
-      ,adddatetime
-  FROM [User]
-  where 
-  	ID = IsNull(nullif(@ID,''),ID) AND 
-    [name] like IsNull(nullif('%' + @name + '%',''),[name]) AND 
-    gender = IsNull(nullif(@gender,''),gender) AND 
-    (adddatetime >= IsNull(nullif(@fromadddatetime,''),'1900-01-01') AND 
-	adddatetime <= IsNull(nullif(@toadddatetime,''),'2100-01-01'))
-  ORDER BY
-  case when UPPER(@sortField) = 'ID' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN ID END ASC,
-  case when UPPER(@sortField) = 'ID' AND LOWER(@sortDirection) = 'desc' THEN ID END DESC,
-  case when LOWER(@sortField) = 'name' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN [name] END ASC,
-  case when LOWER(@sortField) = 'name' AND LOWER(@sortDirection) = 'desc' THEN [name] END DESC,
-  case when LOWER(@sortField) = 'gender' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN gender END ASC,
-  case when LOWER(@sortField) = 'gender' AND LOWER(@sortDirection) = 'desc' THEN gender END DESC,
-  case when LOWER(@sortField) = 'address' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN [address] END ASC,
-  case when LOWER(@sortField) = 'address' AND LOWER(@sortDirection) = 'desc' THEN [address] END DESC,
-  case when LOWER(@sortField) = 'birthdate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN birthdate END ASC,
-  case when LOWER(@sortField) = 'birthdate' AND LOWER(@sortDirection) = 'desc' THEN birthdate END DESC,
-  case when @sortField = '' then ID end ASC,
-  case when @sortField = 'undefined' then ID end ASC
-OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
-```
+Add the queries outlined [above](#stadiumfilterdata-database)
 
 ## Page
 The example application provides users with an opportunity to filter the results by
 
-1. An ID
-2. A Gender (chosen from a dropdown)
-3. Where the name contains a specific substring
-4. Records between two dates
+1. ID
+2. FirstName
+3. LastName
+4. NoOfChildren
+   1. From
+   2. To
+5. NoOfPets
+   1. From
+   2. To
+6. StartDate
+   1. From
+   2. To
+7. EndDate
+   1. From
+   2. To
+8. Happy (dropdown)
+9. Healthy (RadioButtonList)
+10. Subscriptions (CheckBoxList)
 
-The resulting filter will look like this
+![](images/StadiumFilterControls.png)
+
+The resulting filter should look like this
 
 ![](images/FilterControls.png)
 
-1. Add a *Grid* control above the "ServerSideDataGridContainer" container
-2. For the ID filter
-   1. Add a *Label* to the *Grid*
-   2. Add something suitable into the *Text* property
-   3. Place a *TextBox* control next to the *Label*
-   4. Name the TextBox "IDTextBox"
-3. For the Gender filter
-   1. Add a *Label* to the *Grid*
-   2. Add something suitable into the *Text* property
-   3. Place a *DropDown* control next to the *Label*
-   4. Name the TextBox "GenderDropDown"
-   5. Add the values below to the *Options* property
-```json
-= [{"text":"", "value":""},{"text":"Male","value":"1"},{"text":"Female","value":"2"},{"text":"Rather not say","value":"3"}]
-```
-1. For the Name filter
-   1. Add a *Label* to the *Grid*
-   2. Add something suitable into the *Text* property
-   3. Place a *TextBox* control next to the *Label*
-   4. Name the TextBox "NameTextBox"
-2. For the Date filter
-   1. Add a *Label* to the *Grid*
-   2. Add something suitable into the *Text* property
-   3. Place a *Container* control next to the *Label*
-      1. Add a *TextBox* into the *Container* control
-      2. Name the TextBox "AddDateFromTextBox"
-      3. Add a *TextBox* next to the first one inside the *Container* control
-      4. Name the TextBox "AddDateToTextBox"
-   4. Place a button below the *Grid* control
-      1. Name the *Button* "ApplyFilterButton"
-      2. Add "Apply" into the *Text* property
-      3. Create the Click event handler on the button
-      4. Drag the "Initialise" script into the click event handler
-   5. Place second button next to the first one
-      1. Name the second *Button* "ClearFilterButton"
-      2. Add "Cancel" into the *Text* property
-      3. Create the Click event handler on the button
-      4. Drag SetValues into the event handler that set each of the filter fields to empty (= '')
-      5. Drag the "Initialise" script into the click event handler
-   6. Open the "GetData" script and map the additional query parameters to the respective filter fields
-
-![](images/GetDataSelectInputs.png)
-
-   7. Open the "Initialise" script and map the additional query parameters for the two queries to the respective filter fields
+Open the "Initialise" script and map the additional query parameters for the two queries to the respective filter fields
 
 ![](images/InitialiseSelectInputs.png)
 
