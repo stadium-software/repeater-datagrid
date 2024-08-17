@@ -437,15 +437,14 @@ The module requires two global scripts. The first one is used to set up the repe
 /* Stadium Script v1.0 Init https://github.com/stadium-software/repeater-datagrid */
 let scope = this;
 let pageSize = parseInt(~.Parameters.Input.PageSize);
-let sortField = ~.Parameters.Input.DefaultSortField;
+let sortField = ~.Parameters.Input.SortField;
+let sortDirection = ~.Parameters.Input.SortDirection;
 let totalRecords = parseInt(~.Parameters.Input.TotalRecords);
 let initialPage = parseInt(~.Parameters.Input.InitialPage);
-let initialOffset = 0;
 if (isNaN(initialPage)) {
     initialPage = 1;
-} else { 
-    initialOffset = initialPage * pageSize - pageSize;
 }
+let initialOffset = calcOffset(pageSize, initialPage);
 let containerClass = ~.Parameters.Input.ContainerClass;
 if (!containerClass) {
      console.error("The ContainerClass parameter is required");
@@ -475,10 +474,12 @@ if (sortEl) sortEl.classList.remove("dg-asc-sorting", "dg-desc-sorting");
 let cells = container.querySelectorAll(".grid-item");
 let headerCells = container.querySelectorAll(".grid-item:not(.grid-repeater-item)");
 let cellsPerRow = headerCells.length;
+if (document.getElementById("#" + container.id + "_style")) document.getElementById("#" + container.id + "_style").remove();
 let css = '#' + container.id + ' {.grid-item:nth-child(' + cellsPerRow + 'n+1) {border-left: 1px solid var(--dg-border-color);}.grid-item:nth-child(' + cellsPerRow + 'n) {border-right: 1px solid var(--dg-border-color);}';
 let head = document.head || document.getElementsByTagName('head')[0], style = document.createElement('style');
 head.appendChild(style);
 style.type = 'text/css';
+style.id = container.id + "_style";
 style.appendChild(document.createTextNode(css));
 
 let cellCount = 0;
@@ -497,23 +498,38 @@ sessionStorage.setItem(container.id + "_PageSize", pageSize);
 sessionStorage.setItem(container.id + "_Offset", initialOffset);
 sessionStorage.setItem(container.id + "_TotalRecords", totalRecords);
 sessionStorage.setItem(container.id + "_TotalPages", Math.ceil(totalRecords / pageSize));
-sessionStorage.setItem(container.id + "_SortDirection", "");
+sessionStorage.setItem(container.id + "_SortDirection", sortDirection);
 sessionStorage.setItem(container.id + "_SortField", sortField);
+console.log("_Page: " + sessionStorage.getItem(container.id + "_Page"));
+console.log("_PageSize: " + sessionStorage.getItem(container.id + "_PageSize"));
+console.log("_Offset: " + sessionStorage.getItem(container.id + "_Offset"));
+console.log("_TotalRecords: " + sessionStorage.getItem(container.id + "_TotalRecords"));
+console.log("_TotalRecords: " + sessionStorage.getItem(container.id + "_TotalRecords"));
+console.log("_TotalPages: " + sessionStorage.getItem(container.id + "_TotalPages"));
+console.log("_SortDirection: " + sessionStorage.getItem(container.id + "_SortDirection"));
+console.log("_SortField: " + sessionStorage.getItem(container.id + "_SortField"));
 setPageLabel();
 setNextButton(initialPage);
 setPrevButton(initialPage);
+sort(sessionStorage.getItem(container.id + "_SortField"), sessionStorage.getItem(container.id + "_SortDirection"));
 
 for (let i = 0; i < headerCells.length; i++) {
     let inner = headerCells[i].querySelector(".link-container .btn-link");
-    if (inner) inner.addEventListener("mousedown", setSort);
+    if (inner) {
+        inner.removeEventListener("mousedown", setSort);
+        inner.addEventListener("mousedown", setSort);
+    }
 }
 if (container.querySelector(".previous-button")) { 
+    container.querySelector(".previous-button button").removeEventListener("mousedown", previousPage);
     container.querySelector(".previous-button button").addEventListener("mousedown", previousPage);
 }
 if (container.querySelector(".next-button")) { 
+    container.querySelector(".next-button button").removeEventListener("mousedown", nextPage);
     container.querySelector(".next-button button").addEventListener("mousedown", nextPage);
 }
 if (container.querySelector(".specific-page-go")) { 
+    container.querySelector(".specific-page-go button").removeEventListener("mousedown", setPage);
     container.querySelector(".specific-page-go button").addEventListener("mousedown", setPage);
 }
 function previousPage() {
@@ -521,7 +537,7 @@ function previousPage() {
     if (page > 1) { 
         page = page - 1;
         sessionStorage.setItem(container.id + "_Page", page);
-        let offset = page * pageSize - pageSize;
+        let offset = calcOffset(pageSize, page);
         sessionStorage.setItem(container.id + "_Offset", offset);
     }
     setNextButton(page);
@@ -579,37 +595,34 @@ function setPageLabel() {
 }
 function setSort(e) { 
     let clickedEl = e.target;
-    let colHead = clickedEl.textContent.toLowerCase();
-    sessionStorage.setItem(container.id + "_SortField", clickedEl.textContent);
-    let currentSort = container.querySelector(".dg-asc-sorting, .dg-desc-sorting");
+    let colHead = clickedEl.textContent;
+    let dir = "asc";
+    if (clickedEl.closest(".dg-asc-sorting")) {
+        dir = "desc";
+    }
+    sort(colHead, dir);
+}
+function sort(field, direction) {
+    let d = ["asc", "desc"];
+    if (!d.includes(direction.toLowerCase())) direction = "asc";
+    sessionStorage.setItem(container.id + "_SortDirection", direction);
+    sessionStorage.setItem(container.id + "_SortField", field);
     let allHeaders = container.querySelectorAll(".grid-item:not(.grid-repeater-item) .link-container");
-    if (!currentSort) {
-        for (let i = 0; i < allHeaders.length; i++) {
-            if (allHeaders[i].textContent.toLowerCase() == colHead.toLowerCase()) {
-                allHeaders[i].classList.add("dg-asc-sorting");
-            }
-        }
-    } else if (currentSort.classList.contains("dg-desc-sorting") && (currentSort.textContent.toLowerCase() == colHead.toLowerCase())) {
-        currentSort.classList.remove("dg-desc-sorting");
-        currentSort.classList.add("dg-asc-sorting");
-        sessionStorage.setItem(container.id + "_SortDirection", "asc");
-    } else if (currentSort.classList.contains("dg-asc-sorting") && (currentSort.textContent.toLowerCase() == colHead.toLowerCase())) {
-        currentSort.classList.remove("dg-asc-sorting");
-        currentSort.classList.add("dg-desc-sorting");
-        sessionStorage.setItem(container.id + "_SortDirection", "desc");
-    } else if ((currentSort.classList.contains("dg-asc-sorting") || currentSort.classList.contains("dg-desc-sorting")) && (currentSort.textContent.toLowerCase() != colHead.toLowerCase())) {
-        currentSort.classList.remove("dg-asc-sorting", "dg-desc-sorting");
-        for (let i = 0; i < allHeaders.length; i++) {
-            if (allHeaders[i].textContent.toLowerCase() == colHead.toLowerCase()) {
-                allHeaders[i].classList.add("dg-asc-sorting");
-                sessionStorage.setItem(container.id + "_SortDirection", "asc");
-            }
+    for (let i = 0; i < allHeaders.length; i++) {
+        allHeaders[i].classList.remove("dg-asc-sorting", "dg-desc-sorting");
+        if (allHeaders[i].textContent.toLowerCase() == field.toLowerCase()) {
+            allHeaders[i].classList.add("dg-" + direction + "-sorting");
         }
     }
 }
 function setDMValues(ob, property, value) {
     let obname = getObjectName(ob);
     scope[`${obname}${property}`] = value;
+}
+function calcOffset(size, pg) { 
+    let rtn = pg * size - size;
+    if (rtn > 0) rtn = rtn - 1;
+    return rtn;
 }
 ```
 
