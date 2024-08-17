@@ -644,6 +644,8 @@ return { page: sessionStorage.getItem(container.id + "_Page"),
 
 ![](images/StateSetValue.png)
 
+![](images/DataGridStateScript.png)
+
 ### RepeaterDataGridState Return Object
 The "RepeaterDataGridState" script returns an object called "Values" with the properties below. 
 
