@@ -355,9 +355,13 @@ Add a second type called "DataGridState" with the following properties
 ## Page
 To function correctly, the page must contain a number of controls. Some of these provide for DataGrid-specific functions, like paging, while others serve to simply display the data from your dataset. Each control set is defined in detail below. 
 
-The final set of controls for the example application will look like this:
+Add controls that match your columns to the page. 
+
+The set of controls needed for the LoadTest page in the example application will look like this:
 
 ![](images/PageControls.png)
+
+Add controls that match the FilterData dataset as described above. 
 
 ### Main Container
 1. Drag a *Container* control to the page
@@ -379,7 +383,7 @@ The final set of controls for the example application will look like this:
 
 ![](images/RepeaterListItemType.png)
 
-3. For each column you wish to display
+3. For each column you wish to display (these will become the columns in your DataGrid)
    1. Drag a *Label* control into the *Grid*
    2. Map the correct ListItem Property to the *Label Text* property (example shows the "ID" Label)
 
