@@ -22,7 +22,8 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
 - [Application](#application)
   - [Application Properties](#application-properties)
   - [Types](#types)
-    - [DataSet Type](#dataset-type)
+    - [LoadTestDataSet Type](#loadtestdataset-type)
+    - [FilterDataDataSet Type](#filterdatadataset-type)
     - [DataGridState Type](#datagridstate-type)
   - [Page](#page)
     - [Main Container](#main-container)
@@ -307,10 +308,10 @@ In order to access the "LinxAPI" page in the application, it is also necessary t
 ## Types
 Add the two types below
 
-### DataSet Type
+### LoadTestDataSet Type
 Add a new type that contains all the properties (columns) in your dataset. 
 
-The example dataset type is called "DataSet" and contains the following columns:
+The example dataset type is called "LoadTestDataSet" and contains the following columns:
 1. ID (Any)
 2. name (Any)
 3. gender (Any)
@@ -318,7 +319,25 @@ The example dataset type is called "DataSet" and contains the following columns:
 5. birthdate (Any)
 6. adddatetime (Any)
 
-![](images/ColumnType.png)
+![](images/LoadTestType.png)
+
+### FilterDataDataSet Type
+Add a new type that contains all the properties (columns) in your dataset. 
+
+The example dataset type is called "FilterDataDataSet" and contains the following columns:
+1. ID (Any)
+2. FirstName (Any)
+3. LastName (Any)
+4. NoOfChildren (Any)
+5. NoOfPets (Any)
+6. StartDate (Any)
+7. EndDate (any)
+8. Healthy (any)
+9. Happy (any)
+10. Subscription (any)
+11. checked (any)
+
+![](images/FilterDataType.png)
 
 ### DataGridState Type
 Add a second type called "DataGridState" with the following properties
