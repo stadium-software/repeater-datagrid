@@ -359,7 +359,7 @@ The set of controls needed for the LoadTest page in the example application will
 
 ![](images/PageControls.png)
 
-Add controls that match the FilterData dataset as described above. 
+Add controls that match the FilterData dataset in the example as described [above](#filterdatadataset-type). 
 
 ### Main Container
 1. Drag a *Container* control to the page
