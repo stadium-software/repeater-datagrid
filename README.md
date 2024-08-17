@@ -506,10 +506,10 @@ setPrevButton(initialPage);
 sort(sessionStorage.getItem(container.id + "_SortField"), sessionStorage.getItem(container.id + "_SortDirection"));
 
 for (let i = 0; i < headerCells.length; i++) {
-    let outer = headerCells[i].querySelector(".link-container");
-    if (outer && !outer.getAttribute("dg-listener")) {
-        outer.querySelector(".btn-link").addEventListener("mousedown", setSort);
-        outer.setAttribute("dg-listener", true);
+    let headerLink = headerCells[i].querySelector(".link-container");
+    if (headerLink && !headerLink.getAttribute("dg-listener")) {
+        headerLink.querySelector(".btn-link").addEventListener("mousedown", setSort);
+        headerLink.setAttribute("dg-listener", true);
     }
 }
 let prevBt = container.querySelector(".previous-button");
