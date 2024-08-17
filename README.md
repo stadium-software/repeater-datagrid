@@ -809,22 +809,22 @@ Add the queries outlined [above](#stadiumfilterdata-database)
 ## Page
 The example application provides users with an opportunity to filter the results by
 
-1. ID
-2. FirstName
-3. LastName
+1. ID (TextBox)
+2. FirstName (TextBox)
+3. LastName (TextBox)
 4. NoOfChildren
-   1. From
-   2. To
+   1. From (TextBox)
+   2. To (TextBox)
 5. NoOfPets
-   1. From
-   2. To
-6. StartDate
-   1. From
-   2. To
+   1. From (TextBox)
+   2. To (TextBox)
+6. StartDate 
+   1. From (DatePicker)
+   2. To (DatePicker)
 7. EndDate
-   1. From
-   2. To
-8. Happy (dropdown)
+   1. From (DatePicker)
+   2. To (DatePicker)
+8. Happy (DropDown)
 9. Healthy (RadioButtonList)
 10. Subscriptions (CheckBoxList)
 
