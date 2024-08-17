@@ -506,23 +506,26 @@ setPrevButton(initialPage);
 sort(sessionStorage.getItem(container.id + "_SortField"), sessionStorage.getItem(container.id + "_SortDirection"));
 
 for (let i = 0; i < headerCells.length; i++) {
-    let inner = headerCells[i].querySelector(".link-container .btn-link");
-    if (inner) {
-        inner.removeEventListener("mousedown", setSort);
-        inner.addEventListener("mousedown", setSort);
+    let outer = headerCells[i].querySelector(".link-container");
+    if (outer && !outer.getAttribute("dg-listener")) {
+        outer.querySelector(".btn-link").addEventListener("mousedown", setSort);
+        outer.setAttribute("dg-listener", true);
     }
 }
-if (container.querySelector(".previous-button")) { 
-    container.querySelector(".previous-button button").removeEventListener("mousedown", previousPage);
-    container.querySelector(".previous-button button").addEventListener("mousedown", previousPage);
+let prevBt = container.querySelector(".previous-button");
+if (prevBt && !prevBt.getAttribute("dg-listener")) { 
+    prevBt.querySelector("button").addEventListener("mousedown", previousPage);
+    prevBt.setAttribute("dg-listener", true);
 }
-if (container.querySelector(".next-button")) { 
-    container.querySelector(".next-button button").removeEventListener("mousedown", nextPage);
-    container.querySelector(".next-button button").addEventListener("mousedown", nextPage);
+let nextBt = container.querySelector(".next-button");
+if (nextBt && !nextBt.getAttribute("dg-listener")) { 
+    nextBt.querySelector("button").addEventListener("mousedown", nextPage);
+    nextBt.setAttribute("dg-listener", true);
 }
-if (container.querySelector(".specific-page-go")) { 
-    container.querySelector(".specific-page-go button").removeEventListener("mousedown", setPage);
-    container.querySelector(".specific-page-go button").addEventListener("mousedown", setPage);
+let spcBt = container.querySelector(".specific-page-go");
+if (spcBt && !spcBt.getAttribute("dg-listener")) { 
+    spcBt.querySelector("button").addEventListener("mousedown", setPage);
+    spcBt.setAttribute("dg-listener", true);
 }
 function previousPage() {
     let page = parseInt(sessionStorage.getItem(container.id + "_Page"));
