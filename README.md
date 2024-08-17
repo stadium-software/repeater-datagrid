@@ -836,6 +836,10 @@ The resulting filter should look like this
 
 Open the "Initialise" script and map the additional query parameters for the two queries to the respective filter fields
 
+**Select Query**
+
 ![](images/InitialiseSelectInputs.png)
+
+**Totals Query**
 
 ![](images/InitialiseTotalsInputs.png)
