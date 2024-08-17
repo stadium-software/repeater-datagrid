@@ -11,13 +11,13 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
   - [Connector](#connector)
     - [StadiumLoadTest Queries](#stadiumloadtest-queries)
     - ["TotalRecords" Query](#totalrecords-query)
-    - [Example "Select" Query](#example-select-query)
-  - [StadiumFilterData Queries (unfiltered)](#stadiumfilterdata-queries-unfiltered)
-    - [Example "TotalRecords" Query](#example-totalrecords-query)
-    - [Example "Select" Query](#example-select-query-1)
-  - [StadiumFilterData Queries (filtered)](#stadiumfilterdata-queries-filtered)
-    - ["TotalRecords" Query](#totalrecords-query-1)
     - ["Select" Query](#select-query)
+  - [StadiumFilterData Queries (unfiltered)](#stadiumfilterdata-queries-unfiltered)
+    - ["TotalRecords" Query](#totalrecords-query-1)
+    - ["Select" Query](#select-query-1)
+  - [StadiumFilterData Queries (filtered)](#stadiumfilterdata-queries-filtered)
+    - ["TotalRecords" Query](#totalrecords-query-2)
+    - ["Select" Query](#select-query-2)
   - [REST API](#rest-api)
 - [Application](#application)
   - [Application Properties](#application-properties)
@@ -114,7 +114,7 @@ Create the queries below and press the "Fetch Fields & Parameters" button to run
 select count(ID) as total from [User]
 ```
 
-### Example "Select" Query
+### "Select" Query
 
 NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64"
  as shown below and press the "Fetch Fields & Parameters" button again. 
@@ -156,12 +156,12 @@ Create the queries below and press the "Fetch Fields & Parameters" button to run
 
 ![](images/DBQueries.png)
 
-### Example "TotalRecords" Query
+### "TotalRecords" Query
 ```sql
 select count(ID) as total from MyData
 ```
 
-### Example "Select" Query
+### "Select" Query
 
 NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64"
  as shown below and press the "Fetch Fields & Parameters" button again. 
@@ -816,4 +816,3 @@ Open the "Initialise" script and map the additional query parameters for the two
 ![](images/InitialiseSelectInputs.png)
 
 ![](images/InitialiseTotalsInputs.png)
-
