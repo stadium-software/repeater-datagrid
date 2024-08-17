@@ -508,26 +508,26 @@ sort(sessionStorage.getItem(container.id + "_SortField"), sessionStorage.getItem
 for (let i = 0; i < headerCells.length; i++) {
     let headerLink = headerCells[i].querySelector(".link-container");
     if (headerLink && !headerLink.getAttribute("dg-listener")) {
-        headerLink.querySelector(".btn-link").addEventListener("mousedown", setSort);
+        headerLink.querySelector(".btn-link").addEventListener("mousedown", handleSort);
         headerLink.setAttribute("dg-listener", true);
     }
 }
 let prevBt = container.querySelector(".previous-button");
 if (prevBt && !prevBt.getAttribute("dg-listener")) { 
-    prevBt.querySelector("button").addEventListener("mousedown", previousPage);
+    prevBt.querySelector("button").addEventListener("mousedown", handlePrevPg);
     prevBt.setAttribute("dg-listener", true);
 }
 let nextBt = container.querySelector(".next-button");
 if (nextBt && !nextBt.getAttribute("dg-listener")) { 
-    nextBt.querySelector("button").addEventListener("mousedown", nextPage);
+    nextBt.querySelector("button").addEventListener("mousedown", handleNextPg);
     nextBt.setAttribute("dg-listener", true);
 }
 let spcBt = container.querySelector(".specific-page-go");
 if (spcBt && !spcBt.getAttribute("dg-listener")) { 
-    spcBt.querySelector("button").addEventListener("mousedown", setPage);
+    spcBt.querySelector("button").addEventListener("mousedown", handleSetPg);
     spcBt.setAttribute("dg-listener", true);
 }
-function previousPage() {
+function handlePrevPg() {
     let page = parseInt(sessionStorage.getItem(container.id + "_Page"));
     if (page > 1) { 
         page = page - 1;
@@ -547,7 +547,7 @@ function setPrevButton(pg) {
         previousButton.classList.remove("disabled");
     }
 }
-function nextPage() {
+function handleNextPg() {
     let page = parseInt(sessionStorage.getItem(container.id + "_Page"));
     if (page < parseInt(sessionStorage.getItem(container.id + "_TotalPages"))) { 
         page = page + 1;
@@ -567,7 +567,7 @@ function setNextButton(pg) {
         nextButton.classList.remove("disabled");
     }
 }
-function setPage() {
+function handleSetPg() {
     let pageInputContainer = container.querySelector(".specific-page");
     let pageInput = pageInputContainer.querySelector("input");
     let page = pageInput.value;
@@ -588,7 +588,7 @@ function setPageLabel() {
         container.querySelector(".current-page span").textContent = "No records found";
     }
 }
-function setSort(e) { 
+function handleSort(e) { 
     let clickedEl = e.target;
     let colHead = clickedEl.textContent;
     let dir = "asc";
@@ -598,8 +598,7 @@ function setSort(e) {
     sort(colHead, dir);
 }
 function sort(field, direction) {
-    let d = ["asc", "desc"];
-    if (!d.includes(direction.toLowerCase())) direction = "asc";
+    if (!["asc", "desc"].includes(direction.toLowerCase())) direction = "asc";
     sessionStorage.setItem(container.id + "_SortDirection", direction);
     sessionStorage.setItem(container.id + "_SortField", field);
     let allHeaders = container.querySelectorAll(".grid-item:not(.grid-repeater-item) .link-container");
