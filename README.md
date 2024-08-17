@@ -834,7 +834,7 @@ The resulting filter should look like this
 
 ![](images/FilterControls.png)
 
-Open the "Initialise" script and map the additional query parameters for the two queries to the respective filter fields
+Open the "Initialise" and "GetData" scripts and map the additional query parameters for the two queries to the respective filter fields
 
 **Select Query**
 
