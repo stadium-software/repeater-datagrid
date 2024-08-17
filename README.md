@@ -22,9 +22,9 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
 - [Application](#application)
   - [Application Properties](#application-properties)
   - [Types](#types)
+    - [DataGridState Type](#datagridstate-type)
     - [LoadTestDataSet Type](#loadtestdataset-type)
     - [FilterDataDataSet Type](#filterdatadataset-type)
-    - [DataGridState Type](#datagridstate-type)
   - [Page](#page)
     - [Main Container](#main-container)
     - [Grid](#grid)
@@ -306,38 +306,9 @@ In order to access the "LinxAPI" page in the application, it is also necessary t
 1. Check the *Enable Style Sheet* checkbox in the application properties
 
 ## Types
-Add the two types below
-
-### LoadTestDataSet Type
-Add a new type that contains all the properties (columns) in your dataset. 
-
-The example dataset type is called "LoadTestDataSet" and contains the following columns:
-1. ID (Any)
-2. name (Any)
-3. gender (Any)
-4. address (Any)
-5. birthdate (Any)
-6. adddatetime (Any)
-
-![](images/LoadTestType.png)
-
-### FilterDataDataSet Type
-Add a new type that contains all the properties (columns) in your dataset. 
-
-The example dataset type is called "FilterDataDataSet" and contains the following columns:
-1. ID (Any)
-2. FirstName (Any)
-3. LastName (Any)
-4. NoOfChildren (Any)
-5. NoOfPets (Any)
-6. StartDate (Any)
-7. EndDate (any)
-8. Healthy (any)
-9. Happy (any)
-10. Subscription (any)
-11. checked (any)
-
-![](images/FilterDataType.png)
+Add
+1. The DataGridState type described below
+2. A type that matches the field in your dataset (two examples below)
 
 ### DataGridState Type
 Add a second type called "DataGridState" with the following properties
@@ -351,6 +322,33 @@ Add a second type called "DataGridState" with the following properties
 7. sortField (any)
 
 ![](images/DGStateType.png)
+
+### LoadTestDataSet Type
+The LoadTest example dataset type is called "LoadTestDataSet" and contains the following columns:
+1. ID (Any)
+2. name (Any)
+3. gender (Any)
+4. address (Any)
+5. birthdate (Any)
+6. adddatetime (Any)
+
+![](images/LoadTestType.png)
+
+### FilterDataDataSet Type
+The FilterData example dataset type is called "FilterDataDataSet" and contains the following columns:
+1. ID (Any)
+2. FirstName (Any)
+3. LastName (Any)
+4. NoOfChildren (Any)
+5. NoOfPets (Any)
+6. StartDate (Any)
+7. EndDate (any)
+8. Healthy (any)
+9. Happy (any)
+10. Subscription (any)
+11. checked (any)
+
+![](images/FilterDataType.png)
 
 ## Page
 To function correctly, the page must contain a number of controls. Some of these provide for DataGrid-specific functions, like paging, while others serve to simply display the data from your dataset. Each control set is defined in detail below. 
