@@ -9,7 +9,7 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
   - [StadiumLoadTest Database](#stadiumloadtest-database)
   - [StadiumFilterData Database](#stadiumfilterdata-database)
   - [Connector](#connector)
-    - [StadiumLoadTest Queries](#stadiumloadtest-queries)
+  - [StadiumLoadTest Queries](#stadiumloadtest-queries)
     - ["TotalRecords" Query](#totalrecords-query)
     - ["Select" Query](#select-query)
   - [StadiumFilterData Queries (unfiltered)](#stadiumfilterdata-queries-unfiltered)
@@ -99,7 +99,7 @@ To run the example application, create / amend
 1. Database connector to the "StadiumLoadTest" database you [created above](#database-setup)
 2. Database connector to the "StadiumFilterData"
 
-### StadiumLoadTest Queries
+## StadiumLoadTest Queries
 The module requires two data sets: 
 
 1. The total number of records
