@@ -500,14 +500,6 @@ sessionStorage.setItem(container.id + "_TotalRecords", totalRecords);
 sessionStorage.setItem(container.id + "_TotalPages", Math.ceil(totalRecords / pageSize));
 sessionStorage.setItem(container.id + "_SortDirection", sortDirection);
 sessionStorage.setItem(container.id + "_SortField", sortField);
-console.log("_Page: " + sessionStorage.getItem(container.id + "_Page"));
-console.log("_PageSize: " + sessionStorage.getItem(container.id + "_PageSize"));
-console.log("_Offset: " + sessionStorage.getItem(container.id + "_Offset"));
-console.log("_TotalRecords: " + sessionStorage.getItem(container.id + "_TotalRecords"));
-console.log("_TotalRecords: " + sessionStorage.getItem(container.id + "_TotalRecords"));
-console.log("_TotalPages: " + sessionStorage.getItem(container.id + "_TotalPages"));
-console.log("_SortDirection: " + sessionStorage.getItem(container.id + "_SortDirection"));
-console.log("_SortField: " + sessionStorage.getItem(container.id + "_SortField"));
 setPageLabel();
 setNextButton(initialPage);
 setPrevButton(initialPage);
@@ -537,7 +529,7 @@ function previousPage() {
     if (page > 1) { 
         page = page - 1;
         sessionStorage.setItem(container.id + "_Page", page);
-        let offset = calcOffset(pageSize, page);
+        let offset = calcOffset(sessionStorage.getItem(container.id + "_PageSize"), page);
         sessionStorage.setItem(container.id + "_Offset", offset);
     }
     setNextButton(page);
@@ -557,7 +549,7 @@ function nextPage() {
     if (page < parseInt(sessionStorage.getItem(container.id + "_TotalPages"))) { 
         page = page + 1;
         sessionStorage.setItem(container.id + "_Page", page);
-        let offset = page * pageSize - pageSize;
+        let offset = calcOffset(sessionStorage.getItem(container.id + "_PageSize"), page);
         sessionStorage.setItem(container.id + "_Offset", offset);
     }
     setNextButton(page);
@@ -578,7 +570,7 @@ function setPage() {
     let page = pageInput.value;
     if (!isNaN(page) && page > 0 && page <= parseInt(sessionStorage.getItem(container.id + "_TotalPages"))) {
         sessionStorage.setItem(container.id + "_Page", page);
-        let offset = page * pageSize - pageSize;
+        let offset = calcOffset(sessionStorage.getItem(container.id + "_PageSize"), page);
         sessionStorage.setItem(container.id + "_Offset", offset);
         setNextButton(page);
         setPrevButton(page);
@@ -620,8 +612,7 @@ function setDMValues(ob, property, value) {
     scope[`${obname}${property}`] = value;
 }
 function calcOffset(size, pg) { 
-    let rtn = pg * size - size;
-    if (rtn > 0) rtn = rtn - 1;
+    let rtn = (parseInt(pg) - 1) * parseInt(size);
     return rtn;
 }
 ```
@@ -642,7 +633,8 @@ if (!containerClass) {
      return false;
 }
 let container = document.querySelector("." + containerClass);
-return { page: sessionStorage.getItem(container.id + "_Page"),
+return {
+     page: sessionStorage.getItem(container.id + "_Page"),
      pageSize: sessionStorage.getItem(container.id + "_PageSize"),
      offset: sessionStorage.getItem(container.id + "_Offset"),
      totalRecords: sessionStorage.getItem(container.id + "_TotalRecords"),
