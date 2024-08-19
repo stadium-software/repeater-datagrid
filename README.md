@@ -621,9 +621,9 @@ To easily access the values, drag type called "DataGridState" to the script and 
 Alll events in the example application either call a script to initialise the DataGrid or one to retreive the DataGrid state. 
 
 ### Initialise Page Script
-The "RepeaterDataGridInit" script allows for the initalisation of the *Repeater* as a DataGrid. Call this script to initialise the DataGrid in the Page.Load script and whenever the dataset changes, like when it is filtered for example. 
+The "RepeaterDataGridInit" script allows for the initalisation of the *Repeater* as a DataGrid. Call this script to initialise the DataGrid in the Page.Load script and whenever the dataset changes, like when it is filtered for example. Since each page has slightly different requirements and the "Initialise" script is not exactly the same across pagtes. 
 
-In events that initialise or re-initialise the DataGrid, the example application simply calls a Page Script called "Initialise"
+In events that initialise or re-initialise the DataGrid, the example application simply calls a Page Script called "Initialise". The simplest example of this script can be created as follows:
 
 1. Create a Script called "Initialise" under the page
 2. Drag the "TotalRecords" query to the script
