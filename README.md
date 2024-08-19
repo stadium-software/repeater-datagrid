@@ -35,13 +35,15 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
     - [Page.Load](#pageload)
     - [Sorting](#sorting)
     - [Paging](#paging)
-    - [Link Columns](#link-columns)
   - [CSS](#css)
     - [Customising CSS](#customising-css)
     - [CSS Upgrading](#css-upgrading)
-- [Loading Spinners](#loading-spinners)
+- [Link Columns](#link-columns)
+- [Data Export](#data-export)
 - [Custom Filters](#custom-filters)
   - [Page](#page-1)
+- [Editable Columns](#editable-columns)
+- [Loading Spinners](#loading-spinners)
 
 # Overview
 Using this module, you can configure a *Repeater* control to create a DataGrid that looks and works similar to the standard Stadium *DataGrid* control. It works by enabling the retrieval and display of a single page of records only. Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid.  
@@ -691,19 +693,6 @@ Drag the "Initialise" script into the Page.Load event handler
 
 ![](images/PagingEventHandler.png)
 
-### Link Columns
-To add a link columns to the Datagrid: 
-1. Drag an *Image*, *Link* or *Button* control into the *Repeater* control
-
-![](images/EditLink.png)
-
-2. Create the *Click* Event Handler
-3. In the *Click* Event Handler, you have access to all the controls in that *Repeater* row in the *Controls* group in the properties dropdown 
-
-**Example shows how to access the ID.Label Text Property in a EditImage.Click event handler**
-
-![](images/AccessColumnValues.png)
-
 ## CSS
 The CSS below is required for the correct functioning of the module. Some elements can be [customised](#customising-css) using a variables CSS file. 
 
@@ -724,17 +713,23 @@ The CSS below is required for the correct functioning of the module. Some elemen
 ### CSS Upgrading
 To upgrade the CSS in this module, follow the [steps outlined in this repo](https://github.com/stadium-software/samples-upgrading)
 
-# Loading Spinners
-To add a loading spinner to the DataGrid
+# Link Columns
+To add a link columns to the Datagrid: 
+1. Drag an *Image*, *Link* or *Button* control into the *Repeater* control
 
-1. Add the [Spinner Repo](https://github.com/stadium-software/spinners) to your application
-2. Drag a *Container* control anywhere into the "ServerSideDataGridContainer" and name it "Spinner"
-3. Add the classes "stadium-spinner spinner-contained" to the "Spinner"
-4. Add a class for the type of spinner you would like to display (e.g. spinner-type-1)
-5. Drag the "Spinner" Glopbal Script to the Page.Load for page that will use the spinner
-6. Add a *SetValue* action to any script when you want to show or hide the spinner
-   1. Set the "Spinner.Visible" property to "true" to show the spinner
-   2. Set the "Spinner.Visible" property to "false" to hide the spinner
+![](images/EditLink.png)
+
+2. Create the *Click* Event Handler
+3. In the *Click* Event Handler, you have access to all the controls in that *Repeater* row in the *Controls* group in the properties dropdown 
+
+**Example shows how to access the ID.Label Text Property in a EditImage.Click event handler**
+
+![](images/AccessColumnValues.png)
+
+# Data Export
+Enabling data export to CSV requires the use of the [List to CSV Download](https://github.com/stadium-software/utils-list-to-csv-download) repo. 
+1. Fetch the data to be exported by executing a query in an event handler or by calling a WebService
+2. Assign the results set to the List input property of the *List to CSV Download* module script
 
 # Custom Filters
 Custom filters can be manually created and can work with the DataGrid as follows:
@@ -781,3 +776,28 @@ Open the "Initialise" and "GetData" scripts and map the additional query paramet
 **Totals Query**
 
 ![](images/InitialiseTotalsInputs.png)
+
+# Editable Columns
+To make a column edibable: 
+1. Drag a form control into the *Repeater* control (e.g. CheckBox, CheckBoxList, DatePicker, DropDown, RadioButtonList)
+
+![](images/EditableColumnControls.png)
+
+2. Create the *Change* Event Handler
+3. In the *Change* Event Handler, you have access to all the controls in that *Repeater* row in the *Controls* group in the properties dropdown 
+
+**Example shows how to add a CheckboxList column and a DropDown column**
+
+![](images/EditableColumns.png)
+
+# Loading Spinners
+To add a loading spinner to the DataGrid
+
+1. Add the [Spinner Repo](https://github.com/stadium-software/spinners) to your application
+2. Drag a *Container* control anywhere into the "ServerSideDataGridContainer" and name it "Spinner"
+3. Add the classes "stadium-spinner spinner-contained" to the "Spinner"
+4. Add a class for the type of spinner you would like to display (e.g. spinner-type-1)
+5. Drag the "Spinner" Glopbal Script to the Page.Load for page that will use the spinner
+6. Add a *SetValue* action to any script when you want to show or hide the spinner
+   1. Set the "Spinner.Visible" property to "true" to show the spinner
+   2. Set the "Spinner.Visible" property to "false" to hide the spinner
