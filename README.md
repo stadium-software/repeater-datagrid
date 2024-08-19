@@ -6,24 +6,19 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
 - [Overview](#overview)
 - [Version](#version)
 - [Sample Databases \& Connectors Setup](#sample-databases--connectors-setup)
-  - [StadiumLoadTest Database](#stadiumloadtest-database)
   - [StadiumFilterData Database](#stadiumfilterdata-database)
   - [Connector](#connector)
-  - [StadiumLoadTest Queries](#stadiumloadtest-queries)
+  - [StadiumFilterData Queries (unfiltered)](#stadiumfilterdata-queries-unfiltered)
     - ["TotalRecords" Query](#totalrecords-query)
     - ["Select" Query](#select-query)
-  - [StadiumFilterData Queries (unfiltered)](#stadiumfilterdata-queries-unfiltered)
+  - [StadiumFilterData Queries (filtered)](#stadiumfilterdata-queries-filtered)
     - ["TotalRecords" Query](#totalrecords-query-1)
     - ["Select" Query](#select-query-1)
-  - [StadiumFilterData Queries (filtered)](#stadiumfilterdata-queries-filtered)
-    - ["TotalRecords" Query](#totalrecords-query-2)
-    - ["Select" Query](#select-query-2)
   - [REST API](#rest-api)
 - [Application](#application)
   - [Application Properties](#application-properties)
   - [Types](#types)
     - [DataGridState Type](#datagridstate-type)
-    - [LoadTestDataSet Type](#loadtestdataset-type)
     - [FilterDataDataSet Type](#filterdatadataset-type)
   - [Page](#page)
     - [Main Container](#main-container)
@@ -53,27 +48,32 @@ Using this module, you can configure a *Repeater* control to create a DataGrid t
 
 **Notable features**
 
-- Can be used with any connector
-- Configurable page size
+- Can be used with any connector (database or Web Service)
+- Works with data sources of any size
 - Provides for sorting and paging
-- Supports [custom filters](#custom-filters)
+- Configurable / selectable page size
+- Configurable / selectable initial page
+- Support for link columns
+- Support for data export
+- Supoort for editable columns
+- Support for [custom filters](#custom-filters)
 
 **Assets**
 
 The module comes with two [CSS files](#css-setup) and [two scripts](#global-scripts). 
 
-- The CSS makes a Stadium *Repeater* control look like a DataGrid. The *Repeater* control must contain a [variety of controls](#page). 
-- The scripts provide functionality to facilitate the rendering of data and keeping the DataGrid state. This includes recording when users use the controls to sort or page the data. 
+- The CSS makes a Stadium *Repeater* control look like a DataGrid. The *Repeater* control must contain a [variety of controls](#page)
+- The scripts provide functionality to facilitate the rendering of data and keeping the DataGrid state. This includes recording when users use the controls to sort or page the data
 
 **Integration**
 
 To use this module in a Stadium application
 1. Add link, label and other controls to a Grid and Repeater control to create the DataGrid columns
-2. Add SQL queries or API calls to retrieve and assign the correct data when loading the DataGrid data, when users sort the data or when they page through the data in the control [event handlers](#scripts-and-events). 
+2. Add SQL queries or API calls to retrieve and assign the correct data when loading the DataGrid data, when users sort the data or when they page through the data in the control [event handlers](#scripts-and-events)
 
 **Example Application**
 
-To illustrate how this module works, [create this database](#database) and open the [sample application](Stadium6/RepeaterDataGrid.sapz). It displays data from the database table with 2 million records. It contains [scripts](#scripts-and-events) to demonstrate how to configure the sorting and paging features.
+To illustrate how this module works, [create this database](#database) and open the [sample application](Stadium6/RepeaterDataGrid.sapz). It displays data from the database table with over 100,000 records. It contains [scripts](#scripts-and-events) to demonstrate how to configure the sorting and paging features.
 
 ![](images/DataGridScreenShot.png)
 
@@ -85,67 +85,11 @@ The module can be configured to work with any data source and connector.
 
 The attached example application uses a two separate databases and a number of queries. 
 
-## StadiumLoadTest Database
-To run or rebuild the sample application, you need to:
-1. Create a database in a SQL Server instance called "StadiumLoadTest"
-2. Unzip and run the SQL script in the database folder in this repo (this will create a table called "User") [script file](database/script.zip)
-
 ## StadiumFilterData Database
 1. Use the instructions from [this repo](https://github.com/stadium-software/samples-database) to setup the database and DataGrid for this sample
 
 ## Connector
-Set up your connector to your datasource as you normally would or change the sample connectors to connect to your database. 
-
-To run the example application, create / amend
-1. Database connector to the "StadiumLoadTest" database you [created above](#database-setup)
-2. Database connector to the "StadiumFilterData"
-
-## StadiumLoadTest Queries
-The module requires two data sets: 
-
-1. The total number of records
-2. The data to be attached to the *Repeater* (a list of objects from a database or an API)
-
-Create the queries below and press the "Fetch Fields & Parameters" button to run the example application. These queries include parameters to facilitate DataGrid *paging* and *sorting*. 
-
-![](images/DBQueries.png)
-
-### "TotalRecords" Query
-```sql
-select count(ID) as total from [User]
-```
-
-### "Select" Query
-
-NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64"
- as shown below and press the "Fetch Fields & Parameters" button again. 
-
-![](images/SQLErrorParameters.png)
-
-```sql
-SELECT 
-	ID
-    ,name
-    ,gender
-    ,address
-    ,birthdate
-    ,adddatetime
-  FROM [User]
-  ORDER BY
-  case when UPPER(@sortField) = 'ID' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN ID END ASC,
-  case when UPPER(@sortField) = 'ID' AND LOWER(@sortDirection) = 'desc' THEN ID END DESC,
-  case when LOWER(@sortField) = 'name' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN [name] END ASC,
-  case when LOWER(@sortField) = 'name' AND LOWER(@sortDirection) = 'desc' THEN [name] END DESC,
-  case when LOWER(@sortField) = 'gender' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN gender END ASC,
-  case when LOWER(@sortField) = 'gender' AND LOWER(@sortDirection) = 'desc' THEN gender END DESC,
-  case when LOWER(@sortField) = 'address' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN [address] END ASC,
-  case when LOWER(@sortField) = 'address' AND LOWER(@sortDirection) = 'desc' THEN [address] END DESC,
-  case when LOWER(@sortField) = 'birthdate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN birthdate END ASC,
-  case when LOWER(@sortField) = 'birthdate' AND LOWER(@sortDirection) = 'desc' THEN birthdate END DESC,
-  case when @sortField = '' then ID end ASC,
-  case when @sortField = 'undefined' then ID end ASC
-OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
-```
+Set up your connector to your datasource as you normally would or change the sample connectors to connect to your "StadiumFilterData" database. 
 
 ## StadiumFilterData Queries (unfiltered)
 The module requires four data sets: 
@@ -298,7 +242,7 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
 
 ## REST API
-In order to access the "LinxAPI" page in the application, it is also necessary to run the SimpleRESTHost service in the Linx applicaiton in this repo. The *Setting* called "DBConn" needs to be changed to point to your local SQL Server. 
+In order to access the "LinxAPI" page in the application, it is also necessary to run the SimpleRESTHost service in the Linx application in this repo. The *Setting* called "DBConn" needs to be changed to point to your local SQL Server. 
 
 # Application
 
@@ -308,7 +252,7 @@ In order to access the "LinxAPI" page in the application, it is also necessary t
 ## Types
 Add
 1. The DataGridState type described below
-2. A type that matches the field in your dataset (two examples below)
+2. A type that matches the field in your dataset (example below)
 
 ### DataGridState Type
 Add a second type called "DataGridState" with the following properties
@@ -322,17 +266,6 @@ Add a second type called "DataGridState" with the following properties
 7. sortField (any)
 
 ![](images/DGStateType.png)
-
-### LoadTestDataSet Type
-The LoadTest example dataset type is called "LoadTestDataSet" and contains the following columns:
-1. ID (Any)
-2. name (Any)
-3. gender (Any)
-4. address (Any)
-5. birthdate (Any)
-6. adddatetime (Any)
-
-![](images/LoadTestType.png)
 
 ### FilterDataDataSet Type
 The FilterData example dataset type is called "FilterDataDataSet" and contains the following columns:
@@ -355,11 +288,9 @@ To function correctly, the page must contain a number of controls. Some of these
 
 Add controls that match your columns to the page. 
 
-The set of controls needed for the LoadTest page in the example application will look like this:
+To run the sample, add controls that match the FilterData dataset in the example as described [above](#filterdatadataset-type). The set of controls needed for the LoadTest page in the example application will look like this:
 
 ![](images/PageControls.png)
-
-Add controls that match the FilterData dataset in the example as described [above](#filterdatadataset-type). 
 
 ### Main Container
 1. Drag a *Container* control to the page
