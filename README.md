@@ -791,10 +791,23 @@ To conditionally style cells:
    1. Add a *Decision* action
    2. Set the *Decision* condition you require (e.g. Control.Text > 10)
       1. Add a *SetValue* action into the condition 
-      2. Add a class to the control *Classes* property (e.g. "= NoOfChildrenLabel.Classes + ' red-background'")
+      2. Add a class to the control *Classes* property
+         1. Set the *Target* property to the *Control.CLasses* property
+         2. Set the *Value* property to an expression like the one below
+
+```javascript
+NoOfChildrenLabel.Classes + ' red-background'
+```
+
    3. In the *Else* condition
       1. Add a *SetValue* action into the condition 
-      2. Remove the class from the control *Classes* property (e.g. "= NoOfChildrenLabel.Classes.replaceAll('red-background', '')")
+      2. Remove the class from the control *Classes* property
+         1. Set the *Target* property to the *Control.CLasses* property
+         2. Set the *Value* property to an expression like the one below
+
+```javascript
+NoOfChildrenLabel.Classes.replaceAll('red-background', '')
+```
 
 ![](images/RepeaterItemLoadDecision.png)
 
