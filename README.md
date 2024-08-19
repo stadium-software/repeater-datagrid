@@ -42,6 +42,7 @@ https://github.com/user-attachments/assets/8c7b1b52-a7f6-4086-98af-e2336182d65d
 - [Data Export](#data-export)
 - [Custom Filters](#custom-filters)
   - [Page](#page-1)
+- [Conditional Cell Styling](#conditional-cell-styling)
 - [Editable Columns](#editable-columns)
 - [Load Specific Page](#load-specific-page)
 - [Selectable Page Size](#selectable-page-size)
@@ -91,6 +92,7 @@ The attached example application uses a two separate databases and a number of q
 
 ## StadiumFilterData Database
 1. Use the instructions from [this repo](https://github.com/stadium-software/samples-database) to setup the database and DataGrid for this sample
+2. To increase the records in the database, run the SQL scripts contained in the zip file in the [database](/database) folder in this repo
 
 ## Connector
 Set up your connector to your datasource as you normally would or change the sample connectors to connect to your "StadiumFilterData" database. 
@@ -778,6 +780,37 @@ Open the "Initialise" and "GetData" scripts and map the additional query paramet
 **Totals Query**
 
 ![](images/InitialiseTotalsInputs.png)
+
+# Conditional Cell Styling
+To conditionally style cells:
+1. Add a RepeaterItemLoad event to the *Repeater* control
+
+![](images/RepeaterItemLoad.png)
+
+2. In the *Repeater* control event handler
+   1. Add a *Decision* action and uncheck the *Else* condition
+   2. Set the *Decision* condition you require (e.g. Control.Text > 10)
+   3. Add a *SetValue* action into the condition 
+   4. Add a class to the control *Classes* property (e.g. "= NoOfChildrenLabel.Classes + ' red-background'")
+3. Open the *StyleSheet*
+4. Add the class and attributes to the *StyleSheet* as you see fit
+
+
+**Example CSS**
+```CSS
+/*Changes the background color and font styles of a cell*/
+.grid-repeater-item:has(.red-background) {
+	background-color: red;
+	span {
+		color: white;
+		font-weight: bold;
+	}
+}
+/*Hides a cell label*/
+.displaynone {
+	display: none;
+}
+```
 
 # Editable Columns
 To make a column edibable: 
