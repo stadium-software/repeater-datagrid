@@ -43,6 +43,8 @@ https://github.com/user-attachments/assets/0164fc8f-a6c9-4eb6-b9a7-ffb4ac18d4cf
 - [Custom Filters](#custom-filters)
   - [Page](#page-1)
 - [Editable Columns](#editable-columns)
+- [Load Specific Page](#load-specific-page)
+- [Selectable Page Size](#selectable-page-size)
 - [Loading Spinners](#loading-spinners)
 
 # Overview
@@ -50,7 +52,7 @@ Using this module, you can configure a *Repeater* control to create a DataGrid t
 
 **Notable features**
 
-- Can be used with any connector (database or Web Service)
+- Can be used with any connector (Database or Web Service)
 - Works with data sources of any size
 - Provides for sorting and paging
 - Configurable / selectable page size
@@ -789,6 +791,21 @@ To make a column edibable:
 **Example shows how to add a CheckboxList column and a DropDown column**
 
 ![](images/EditableColumns.png)
+
+# Load Specific Page
+In order to load a specific page when the DataGrid loads, pass the page you wish to load into the "Initialise" script
+
+# Selectable Page Size
+To enable users to select a page size:
+1. Add a *DropDown* control with the allowable page sizes
+2. Add a *Change* event handler to the *DropDown* control
+3. Drag the "RepeaterDataGridState" global script into the event handler and add the DataGrid class into the script "Classes" input parameter
+4. Drag the "DataGridState" type into the event handler and assign the "RepeaterDataGridState" return value to the type
+5. Drag the "Initialise" script into the event handler and 
+   1. Pass the selected *DropDown* value into the "Initialise" script "PageSize" input parameter 
+   2. Pass the "SortField" and "SortDirection" values form the "DataGridState" type into the appropriate "Initialise" script input parameters
+
+![](images/InitialiseScriptInputParams.png)
 
 # Loading Spinners
 To add a loading spinner to the DataGrid
