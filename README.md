@@ -666,7 +666,7 @@ In all sorting and paging events, the example application simply calls a Page Sc
    1. Target: The Repeater List Property
    2. Source: The data returned by the connector
 
-![](images/RepeaterListAssignment.png)
+![](images/SetRepeaterData.png)
 
 **GetData Script**
 
