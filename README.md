@@ -788,13 +788,18 @@ To conditionally style cells:
 ![](images/RepeaterItemLoad.png)
 
 2. In the *Repeater* control event handler
-   1. Add a *Decision* action and uncheck the *Else* condition
+   1. Add a *Decision* action
    2. Set the *Decision* condition you require (e.g. Control.Text > 10)
-   3. Add a *SetValue* action into the condition 
-   4. Add a class to the control *Classes* property (e.g. "= NoOfChildrenLabel.Classes + ' red-background'")
+      1. Add a *SetValue* action into the condition 
+      2. Add a class to the control *Classes* property (e.g. "= NoOfChildrenLabel.Classes + ' red-background'")
+   3. In the *Else* condition
+      1. Add a *SetValue* action into the condition 
+      2. Remove the class from the control *Classes* property (e.g. "= NoOfChildrenLabel.Classes.replaceAll('red-background', '')")
+
+![](images/RepeaterItemLoadDecision.png)
+
 3. Open the *StyleSheet*
 4. Add the class and attributes to the *StyleSheet* as you see fit
-
 
 **Example CSS**
 ```CSS
