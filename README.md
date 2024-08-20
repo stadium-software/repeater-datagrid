@@ -12,8 +12,8 @@ https://github.com/user-attachments/assets/0755fd61-0c0e-4cdb-aa2c-5626abfe30b9
     - ["TotalRecords" Query](#totalrecords-query)
     - ["Select" Query](#select-query)
   - [StadiumFilterData Queries (filtered)](#stadiumfilterdata-queries-filtered)
-    - ["TotalRecords" Query](#totalrecords-query-1)
-    - ["Select" Query](#select-query-1)
+    - ["FilterTotals" Query](#filtertotals-query)
+    - ["FilterSelect" Query](#filterselect-query)
   - [REST API](#rest-api)
 - [Application](#application)
   - [Application Properties](#application-properties)
@@ -42,6 +42,7 @@ https://github.com/user-attachments/assets/0755fd61-0c0e-4cdb-aa2c-5626abfe30b9
 - [Data Export](#data-export)
 - [Custom Filters](#custom-filters)
   - [Page](#page-1)
+  - [Queries](#queries)
 - [Conditional Cell Styling](#conditional-cell-styling)
 - [Editable Columns](#editable-columns)
 - [Load Specific Page](#load-specific-page)
@@ -167,7 +168,7 @@ Create the queries below and press the "Fetch Fields & Parameters" button to run
 
 ![](images/DBQueries.png)
 
-### "TotalRecords" Query
+### "FilterTotals" Query
 ```sql
 select count(ID) as total from MyData
  WHERE 
@@ -187,7 +188,7 @@ select count(ID) as total from MyData
 	EndDate <= IsNull(nullif(CONVERT(datetime, @toEndDate, 127),''),'2100-01-01'))
 ```
 
-### "Select" Query
+### "FilterSelect" Query
 
 NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64"
  as shown below and press the "Fetch Fields & Parameters" button again. 
@@ -773,13 +774,16 @@ The resulting filter should look like this
 
 ![](images/FilterControls.png)
 
-Open the "Initialise" and "GetData" scripts and map the additional query parameters for the two queries to the respective filter fields
+## Queries
+Amend the "Initialise" and "GetData" scripts
+1. Replace the "Select" and "Totals" queries with the "FilterSelect" and "FilterTotals" queries
+2. Map the additional query parameters for the two queries to the respective filter fields
 
-**Select Query**
+**FilterSelect Query**
 
 ![](images/InitialiseSelectInputs.png)
 
-**Totals Query**
+**FilterTotals Query**
 
 ![](images/InitialiseTotalsInputs.png)
 
