@@ -61,7 +61,7 @@ Using this module, you can configure a *Repeater* control to create a DataGrid t
 - Configurable / selectable initial page
 - Support for link columns
 - Support for data export
-- Supoort for editable columns
+- Support for editable columns
 - Support for [custom filters](#custom-filters)
 
 **Assets**
