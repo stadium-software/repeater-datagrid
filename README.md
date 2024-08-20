@@ -55,7 +55,7 @@ Using this module, you can configure a *Repeater* control to create a DataGrid t
 **Notable features**
 
 - Can be used with any connector (Database or Web Service)
-- Works with data sources of any size
+- Cane be used with data sources of any size
 - Provides for sorting and paging
 - Configurable / selectable page size
 - Configurable / selectable initial page
