@@ -68,14 +68,15 @@ Using this module, you can configure a *Repeater* control to create a DataGrid t
 
 The module comes with two [CSS files](#css-setup) and [two scripts](#global-scripts). 
 
-- The CSS makes a Stadium *Repeater* control look similar to a *DataGrid* control
+- The CSS makes the [collection of controls](#page) required in this module look similar to a *DataGrid* control
 - The scripts provide functionality to facilitate the rendering of data and keeping the *DataGrid* state, including data page, sort field and sort direction
 
-**Integration**
+**Setup Overview**
 
 To use this module in a Stadium application
-1. The *Repeater* control must contain a [variety of controls](#page). Add link, label and other controls to a *Grid* and *Repeater* control to create the *DataGrid* columns
-2. Add SQL queries or API calls to retrieve and assign the correct data when loading the *DataGrid* data, when users sort the data or when they page through the data in the control [event handlers](#scripts-and-events)
+1. Compose the *DataGrid* control from a [variety of other Stadium controls](#page), such as Containers, Grids, Repeaters, Labels and Links
+2. Add SQL queries or API calls to return the data to be shown in the DataGrid
+3. Retrieve and assign appropriate datasets in the various [event handlers](#scripts-and-events) when users load, page or sort the *DataGrid*
 
 **Example Application**
 
