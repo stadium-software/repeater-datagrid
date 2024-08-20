@@ -90,7 +90,7 @@ To illustrate how this module works, [create this database](#database) and open 
 # Sample Databases & Connectors Setup
 The module can be configured to work with any data source and connector. 
 
-The attached example application uses a two separate databases and a number of queries. 
+The attached example application consists of multiple examples pages using a *Database Connector* and a *WebService Connector*. 
 
 ## StadiumFilterData Database
 1. Use the instructions from [this repo](https://github.com/stadium-software/samples-database) to setup the database and DataGrid for this sample
