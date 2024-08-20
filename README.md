@@ -50,7 +50,7 @@ https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
 - [Loading Spinners](#loading-spinners)
 
 # Overview
-Using this module, you can configure a *Repeater* control to create a DataGrid that looks and works similar to the standard Stadium *DataGrid* control. It works by enabling the retrieval and display of a single page of records only. Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid.  
+Using this module, you can configure a *Repeater* control to create a DataGrid that looks and works similar to the standard Stadium *DataGrid* control. Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
 
 **Notable features**
 
