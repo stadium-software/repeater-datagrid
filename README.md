@@ -102,8 +102,8 @@ Set up your connector to your datasource as you normally would or change the sam
 ## StadiumFilterData Queries (unfiltered)
 The module requires four data sets: 
 
-1. The total number of records
-2. The data to be attached to the *Repeater* (a list of objects from a database or an API)
+1. The total number of records (to calculate the number of pages)
+2. The data to be attached to the *Repeater* (from a database or an API)
 
 Create the queries below and press the "Fetch Fields & Parameters" button to run the example application. These queries include parameters to facilitate DataGrid *paging* and *sorting*. 
 
