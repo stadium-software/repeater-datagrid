@@ -74,8 +74,8 @@ The module comes with two [CSS files](#css-setup) and [two scripts](#global-scri
 **Integration**
 
 To use this module in a Stadium application
-1. The *Repeater* control must contain a [variety of controls](#page). Add link, label and other controls to a Grid and Repeater control to create the DataGrid columns
-2. Add SQL queries or API calls to retrieve and assign the correct data when loading the DataGrid data, when users sort the data or when they page through the data in the control [event handlers](#scripts-and-events)
+1. The *Repeater* control must contain a [variety of controls](#page). Add link, label and other controls to a *Grid* and *Repeater* control to create the *DataGrid* columns
+2. Add SQL queries or API calls to retrieve and assign the correct data when loading the *DataGrid* data, when users sort the data or when they page through the data in the control [event handlers](#scripts-and-events)
 
 **Example Application**
 
