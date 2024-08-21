@@ -5,11 +5,11 @@
     .grid-item {
         display: flex;
         align-items: center;
-        border-bottom: 1px solid var(--dg-border-color);
+        border-bottom: 1px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
         padding: 5px;
 
         .control-container {
-            font-size: var(--dg-item-font-size);
+            font-size: var(--dg-item-font-size, var(--DATA-GRID-CELL-FONT-SIZE));
             margin-top: 0;
             vertical-align: -webkit-baseline-middle;
             padding-right: 12px;
@@ -17,13 +17,13 @@
     }
 
     .grid-item:not(.grid-repeater-item) {
-        border-top: 1px solid var(--dg-border-color);
-        border-bottom: 3px solid var(--dg-border-color);
+        border-top: 1px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
+        border-bottom: 3px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
         padding: 6px;
 
         span {
             font-weight: bold;
-            font-size: var(--dg-header-font-size);
+            font-size: var(--dg-header-font-size, var(--DATA-GRID-HEADER-CELL-FONT-SIZE));
             text-transform: uppercase;
         }
     }
@@ -32,32 +32,32 @@
         text-transform: uppercase;
         text-decoration: underline;
         font-weight: bold;
-        font-size: var(--dg-header-font-size);
+        font-size: var(--dg-header-font-size, var(--DATA-GRID-HEADER-CELL-FONT-SIZE));
     }
 
     .dg-alternate-row {
-        background-color: var(--dg-alternate-row-bg-color);
+        background-color: var(--dg-alternate-row-bg-color, var(--DATA-GRID-ODD-ROW-BACKGROUND-COLOR));
     }
 
     .dg-asc-sorting {
-        background-image: var(--dg-sorting-asc-icon);
+        background-image: var(--dg-sorting-asc-icon, var(--DATA-GRID-SORT-ARROW-ASC-ICON));
         background-repeat: no-repeat;
         background-position: right center;
-        background-size: var(--dg-sorting-icon-size);
+        background-size: var(--dg-sorting-icon-size, var(--DATA-GRID-SORT-ARROW-ASCDESC-ICON-SIZE));
     }
 
     .dg-desc-sorting {
-        background-image: var(--dg-sorting-desc-icon);
+        background-image: var(--dg-sorting-desc-icon, var(--DATA-GRID-SORT-ARROW-DESC-ICON));
         background-repeat: no-repeat;
         background-position: right center;
-        background-size: var(--dg-sorting-icon-size);
+        background-size: var(--dg-sorting-icon-size, var(--DATA-GRID-SORT-ARROW-ASCDESC-ICON-SIZE));
     }
 
     .paging {
         display: flex;
         align-items: center;
         padding: 4px 0;
-        border: 1px solid var(--dg-border-color);
+        border: 1px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
 
         .control-container {
             margin-top: 0;
@@ -85,8 +85,8 @@
         }
 
         .button-container.disabled .btn {
-            background-color: var(--dg-border-color);
-            border-color: var(--dg-border-color);
+            background-color: var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
+            border-color: var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
         }
 
         .btn {
@@ -100,7 +100,7 @@
             padding: 0 4px 0 12px;
             
         input[type='text'].form-control {
-                width: var(--dg-paging-specific-page-textbox-width);
+                width: var(--dg-paging-specific-page-textbox-width, 60px);
                 height: 22px;
                 padding: 0 4px;
             }
