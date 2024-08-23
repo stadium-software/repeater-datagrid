@@ -39,17 +39,17 @@ To illustrate how this module works, [create this database](#database) and open 
 
 # Contents <!-- omit in toc -->
 - [Version](#version)
-- [Sample Databases \& Connectors Setup](#sample-databases--connectors-setup)
+- [Sample Database Setup](#sample-database-setup)
   - [StadiumFilterData Database](#stadiumfilterdata-database)
-  - [Connector](#connector)
+- [Application](#application)
+  - [Application Properties](#application-properties)
+- [Connector](#connector)
   - [StadiumFilterData Queries](#stadiumfilterdata-queries)
     - ["TotalRecords" Query](#totalrecords-query)
     - ["Select" Query](#select-query)
-- [Application](#application)
-  - [Application Properties](#application-properties)
   - [Types](#types)
     - [DataGridState Type](#datagridstate-type)
-    - [FilterDataDataSet Type](#filterdatadataset-type)
+    - [DataSet Type](#dataset-type)
   - [Page](#page)
     - [Main Container](#main-container)
     - [Grid](#grid)
@@ -81,7 +81,7 @@ To illustrate how this module works, [create this database](#database) and open 
 # Version
 1.0 initial
 
-# Sample Databases & Connectors Setup
+# Sample Database Setup
 The module can be configured to work with any data source and connector. 
 
 The attached example application consists of multiple examples pages using a *Database Connector* and a *WebService Connector*. 
@@ -90,7 +90,12 @@ The attached example application consists of multiple examples pages using a *Da
 1. Use the instructions from [this repo](https://github.com/stadium-software/samples-database) to setup the database and DataGrid for this sample
 2. To increase the records in the database, run the SQL scripts contained in the zip file in the [database](/database) folder in this repo
 
-## Connector
+# Application
+
+## Application Properties
+1. Check the *Enable Style Sheet* checkbox in the application properties
+
+# Connector
 Set up your connector to your datasource as you normally would or change the sample connectors to connect to your "StadiumFilterData" database. 
 
 ## StadiumFilterData Queries
@@ -153,18 +158,14 @@ SELECT ID
 OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
 
-# Application
-
-## Application Properties
-1. Check the *Enable Style Sheet* checkbox in the application properties
-
 ## Types
-Add
-1. The DataGridState type described below
+Add two types to make working with the data easier 
+
+1. The "DataGridState" type described below
 2. A type that matches the field in your dataset (example below)
 
 ### DataGridState Type
-Add a second type called "DataGridState" with the following properties
+Add a type called "DataGridState" with the properties bwlow. 
 
 1. page (any)
 2. pageSize (any)
@@ -176,8 +177,8 @@ Add a second type called "DataGridState" with the following properties
 
 ![](images/DGStateType.png)
 
-### FilterDataDataSet Type
-The FilterData example dataset type is called "FilterDataDataSet" and contains the following columns:
+### DataSet Type
+Add a type that represents the fields in your dataset. The sample dataset type is called "DataSet" and contains the following fields:
 1. ID (Any)
 2. FirstName (Any)
 3. LastName (Any)
