@@ -634,7 +634,7 @@ To upgrade the CSS in this module, follow the [steps outlined in this repo](http
 [Selectable Page Size](customisable-page-size.md)
 
 ## Conditional Cell Styling
-[conditional-cell-styling.md]
+[conditional-cell-styling.md](conditional-cell-styling.md)
 
 ## Editable Columns
 [Making columns editable](editable-columns.md)
