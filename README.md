@@ -42,7 +42,7 @@ To illustrate how this module works, [create this database](#database) and open 
 - [Sample Databases \& Connectors Setup](#sample-databases--connectors-setup)
   - [StadiumFilterData Database](#stadiumfilterdata-database)
   - [Connector](#connector)
-  - [StadiumFilterData Queries (unfiltered)](#stadiumfilterdata-queries-unfiltered)
+  - [StadiumFilterData Queries](#stadiumfilterdata-queries)
     - ["TotalRecords" Query](#totalrecords-query)
     - ["Select" Query](#select-query)
 - [Application](#application)
@@ -67,7 +67,7 @@ To illustrate how this module works, [create this database](#database) and open 
   - [CSS](#css)
     - [Customising CSS](#customising-css)
     - [CSS Upgrading](#css-upgrading)
-- [Additional Modules](#additional-modules)
+- [Additional Features](#additional-features)
   - [Making Columns Sortable](#making-columns-sortable)
   - [Adding Link Columns](#adding-link-columns)
   - [Data Export](#data-export)
@@ -93,7 +93,7 @@ The attached example application consists of multiple examples pages using a *Da
 ## Connector
 Set up your connector to your datasource as you normally would or change the sample connectors to connect to your "StadiumFilterData" database. 
 
-## StadiumFilterData Queries (unfiltered)
+## StadiumFilterData Queries
 The module requires four data sets: 
 
 1. The total number of records (to calculate the number of pages)
@@ -613,7 +613,7 @@ The CSS below is required for the correct functioning of the module. Some elemen
 ### CSS Upgrading
 To upgrade the CSS in this module, follow the [steps outlined in this repo](https://github.com/stadium-software/samples-upgrading)
 
-# Additional Modules
+# Additional Features
 
 ## Making Columns Sortable
 [Sortable Columns](sortable.md)
