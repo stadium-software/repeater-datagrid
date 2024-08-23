@@ -2,8 +2,42 @@
 
 https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
 
-## Contents <!-- omit in toc -->
-- [Overview](#overview)
+# Overview <!-- omit in toc -->
+Using this module, you can configure a *Repeater* control to create a DataGrid that looks and works similar to the standard Stadium *DataGrid* control. Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
+
+## Notable features
+
+- Can be used with any Database or Web Service Connectors
+- Can be used with data sources of any size
+- Provides for sorting and paging
+- Configurable / selectable page size
+- Configurable / selectable initial page
+- Support for link columns
+- Support for data export
+- Support for editable columns
+- Support for [custom filters](#custom-filters)
+
+## Setup Overview
+
+To use this module in a Stadium application
+1. Compose the *DataGrid* control from a [variety of other Stadium controls](#page), such as Containers, Grids, Repeaters, Labels and Links
+2. Add SQL queries or API calls to return the data to be shown in the DataGrid
+3. Retrieve and assign appropriate datasets in the various [event handlers](#scripts-and-events) when users load, page or sort the *DataGrid*
+
+## Assets
+
+The module comes with two [CSS files](#css-setup) and [two scripts](#global-scripts). 
+
+- The CSS makes the [collection of controls](#page) required in this module look similar to a *DataGrid* control
+- The scripts provide functionality to facilitate the rendering of data and keeping the *DataGrid* state, including data page, sort field and sort direction
+
+## Example Application
+
+To illustrate how this module works, [create this database](#database) and open the [sample application](Stadium6/RepeaterDataGrid.sapz). It displays data from the database table with over 100,000 records. It contains [scripts](#scripts-and-events) to demonstrate how to configure the sorting and paging features.
+
+![](images/DataGridScreenShot.png)
+
+# Contents <!-- omit in toc -->
 - [Version](#version)
 - [Sample Databases \& Connectors Setup](#sample-databases--connectors-setup)
   - [StadiumFilterData Database](#stadiumfilterdata-database)
@@ -48,41 +82,6 @@ https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
 - [Load Specific Page](#load-specific-page)
 - [Selectable Page Size](#selectable-page-size)
 - [Loading Spinners](#loading-spinners)
-
-# Overview
-Using this module, you can configure a *Repeater* control to create a DataGrid that looks and works similar to the standard Stadium *DataGrid* control. Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
-
-**Notable features**
-
-- Can be used with any Database or Web Service Connectors
-- Can be used with data sources of any size
-- Provides for sorting and paging
-- Configurable / selectable page size
-- Configurable / selectable initial page
-- Support for link columns
-- Support for data export
-- Support for editable columns
-- Support for [custom filters](#custom-filters)
-
-**Assets**
-
-The module comes with two [CSS files](#css-setup) and [two scripts](#global-scripts). 
-
-- The CSS makes the [collection of controls](#page) required in this module look similar to a *DataGrid* control
-- The scripts provide functionality to facilitate the rendering of data and keeping the *DataGrid* state, including data page, sort field and sort direction
-
-**Setup Overview**
-
-To use this module in a Stadium application
-1. Compose the *DataGrid* control from a [variety of other Stadium controls](#page), such as Containers, Grids, Repeaters, Labels and Links
-2. Add SQL queries or API calls to return the data to be shown in the DataGrid
-3. Retrieve and assign appropriate datasets in the various [event handlers](#scripts-and-events) when users load, page or sort the *DataGrid*
-
-**Example Application**
-
-To illustrate how this module works, [create this database](#database) and open the [sample application](Stadium6/RepeaterDataGrid.sapz). It displays data from the database table with over 100,000 records. It contains [scripts](#scripts-and-events) to demonstrate how to configure the sorting and paging features.
-
-![](images/DataGridScreenShot.png)
 
 # Version
 1.0 initial
@@ -851,7 +850,7 @@ To make a column edibable:
 ![](images/EditableColumns.png)
 
 # Load Specific Page
-In order to load a specific page when the DataGrid loads, pass the page you wish to load into the "Initialise" script
+[Loading a specific page](load-specific-page.md)
 
 # Selectable Page Size
 To enable users to select a page size:
@@ -866,13 +865,4 @@ To enable users to select a page size:
 ![](images/InitialiseScriptInputParams.png)
 
 # Loading Spinners
-To add a loading spinner to the DataGrid
-
-1. Add the [Spinner Repo](https://github.com/stadium-software/spinners) to your application
-2. Drag a *Container* control anywhere into the "ServerSideDataGridContainer" and name it "Spinner"
-3. Add the classes "stadium-spinner spinner-contained" to the "Spinner"
-4. Add a class for the type of spinner you would like to display (e.g. spinner-type-1)
-5. Drag the "Spinner" Glopbal Script to the Page.Load for page that will use the spinner
-6. Add a *SetValue* action to any script when you want to show or hide the spinner
-   1. Set the "Spinner.Visible" property to "true" to show the spinner
-   2. Set the "Spinner.Visible" property to "false" to hide the spinner
+To add a loading spinner to the DataGrid, implement the [Spinners Module](https://github.com/stadium-software/spinners)
