@@ -837,32 +837,13 @@ NoOfChildrenLabel.Classes.replaceAll('red-background', '')
 ```
 
 # Editable Columns
-To make a column edibable: 
-1. Drag a form control into the *Repeater* control (e.g. CheckBox, CheckBoxList, DatePicker, DropDown, RadioButtonList)
-
-![](images/EditableColumnControls.png)
-
-2. Create the *Change* Event Handler
-3. In the *Change* Event Handler, you have access to all the controls in that *Repeater* row in the *Controls* group in the properties dropdown 
-
-**Example shows how to add a CheckboxList column and a DropDown column**
-
-![](images/EditableColumns.png)
+[Making columns editable](editable-columns.md)
 
 # Load Specific Page
 [Loading a specific page](load-specific-page.md)
 
 # Selectable Page Size
-To enable users to select a page size:
-1. Add a *DropDown* control with the allowable page sizes
-2. Add a *Change* event handler to the *DropDown* control
-3. Drag the "RepeaterDataGridState" global script into the event handler and add the DataGrid class into the script "Classes" input parameter
-4. Drag the "DataGridState" type into the event handler and assign the "RepeaterDataGridState" return value to the type
-5. Drag the "Initialise" script into the event handler and 
-   1. Pass the selected *DropDown* value into the "Initialise" script "PageSize" input parameter 
-   2. Pass the "SortField" and "SortDirection" values form the "DataGridState" type into the appropriate "Initialise" script input parameters
-
-![](images/InitialiseScriptInputParams.png)
+[Selectable Page Size](customisable-page-size.md)
 
 # Loading Spinners
 To add a loading spinner to the DataGrid, implement the [Spinners Module](https://github.com/stadium-software/spinners)
