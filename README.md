@@ -45,10 +45,6 @@ To illustrate how this module works, [create this database](#database) and open 
   - [StadiumFilterData Queries (unfiltered)](#stadiumfilterdata-queries-unfiltered)
     - ["TotalRecords" Query](#totalrecords-query)
     - ["Select" Query](#select-query)
-  - [StadiumFilterData Queries (filtered)](#stadiumfilterdata-queries-filtered)
-    - ["FilterTotals" Query](#filtertotals-query)
-    - ["FilterSelect" Query](#filterselect-query)
-  - [REST API](#rest-api)
 - [Application](#application)
   - [Application Properties](#application-properties)
   - [Types](#types)
@@ -67,7 +63,6 @@ To illustrate how this module works, [create this database](#database) and open 
     - [Initialise Page Script](#initialise-page-script)
     - [GetData Page Script](#getdata-page-script)
     - [Page.Load](#pageload)
-    - [Sorting](#sorting)
     - [Paging](#paging)
   - [CSS](#css)
     - [Customising CSS](#customising-css)
@@ -75,8 +70,6 @@ To illustrate how this module works, [create this database](#database) and open 
 - [Link Columns](#link-columns)
 - [Data Export](#data-export)
 - [Custom Filters](#custom-filters)
-  - [Page](#page-1)
-  - [Queries](#queries)
 - [Conditional Cell Styling](#conditional-cell-styling)
 - [Editable Columns](#editable-columns)
 - [Load Specific Page](#load-specific-page)
@@ -157,99 +150,6 @@ SELECT ID
   case when @sortField = 'undefined' then ID end ASC
 OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
-
-## StadiumFilterData Queries (filtered)
-The module requires four data sets: 
-
-1. The total number of records when filtered
-2. The data to be attached to the *Repeater* (a list of objects from a database or an API) when filtered
-
-Create the queries below and press the "Fetch Fields & Parameters" button to run the example application. These queries include parameters to facilitate DataGrid *paging* and *sorting*. 
-
-![](images/DBQueries.png)
-
-### "FilterTotals" Query
-```sql
-select count(ID) as total from MyData
- WHERE 
-	ID = IsNull(nullif(@ID,''),ID) AND 
-	FirstName like IsNull(nullif('%' + @FirstName + '%',''),FirstName) AND 
-	LastName like IsNull(nullif('%' + @LastName + '%',''),LastName) AND 
-	IsNull(nullif(@Subscription,''),Subscription) like '%' + Subscription + '%' COLLATE Latin1_General_CS_AS  AND 
-	Healthy = IsNull(nullif(@Healthy,''),Healthy) AND 
-	Happy = IsNull(nullif(@Happy,''),Happy) AND 
-	(NoOfChildren >= IsNull(nullif(@fromNoOfChildren,''),0) AND 
-	NoOfChildren <= IsNull(nullif(@toNoOfChildren,''),1000000)) AND 
-	(NoOfPets >= IsNull(nullif(@fromNoOfPets,''),0) AND 
-	NoOfPets <= IsNull(nullif(@toNoOfPets,''),1000000)) AND 
-	(StartDate >= IsNull(nullif(CONVERT(datetime, @fromStartDate, 127),''),'1900-01-01') AND 
-	StartDate <= IsNull(nullif(CONVERT(datetime, @toStartDate, 127),''),'2100-01-01')) AND 
-	(EndDate >= IsNull(nullif(CONVERT(datetime, @fromEndDate, 127),''),'1900-01-01') AND 
-	EndDate <= IsNull(nullif(CONVERT(datetime, @toEndDate, 127),''),'2100-01-01'))
-```
-
-### "FilterSelect" Query
-
-NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64"
- as shown below and press the "Fetch Fields & Parameters" button again. 
-
-![](images/SQLErrorParameters.png)
-
-```sql
-SELECT ID
-      ,FirstName
-      ,LastName
-      ,NoOfChildren
-      ,NoOfPets
-      ,StartDate
-      ,EndDate
-      ,Healthy
-      ,Happy
-      ,Subscription
-  FROM dbo.MyData
-  WHERE 
-	ID = IsNull(nullif(@ID,''),ID) AND 
-	FirstName like IsNull(nullif('%' + @FirstName + '%',''),FirstName) AND 
-	LastName like IsNull(nullif('%' + @LastName + '%',''),LastName) AND 
-	IsNull(nullif(@Subscription,''),Subscription) like '%' + Subscription + '%' COLLATE Latin1_General_CS_AS  AND 
-	Healthy = IsNull(nullif(@Healthy,''),Healthy) AND 
-	Happy = IsNull(nullif(@Happy,''),Happy) AND 
-	(NoOfChildren >= IsNull(nullif(@fromNoOfChildren,''),0) AND 
-	NoOfChildren <= IsNull(nullif(@toNoOfChildren,''),1000000)) AND 
-	(NoOfPets >= IsNull(nullif(@fromNoOfPets,''),0) AND 
-	NoOfPets <= IsNull(nullif(@toNoOfPets,''),1000000)) AND 
-	(StartDate >= IsNull(nullif(CONVERT(datetime, @fromStartDate, 127),''),'1900-01-01') AND 
-	StartDate <= IsNull(nullif(CONVERT(datetime, @toStartDate, 127),''),'2100-01-01')) AND 
-	(EndDate >= IsNull(nullif(CONVERT(datetime, @fromEndDate, 127),''),'1900-01-01') AND 
-	EndDate <= IsNull(nullif(CONVERT(datetime, @toEndDate, 127),''),'2100-01-01'))
-  ORDER BY
-  case when UPPER(@sortField) = 'ID' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN ID END ASC,
-  case when UPPER(@sortField) = 'ID' AND LOWER(@sortDirection) = 'desc' THEN ID END DESC,
-  case when LOWER(@sortField) = 'FirstName' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN FirstName END ASC,
-  case when LOWER(@sortField) = 'FirstName' AND LOWER(@sortDirection) = 'desc' THEN FirstName END DESC,
-  case when LOWER(@sortField) = 'LastName' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN LastName END ASC,
-  case when LOWER(@sortField) = 'LastName' AND LOWER(@sortDirection) = 'desc' THEN LastName END DESC,
-  case when LOWER(@sortField) = 'NoOfChildren' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN NoOfChildren END ASC,
-  case when LOWER(@sortField) = 'NoOfChildren' AND LOWER(@sortDirection) = 'desc' THEN NoOfChildren END DESC,
-  case when LOWER(@sortField) = 'NoOfPets' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN NoOfPets END ASC,
-  case when LOWER(@sortField) = 'NoOfPets' AND LOWER(@sortDirection) = 'desc' THEN NoOfPets END DESC,
-  case when LOWER(@sortField) = 'StartDate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN StartDate END ASC,
-  case when LOWER(@sortField) = 'StartDate' AND LOWER(@sortDirection) = 'desc' THEN StartDate END DESC,
-  case when LOWER(@sortField) = 'EndDate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN EndDate END ASC,
-  case when LOWER(@sortField) = 'EndDate' AND LOWER(@sortDirection) = 'desc' THEN EndDate END DESC,
-  case when LOWER(@sortField) = 'Healthy' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Healthy END ASC,
-  case when LOWER(@sortField) = 'Healthy' AND LOWER(@sortDirection) = 'desc' THEN Healthy END DESC,
-  case when LOWER(@sortField) = 'Happy' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Happy END ASC,
-  case when LOWER(@sortField) = 'Happy' AND LOWER(@sortDirection) = 'desc' THEN Happy END DESC,
-  case when LOWER(@sortField) = 'Subscription' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Subscription END ASC,
-  case when LOWER(@sortField) = 'Subscription' AND LOWER(@sortDirection) = 'desc' THEN Subscription END DESC,
-  case when @sortField = '' then ID end ASC,
-  case when @sortField = 'undefined' then ID end ASC
-OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
-```
-
-## REST API
-In order to access the "LinxAPI" page in the application, it is also necessary to run the SimpleRESTHost service in the Linx application in this repo. The *Setting* called "DBConn" needs to be changed to point to your local SQL Server. 
 
 # Application
 
@@ -684,13 +584,6 @@ Drag the "Initialise" script into the Page.Load event handler
 
 ![](images/InitialisePageLoad.png)
 
-### Sorting
-1. For all header *Link* controls
-   1. Create the *Click Event Handler*
-   2. Drag the "GetData" script into the control *Click Event Handler* script
-
-![](images/SortingEventHandler.png)
-
 ### Paging
 1. For all paging *Button* controls
    1. Create the *Click Event Handler*
@@ -719,122 +612,16 @@ The CSS below is required for the correct functioning of the module. Some elemen
 To upgrade the CSS in this module, follow the [steps outlined in this repo](https://github.com/stadium-software/samples-upgrading)
 
 # Link Columns
-To add a link columns to the Datagrid: 
-1. Drag an *Image*, *Link* or *Button* control into the *Repeater* control
-
-![](images/EditLink.png)
-
-2. Create the *Click* Event Handler
-3. In the *Click* Event Handler, you have access to all the controls in that *Repeater* row in the *Controls* group in the properties dropdown 
-
-**Example shows how to access the ID.Label Text Property in a EditImage.Click event handler**
-
-![](images/AccessColumnValues.png)
+[Link Columns](link-columns.md)
 
 # Data Export
-Enabling data export to CSV can be achieved with the use of the [List to CSV Download](https://github.com/stadium-software/utils-list-to-csv-download) repo
-1. Fetch the data to be exported by executing a query in an event handler or by calling a WebService
-2. Assign the results set to the List input property of the *List to CSV Download* module script
-
-**Note: It may be necessary to split large datasets up into smaller batches**
+[Data Exports](export.md)
 
 # Custom Filters
-Custom filters can be manually created and can work with the DataGrid as follows:
-
-1. Additional conditions must be added into the datasource (by adding a custom where clause the query or API call)
-2. Controls that enable users to provide filter criteria needs to be added to the page (custom filter UI)
-
-Add the queries outlined [above](#stadiumfilterdata-database)
-
-## Page
-The example application provides users with an opportunity to filter the results by
-
-1. ID (TextBox)
-2. FirstName (TextBox)
-3. LastName (TextBox)
-4. NoOfChildren
-   1. From (TextBox)
-   2. To (TextBox)
-5. NoOfPets
-   1. From (TextBox)
-   2. To (TextBox)
-6. StartDate 
-   1. From (DatePicker)
-   2. To (DatePicker)
-7. EndDate
-   1. From (DatePicker)
-   2. To (DatePicker)
-8. Happy (DropDown)
-9. Healthy (RadioButtonList)
-10. Subscriptions (CheckBoxList)
-
-![](images/StadiumFilterControls.png)
-
-The resulting filter should look like this
-
-![](images/FilterControls.png)
-
-## Queries
-Amend the "Initialise" and "GetData" scripts
-1. Replace the "Select" and "Totals" queries with the "FilterSelect" and "FilterTotals" queries
-2. Map the additional query parameters for the two queries to the respective filter fields
-
-**FilterSelect Query**
-
-![](images/InitialiseSelectInputs.png)
-
-**FilterTotals Query**
-
-![](images/InitialiseTotalsInputs.png)
+[Custom Filters](custom-filters.md)
 
 # Conditional Cell Styling
-To conditionally style cells:
-1. Add a RepeaterItemLoad event to the *Repeater* control
-
-![](images/RepeaterItemLoad.png)
-
-2. In the *Repeater* control event handler
-   1. Add a *Decision* action
-   2. Set the *Decision* condition you require (e.g. Control.Text > 10)
-      1. Add a *SetValue* action into the condition 
-      2. Add a class to the control *Classes* property
-         1. Set the *Target* property to the *Control.CLasses* property
-         2. Set the *Value* property to an expression like the one below
-
-```javascript
-NoOfChildrenLabel.Classes + ' red-background'
-```
-
-   3. In the *Else* condition
-      1. Add a *SetValue* action into the condition 
-      2. Remove the class from the control *Classes* property
-         1. Set the *Target* property to the *Control.CLasses* property
-         2. Set the *Value* property to an expression like the one below
-
-```javascript
-NoOfChildrenLabel.Classes.replaceAll('red-background', '')
-```
-
-![](images/RepeaterItemLoadDecision.png)
-
-3. Open the *StyleSheet*
-4. Add the class and attributes to the *StyleSheet* as you see fit
-
-**Example CSS**
-```CSS
-/*Changes the background color and font styles of a cell*/
-.grid-repeater-item:has(.red-background) {
-	background-color: red;
-	span {
-		color: white;
-		font-weight: bold;
-	}
-}
-/*Hides a cell label*/
-.displaynone {
-	display: none;
-}
-```
+[conditional-cell-styling.md]
 
 # Editable Columns
 [Making columns editable](editable-columns.md)
