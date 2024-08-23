@@ -67,14 +67,16 @@ To illustrate how this module works, [create this database](#database) and open 
   - [CSS](#css)
     - [Customising CSS](#customising-css)
     - [CSS Upgrading](#css-upgrading)
-- [Link Columns](#link-columns)
-- [Data Export](#data-export)
-- [Custom Filters](#custom-filters)
-- [Conditional Cell Styling](#conditional-cell-styling)
-- [Editable Columns](#editable-columns)
-- [Load Specific Page](#load-specific-page)
-- [Selectable Page Size](#selectable-page-size)
-- [Loading Spinners](#loading-spinners)
+- [Additional Modules](#additional-modules)
+  - [Making Columns Sortable](#making-columns-sortable)
+  - [Adding Link Columns](#adding-link-columns)
+  - [Data Export](#data-export)
+  - [Custom Filters](#custom-filters)
+  - [Load Specific Page](#load-specific-page)
+  - [Selectable Page Size](#selectable-page-size)
+  - [Conditional Cell Styling](#conditional-cell-styling)
+  - [Editable Columns](#editable-columns)
+  - [Loading Spinners](#loading-spinners)
 
 # Version
 1.0 initial
@@ -611,26 +613,31 @@ The CSS below is required for the correct functioning of the module. Some elemen
 ### CSS Upgrading
 To upgrade the CSS in this module, follow the [steps outlined in this repo](https://github.com/stadium-software/samples-upgrading)
 
-# Link Columns
+# Additional Modules
+
+## Making Columns Sortable
+[Sortable Columns](sortable.md)
+
+## Adding Link Columns
 [Link Columns](link-columns.md)
 
-# Data Export
+## Data Export
 [Data Exports](export.md)
 
-# Custom Filters
+## Custom Filters
 [Custom Filters](custom-filters.md)
 
-# Conditional Cell Styling
-[conditional-cell-styling.md]
-
-# Editable Columns
-[Making columns editable](editable-columns.md)
-
-# Load Specific Page
+## Load Specific Page
 [Loading a specific page](load-specific-page.md)
 
-# Selectable Page Size
+## Selectable Page Size
 [Selectable Page Size](customisable-page-size.md)
 
-# Loading Spinners
+## Conditional Cell Styling
+[conditional-cell-styling.md]
+
+## Editable Columns
+[Making columns editable](editable-columns.md)
+
+## Loading Spinners
 To add a loading spinner to the DataGrid, implement the [Spinners Module](https://github.com/stadium-software/spinners)
