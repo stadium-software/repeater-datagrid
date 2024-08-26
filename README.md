@@ -4,7 +4,7 @@
 - [Overview](#overview)
 - [Version](#version)
 - [Example Application](#example-application)
-- [Application](#application)
+- [Application Setup](#application-setup)
   - [Application Properties](#application-properties)
 - [Connector](#connector)
   - [StadiumFilterData Queries](#stadiumfilterdata-queries)
@@ -60,7 +60,7 @@ The repo includes the sample application shown in the video. To run the example 
    1. Amend the database connector
    2. Hit the *Preview* button
 
-# Application
+# Application Setup
 
 ## Application Properties
 1. Check the *Enable Style Sheet* checkbox in the application properties
