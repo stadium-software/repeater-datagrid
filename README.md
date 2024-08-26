@@ -432,21 +432,20 @@ return {
 ![](images/StateSetValue.png)
 
 ## Page Scripts and Events
-I recommend creating two page-level scripts for initialising the *Repeater* and for handling paging 
+I recommend creating two page-level scripts to contain the logic for initialising the *Repeater* and for handling paging. 
 
 ### Initialise Page Script
-Create a page script called "Initialise" to contain all *Repeater* initialisation logic 
-
 1. Create a Script called "Initialise" under the page
-2. Drag the "TotalRecords" query to the script
-3. Drag the "Select" query to the script and complete the input parameters
+
+![](images/InitialiseScript.png)
+
+2. Drag the "TotalRecords" query into the script
+3. Drag the "Select" query into the script and complete the input parameters
    1. offsetRows: 0 (to start with the first record the initial offset 0)
    2. pageSize: an interger that defines how many records the DataGrid shows (e.g. 10)
-   3. sortField: a string specifying the initial column by which the DataGrid is sorted (e.g. ID)
-   4. sortDirection: a string specifying initial sort direction of the DataGrid (e.g. asc)
 4. Drag a *SetValue* action into the script
    1. Target: The List property of the *Repeater*
-   2. Source: the dataset returned by the query
+   2. Source: The dataset returned by the query
 
 ![](images/SetRepeaterData.png)
 
@@ -458,9 +457,7 @@ Create a page script called "Initialise" to contain all *Repeater* initialisatio
     4.  PageSize: The number of records to display per page (e.g. 10)
     5.  TotalRecords: The total number of records in the dataset (select count)
 
-**Initialise Script**
-
-![](images/InitialiseScript.png)
+![](images/InitialiseScriptParameters.png)
 
 ### GetData Page Script
 Using the "RepeaterDataGridState" script, you can find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. You can then use this information when querying the data source and assigning the correct set of data to the *Repeater*. Use this script in the Link.Click events that handle sorting as well as the Button.Click events that handle the paging of the DataGrid. 
