@@ -3,7 +3,6 @@
 ## Contents <!-- omit in toc -->
 - [Overview](#overview)
   - [Notable features](#notable-features)
-  - [How it works](#how-it-works)
 - [Version](#version)
 - [Example Application](#example-application)
 - [Application](#application)
@@ -61,12 +60,6 @@ https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
 - Support for editable columns
 - Support for data export
 - Support for [custom filters](#custom-filters)
-
-## How it works
-To use this module in a Stadium application
-1. Compose a *DataGrid* from a [variety of other Stadium controls](#page), including Containers, a Grid, a Repeater, some Labels and Links
-2. Add SQL queries or API calls that return data for specific DataGrid pages (must accept the specific parameters [outlined below](#connector))
-3. Retrieve and assign appropriate datasets in various [event handlers](#scripts-and-events) (when the *Repeater* loads or when users opt to page through or sort the data)
 
 # Version
 1.0 initial
