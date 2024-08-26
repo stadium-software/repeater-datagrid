@@ -23,7 +23,7 @@ select count(ID) as total from MyData
 ### "SortableSelect" Query
 NOTE: When creating this SQL in the Stadium Query Editor and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the *Type* option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below. Then press the "Fetch Fields & Parameters" button again. 
 
-![](images/SQLErrorParameters.png)
+![](images/SortableSelectParameters.png)
 
 ```sql
 SELECT ID
