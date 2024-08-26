@@ -10,9 +10,6 @@
   - [StadiumFilterData Queries](#stadiumfilterdata-queries)
     - ["TotalRecords"](#totalrecords)
     - ["BasicSelect"](#basicselect)
-  - [Types](#types)
-    - [DataGridState Type](#datagridstate-type)
-    - [DataSet Type](#dataset-type)
   - [Page](#page)
     - [Main Container](#main-container)
     - [Grid](#grid)
@@ -21,6 +18,7 @@
   - [Global Scripts](#global-scripts)
     - [Initialisation Script](#initialisation-script)
     - [DataGrid State Script](#datagrid-state-script)
+    - [DataGridState Type](#datagridstate-type)
     - [RepeaterDataGridState Return Object](#repeaterdatagridstate-return-object)
   - [Page Scripts and Events](#page-scripts-and-events)
     - [Initialise Page Script](#initialise-page-script)
@@ -103,38 +101,6 @@ SELECT ID
   OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
 
-## Types
-Add two types to make working with the data easier (these are optional, but highly recommended) 
-1. The "DataGridState" type to ascertain the state of the *Repeater* (e.g. the page to fetch from the database)
-2. A type that matches the fields in your dataset (example below)
-
-### DataGridState Type
-Add a type called "DataGridState" with the properties below:
-1. page (any)
-2. pageSize (any)
-3. offset (any)
-4. totalRecords (any)
-5. totalPages (any)
-6. sortDirection (any)
-7. sortField (any)
-
-![](images/DGStateType.png)
-
-### DataSet Type
-Add a type that represents the fields in your dataset. The sample dataset type is called "DataSet" and contains the following fields:
-1. ID (Any)
-2. FirstName (Any)
-3. LastName (Any)
-4. NoOfChildren (Any)
-5. NoOfPets (Any)
-6. StartDate (Any)
-7. EndDate (any)
-8. Healthy (any)
-9. Happy (any)
-10. Subscription (any)
-
-![](images/FilterDataType.png)
-
 ## Page
 To function correctly, the page must contain a number of controls. Some of these provide for DataGrid-specific functions, like paging, while others serve to simply display the data from your dataset. Each control set is defined in detail below. 
 
@@ -160,11 +126,25 @@ To run the sample, add controls that match the FilterData dataset in the example
 
 ### Repeater
 1. Drag a *Repeater* control into the *Grid* control (under the header row)
-2. Assign the *Type* that contains the fields from your datasource you created above to the *Repeater* *ListItem Type* property
+2. Create a Type called "DataSet" that represents the fields in your dataset. The sample dataset type is called "DataSet" and contains the following fields:
+   1. ID (Any)
+   2. FirstName (Any)
+   3. LastName (Any)
+   4. NoOfChildren (Any)
+   5. NoOfPets (Any)
+   6. StartDate (Any)
+   7. EndDate (any)
+   8. Healthy (any)
+   9. Happy (any)
+   10. Subscription (any)
+
+![](images/FilterDataType.png)
+
+3. Assign the "DataSet" *Type* to the *Repeater* *ListItem Type* property
 
 ![](images/RepeaterListItemType.png)
 
-3. For each column you wish to display (these will become the columns in your DataGrid)
+4. For each column you wish to display (these will become the columns in your DataGrid)
    1. Drag a *Label* control into the *Grid*
    2. Map the correct ListItem Property to the *Label Text* property (example shows the "ID" Label)
 
@@ -436,6 +416,18 @@ return {
 ![](images/StateSetValue.png)
 
 ![](images/DataGridStateScript.png)
+
+### DataGridState Type
+Add a type called "DataGridState" with the properties below:
+1. page (any)
+2. pageSize (any)
+3. offset (any)
+4. totalRecords (any)
+5. totalPages (any)
+6. sortDirection (any)
+7. sortField (any)
+
+![](images/DGStateType.png)
 
 ### RepeaterDataGridState Return Object
 To easily access the values returned by the "DataGridState" script, assign the Values output from the "RepeaterDataGridState" script to the type. 
