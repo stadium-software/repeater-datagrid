@@ -1,20 +1,40 @@
 # Custom Filters
-Custom filters can be manually created and can work with the DataGrid as follows:
+Custom filters can be created by 
 
-1. Additional conditions must be added into the datasource (by adding a custom where clause the query or API call)
-2. Controls that enable users to provide filter criteria needs to be added to the page (custom filter UI)
-
-Add the queries outlined [above](#stadiumfilterdata-database)
+1. Adding suitable input controls to the page for the user
+2. Passing the values to the query or API call
+3. Using the provided values in a "WHERE" clause
 
 ## StadiumFilterData Queries (filtered)
-The module requires four data sets: 
+Both, the "TotalRecords" query and the "Select" query require the addition of a "WHERE" clause. The specific filter options provided to the user will determine which parameters are required in the "WHERE" clause of the query. 
 
-1. The total number of records when filtered
-2. The data to be attached to the *Repeater* (a list of objects from a database or an API) when filtered
+## Page
+The example application provides users with an opportunity to filter the results by
 
-Create the queries below and press the "Fetch Fields & Parameters" button to run the example application. These queries include parameters to facilitate DataGrid *paging* and *sorting*. 
+1. ID (TextBox)
+2. FirstName (TextBox)
+3. LastName (TextBox)
+4. NoOfChildren
+   1. From (TextBox)
+   2. To (TextBox)
+5. NoOfPets
+   1. From (TextBox)
+   2. To (TextBox)
+6. StartDate 
+   1. From (DatePicker)
+   2. To (DatePicker)
+7. EndDate
+   1. From (DatePicker)
+   2. To (DatePicker)
+8. Happy (DropDown)
+9. Healthy (RadioButtonList)
+10. Subscriptions (CheckBoxList)
 
-![](images/DBQueries.png)
+![](images/StadiumFilterControls.png)
+
+The resulting filter should look like this
+
+![](images/FilterControls.png)
 
 ### "FilterTotals" Query
 ```sql
@@ -37,12 +57,6 @@ select count(ID) as total from MyData
 ```
 
 ### "FilterSelect" Query
-
-NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64"
- as shown below and press the "Fetch Fields & Parameters" button again. 
-
-![](images/SQLErrorParameters.png)
-
 ```sql
 SELECT ID
       ,FirstName
@@ -96,35 +110,11 @@ SELECT ID
 OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
 
-## Page
-The example application provides users with an opportunity to filter the results by
+**NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below and press the "Fetch Fields & Parameters" button again.**
 
-1. ID (TextBox)
-2. FirstName (TextBox)
-3. LastName (TextBox)
-4. NoOfChildren
-   1. From (TextBox)
-   2. To (TextBox)
-5. NoOfPets
-   1. From (TextBox)
-   2. To (TextBox)
-6. StartDate 
-   1. From (DatePicker)
-   2. To (DatePicker)
-7. EndDate
-   1. From (DatePicker)
-   2. To (DatePicker)
-8. Happy (DropDown)
-9. Healthy (RadioButtonList)
-10. Subscriptions (CheckBoxList)
+![](images/SQLErrorParameters.png)
 
-![](images/StadiumFilterControls.png)
-
-The resulting filter should look like this
-
-![](images/FilterControls.png)
-
-## Queries
+## Page Scripts
 Amend the "Initialise" and "GetData" scripts
 1. Replace the "Select" and "Totals" queries with the "FilterSelect" and "FilterTotals" queries
 2. Map the additional query parameters for the two queries to the respective filter fields
