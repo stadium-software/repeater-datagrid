@@ -433,27 +433,30 @@ return {
 It is recommended to create two page-level scripts to contain the logic for initialising the *Repeater* and for handling paging. 
 
 ### "Initialise" Page Script
+
+![](images/InitialiseScript.png)
+
 1. Create a Script called "Initialise" under the page
 
 ![](images/InitialisePageScript.png)
 
 2. Drag the "TotalRecords" query into the script
-3. Drag the "Select" query into the script and complete the input parameters
+3. Drag the "BasicSelect" query into the script and complete the input parameters
    1. offsetRows: 0 (to start with the first record the initial offset 0)
    2. pageSize: an interger that defines how many records the DataGrid shows (e.g. 10)
 4. Drag a *SetValue* action into the script
    1. Target: The List property of the *Repeater*
    2. Source: The dataset returned by the query
 
-![](images/InitialiseScript.png)
+![](images/SetRepeaterData.png)
 
 5.  Drag the "RepeaterDataGridInit" script to the event Handler
 6.  Enter values for the input parameters
-    1.  ContainerClass: The unique class you assigned to the container (e.g. ServerSideDataGridContainer)
+    1.  ContainerClass: The unique class you assigned to the container (e.g. server-side-datagrid)
     2.  DefaultSortField: The SQL column of the default sort field (e.g. ID)
-    3.  InitialPage (optional): The page number to display (default is 1)
-    4.  PageSize: The number of records to display per page (e.g. 10)
-    5.  TotalRecords: The total number of records in the dataset (select count)
+    3.  InitialPage (optional): The DataGrid page to display (default is 1)
+    4.  PageSize: The number of records to display per DataGrid page (e.g. 10)
+    5.  TotalRecords: The total number of records in the dataset (~.StadiumFilterData_Totals.FirstResult.total)
 
 ![](images/InitialiseScriptParameters.png)
 
@@ -486,8 +489,8 @@ In the "Previous", "Next" or "Go" paging button events, simply calls a Page Scri
    1. Add the class you assigned to the Main Container to the input parameter of the "RepeaterDataGridState" script (e.g. server-side-datagrid)
 3. Drag the type called "DataGridState" to the script
    1. Assign the output called "Values" from the "RepeaterDataGridState" script to the "DataGridState" type
-4. Drag the "Select" query into the script
-5. Complete the "Select" query input parameters by selecting the properties from the "DataGridState" type. If you are using your own datasource, you need to make use of these values to return the correct dataset to the *Repeater*
+4. Drag the "BasicSelect" query into the script
+5. Complete the "BasicSelect" query input parameters by selecting the properties from the "DataGridState" type. If you are using your own datasource, you need to make use of these values to return the correct dataset to the *Repeater*
    1. offsetRows: = ~.DataGridState.offset
    2. pageSize: = ~.DataGridState.pageSize
    3. sortField: = ~.DataGridState.sortField
