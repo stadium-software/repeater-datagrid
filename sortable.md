@@ -87,7 +87,7 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 
 ## Page
 To enable users to page:
-1. Swap the Header *Label* controls into *Link* controls
+1. Exchange the header *Label* controls with *Link* controls
 
 ![](images/HeaderLinkControls.png)
 
