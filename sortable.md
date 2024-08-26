@@ -12,7 +12,7 @@ The "SortableSelect" query includes the parameters below to facilitate *paging* 
 3. @sortField: The name of the sort field
 4. @sortDirection: The sorting direction (asc or desc)
 
-![](images/SortableSelectParameters.png)
+![](images/SortableQueryParameters.png)
 
 ### "SortableSelect" Query
 1. Create a new query called "SortableSelect" under the "StadiumFilterData" connector
