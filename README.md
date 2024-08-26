@@ -2,7 +2,6 @@
 
 ## Contents <!-- omit in toc -->
 - [Overview](#overview)
-  - [Notable features](#notable-features)
 - [Version](#version)
 - [Example Application](#example-application)
 - [Application](#application)
@@ -48,18 +47,6 @@ Using this module, a *Repeater* control can be configured to look and function s
 Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
 
 https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
-
-## Notable features
-- Can be used with Database and Web Service Connectors
-- Can be used with data sources of any size
-- Provides for sorting and paging
-- Settable page size
-- Settable initial page
-- Settable initial sort field and direction
-- Support for link columns
-- Support for editable columns
-- Support for data export
-- Support for [custom filters](#custom-filters)
 
 # Version
 1.0 initial
