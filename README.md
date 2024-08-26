@@ -3,44 +3,54 @@
 https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
 
 # Overview <!-- omit in toc -->
-Using this module, you can configure a *Repeater* control to create a DataGrid that looks and works similar to the standard Stadium *DataGrid* control. Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
+Using this module, a *Repeater* control can be configured to look and function similar to the standard Stadium *DataGrid* control. Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
 
 ## Notable features
 
-- Can be used with any Database or Web Service Connectors
+- Can be used with Database and Web Service Connectors
 - Can be used with data sources of any size
 - Provides for sorting and paging
-- Configurable / selectable page size
-- Configurable / selectable initial page
+- Settable page size
+- Settable initial page
+- Settable initial sort field and direction
 - Support for link columns
-- Support for data export
 - Support for editable columns
+- Support for data export
 - Support for [custom filters](#custom-filters)
 
 ## Setup Overview
 
 To use this module in a Stadium application
-1. Compose the *DataGrid* control from a [variety of other Stadium controls](#page), such as Containers, Grids, Repeaters, Labels and Links
-2. Add SQL queries or API calls to return the data to be shown in the DataGrid
-3. Retrieve and assign appropriate datasets in the various [event handlers](#scripts-and-events) when users load, page or sort the *DataGrid*
+1. Compose a *DataGrid* from a [variety of other Stadium controls](#page), such as Containers, Grids, Repeaters, Labels and Links
+2. Add SQL queries or API calls that can return data for a specific DataGrid page (must accept the specific parameters [outlined below](#connector))
+3. Retrieve and assign appropriate datasets in various [event handlers](#scripts-and-events) (when pages load the *DataGrid* or users opt to page or sort them)
 
 ## Assets
 
-The module comes with two [CSS files](#css-setup) and [two scripts](#global-scripts). 
+The module comes with some [CSS](#css-setup) and [two scripts](#global-scripts)
 
-- The CSS makes the [collection of controls](#page) required in this module look similar to a *DataGrid* control
-- The scripts provide functionality to facilitate the rendering of data and keeping the *DataGrid* state, including data page, sort field and sort direction
+- The CSS makes the [collection of controls](#page) required in this module look similar to the standard Stadium *DataGrid* control
+- The scripts provide functionality to facilitate the rendering of data and keeping the *DataGrid* state (including data page, sort field and sort direction)
 
 ## Example Application
+The repo includes a sample application that 
+1. Displays data from the [sample table](data/data.zip)
+2. Contains [scripts](#scripts-and-events) to demonstrate how to configure all the features [mentioned above](#notable-features)
+3. Contains one page that illustrates how the module can be used with a [REST API](api-integration.md)
 
-To illustrate how this module works, [create this database](#database) and open the [sample application](Stadium6/RepeaterDataGrid.sapz). It displays data from the database table with over 100,000 records. It contains [scripts](#scripts-and-events) to demonstrate how to configure the sorting and paging features.
+To run the sample application
+1. Setup the Database
+   1. [Create the database](#database) in your SQL Server instance
+   2. Use the [data scripts](data/data.zip) to populate the *MyData* table with as many records as you wish
+2. Open the [sample application](Stadium6/RepeaterDataGrid.sapz)
+   1. Amend the database connector
+   2. Hit the *Preview* button
 
 ![](images/DataGridScreenShot.png)
 
 # Contents <!-- omit in toc -->
 - [Version](#version)
 - [Sample Database Setup](#sample-database-setup)
-  - [StadiumFilterData Database](#stadiumfilterdata-database)
 - [Application](#application)
   - [Application Properties](#application-properties)
 - [Connector](#connector)
@@ -59,7 +69,7 @@ To illustrate how this module works, [create this database](#database) and open 
     - [Initialisation Script](#initialisation-script)
     - [DataGrid State Script](#datagrid-state-script)
     - [RepeaterDataGridState Return Object](#repeaterdatagridstate-return-object)
-  - [Scripts and Events](#scripts-and-events)
+  - [Page Scripts and Events](#page-scripts-and-events)
     - [Initialise Page Script](#initialise-page-script)
     - [GetData Page Script](#getdata-page-script)
     - [Page.Load](#pageload)
@@ -68,8 +78,8 @@ To illustrate how this module works, [create this database](#database) and open 
     - [Customising CSS](#customising-css)
     - [CSS Upgrading](#css-upgrading)
 - [Additional Features](#additional-features)
-  - [Making Columns Sortable](#making-columns-sortable)
-  - [Adding Link Columns](#adding-link-columns)
+  - [Sortable Columns](#sortable-columns)
+  - [Link Columns](#link-columns)
   - [Data Export](#data-export)
   - [Custom Filters](#custom-filters)
   - [Load Specific Page](#load-specific-page)
@@ -82,13 +92,7 @@ To illustrate how this module works, [create this database](#database) and open 
 1.0 initial
 
 # Sample Database Setup
-The module can be configured to work with any data source and connector. 
-
-The attached example application consists of multiple examples pages using a *Database Connector* and a *WebService Connector*. 
-
-## StadiumFilterData Database
-1. Use the instructions from [this repo](https://github.com/stadium-software/samples-database) to setup the database and DataGrid for this sample
-2. To increase the records in the database, run the SQL scripts contained in the zip file in the [database](/database) folder in this repo
+[Follow these instructions](database-setup.md) to set up the database
 
 # Application
 
@@ -160,13 +164,11 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 
 ## Types
 Add two types to make working with the data easier 
-
 1. The "DataGridState" type described below
 2. A type that matches the field in your dataset (example below)
 
 ### DataGridState Type
-Add a type called "DataGridState" with the properties bwlow. 
-
+Add a type called "DataGridState" with the properties below:
 1. page (any)
 2. pageSize (any)
 3. offset (any)
@@ -315,13 +317,14 @@ if (sortEl) sortEl.classList.remove("dg-asc-sorting", "dg-desc-sorting");
 let cells = container.querySelectorAll(".grid-item");
 let headerCells = container.querySelectorAll(".grid-item:not(.grid-repeater-item)");
 let cellsPerRow = headerCells.length;
-if (document.getElementById("#" + container.id + "_style")) document.getElementById("#" + container.id + "_style").remove();
-let css = '#' + container.id + ' {.grid-item:nth-child(' + cellsPerRow + 'n+1) {border-left: 1px solid var(--dg-border-color);}.grid-item:nth-child(' + cellsPerRow + 'n) {border-right: 1px solid var(--dg-border-color);}';
-let head = document.head || document.getElementsByTagName('head')[0], style = document.createElement('style');
-head.appendChild(style);
-style.type = 'text/css';
-style.id = container.id + "_style";
-style.appendChild(document.createTextNode(css));
+if (!document.getElementById(container.id + "_stylesheet")) {
+    let css = '#' + container.id + ' {.grid-item:nth-child(' + cellsPerRow + 'n+1) {border-left: 1px solid var(--dg-border-color);}.grid-item:nth-child(' + cellsPerRow + 'n) {border-right: 1px solid var(--dg-border-color);}';
+    let head = document.head || document.getElementsByTagName('head')[0], style = document.createElement('style');
+    head.appendChild(style);
+    style.type = 'text/css';
+    style.id = container.id + "_stylesheet";
+    style.appendChild(document.createTextNode(css));
+}
 
 let cellCount = 0;
 let alt = false;
@@ -495,10 +498,9 @@ return {
 ![](images/DataGridStateScript.png)
 
 ### RepeaterDataGridState Return Object
-The "RepeaterDataGridState" script returns an object called "Values" with the properties below. 
+To easily access the values returned by the "DataGridState" script, assign the Values output from the "RepeaterDataGridState" script to the type. 
 
-To easily access the values, drag type called "DataGridState" to the script and assign the Values output from the "RepeaterDataGridState" script to the type. 
-
+The "RepeaterDataGridState" script returns an object called "Values" with the properties below:
 1. page: The page of data to show (int)
 2. pageSize: The number of records each page must contain (int)
 3. offset: The number of rows to skip before starting to return rows from the query (PageSize * Page) (int)
@@ -523,8 +525,8 @@ To easily access the values, drag type called "DataGridState" to the script and 
 }
 ```
 
-## Scripts and Events
-Alll events in the example application either call a script to initialise the DataGrid or one to retreive the DataGrid state. 
+## Page Scripts and Events
+All events in the example application either call a script to initialise the DataGrid or one to retreive the DataGrid state. 
 
 ### Initialise Page Script
 The "RepeaterDataGridInit" script allows for the initalisation of the *Repeater* as a DataGrid. Call this script to initialise the DataGrid in the Page.Load script and whenever the dataset changes, like when it is filtered for example. Since each page has slightly different requirements and the "Initialise" script is not exactly the same across pagtes. 
@@ -616,10 +618,10 @@ To upgrade the CSS in this module, follow the [steps outlined in this repo](http
 
 # Additional Features
 
-## Making Columns Sortable
+## Sortable Columns
 [Sortable Columns](sortable.md)
 
-## Adding Link Columns
+## Link Columns
 [Link Columns](link-columns.md)
 
 ## Data Export
