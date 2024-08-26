@@ -154,6 +154,9 @@ To enable paging a specific set of controls with specific classnames is required
 1. Drag a *Container* control below the *Grid* control, but inside the main container 
 2. Give it a suitable name (e.g. PagingContainer)
 3. Add the class "paging" to the *Container* classes property (it must be this exact class!)
+
+![](images/PagingContainerProperties.png)
+
 4. Drag a *Button* control into the PagingContainer
    1. Name the Button "PreviousButton"
    2. Add the text "<<" in the button text property
