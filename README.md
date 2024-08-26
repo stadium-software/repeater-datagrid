@@ -8,8 +8,8 @@
   - [Application Properties](#application-properties)
 - [Connector](#connector)
   - [StadiumFilterData Queries](#stadiumfilterdata-queries)
-    - ["TotalRecords" Query](#totalrecords-query)
-    - ["BasicSelect" Query](#basicselect-query)
+    - ["TotalRecords"](#totalrecords)
+    - ["BasicSelect"](#basicselect)
   - [Types](#types)
     - [DataGridState Type](#datagridstate-type)
     - [DataSet Type](#dataset-type)
@@ -69,17 +69,14 @@ The repo includes the sample application shown in the video. To run the example 
 A database connector to the "StadiumFilterData" database is required
 
 ## StadiumFilterData Queries
-The module requires the following data:
-1. The total number of records. This is used to calculate the number of pages
-2. A page of data to be displayed in the *Repeater* (from a database or an API)
 
-### "TotalRecords" Query
+### "TotalRecords"
 Create a query called "TotalRecords". The result is used to calulate the total number of pages in the *Repeater*
 ```sql
 select count(ID) as total from MyData
 ```
 
-### "BasicSelect" Query
+### "BasicSelect"
 Create a query called "BasicSelect". This will return a page of data that must be attached to the *Repeater*
 
 The "BasicSelect" query include the parameters below to facilitate *paging*:
