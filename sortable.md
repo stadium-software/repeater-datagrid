@@ -7,10 +7,10 @@ Sorting requires the addition of an *ORDER BY* clause to the Select query
 Create a new query called "SortableSelect". This will return a page of data that must be attached to the *Repeater*
 
 The "SortableSelect" query includes the parameters below to facilitate *paging* and *sorting*:
-1. @offsetRows: The number of records to skip
-2. @pageSize: The number of records to fetch
-3. @sortField: The name of the sort field
-4. @sortDirection: The sorting direction (asc or desc)
+1. @sortField: The name of the sort field
+2. @sortDirection: The sorting direction (asc or desc)
+3. @offsetRows: The number of records to skip
+4. @pageSize: The number of records to fetch
 
 ![](images/SortableQueryParameters.png)
 
@@ -63,7 +63,7 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ## Page Scripts
 
 ### Initialise
-1. Create a page script as per the description in the [Readme.md](Readme.md) file or copy this script from the "Basic" page 
+1. Create a page script as per the description in the [Readme](/Readme.md) file or copy this script from the "Basic" page 
 2. Remove the "BasicSelect" query from the script and replace it with the "SortableSelect" query
 3. Complete the "SortableSelect" query parameters
    1. offsetRows: 0 (to start with the first record the initial offset 0)
