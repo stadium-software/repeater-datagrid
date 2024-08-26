@@ -39,7 +39,7 @@
   - [Editable Columns](#editable-columns)
   - [Loading Spinners](#loading-spinners)
 
-## Overview <!-- omit in toc -->
+## Overview
 Using this module, a *Repeater* control can be configured to look and function similar to the standard Stadium *DataGrid* control. 
 
 Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
