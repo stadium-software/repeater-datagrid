@@ -196,8 +196,8 @@ To enable paging a specific set of controls with specific classnames is required
 
 ## Global Scripts
 The module requires two global scripts:
-1. The "Initialisation Script" is used to initialise the *Repeater*
-2. The "RepeaterDataGridState" is used when users use the paging options
+1. The "RepeaterDataGridInit" is used in the page load event
+2. The "RepeaterDataGridState" is used in the paging click events
 
 ### Initialisation Script
 1. Create a Global Script called "RepeaterDataGridInit"
