@@ -26,6 +26,6 @@ Enabling data export to CSV can be achieved with the use of the [List to CSV Dow
       2. Source: ~.Counter_var + ~.PageSize_var
    4. In Chrome users will be asked to verify the download of multiple files
 
-**CAUTION: Pushing many files to the user using this method can also cause the browser to hang or crash.**
+**CAUTION: Pushing many files to the user using this method can cause the browser to hang or crash**
 
 ![](images/ExportScriptActions.png)
