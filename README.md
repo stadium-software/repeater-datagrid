@@ -69,7 +69,7 @@ A database connector to the "StadiumFilterData" database is required
 ## StadiumFilterData Queries
 
 ### "TotalRecords"
-Create a query called "TotalRecords". The result is used to calulate the total number of pages in the *Repeater*
+Create a query called "TotalRecords". The result is used when calulating the total number of pages in the *Repeater*
 ```sql
 select count(ID) as total from MyData
 ```
@@ -81,9 +81,9 @@ The "BasicSelect" query include the parameters below to facilitate *paging*:
 1. @offsetRows: The number of records to skip
 2. @pageSize: The number of records to fetch
 
-**NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below and press the "Fetch Fields & Parameters" button again.**
-
 ![](images/BasicQueryParameters.png)
+
+**NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below and press the "Fetch Fields & Parameters" button again.**
 
 ```sql
 SELECT ID
@@ -102,11 +102,7 @@ SELECT ID
 ```
 
 ## Page
-To function correctly, the page must contain a number of controls. Some of these provide for DataGrid-specific functions, like paging, while others serve to simply display the data from your dataset. Each control set is defined in detail below. 
-
-Add controls that match your columns to the page. 
-
-To run the sample, add controls that match the FilterData dataset in the example as described [above](#filterdatadataset-type). The set of controls needed for the LoadTest page in the example application will look like this:
+To function correctly, the page must contain a number of controls. Some of these provide for DataGrid-specific functions, like paging, while others serve to simply display the data from your dataset. Each control set is defined in detail below. The final result will look something like this:
 
 ![](images/PageControls.png)
 
@@ -117,16 +113,13 @@ To run the sample, add controls that match the FilterData dataset in the example
 
 ### Grid
 1. Drag a *Grid* control into the *Container* control
-2. For each column you wish to display
-   1. Drag a *Link* control into the *Grid* if the column must be sortable
-   2. Drag a *Label* control into the *Grid* if the column should not be sortable
-   3. Leave the column empty if you don't want to display a column header (add a dummy control for now that you can remove later)
+2. For each column in your dataset, drag a *Label* control into the *Grid*
 
 ![](images/GridHeaders.png)
 
 ### Repeater
 1. Drag a *Repeater* control into the *Grid* control (under the header row)
-2. Create a Type called "DataSet" that represents the fields in your dataset. The sample dataset type is called "DataSet" and contains the following fields:
+2. Create a *Type* called "DataSet" that represents your dataset. The sample dataset type is called "DataSet" and contains the following fields:
    1. ID (Any)
    2. FirstName (Any)
    3. LastName (Any)
@@ -144,11 +137,12 @@ To run the sample, add controls that match the FilterData dataset in the example
 
 ![](images/RepeaterListItemType.png)
 
-4. For each column you wish to display (these will become the columns in your DataGrid)
+4. For each in your DataSet
    1. Drag a *Label* control into the *Grid*
-   2. Map the correct ListItem Property to the *Label Text* property (example shows the "ID" Label)
 
 ![](images/RepeaterColumns.png)
+
+   2. Map the correct ListItem Property to the *Label Text* property (example shows the "ID" Label)
 
 ![](images/BindingControlsToRepeater.png)
 
