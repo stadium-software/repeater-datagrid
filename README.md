@@ -1,6 +1,13 @@
 # DataGrid Repeater <!-- omit in toc -->
 
 ## Contents <!-- omit in toc -->
+- [Overview](#overview)
+  - [Notable features](#notable-features)
+  - [Setup Steps](#setup-steps)
+  - [Assets](#assets)
+  - [Example Application](#example-application)
+  - [Running the sample application](#running-the-sample-application)
+- [Version](#version)
 - [Sample Database Setup](#sample-database-setup)
 - [Application](#application)
   - [Application Properties](#application-properties)
@@ -39,14 +46,14 @@
   - [Editable Columns](#editable-columns)
   - [Loading Spinners](#loading-spinners)
 
-## Overview
+# Overview
 Using this module, a *Repeater* control can be configured to look and function similar to the standard Stadium *DataGrid* control. 
 
 Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
 
 https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
 
-### Notable features
+## Notable features
 - Can be used with Database and Web Service Connectors
 - Can be used with data sources of any size
 - Provides for sorting and paging
@@ -58,25 +65,25 @@ https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
 - Support for data export
 - Support for [custom filters](#custom-filters)
 
-### Setup Steps
+## Setup Steps
 To use this module in a Stadium application
 1. Compose a *DataGrid* from a [variety of other Stadium controls](#page), including Containers, a Grid, a Repeater, some Labels and Links
 2. Add SQL queries or API calls that return data for specific DataGrid pages (must accept the specific parameters [outlined below](#connector))
 3. Retrieve and assign appropriate datasets in various [event handlers](#scripts-and-events) (when the *Repeater* loads or when users opt to page through or sort the data)
 
-### Assets
+## Assets
 The module comes with some [CSS](#css-setup) and [two scripts](#global-scripts)
 
 - The CSS makes the [collection of controls](#page) required in this module look similar to the standard Stadium *DataGrid* control
 - The scripts provide functionality to facilitate the rendering of data and keeping state (including data page, sort field and sort direction)
 
-### Example Application
+## Example Application
 The repo includes a sample application that 
 1. Displays data from the [sample table](data/data.zip)
 2. Contains [scripts](#scripts-and-events) to demonstrate how to configure all the features [mentioned above](#notable-features)
 3. Contains one page that illustrates how the module can be used with a [REST API](api-integration.md)
 
-### Running the sample application
+## Running the sample application
 1. Setup the Database
    1. [Create the database](#database) in your SQL Server instance
    2. Use the [data scripts](data/data.zip) to populate the *MyData* table with as many records as you wish
@@ -86,7 +93,7 @@ The repo includes a sample application that
 
 ![](images/DataGridScreenShot.png)
 
-## Version
+# Version
 1.0 initial
 
 # Sample Database Setup
