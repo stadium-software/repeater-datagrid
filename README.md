@@ -22,8 +22,8 @@ Using this module, a *Repeater* control can be configured to look and function s
 
 To use this module in a Stadium application
 1. Compose a *DataGrid* from a [variety of other Stadium controls](#page), such as Containers, Grids, Repeaters, Labels and Links
-2. Add SQL queries or API calls that can return data for a specific DataGrid page (must accept the specific parameters [outlined below](#connector))
-3. Retrieve and assign appropriate datasets in various [event handlers](#scripts-and-events) (when pages load the *DataGrid* or users opt to page or sort them)
+2. Add SQL queries or API calls that return data for specific DataGrid pages (must accept the specific parameters [outlined below](#connector))
+3. Retrieve and assign appropriate datasets in various [event handlers](#scripts-and-events) (when the *DataGrid* loads or when users opt to page through or sort the data)
 
 ## Assets
 
@@ -38,7 +38,7 @@ The repo includes a sample application that
 2. Contains [scripts](#scripts-and-events) to demonstrate how to configure all the features [mentioned above](#notable-features)
 3. Contains one page that illustrates how the module can be used with a [REST API](api-integration.md)
 
-To run the sample application
+## Running the sample application
 1. Setup the Database
    1. [Create the database](#database) in your SQL Server instance
    2. Use the [data scripts](data/data.zip) to populate the *MyData* table with as many records as you wish
