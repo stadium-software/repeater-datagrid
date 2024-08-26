@@ -488,8 +488,14 @@ Create a type called "DataGridState" with the properties below:
 1. Create a Script called "GetData" under the page
 2. Drag the "RepeaterDataGridState" script into the "GetData" script
    1. Add the class you assigned to the Main Container to the input parameter of the "RepeaterDataGridState" script (e.g. server-side-datagrid)
+
+![](images/GridStateScriptInputs.png)
+
 3. Drag the type called "DataGridState" to the script
    1. Assign the output called "Values" from the "RepeaterDataGridState" script to the "DataGridState" type
+
+![](images/StateValueAssignment.png)
+
 4. Drag the "BasicSelect" query into the script and complete the "BasicSelect" query input parameters by selecting the properties from the "DataGridState" type
 
 ![](images/BasicSelectInputParameters.png)
