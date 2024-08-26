@@ -63,7 +63,7 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ## Page Scripts
 
 ### Initialise
-1. Create a page script as per the description in the [Readme](README.md) file or copy this script from the "Basic" page 
+1. Create this page script as per the description in the [Readme](README.md) file or copy the "Initialise" script from the "Basic" page 
 2. Remove the "BasicSelect" query from the script and replace it with the "SortableSelect" query
 3. Complete the "SortableSelect" query parameters
    1. offsetRows: 0 (to start with the first record the initial offset 0)
@@ -73,6 +73,17 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 4. Change the *Source* property of the *SetValue* action below
    1. Source: The dataset returned by the "SortableSelect" query
 5. Adjust the "RepeaterDataGridInit" input parameters as required
+
+### GetData
+1. Create this page script as per the description in the [Readme](README.md) file or copy the "GetData" script from the "Basic" page 
+2. Remove the "BasicSelect" query from the script and replace it with the "SortableSelect" query
+3. Complete the "BasicSelect" query input parameters by selecting the properties from the "DataGridState" type
+   1. offsetRows: = ~.DataGridState.offset
+   2. pageSize: = ~.DataGridState.pageSize
+   3. sortField: = ~.DataGridState.sortField
+   4. sortDirection: = ~.DataGridState.sortDirection
+
+![](images/SortableGetDataInputs.png)
 
 ## Page
 To enable users to page:
