@@ -433,6 +433,7 @@ return {
 It is recommended to create two page-level scripts to contain the logic for initialising the *Repeater* and for handling paging. 
 
 ### "Initialise" Page Script
+It is advisable to add a page script that will contain the following actions:
 
 ![](images/InitialiseScript.png)
 
@@ -455,13 +456,13 @@ It is recommended to create two page-level scripts to contain the logic for init
     1.  ContainerClass: The unique class you assigned to the container (e.g. server-side-datagrid)
     2.  DefaultSortField: The SQL column of the default sort field (e.g. ID)
     3.  InitialPage (optional): The DataGrid page to display (default is 1)
-    4.  PageSize: The number of records to display per DataGrid page (e.g. 10)
+    4.  PageSize: The number of records to display per DataGrid page (the same number as added in the "pageSize" query parameter above)
     5.  TotalRecords: The total number of records in the dataset (~.StadiumFilterData_Totals.FirstResult.total)
 
 ![](images/InitialiseScriptParameters.png)
 
 ### "GetData" Page Script
-When users click the "Previous", "Next" or "Go" paging buttons, the "BasicSelect" query needs to be called with the appropriate parameters. The necessary information is returned by the "RepeaterDataGridState" script. To make the logic reusable, it is advisable to add a page script that will contain the following actions:
+When users click the "Previous", "Next" or "Go" paging buttons, the "BasicSelect" query needs to be called with the appropriate parameters. The information necessary for the query is returned by the "RepeaterDataGridState" script. It is advisable to add a page script that will contain the following actions:
 
 ![](images/GetDataScript.png)
 
