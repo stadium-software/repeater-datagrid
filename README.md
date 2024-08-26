@@ -158,22 +158,36 @@ To enable paging a specific set of controls with specific classnames is required
    1. Name the Button "PreviousButton"
    2. Add the text "<<" in the button text property
    3. Add the class "previous-button" to the button classes property
+
+![](images/PreviousButtonProperties.png)
+
 5. Drag another *Button* control into the PagingContainer and place it next to the PreviousButton
    1. Name the Button "NextButton"
    2. Add the text ">>" in the button text property
    3. Add the class "next-button" to the button classes property
+
+![](images/NextButtonProperties.png)
+
 6. Drag a *TextBox* into the the PagingContainer and place it next to the NextButton
    1. Name the TextBox "SpecificPageTextBox"
    2. Add the class "specific-page" to the SpecificPageTextBox classes property
+
+![](images/SpecificPageTextBoxProperties.png)
+
 7. Drag a *Button* control into the PagingContainer and place it next to the SpecificPageTextBox control
    1. Name the Button "SpecificPageGoButton"
    2. Add the text "Go" in the button text property
    3. Add the class "specific-page-go" to the button classes property
+
+![](images/SpecificPageButtonProperties.png)
+
 8. Drag a *Label* control to the PagingContainer and place it next to the SpecificPageGoButton control
    1. Name the Label "CurPageLabel"
    2. Add the class "current-page" to the label classes property
 
-**Result**
+![](images/CurrentPageLabelProperties.png)
+
+**Rendered Container**
 
 ![](images/PagingRendered.png)
 
