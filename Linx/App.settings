@@ -1,8 +1,0 @@
-[
-  {
-    "Id": "2jYC",
-    "Name": "DBConn",
-    "Type": "Compiled:String",
-    "Value": "Data Source=.\\sqlexpress;Initial Catalog=StadiumFilterData;User ID=sa;Password=password;TrustServerCertificate=True;"
-  }
-]
