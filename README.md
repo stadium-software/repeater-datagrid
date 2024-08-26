@@ -437,6 +437,8 @@ It is advisable to add a page script that will contain the following actions:
 
 ![](images/InitialiseScript.png)
 
+**Script Actions**
+
 1. Create a Script called "Initialise" under the page
 
 ![](images/InitialisePageScript.png)
@@ -462,15 +464,15 @@ It is advisable to add a page script that will contain the following actions:
 ![](images/InitialiseScriptParameters.png)
 
 ### "GetData" Page Script
-When users click the "Previous", "Next" or "Go" paging buttons, the "BasicSelect" query needs to be called with the appropriate parameters. The information necessary for the query is returned by the "RepeaterDataGridState" script. It is advisable to add a page script that will contain the following actions:
+When users click the "Previous", "Next" or "Go" paging buttons, the "BasicSelect" query needs to be called with the appropriate parameters. The information necessary for the query is returned by the "RepeaterDataGridState" script. It is advisable to add a page script that can be called in all of the paging button events. It needs to contain the following actions:
 
 ![](images/GetDataScript.png)
 
-To easily access the values returned by the "DataGridState" script, create a type called "DataGridState" and assign the Values output from the "RepeaterDataGridState" script to that type. 
+To easily access the values returned by the "DataGridState" script, it is advisable to create a type called "DataGridState" and assign the Values output from the "RepeaterDataGridState" script to that type. 
 
 **DataGridState Type**
 
-Add a type called "DataGridState" with the properties below:
+Create a type called "DataGridState" with the properties below:
 1. page (any)
 2. pageSize (any)
 3. offset (any)
@@ -481,22 +483,20 @@ Add a type called "DataGridState" with the properties below:
 
 ![](images/DGStateType.png)
 
-**Page Script**
-
-In the "Previous", "Next" or "Go" paging button events, simply calls a Page Script called "GetData"
+**Script Actions**
 
 1. Create a Script called "GetData" under the page
 2. Drag the "RepeaterDataGridState" script into the "GetData" script
    1. Add the class you assigned to the Main Container to the input parameter of the "RepeaterDataGridState" script (e.g. server-side-datagrid)
 3. Drag the type called "DataGridState" to the script
    1. Assign the output called "Values" from the "RepeaterDataGridState" script to the "DataGridState" type
-4. Drag the "BasicSelect" query into the script
-5. Complete the "BasicSelect" query input parameters by selecting the properties from the "DataGridState" type. If you are using your own datasource, you need to make use of these values to return the correct dataset to the *Repeater*
+4. Drag the "BasicSelect" query into the script and complete the "BasicSelect" query input parameters by selecting the properties from the "DataGridState" type
+
+![](images/BasicSelectInputParameters.png)
+
    1. offsetRows: = ~.DataGridState.offset
    2. pageSize: = ~.DataGridState.pageSize
-   3. sortField: = ~.DataGridState.sortField
-   4. sortDirection: = ~.DataGridState.sortDirection
-6. Drag a *SetValue* to the script to set the Repeater data
+5. Drag a *SetValue* to the script to set the Repeater data
    1. Target: The Repeater List Property
    2. Source: The data returned by the connector
 
