@@ -63,8 +63,8 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ## Page Scripts
 
 ### Initialise
-1. Create a page scritp as per the description in the [Readme.md](Readme.md) file or copy this script from the "Basic" page 
-2. Remove the "BasicSelect" query and replace it with the "SortableSelect" query instead
+1. Create a page script as per the description in the [Readme.md](Readme.md) file or copy this script from the "Basic" page 
+2. Remove the "BasicSelect" query from the script and replace it with the "SortableSelect" query
 3. Complete the "SortableSelect" query parameters
    1. offsetRows: 0 (to start with the first record the initial offset 0)
    2. pageSize: an interger that defines how many records the DataGrid shows (e.g. 10)
@@ -81,6 +81,9 @@ To enable users to page:
 ![](images/HeaderLinkControls.png)
 
 2. Create the *Click Event Handler* for each of the header *Link* controls
+
+![](images/SortablePageEvents.png)
+
 3. Drag the "GetData" script into the control *Click Event Handler* script
 
 ![](images/SortingEventHandler.png)
