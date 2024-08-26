@@ -4,11 +4,8 @@
 - [Overview](#overview)
   - [Notable features](#notable-features)
   - [How it works](#how-it-works)
-  - [Module Assets](#module-assets)
-  - [Example Application](#example-application)
-    - [Running the sample application](#running-the-sample-application)
 - [Version](#version)
-- [Sample Database Setup](#sample-database-setup)
+- [Example Application](#example-application)
 - [Application](#application)
   - [Application Properties](#application-properties)
 - [Connector](#connector)
@@ -71,32 +68,24 @@ To use this module in a Stadium application
 2. Add SQL queries or API calls that return data for specific DataGrid pages (must accept the specific parameters [outlined below](#connector))
 3. Retrieve and assign appropriate datasets in various [event handlers](#scripts-and-events) (when the *Repeater* loads or when users opt to page through or sort the data)
 
-## Module Assets
-The module comes with some [CSS](#css-setup) and [two scripts](#global-scripts)
-- The CSS makes the [collection of controls](#page) required in this module look similar to the standard Stadium *DataGrid* control
-- The scripts provide functionality to facilitate the rendering of data and keeping state (including data page, sort field and sort direction)
+# Version
+1.0 initial
 
-## Example Application
+# Example Application
 The repo includes a sample application that 
 1. Displays data from the [sample table](data/data.zip)
 2. Contains [scripts](#scripts-and-events) to demonstrate how to configure all the features [mentioned above](#notable-features)
 3. Contains one page that illustrates how the module can be used with a [REST API](api-integration.md)
 
-### Running the sample application
+To run the example application, follow these steps:
 1. Setup the Database
-   1. [Create the database](#database) in your SQL Server instance
+   1. [Follow these instructions](database-setup.md) to set up the database for the [sample application](Stadium6/RepeaterDataGrid.sapz)
    2. Use the [data scripts](data/data.zip) to populate the *MyData* table with as many records as you wish
 2. Open the [sample application](Stadium6/RepeaterDataGrid.sapz)
    1. Amend the database connector
    2. Hit the *Preview* button
 
 ![](images/DataGridScreenShot.png)
-
-# Version
-1.0 initial
-
-# Sample Database Setup
-[Follow these instructions](database-setup.md) to set up the database for the [sample application](Stadium6/RepeaterDataGrid.sapz)
 
 # Application
 
