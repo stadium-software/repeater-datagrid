@@ -1,10 +1,50 @@
 # DataGrid Repeater <!-- omit in toc -->
 
-https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
+# Contents <!-- omit in toc -->
+- [Version](#version)
+- [Sample Database Setup](#sample-database-setup)
+- [Application](#application)
+  - [Application Properties](#application-properties)
+- [Connector](#connector)
+  - [StadiumFilterData Queries](#stadiumfilterdata-queries)
+    - ["TotalRecords" Query](#totalrecords-query)
+    - ["BasicSelect" Query](#basicselect-query)
+  - [Types](#types)
+    - [DataGridState Type](#datagridstate-type)
+    - [DataSet Type](#dataset-type)
+  - [Page](#page)
+    - [Main Container](#main-container)
+    - [Grid](#grid)
+    - [Repeater](#repeater)
+    - [Paging Container](#paging-container)
+  - [Global Scripts](#global-scripts)
+    - [Initialisation Script](#initialisation-script)
+    - [DataGrid State Script](#datagrid-state-script)
+    - [RepeaterDataGridState Return Object](#repeaterdatagridstate-return-object)
+  - [Page Scripts and Events](#page-scripts-and-events)
+    - [Initialise Page Script](#initialise-page-script)
+    - [GetData Page Script](#getdata-page-script)
+    - [Page.Load](#pageload)
+    - [Paging](#paging)
+  - [CSS](#css)
+    - [Customising CSS](#customising-css)
+    - [CSS Upgrading](#css-upgrading)
+- [Additional Features](#additional-features)
+  - [Sortable Columns](#sortable-columns)
+  - [Link Columns](#link-columns)
+  - [Data Export](#data-export)
+  - [Custom Filters](#custom-filters)
+  - [Load Specific Page](#load-specific-page)
+  - [Selectable Page Size](#selectable-page-size)
+  - [Conditional Cell Styling](#conditional-cell-styling)
+  - [Editable Columns](#editable-columns)
+  - [Loading Spinners](#loading-spinners)
 
 # Overview <!-- omit in toc -->
 Using this module, a *Repeater* control can be configured to look and function similar to the standard Stadium *DataGrid* control. 
 Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
+
+https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
 
 ## Notable features
 - Can be used with Database and Web Service Connectors
@@ -45,46 +85,6 @@ The repo includes a sample application that
    2. Hit the *Preview* button
 
 ![](images/DataGridScreenShot.png)
-
-# Contents <!-- omit in toc -->
-- [Version](#version)
-- [Sample Database Setup](#sample-database-setup)
-- [Application](#application)
-  - [Application Properties](#application-properties)
-- [Connector](#connector)
-  - [StadiumFilterData Queries](#stadiumfilterdata-queries)
-    - ["TotalRecords" Query](#totalrecords-query)
-    - ["BasicSelect" Query](#basicselect-query)
-  - [Types](#types)
-    - [DataGridState Type](#datagridstate-type)
-    - [DataSet Type](#dataset-type)
-  - [Page](#page)
-    - [Main Container](#main-container)
-    - [Grid](#grid)
-    - [Repeater](#repeater)
-    - [Paging Container](#paging-container)
-  - [Global Scripts](#global-scripts)
-    - [Initialisation Script](#initialisation-script)
-    - [DataGrid State Script](#datagrid-state-script)
-    - [RepeaterDataGridState Return Object](#repeaterdatagridstate-return-object)
-  - [Page Scripts and Events](#page-scripts-and-events)
-    - [Initialise Page Script](#initialise-page-script)
-    - [GetData Page Script](#getdata-page-script)
-    - [Page.Load](#pageload)
-    - [Paging](#paging)
-  - [CSS](#css)
-    - [Customising CSS](#customising-css)
-    - [CSS Upgrading](#css-upgrading)
-- [Additional Features](#additional-features)
-  - [Sortable Columns](#sortable-columns)
-  - [Link Columns](#link-columns)
-  - [Data Export](#data-export)
-  - [Custom Filters](#custom-filters)
-  - [Load Specific Page](#load-specific-page)
-  - [Selectable Page Size](#selectable-page-size)
-  - [Conditional Cell Styling](#conditional-cell-styling)
-  - [Editable Columns](#editable-columns)
-  - [Loading Spinners](#loading-spinners)
 
 # Version
 1.0 initial
