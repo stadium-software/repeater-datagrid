@@ -137,7 +137,7 @@ To function correctly, the page must contain a number of controls. Some of these
 
 ![](images/RepeaterListItemType.png)
 
-4. For each in your DataSet
+4. For each field in your DataSet
    1. Drag a *Label* control into the *Grid*
 
 ![](images/RepeaterColumns.png)
