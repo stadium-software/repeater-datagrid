@@ -1,9 +1,10 @@
 # Custom Filters
 Custom filters can be created by 
 
-1. Adding suitable input controls to the page for the user
-2. Passing the values to the query or API call
+1. Adding input controls to the page to enable users to capture filter criteria
+2. Passing user-provided filter criteria to the query or API call
 3. Using the provided values in a "WHERE" clause
+4. Returning filtered datasets in the "initialise" script
 
 ## StadiumFilterData Queries (filtered)
 Both, the "TotalRecords" query and the "Select" query require the addition of a "WHERE" clause. The specific filter options provided to the user will determine which parameters are required in the "WHERE" clause of the query. 
@@ -35,6 +36,14 @@ The example application provides users with an opportunity to filter the results
 The resulting filter should look like this
 
 ![](images/FilterControls.png)
+
+## Event Handlers
+1. Add a Click event handler to the "Apply" button
+   1. Drag the "Initialise" page script into the "Apply" button click event handler
+2. In the "Clear" button click event handler
+   1. Drag a SetValue action for each filter input field 
+   2. Set the relevant property of each control in the filter to empty
+   3. Call the "Initialise" page script
 
 ### "FilterTotals" Query
 ```sql
@@ -111,8 +120,6 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
 
 **NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below and press the "Fetch Fields & Parameters" button again.**
-
-![](images/SQLErrorParameters.png)
 
 ## Page Scripts
 Amend the "Initialise" and "GetData" scripts
