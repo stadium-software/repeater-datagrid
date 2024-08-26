@@ -1,12 +1,16 @@
 # Editable Columns
 
-To make a column editable: 
-1. Drag a form control into the *Repeater* control (e.g. CheckBox, CheckBoxList, DatePicker, DropDown, RadioButtonList)
+To make a column editable
+
+## Page
+1. Drag form controls into the *Repeater* control (e.g. CheckBox, CheckBoxList, DatePicker, DropDown, RadioButtonList)
+2. Map the correct ListItem Property to the control *value* property
+3. Create the control *Change* Event Handler
 
 ![](images/EditableColumnControls.png)
 
-2. Create the *Change* Event Handler
-3. In the *Change* Event Handler, you have access to all the controls in that *Repeater* row in the *Controls* group in the properties dropdown 
+## Event Handler
+Use any value from the *Repeater* instance (row) in the event handler to update the data source 
 
 **Example shows how to add a CheckboxList column and a DropDown column**
 
