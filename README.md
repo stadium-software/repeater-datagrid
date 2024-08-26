@@ -73,8 +73,6 @@ The module requires the following data:
 1. The total number of records. This is used to calculate the number of pages
 2. A page of data to be displayed in the *Repeater* (from a database or an API)
 
-![](images/DBQueries.png)
-
 ### "TotalRecords" Query
 Create a query called "TotalRecords". The result is used to calulate the total number of pages in the *Repeater*
 ```sql
