@@ -63,7 +63,7 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ## Page Scripts
 
 ### Initialise
-1. Create a page script as per the description in the [Readme](Readme.md) file or copy this script from the "Basic" page 
+1. Create a page script as per the description in the [Readme](README.md) file or copy this script from the "Basic" page 
 2. Remove the "BasicSelect" query from the script and replace it with the "SortableSelect" query
 3. Complete the "SortableSelect" query parameters
    1. offsetRows: 0 (to start with the first record the initial offset 0)
