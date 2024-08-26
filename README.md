@@ -18,11 +18,11 @@
   - [Global Scripts](#global-scripts)
     - [Initialisation Script](#initialisation-script)
     - [DataGrid State Script](#datagrid-state-script)
-    - [DataGridState Type](#datagridstate-type)
-    - [RepeaterDataGridState Return Object](#repeaterdatagridstate-return-object)
   - [Page Scripts and Events](#page-scripts-and-events)
     - [Initialise Page Script](#initialise-page-script)
     - [GetData Page Script](#getdata-page-script)
+    - [DataGridState Type](#datagridstate-type)
+    - [RepeaterDataGridState Return Object](#repeaterdatagridstate-return-object)
     - [Page.Load](#pageload)
     - [Paging](#paging)
   - [CSS](#css)
@@ -431,6 +431,40 @@ return {
 
 ![](images/StateSetValue.png)
 
+## Page Scripts and Events
+I recommend creating two page-level scripts for initialising the *Repeater* and for handling paging 
+
+### Initialise Page Script
+Create a page script called "Initialise" to contain all *Repeater* initialisation logic 
+
+1. Create a Script called "Initialise" under the page
+2. Drag the "TotalRecords" query to the script
+3. Drag the "Select" query to the script and complete the input parameters
+   1. offsetRows: 0 (to start with the first record the initial offset 0)
+   2. pageSize: an interger that defines how many records the DataGrid shows (e.g. 10)
+   3. sortField: a string specifying the initial column by which the DataGrid is sorted (e.g. ID)
+   4. sortDirection: a string specifying initial sort direction of the DataGrid (e.g. asc)
+4. Drag a *SetValue* action into the script
+   1. Target: The List property of the *Repeater*
+   2. Source: the dataset returned by the query
+
+![](images/SetRepeaterData.png)
+
+5.  Drag the "RepeaterDataGridInit" script to the event Handler
+6.  Enter values for the input parameters
+    1.  ContainerClass: The unique class you assigned to the container (e.g. ServerSideDataGridContainer)
+    2.  DefaultSortField: The SQL column of the default sort field (e.g. ID)
+    3.  InitialPage (optional): The page number to display (default is 1)
+    4.  PageSize: The number of records to display per page (e.g. 10)
+    5.  TotalRecords: The total number of records in the dataset (select count)
+
+**Initialise Script**
+
+![](images/InitialiseScript.png)
+
+### GetData Page Script
+Using the "RepeaterDataGridState" script, you can find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. You can then use this information when querying the data source and assigning the correct set of data to the *Repeater*. Use this script in the Link.Click events that handle sorting as well as the Button.Click events that handle the paging of the DataGrid. 
+
 ### DataGridState Type
 Add a type called "DataGridState" with the properties below:
 1. page (any)
@@ -470,42 +504,6 @@ The "RepeaterDataGridState" script returns an object called "Values" with the pr
     sortField: 'ID'
 }
 ```
-
-## Page Scripts and Events
-All events in the example application either call a script to initialise the DataGrid or one to retreive the DataGrid state. 
-
-### Initialise Page Script
-The "RepeaterDataGridInit" script allows for the initalisation of the *Repeater* as a DataGrid. Call this script to initialise the DataGrid in the Page.Load script and whenever the dataset changes, like when it is filtered for example. Since each page has slightly different requirements and the "Initialise" script is not exactly the same across pagtes. 
-
-In events that initialise or re-initialise the DataGrid, the example application simply calls a Page Script called "Initialise". The simplest example of this script can be created as follows:
-
-1. Create a Script called "Initialise" under the page
-2. Drag the "TotalRecords" query to the script
-3. Drag the "Select" query to the script and complete the input parameters
-   1. offsetRows: 0 (to start with the first record the initial offset 0)
-   2. pageSize: an interger that defines how many records the DataGrid shows (e.g. 10)
-   3. sortField: a string specifying the initial column by which the DataGrid is sorted (e.g. ID)
-   4. sortDirection: a string specifying initial sort direction of the DataGrid (e.g. asc)
-4. Drag a *SetValue* action into the script
-   1. Target: The List property of the *Repeater*
-   2. Source: the dataset returned by the query
-
-![](images/SetRepeaterData.png)
-
-5.  Drag the "RepeaterDataGridInit" script to the event Handler
-6.  Enter values for the input parameters
-    1.  ContainerClass: The unique class you assigned to the container (e.g. ServerSideDataGridContainer)
-    2.  DefaultSortField: The SQL column of the default sort field (e.g. ID)
-    3.  InitialPage (optional): The page number to display (default is 1)
-    4.  PageSize: The number of records to display per page (e.g. 10)
-    5.  TotalRecords: The total number of records in the dataset (select count)
-
-**Initialise Script**
-
-![](images/InitialiseScript.png)
-
-### GetData Page Script
-Using the "RepeaterDataGridState" script, you can find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. You can then use this information when querying the data source and assigning the correct set of data to the *Repeater*. Use this script in the Link.Click events that handle sorting as well as the Button.Click events that handle the paging of the DataGrid. 
 
 In all sorting and paging events, the example application simply calls a Page Script called "GetData"
 
