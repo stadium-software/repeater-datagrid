@@ -2,8 +2,8 @@
 
 ## Contents <!-- omit in toc -->
 - [Overview](#overview)
+  - [Example Application](#example-application)
 - [Version](#version)
-- [Example Application](#example-application)
 - [Application Setup](#application-setup)
   - [Application Properties](#application-properties)
 - [Connector](#connector)
@@ -46,10 +46,7 @@ Use this module to display data from data sources that contain too many records 
 
 https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
 
-# Version
-1.0 initial
-
-# Example Application
+## Example Application
 The repo includes the sample application shown in the video. To run the example application, follow these steps:
 1. Setup the Database
    1. [Follow these instructions](database-setup.md) to set up the database for the [sample application](Stadium6/RepeaterDataGrid.sapz)
@@ -57,6 +54,9 @@ The repo includes the sample application shown in the video. To run the example 
 2. Open the [sample application](Stadium6/RepeaterDataGrid.sapz)
    1. Amend the database connector
    2. Hit the *Preview* button
+
+# Version
+1.0 initial
 
 # Application Setup
 
