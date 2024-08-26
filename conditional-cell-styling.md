@@ -1,11 +1,17 @@
 # Conditional Cell Styling
 
-To conditionally style cells:
-1. Add a RepeaterItemLoad event to the *Repeater* control
+To conditionally style cells
+
+# Page
+1. Add a "RepeaterItemLoad" event to the *Repeater* control
 
 ![](images/RepeaterItemLoad.png)
 
-2. In the *Repeater* control event handler
+## Event Handler
+
+![](images/RepeaterItemLoadEvent.png)
+
+1. In the *Repeater* control event handler
    1. Add a *Decision* action
    2. Set the *Decision* condition you require (e.g. Control.Text > 10)
       1. Add a *SetValue* action into the condition 
@@ -29,8 +35,8 @@ NoOfChildrenLabel.Classes.replaceAll('red-background', '')
 
 ![](images/RepeaterItemLoadDecision.png)
 
-3. Open the *StyleSheet*
-4. Add the class and attributes to the *StyleSheet* as you see fit
+2. Open the *StyleSheet*
+3. Add the class and attributes to the *StyleSheet* as you see fit
 
 **Example CSS**
 ```CSS
