@@ -52,20 +52,13 @@ https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
 1.0 initial
 
 # Example Application
-The repo includes a sample application that 
-1. Displays data from the [sample table](data/data.zip)
-2. Contains [scripts](#scripts-and-events) to demonstrate how to configure all the features [mentioned above](#notable-features)
-3. Contains one page that illustrates how the module can be used with a [REST API](api-integration.md)
-
-To run the example application, follow these steps:
+The repo includes the sample application shown in the video. To run the example application, follow these steps:
 1. Setup the Database
    1. [Follow these instructions](database-setup.md) to set up the database for the [sample application](Stadium6/RepeaterDataGrid.sapz)
    2. Use the [data scripts](data/data.zip) to populate the *MyData* table with as many records as you wish
 2. Open the [sample application](Stadium6/RepeaterDataGrid.sapz)
    1. Amend the database connector
    2. Hit the *Preview* button
-
-![](images/DataGridScreenShot.png)
 
 # Application
 
