@@ -11,6 +11,8 @@ Enabling data export to CSV can be achieved with the use of the [List to CSV Dow
    1. Fetch the data to be exported by executing the relevant "Select" query or by calling a WebService
    2. Assign the results set to the List input property of the *List to CSV Download* module script
 
+![](images/SimpleExport.png)
+
 ## Multiple Files Export
 
 **CAUTION: Pushing many files to the user using this method can also cause the browser to hang or crash.**
