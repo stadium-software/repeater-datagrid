@@ -85,7 +85,7 @@ The "BasicSelect" query include the parameters below to facilitate *paging*:
 
 **NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below and press the "Fetch Fields & Parameters" button again.**
 
-![](images/SQLErrorParameters.png)
+![](images/BasicQueryParameters.png)
 
 ```sql
 SELECT ID
