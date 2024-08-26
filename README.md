@@ -428,6 +428,7 @@ return {
 
    1. Set ouput parameter called "Values" as the **target**
    2. Set the *Javascript* action as the **source**
+
 ![](images/StateSetValue.png)
 
 ### DataGridState Type
