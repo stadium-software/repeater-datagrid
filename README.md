@@ -11,9 +11,9 @@
     - ["TotalRecords"](#totalrecords)
     - ["BasicSelect"](#basicselect)
   - [Page](#page)
-    - [Main Container](#main-container)
-    - [Grid](#grid)
-    - [Repeater](#repeater)
+    - [Container (main wrapper)](#container-main-wrapper)
+    - [Grid (DataGrid)](#grid-datagrid)
+    - [Repeater (DataGrid body)](#repeater-datagrid-body)
     - [Paging Container](#paging-container)
   - [Global Scripts](#global-scripts)
     - [Initialisation Script](#initialisation-script)
@@ -110,18 +110,18 @@ To function correctly, the page must contain a number of controls. Some of these
 
 ![](images/PageControls.png)
 
-### Main Container
+### Container (main wrapper)
 1. Drag a *Container* control to the page
 2. Give it a suitable name (e.g. ServerSideDataGridContainer)
 3. Add a class of your choice to the control *Classes* property to uniquely identify the control (e.g. server-side-datagrid)
 
-### Grid
+### Grid (DataGrid)
 1. Drag a *Grid* control into the *Container* control
 2. For each column in your dataset, drag a *Label* control into the *Grid*
 
 ![](images/GridHeaders.png)
 
-### Repeater
+### Repeater (DataGrid body)
 1. Drag a *Repeater* control into the *Grid* control (under the header row)
 2. Create a *Type* called "DataSet" that represents your dataset. The sample dataset type is called "DataSet" and contains the following fields:
    1. ID (Any)
