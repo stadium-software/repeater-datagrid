@@ -195,7 +195,9 @@ To enable paging a specific set of controls with specific classnames is required
 ![](images/PagingRendered.png)
 
 ## Global Scripts
-The module requires two global scripts. The first one is used to set up the repeater to look and function like a DataGrid. The second one is used to query the module to find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. 
+The module requires two global scripts:
+1. The "Initialisation Script" is used to initialise the *Repeater*
+2. The "RepeaterDataGridState" is used when users use the paging options
 
 ### Initialisation Script
 1. Create a Global Script called "RepeaterDataGridInit"
