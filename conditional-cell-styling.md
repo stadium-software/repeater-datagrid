@@ -2,7 +2,7 @@
 
 To conditionally style cells
 
-# Page
+## Page
 1. Add a "RepeaterItemLoad" event to the *Repeater* control
 
 ![](images/RepeaterItemLoad.png)

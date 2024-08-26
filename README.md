@@ -35,6 +35,7 @@
   - [Selectable Page Size](#selectable-page-size)
   - [Conditional Cell Styling](#conditional-cell-styling)
   - [Editable Columns](#editable-columns)
+  - [REST API Example](#rest-api-example)
   - [Loading Spinners](#loading-spinners)
 
 # Overview
@@ -573,6 +574,9 @@ To upgrade the CSS in this module, follow the [steps outlined in this repo](http
 
 ## Editable Columns
 [Making columns editable](editable-columns.md)
+
+## REST API Example
+[REST WebService Integration](api-integration.md)
 
 ## Loading Spinners
 To add a loading spinner to the DataGrid, implement the [Spinners Module](https://github.com/stadium-software/spinners)
