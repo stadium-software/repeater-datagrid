@@ -430,12 +430,12 @@ return {
 ![](images/StateSetValue.png)
 
 ## Page Scripts and Events
-I recommend creating two page-level scripts to contain the logic for initialising the *Repeater* and for handling paging. 
+It is recommended to create two page-level scripts to contain the logic for initialising the *Repeater* and for handling paging. 
 
 ### "Initialise" Page Script
 1. Create a Script called "Initialise" under the page
 
-![](images/InitialiseScript.png)
+![](images/InitialisePageScript.png)
 
 2. Drag the "TotalRecords" query into the script
 3. Drag the "Select" query into the script and complete the input parameters
@@ -445,7 +445,7 @@ I recommend creating two page-level scripts to contain the logic for initialisin
    1. Target: The List property of the *Repeater*
    2. Source: The dataset returned by the query
 
-![](images/SetRepeaterData.png)
+![](images/InitialiseScript.png)
 
 5.  Drag the "RepeaterDataGridInit" script to the event Handler
 6.  Enter values for the input parameters
