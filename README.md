@@ -497,11 +497,11 @@ Create a type called "DataGridState" with the properties below:
 ![](images/StateValueAssignment.png)
 
 4. Drag the "BasicSelect" query into the script and complete the "BasicSelect" query input parameters by selecting the properties from the "DataGridState" type
+   1. offsetRows: = ~.DataGridState.offset
+   2. pageSize: = ~.DataGridState.pageSize
 
 ![](images/BasicSelectInputParameters.png)
 
-   1. offsetRows: = ~.DataGridState.offset
-   2. pageSize: = ~.DataGridState.pageSize
 5. Drag a *SetValue* to the script to set the Repeater data
    1. Target: The Repeater List Property
    2. Source: The data returned by the connector
