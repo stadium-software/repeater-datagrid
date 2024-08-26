@@ -502,50 +502,26 @@ Create a type called "DataGridState" with the properties below:
 
 ![](images/BasicSelectInputParameters.png)
 
-5. Drag a *SetValue* to the script to set the Repeater data
+5. Drag a *SetValue* to the script to set the *Repeater* data
    1. Target: The Repeater List Property
    2. Source: The data returned by the connector
 
 ![](images/SetRepeaterData.png)
 
-**RepeaterDataGridState**
-
-The "RepeaterDataGridState" script returns an object called "Values" with the properties below:
-1. page: The page of data to show (int)
-2. pageSize: The number of records each page must contain (int)
-3. offset: The number of rows to skip before starting to return rows from the query (PageSize * Page) (int)
-4. totalRecords: The total number of records the dataset contains (int)
-5. totalPages: the total number of pages the DataGrid will handle (TotalRecords / PageSize) (int)
-6. sortDirection: one of these values (string)
-   1. Empty (initial value)
-   2. 'asc'
-   3. 'desc'
-7. sortField: the field the data is currently sorted by (string)
-
-**Example "RepeaterDataGridState" Return Object**
-```javascript
-{ 
-    page: 41,
-    pageSize: 10,
-    offset: 410,
-    totalRecords: 2000000,
-    totalPages: 200000,
-    sortDirection: 'asc',
-    sortField: 'ID'
-}
-```
-
 ### Page.Load
-Drag the "Initialise" script into the Page.Load event handler
+To initialise the *Repeater*, drag the "Initialise" script into the Page.Load event handler
 
 ![](images/InitialisePageLoad.png)
 
 ### Paging
 1. For all paging *Button* controls
    1. Create the *Click Event Handler*
-   2. Drag the "GetData" script into the control *Click Event Handler* script
 
-![](images/PagingEventHandler.png)
+![](images/PageClickEvents.png)
+
+   2. Drag the "GetData" script into each of these event handlers
+
+![](images/PagingEventHandler.png) ![](images/NextButtonClickEventActions.png) ![](images/GoButtonClickEventActions.png)
 
 ## CSS
 The CSS below is required for the correct functioning of the module. Some elements can be [customised](#customising-css) using a variables CSS file. 
