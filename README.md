@@ -19,10 +19,8 @@
     - [Initialisation Script](#initialisation-script)
     - [DataGrid State Script](#datagrid-state-script)
   - [Page Scripts and Events](#page-scripts-and-events)
-    - [Initialise Page Script](#initialise-page-script)
-    - [GetData Page Script](#getdata-page-script)
-    - [DataGridState Type](#datagridstate-type)
-    - [RepeaterDataGridState Return Object](#repeaterdatagridstate-return-object)
+    - ["Initialise" Page Script](#initialise-page-script)
+    - ["GetData" Page Script](#getdata-page-script)
     - [Page.Load](#pageload)
     - [Paging](#paging)
   - [CSS](#css)
@@ -434,7 +432,7 @@ return {
 ## Page Scripts and Events
 I recommend creating two page-level scripts to contain the logic for initialising the *Repeater* and for handling paging. 
 
-### Initialise Page Script
+### "Initialise" Page Script
 1. Create a Script called "Initialise" under the page
 
 ![](images/InitialiseScript.png)
@@ -459,10 +457,15 @@ I recommend creating two page-level scripts to contain the logic for initialisin
 
 ![](images/InitialiseScriptParameters.png)
 
-### GetData Page Script
-Using the "RepeaterDataGridState" script, you can find out how the DataGrid is sorted, what page of data must be shown and how many records a page must contain. You can then use this information when querying the data source and assigning the correct set of data to the *Repeater*. Use this script in the Link.Click events that handle sorting as well as the Button.Click events that handle the paging of the DataGrid. 
+### "GetData" Page Script
+When users click the "Previous", "Next" or "Go" paging buttons, the "BasicSelect" query needs to be called with the appropriate parameters. The necessary information is returned by the "RepeaterDataGridState" script. To make the logic reusable, it is advisable to add a page script that will contain the following actions:
 
-### DataGridState Type
+![](images/GetDataScript.png)
+
+To easily access the values returned by the "DataGridState" script, create a type called "DataGridState" and assign the Values output from the "RepeaterDataGridState" script to that type. 
+
+**DataGridState Type**
+
 Add a type called "DataGridState" with the properties below:
 1. page (any)
 2. pageSize (any)
@@ -474,8 +477,28 @@ Add a type called "DataGridState" with the properties below:
 
 ![](images/DGStateType.png)
 
-### RepeaterDataGridState Return Object
-To easily access the values returned by the "DataGridState" script, assign the Values output from the "RepeaterDataGridState" script to the type. 
+**Page Script**
+
+In the "Previous", "Next" or "Go" paging button events, simply calls a Page Script called "GetData"
+
+1. Create a Script called "GetData" under the page
+2. Drag the "RepeaterDataGridState" script into the "GetData" script
+   1. Add the class you assigned to the Main Container to the input parameter of the "RepeaterDataGridState" script (e.g. server-side-datagrid)
+3. Drag the type called "DataGridState" to the script
+   1. Assign the output called "Values" from the "RepeaterDataGridState" script to the "DataGridState" type
+4. Drag the "Select" query into the script
+5. Complete the "Select" query input parameters by selecting the properties from the "DataGridState" type. If you are using your own datasource, you need to make use of these values to return the correct dataset to the *Repeater*
+   1. offsetRows: = ~.DataGridState.offset
+   2. pageSize: = ~.DataGridState.pageSize
+   3. sortField: = ~.DataGridState.sortField
+   4. sortDirection: = ~.DataGridState.sortDirection
+6. Drag a *SetValue* to the script to set the Repeater data
+   1. Target: The Repeater List Property
+   2. Source: The data returned by the connector
+
+![](images/SetRepeaterData.png)
+
+**RepeaterDataGridState**
 
 The "RepeaterDataGridState" script returns an object called "Values" with the properties below:
 1. page: The page of data to show (int)
@@ -501,29 +524,6 @@ The "RepeaterDataGridState" script returns an object called "Values" with the pr
     sortField: 'ID'
 }
 ```
-
-In all sorting and paging events, the example application simply calls a Page Script called "GetData"
-
-1. Create a Script called "GetData" under the page
-2. Drag the "RepeaterDataGridState" script into the "GetData" script
-   1. Add the class you assigned to the Main Container to the input parameter of the "RepeaterDataGridState" script (e.g. server-side-datagrid)
-3. Drag the type called "DataGridState" to the script
-   1. Assign the output called "Values" from the "RepeaterDataGridState" script to the "DataGridState" type
-4. Drag the "Select" query into the script
-5. Complete the "Select" query input parameters by selecting the properties from the "DataGridState" type. If you are using your own datasource, you need to make use of these values to return the correct dataset to the *Repeater*
-   1. offsetRows: = ~.DataGridState.offset
-   2. pageSize: = ~.DataGridState.pageSize
-   3. sortField: = ~.DataGridState.sortField
-   4. sortDirection: = ~.DataGridState.sortDirection
-6. Drag a *SetValue* to the script to set the Repeater data
-   1. Target: The Repeater List Property
-   2. Source: The data returned by the connector
-
-![](images/SetRepeaterData.png)
-
-**GetData Script**
-
-![](images/GetDataScript.png)
 
 ### Page.Load
 Drag the "Initialise" script into the Page.Load event handler
