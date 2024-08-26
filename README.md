@@ -3,10 +3,10 @@
 https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
 
 # Overview <!-- omit in toc -->
-Using this module, a *Repeater* control can be configured to look and function similar to the standard Stadium *DataGrid* control. Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
+Using this module, a *Repeater* control can be configured to look and function similar to the standard Stadium *DataGrid* control. 
+Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
 
 ## Notable features
-
 - Can be used with Database and Web Service Connectors
 - Can be used with data sources of any size
 - Provides for sorting and paging
@@ -18,19 +18,17 @@ Using this module, a *Repeater* control can be configured to look and function s
 - Support for data export
 - Support for [custom filters](#custom-filters)
 
-## Setup Overview
-
+## Setup Steps
 To use this module in a Stadium application
-1. Compose a *DataGrid* from a [variety of other Stadium controls](#page), such as Containers, Grids, Repeaters, Labels and Links
+1. Compose a *DataGrid* from a [variety of other Stadium controls](#page), including Containers, a Grid, a Repeater, some Labels and Links
 2. Add SQL queries or API calls that return data for specific DataGrid pages (must accept the specific parameters [outlined below](#connector))
-3. Retrieve and assign appropriate datasets in various [event handlers](#scripts-and-events) (when the *DataGrid* loads or when users opt to page through or sort the data)
+3. Retrieve and assign appropriate datasets in various [event handlers](#scripts-and-events) (when the *Repeater* loads or when users opt to page through or sort the data)
 
 ## Assets
-
 The module comes with some [CSS](#css-setup) and [two scripts](#global-scripts)
 
 - The CSS makes the [collection of controls](#page) required in this module look similar to the standard Stadium *DataGrid* control
-- The scripts provide functionality to facilitate the rendering of data and keeping the *DataGrid* state (including data page, sort field and sort direction)
+- The scripts provide functionality to facilitate the rendering of data and keeping state (including data page, sort field and sort direction)
 
 ## Example Application
 The repo includes a sample application that 
@@ -56,7 +54,7 @@ The repo includes a sample application that
 - [Connector](#connector)
   - [StadiumFilterData Queries](#stadiumfilterdata-queries)
     - ["TotalRecords" Query](#totalrecords-query)
-    - ["Select" Query](#select-query)
+    - ["BasicSelect" Query](#basicselect-query)
   - [Types](#types)
     - [DataGridState Type](#datagridstate-type)
     - [DataSet Type](#dataset-type)
@@ -92,7 +90,7 @@ The repo includes a sample application that
 1.0 initial
 
 # Sample Database Setup
-[Follow these instructions](database-setup.md) to set up the database
+[Follow these instructions](database-setup.md) to set up the database for the [sample application](Stadium6/RepeaterDataGrid.sapz)
 
 # Application
 
@@ -100,27 +98,29 @@ The repo includes a sample application that
 1. Check the *Enable Style Sheet* checkbox in the application properties
 
 # Connector
-Set up your connector to your datasource as you normally would or change the sample connectors to connect to your "StadiumFilterData" database. 
+A database connector to the "StadiumFilterData" database is required
 
 ## StadiumFilterData Queries
-The module requires four data sets: 
-
-1. The total number of records (to calculate the number of pages)
-2. The data to be attached to the *Repeater* (from a database or an API)
-
-Create the queries below and press the "Fetch Fields & Parameters" button to run the example application. These queries include parameters to facilitate DataGrid *paging* and *sorting*. 
+The module requires the following data:
+1. The total number of records. This is used to calculate the number of pages
+2. A page of data to be displayed in the *Repeater* (from a database or an API)
 
 ![](images/DBQueries.png)
 
 ### "TotalRecords" Query
+Create a query called "TotalRecords". The result is used to calulate the total number of pages in the *Repeater*
 ```sql
 select count(ID) as total from MyData
 ```
 
-### "Select" Query
+### "BasicSelect" Query
+Create a query called "BasicSelect". This will return a page of data that must be attached to the *Repeater*
 
-NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64"
- as shown below and press the "Fetch Fields & Parameters" button again. 
+The "BasicSelect" query include the parameters below to facilitate *paging*:
+1. @offsetRows: The number of records to skip
+2. @pageSize: The number of records to fetch
+
+**NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below and press the "Fetch Fields & Parameters" button again.**
 
 ![](images/SQLErrorParameters.png)
 
@@ -136,36 +136,14 @@ SELECT ID
       ,Happy
       ,Subscription
   FROM dbo.MyData
-  ORDER BY
-  case when UPPER(@sortField) = 'ID' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN ID END ASC,
-  case when UPPER(@sortField) = 'ID' AND LOWER(@sortDirection) = 'desc' THEN ID END DESC,
-  case when LOWER(@sortField) = 'FirstName' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN FirstName END ASC,
-  case when LOWER(@sortField) = 'FirstName' AND LOWER(@sortDirection) = 'desc' THEN FirstName END DESC,
-  case when LOWER(@sortField) = 'LastName' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN LastName END ASC,
-  case when LOWER(@sortField) = 'LastName' AND LOWER(@sortDirection) = 'desc' THEN LastName END DESC,
-  case when LOWER(@sortField) = 'NoOfChildren' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN NoOfChildren END ASC,
-  case when LOWER(@sortField) = 'NoOfChildren' AND LOWER(@sortDirection) = 'desc' THEN NoOfChildren END DESC,
-  case when LOWER(@sortField) = 'NoOfPets' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN NoOfPets END ASC,
-  case when LOWER(@sortField) = 'NoOfPets' AND LOWER(@sortDirection) = 'desc' THEN NoOfPets END DESC,
-  case when LOWER(@sortField) = 'StartDate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN StartDate END ASC,
-  case when LOWER(@sortField) = 'StartDate' AND LOWER(@sortDirection) = 'desc' THEN StartDate END DESC,
-  case when LOWER(@sortField) = 'EndDate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN EndDate END ASC,
-  case when LOWER(@sortField) = 'EndDate' AND LOWER(@sortDirection) = 'desc' THEN EndDate END DESC,
-  case when LOWER(@sortField) = 'Healthy' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Healthy END ASC,
-  case when LOWER(@sortField) = 'Healthy' AND LOWER(@sortDirection) = 'desc' THEN Healthy END DESC,
-  case when LOWER(@sortField) = 'Happy' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Happy END ASC,
-  case when LOWER(@sortField) = 'Happy' AND LOWER(@sortDirection) = 'desc' THEN Happy END DESC,
-  case when LOWER(@sortField) = 'Subscription' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Subscription END ASC,
-  case when LOWER(@sortField) = 'Subscription' AND LOWER(@sortDirection) = 'desc' THEN Subscription END DESC,
-  case when @sortField = '' then ID end ASC,
-  case when @sortField = 'undefined' then ID end ASC
-OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
+  ORDER BY ID
+  OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
 
 ## Types
-Add two types to make working with the data easier 
-1. The "DataGridState" type described below
-2. A type that matches the field in your dataset (example below)
+Add two types to make working with the data easier (these are optional, but highly recommended) 
+1. The "DataGridState" type to ascertain the state of the *Repeater* (e.g. the page to fetch from the database)
+2. A type that matches the fields in your dataset (example below)
 
 ### DataGridState Type
 Add a type called "DataGridState" with the properties below:
@@ -191,7 +169,6 @@ Add a type that represents the fields in your dataset. The sample dataset type i
 8. Healthy (any)
 9. Happy (any)
 10. Subscription (any)
-11. checked (any)
 
 ![](images/FilterDataType.png)
 

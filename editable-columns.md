@@ -11,3 +11,8 @@ To make a column editable:
 **Example shows how to add a CheckboxList column and a DropDown column**
 
 ![](images/EditableColumns.png)
+
+## Type
+To set the checkbox checked property, add a "checked" property to the "DataSet" type
+
+![](images/FilterDataTypeExtended.png)
