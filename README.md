@@ -75,11 +75,16 @@ select count(ID) as total from MyData
 ### "BasicSelect"
 Create a query called "BasicSelect". This will return a page of data that must be attached to the *Repeater*
 
-The "BasicSelect" query include the parameters below to facilitate *paging*:
+The "BasicSelect" query includes the parameters below to facilitate *paging*:
 1. @offsetRows: The number of records to skip
 2. @pageSize: The number of records to fetch
 
 ![](images/BasicQueryParameters.png)
+
+1. Create a new query called "BasicSelect" under the "StadiumFilterData" connector
+2. Add the query below 
+3. Press the "Fetch Fields & Parameters" button
+4. Change the Type of the "@offsetRows" and "@pageSize" parameters to "Int64"
 
 **NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below and press the "Fetch Fields & Parameters" button again.**
 

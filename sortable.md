@@ -1,29 +1,26 @@
 # Sortable
-In order to allow users to click on column headers to make the DataGrid data sortable, we need to: 
-
-1. Swap the Header *Label* controls into *Link* controls
-
-![](images/HeaderLinkControls.png)
-
-2. Create the *Click Event Handler* for each of the header *Link* controls
-3. Drag the "GetData" script into the control *Click Event Handler* script
-
-![](images/SortingEventHandler.png)
+To allow users to click on column headers to make the DataGrid data sortable a number of changes are necessary. 
 
 ## Query
+Sorting requires the addition of an *ORDER BY* clause to the Select query
 
-Sorting requires the additujon of an *ORDER BY* clause to the query. Create the queries below and press the "Fetch Fields & Parameters" button to run the example application. These queries include parameters to facilitate DataGrid *paging* 
+Create a new query called "SortableSelect". This will return a page of data that must be attached to the *Repeater*
 
-### "TotalRecords" Query
-The totals query remains as is: 
-```sql
-select count(ID) as total from MyData
-```
-
-### "SortableSelect" Query
-NOTE: When creating this SQL in the Stadium Query Editor and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the *Type* option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below. Then press the "Fetch Fields & Parameters" button again. 
+The "SortableSelect" query includes the parameters below to facilitate *paging* and *sorting*:
+1. @offsetRows: The number of records to skip
+2. @pageSize: The number of records to fetch
+3. @sortField: The name of the sort field
+4. @sortDirection: The sorting direction (asc or desc)
 
 ![](images/SortableSelectParameters.png)
+
+### "SortableSelect" Query
+1. Create a new query called "SortableSelect" under the "StadiumFilterData" connector
+2. Add the query below 
+3. Press the "Fetch Fields & Parameters" button
+4. Change the Type of the "@offsetRows" and "@pageSize" parameters to "Int64"
+
+**NOTE: When creating this SQL in the Stadium Query Editor and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the *Type* option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below. Then press the "Fetch Fields & Parameters" button again.**
 
 ```sql
 SELECT ID
@@ -62,3 +59,28 @@ SELECT ID
   case when @sortField = 'undefined' then ID end ASC
 OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
+
+## Page Scripts
+
+### Initialise
+1. Create a page scritp as per the description in the [Readme.md](Readme.md) file or copy this script from the "Basic" page 
+2. Remove the "BasicSelect" query and replace it with the "SortableSelect" query instead
+3. Complete the "SortableSelect" query parameters
+   1. offsetRows: 0 (to start with the first record the initial offset 0)
+   2. pageSize: an interger that defines how many records the DataGrid shows (e.g. 10)
+   3. sortField: The initial sort field for the dataset (e.g. ID)
+   4. sortDirection: The initial sort direction of the dataset (e.g. asc)
+4. Change the *Source* property of the *SetValue* action below
+   1. Source: The dataset returned by the "SortableSelect" query
+5. Adjust the "RepeaterDataGridInit" input parameters as required
+
+## Page
+To enable users to page:
+1. Swap the Header *Label* controls into *Link* controls
+
+![](images/HeaderLinkControls.png)
+
+2. Create the *Click Event Handler* for each of the header *Link* controls
+3. Drag the "GetData" script into the control *Click Event Handler* script
+
+![](images/SortingEventHandler.png)
