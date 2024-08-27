@@ -445,11 +445,9 @@ Create two page-level scripts to contain the logic for initialising the *Repeate
 ![](images/InitialisePageScript.png)
 
 ### "Initialise" Page Script
-Add a page script that will contain the following actions:
+The "Initialise" script that will contain the following actions:
 
 ![](images/InitialiseScript.png)
-
-**Script Actions**
 
 1. Create a Script called "Initialise" under the page
 2. Drag the "TotalRecords" query into the script
