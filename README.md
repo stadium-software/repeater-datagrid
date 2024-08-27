@@ -149,7 +149,7 @@ To function correctly, the page must contain a number of controls. The final res
 
 ![](images/RepeaterColumns.png)
 
-   3. In the *Label* *Text* property, select the corresponding ListItem property in the dropdown (example shows the "ID" Label)
+   iii. In the *Label* *Text* property, select the corresponding ListItem property in the dropdown (example shows the "ID" Label)
 
 ![](images/BindingControlsToRepeater.png)
 
