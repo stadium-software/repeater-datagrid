@@ -68,7 +68,7 @@ A database connector to the "StadiumFilterData" database is required
 ## StadiumFilterData Queries
 
 ### "TotalRecords"
-Create a query called "TotalRecords". The result is used when calulating the total number of pages in the *Repeater*
+Create a query called "TotalRecords". The result is used when calculating the total number of pages in the *Repeater*
 ```sql
 select count(ID) as total from MyData
 ```
@@ -106,7 +106,7 @@ SELECT ID
 ```
 
 ## Page
-To function correctly, the page must contain a number of controls. Some of these provide for DataGrid-specific functions, like paging, while others serve to simply display the data from your dataset. Each control set is defined in detail below. The final result will look something like this:
+To function correctly, the page must contain a number of controls. The final result will look something like this:
 
 ![](images/PageControls.png)
 
