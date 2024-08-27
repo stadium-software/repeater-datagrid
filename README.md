@@ -453,20 +453,19 @@ The "Initialise" script that will contain the following actions:
 2. Drag the "TotalRecords" query into the script
 3. Drag the "BasicSelect" query into the script and complete the input parameters
    1. offsetRows: 0 (to start with the first record the initial offset 0)
-   2. pageSize: an interger that defines how many records the DataGrid shows (e.g. 10)
+   2. pageSize: an integer that defines how many records the DataGrid shows (e.g. 10)
 4. Drag a *SetValue* action into the script
    1. Target: The List property of the *Repeater*
    2. Source: The dataset returned by the query
 
 ![](images/SetRepeaterData.png)
 
-5.  Drag the "RepeaterDataGridInit" script to the event Handler
-6.  Enter values for the input parameters
-    1.  ContainerClass: The unique class you assigned to the container (e.g. server-side-datagrid)
-    2.  DefaultSortField: The SQL column of the default sort field (e.g. ID)
+5.  Drag the "RepeaterDataGridInit" script to the event Handler and complete the input parameters
+    1.  ContainerClass: The unique class you assigned to the main container (e.g. server-side-datagrid)
+    2.  DefaultSortField: The name of the default sort column (e.g. ID)
     3.  InitialPage (optional): The DataGrid page to display (default is 1)
-    4.  PageSize: The number of records to display per DataGrid page (the same number as added in the "pageSize" query parameter above)
-    5.  TotalRecords: The total number of records in the dataset (~.StadiumFilterData_Totals.FirstResult.total)
+    4.  PageSize: The number of records to display per DataGrid page. This must be the same number as the one added in the "pageSize" query parameter above.
+    5.  TotalRecords: The total number of records in the dataset. The "total" result returned by the "TotalRecords" query: ~.StadiumFilterData_Totals.FirstResult.total
 
 ![](images/InitialiseScriptParameters.png)
 
