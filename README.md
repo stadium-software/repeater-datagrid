@@ -155,16 +155,15 @@ To function correctly, the page must contain a number of controls. The final res
 ### Paging Container
 To enable paging a specific set of controls with specific classnames is required as depicted and described below
 
+**Designer Controls**
+
+![](images/PagingContainer.png)
+
 **Paging Rendered**
 
 ![](images/PagingRendered.png)
 
-
-**Designer**
-
-![](images/PagingContainer.png)
-
-1. Drag a *Container* control below the *Grid* control, but inside the main container 
+1. Drag a *Container* control below the *Grid* control, but **inside the main container**
    1. Give it a suitable name (e.g. PagingContainer)
    2. Add the class "paging" to the *Container* classes property (it must be this exact class!)
 
