@@ -154,7 +154,7 @@ To function correctly, the page must contain a number of controls. The final res
 ![](images/BindingControlsToRepeater.png)
 
 ### Paging Container
-To enable paging a specific set of controls with specific classnames is required as depicted and described below. These controls will be used 
+To enable paging a specific set of controls with specific classnames is required as depicted and described below
 
 **Paging Rendered**
 
