@@ -16,8 +16,8 @@
     - [Repeater (DataGrid body)](#repeater-datagrid-body)
     - [Paging Container](#paging-container)
   - [Global Scripts](#global-scripts)
-    - [Initialisation Script](#initialisation-script)
-    - [DataGrid State Script](#datagrid-state-script)
+    - ["RepeaterDataGridInit" Script](#repeaterdatagridinit-script)
+    - ["RepeaterDataGridState" Script](#repeaterdatagridstate-script)
   - [Page Scripts and Events](#page-scripts-and-events)
     - ["Initialise" Page Script](#initialise-page-script)
     - ["GetData" Page Script](#getdata-page-script)
@@ -204,10 +204,10 @@ To enable paging a specific set of controls with specific classnames is required
 
 ## Global Scripts
 The module requires two global scripts:
-1. The "RepeaterDataGridInit" is used in the page load event to set up the *Repeater* and initialise the module
-2. The "RepeaterDataGridState" returns values that need to be passed to the query @offsetRows and @pageSize parameters
+1. "RepeaterDataGridInit": used in the page load event to set up the *Repeater* and initialise the module
+2. "RepeaterDataGridState": returns values that need to be passed to the query @offsetRows and @pageSize parameters
 
-### Initialisation Script
+### "RepeaterDataGridInit" Script
 1. Create a Global Script called "RepeaterDataGridInit"
 2. Add the input parameters below to the Global Script
    1. ContainerClass
@@ -404,7 +404,7 @@ function calcOffset(size, pg) {
 }
 ```
 
-### DataGrid State Script
+### "RepeaterDataGridState" Script
 1. Create a second Global Script called "RepeaterDataGridState"
 2. Add the **input** parameters below to the Global Script
    1. ContainerClass
