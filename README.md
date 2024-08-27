@@ -118,6 +118,8 @@ To function correctly, the page must contain a number of controls. The final res
 ### Grid (DataGrid)
 1. Drag a *Grid* control into the *Container* control
 2. For each column in your dataset, drag a *Label* control into the *Grid*
+3. Name the *Label* "*ColumnName*HeaderLabel"
+4. Add the *ColumnName* to the *Label* text property
 
 ![](images/GridHeaders.png)
 
