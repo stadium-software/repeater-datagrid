@@ -151,7 +151,14 @@ To function correctly, the page must contain a number of controls. Some of these
 ![](images/BindingControlsToRepeater.png)
 
 ### Paging Container
-To enable paging a specific set of controls with specific classnames is required as depicted and described below
+To enable paging a specific set of controls with specific classnames is required as depicted and described below. These controls will be used 
+
+**Paging Rendered**
+
+![](images/PagingRendered.png)
+
+
+**Designer**
 
 ![](images/PagingContainer.png)
 
@@ -194,14 +201,10 @@ To enable paging a specific set of controls with specific classnames is required
 
 ![](images/CurrentPageLabelProperties.png)
 
-**Rendered Container**
-
-![](images/PagingRendered.png)
-
 ## Global Scripts
 The module requires two global scripts:
 1. The "RepeaterDataGridInit" is used in the page load event
-2. The "RepeaterDataGridState" is used in the paging click events
+2. The "RepeaterDataGridState" provides the information necessary to retrieve the right set of data in paging click events
 
 ### Initialisation Script
 1. Create a Global Script called "RepeaterDataGridInit"
@@ -436,10 +439,10 @@ return {
 ![](images/StateSetValue.png)
 
 ## Page Scripts and Events
-It is recommended to create two page-level scripts to contain the logic for initialising the *Repeater* and for handling paging. 
+Create two page-level scripts to contain the logic for initialising the *Repeater* and for handling paging
 
 ### "Initialise" Page Script
-It is advisable to add a page script that will contain the following actions:
+Add a page script that will contain the following actions:
 
 ![](images/InitialiseScript.png)
 
@@ -470,11 +473,11 @@ It is advisable to add a page script that will contain the following actions:
 ![](images/InitialiseScriptParameters.png)
 
 ### "GetData" Page Script
-When users click the "Previous", "Next" or "Go" paging buttons, the "BasicSelect" query needs to be called with the appropriate parameters. The information necessary for the query is returned by the "RepeaterDataGridState" script. It is advisable to add a page script that can be called in all of the paging button events. It needs to contain the following actions:
+When users click the "Previous", "Next" or "Go" paging buttons, the "BasicSelect" query needs to be called with the appropriate parameters. The information necessary for the query is returned by the "RepeaterDataGridState" script. Add a page script that can be called in all of the paging button events. It needs to contain the following actions:
 
 ![](images/GetDataScript.png)
 
-To easily access the values returned by the "DataGridState" script, it is advisable to create a type called "DataGridState" and assign the Values output from the "RepeaterDataGridState" script to that type. 
+To easily access the values returned by the "DataGridState" script, create a type called "DataGridState" and assign the Values output from the "RepeaterDataGridState" script to that type. 
 
 **DataGridState Type**
 
