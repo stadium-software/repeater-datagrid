@@ -442,6 +442,8 @@ return {
 ## Page Scripts and Events
 Create two page-level scripts to contain the logic for initialising the *Repeater* and for handling paging
 
+![](images/InitialisePageScript.png)
+
 ### "Initialise" Page Script
 Add a page script that will contain the following actions:
 
@@ -450,9 +452,6 @@ Add a page script that will contain the following actions:
 **Script Actions**
 
 1. Create a Script called "Initialise" under the page
-
-![](images/InitialisePageScript.png)
-
 2. Drag the "TotalRecords" query into the script
 3. Drag the "BasicSelect" query into the script and complete the input parameters
    1. offsetRows: 0 (to start with the first record the initial offset 0)
