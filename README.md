@@ -145,10 +145,11 @@ To function correctly, the page must contain a number of controls. The final res
 
 4. For each field in your DataSet
    1. Drag a *Label* control into the *Grid*
+   2. Name the *Label* "*ColumnName*Label"
 
 ![](images/RepeaterColumns.png)
 
-   2. Map the correct ListItem Property to the *Label Text* property (example shows the "ID" Label)
+   3. In the *Label* *Text* property, select the corresponding ListItem property in the dropdown (example shows the "ID" Label)
 
 ![](images/BindingControlsToRepeater.png)
 
