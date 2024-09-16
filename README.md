@@ -439,27 +439,33 @@ Create a script under the page called "Initialise" with the input Parameter:
 
 **"Initialise" Script Actions**
 1. Drag a "State" *Type* into the script
-2. In the *Value* property of the type, assign the input parameter called "State"
-3. Drag the "TotalRecords" query into the script
-4. Drag the "GetData" script into the script
-   1. Assign the "State" type to the "State" input parameter
-5. Drag a *List* into the script and call it "ColumnsList"
-6. Assign the "Column" *Type* to the *Item Type* property
-7. For each column in your *Repeater* / field in your dataset, provide the following
+   1. In the *Value* property of the "State" *Type*, assign the script input parameter called "State"
+
+![]()
+
+2. Drag the "TotalRecords" query into the "Initialise" script
+3. Drag the "GetData" script into the "Initialise" script
+   1. Assign the "State" type to the "State" input parameter of the "GetData" script
+4. Drag a *List* into the script and call it "ColumnsList"
+5. Assign the "Column" *Type* to the *Item Type* property
+6. For each column in your *Repeater* / field in your dataset, provide the following
    1. name (required): The column name (case sensitive)
-   2. header (optional): The header shown for this column. A value is necessary for users to be able to sort by the column
+   2. header (optional): The header shown for this column. A header value is necessary for users to be able to sort by the column
    3. visible (optional): Add "false" to hide the column
    4. sortable (optional): Add "false" to show the heading as an (unclickable) *Label* instead of a *Link*
 
 ![](images/SetRepeaterData.png)
 
-5.  Drag the "RepeaterDataGrid" script to the event Handler and complete the input parameters
+5.  Drag the "RepeaterDataGrid" script into the "Initialise" script and provide the "RepeaterDataGrid" input parameters
    1. Columns: The *List* of columns called "ColumnsList"
    2. ContainerClass: The unique class you assigned to the main container (e.g. server-side-datagrid)
-   3. EditableGrid: A boolean that hides the paging controls and changes header *Links* controls into *Label* controls
-   4. EventHandler: The name of the script that fetches and assings the data to the *Repeater*, called "GetData"
-   5. State: The "State" *Type* created in step 1 of the script
-   6. TotalRecords: The total number of records in the dataset. The "total" result returned by the "TotalRecords" query: ~.StadiumFilterData_Totals.FirstResult.total
+   3. EditableGrid: Ignore this property data display ([see Editable Datagrids](#editable-datagrids)). It's a boolean that hides the paging controls and changes header *Links* controls into *Label* controls
+   4. EventHandler ("GetData"): The name of the script that fetches and assigns the data pages to the *Repeater* (in the example application it's called "GetData")
+   5. State: The "State" *Type* created in step 1 of the "Initialise" script
+   6. TotalRecords: The "total" result returned by the "TotalRecords" query: 
+   ```javascript
+   ~.StadiumFilterData_Totals.FirstResult.total
+   ```
 
 ![](images/InitialiseScriptParameters.png)
 
