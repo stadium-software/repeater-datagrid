@@ -18,9 +18,10 @@
     - [Column](#column)
     - [State](#state)
     - [DataSet](#dataset)
-  - ["GetData" Page Script](#getdata-page-script)
-  - ["Initialise" Page Script](#initialise-page-script)
-  - [Page.Load](#pageload)
+  - [Page Scripts](#page-scripts)
+    - ["GetData"](#getdata)
+    - ["Initialise" Page Script](#initialise-page-script)
+  - [Page.Load Event Handler](#pageload-event-handler)
   - [CSS](#css)
     - [Customising CSS](#customising-css)
     - [CSS Upgrading](#css-upgrading)
@@ -397,11 +398,13 @@ The "DataSet" type for the sample application as the following properties
 
 ![](images/)
 
-## "GetData" Page Script
+## Page Scripts
+
+### "GetData"
 Create a script under the page called "GetData" with the input Parameter:
 1. State
 
-**"GetData" Script Actions**
+**Script Actions**
 1. Drag a *Variable* to the script and call it "OffsetRows_var"
 2. In the "OffsetRows_var" *Value* property, paste the following value (including the =)
 ```javascript
@@ -433,11 +436,11 @@ Create a script under the page called "GetData" with the input Parameter:
 
 ![](images/SetRepeaterData.png)
 
-## "Initialise" Page Script
+### "Initialise" Page Script
 Create a script under the page called "Initialise" with the input Parameter:
 1. State
 
-**"Initialise" Script Actions**
+**Script Actions**
 1. Drag a "State" *Type* into the script
    1. In the *Value* property of the "State" *Type*, assign the script input parameter called "State"
 
@@ -469,7 +472,7 @@ Create a script under the page called "Initialise" with the input Parameter:
 
 ![](images/InitialiseScriptParameters.png)
 
-## Page.Load
+## Page.Load Event Handler
 To initialise the *Repeater*:
 1. Drag a "State" *Type* into the event handler
 2. Open the *Object Editor* in the dropdown of the "State" *Values* property
