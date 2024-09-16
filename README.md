@@ -412,9 +412,18 @@ Create a script under the page called "GetData" with the input Parameter:
    ```javascript
    = ~.Parameters.Input.State.sortField
    ```
-   2. sortDirection: = ~.Parameters.Input.State.sortDirection
-   3. offsetRows: = ~.OffsetRows_var
-   4. pageSize: = ~.Parameters.Input.State.pageSize
+   2. sortDirection: 
+   ```javascript
+   = ~.Parameters.Input.State.sortDirection
+   ```
+   3. offsetRows: 
+   ```javascript
+   = ~.OffsetRows_var
+   ```
+   4. pageSize: 
+   ```javascript
+   = ~.Parameters.Input.State.pageSize
+   ```
 
 ![](images/GridStateScriptInputs.png)
 
