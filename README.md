@@ -404,7 +404,7 @@ Create a script under the page called "GetData" with the input Parameter:
 **"GetData" Script Actions**
 1. Drag a *Variable* to the script and call it "OffsetRows_var"
 2. In the *Variable* *Value* property, paste the following value (including the =)
-```text
+```javascript
 = (~.Parameters.Input.State.page - 1) * ~.Parameters.Input.State.pageSize
 ```
 3. Drag the "StadiumFilterData_Select" query to the script and paste the values below into the query input parameters
