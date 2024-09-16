@@ -14,6 +14,20 @@
             vertical-align: -webkit-baseline-middle;
             padding-right: 12px;
         }
+
+        .label-container {
+            text-wrap: nowrap;
+        }
+        
+        .text-wrap {
+            text-wrap: wrap;
+        }
+    
+        .text-ellipsis {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
     }
 
     .grid-item:not(.grid-repeater-item) {
@@ -53,12 +67,17 @@
         background-size: var(--dg-sorting-icon-size, var(--DATA-GRID-SORT-ARROW-ASCDESC-ICON-SIZE));
     }
 
-    .paging {
+    .paging-stack-layout {
         display: flex;
         align-items: center;
         padding: 4px 0;
         border: 1px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
-
+        width: 100%;
+            
+        .paging {
+            display: inline-flex;
+            align-items: center;
+        }
         .control-container {
             margin-top: 0;
             vertical-align: -webkit-baseline-middle;
@@ -105,5 +124,8 @@
                 padding: 0 4px;
             }
         }
+    }
+    .visually-hidden {
+        display: none;
     }
 }
