@@ -14,7 +14,7 @@
     - [Container (main wrapper)](#container-main-wrapper)
     - [Grid (DataGrid)](#grid-datagrid)
     - [Repeater (DataGrid body)](#repeater-datagrid-body)
-  - [Global Scripts](#global-scripts)
+  - [Global Script](#global-script)
   - [Types](#types)
     - [Column](#column)
     - [State](#state)
@@ -61,7 +61,7 @@ The repo includes the sample application shown in the video. To run the example 
 1. Check the *Enable Style Sheet* checkbox in the application properties
 
 # Connector
-A database connector to the "StadiumFilterData" database is required
+To run the sample, a database connector to the "StadiumFilterData" database and two Queries need to be added
 
 ## StadiumFilterData Queries
 
@@ -72,22 +72,7 @@ select count(ID) as total from MyData
 ```
 
 ### "Select"
-The "Select" will return a page of data to be attached to the *Repeater* and shown to the user
-
-The "Select" query includes the parameters below to facilitate *paging* and *sorting*:
-1. @offsetRows: The number of records to skip
-2. @pageSize: The number of records to fetch
-3. @sortField: The name of the column to sort by
-4. @sortDirection: asc or desc
-
-![](images/)
-
-**Creating the query**
-
-1. Create a new query called "Select" under the "StadiumFilterData" connector
-2. Paste the query below into the editor
-3. Press the "Fetch Fields & Parameters" button
-4. Change the Type of the "@offsetRows" and "@pageSize" parameters to "Int64"
+Create a query called "Select"
 
 **NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below and press the "Fetch Fields & Parameters" button again.**
 
@@ -130,9 +115,7 @@ SELECT ID
 ```
 
 ## Page
-To function correctly, the page must contain a number of controls. The final result will look something like this:
-
-![](images/)
+The page must contain a number of controls
 
 ### Container (main wrapper)
 1. Drag a *Container* control to the page
@@ -142,29 +125,13 @@ To function correctly, the page must contain a number of controls. The final res
 ### Grid (DataGrid)
 1. Drag a *Grid* control into the *Container* control
 
-![](images/)
-
 ### Repeater (DataGrid body)
-1. Drag a *Repeater* control into the *Grid* control (under the header row)
-2. Create a *Type* called "DataSet" that represents your dataset. The sample dataset type is called "DataSet" and contains the following fields:
-   1. ID (Any)
-   2. FirstName (Any)
-   3. LastName (Any)
-   4. NoOfChildren (Any)
-   5. NoOfPets (Any)
-   6. StartDate (Any)
-   7. EndDate (any)
-   8. Healthy (any)
-   9. Happy (any)
-   10. Subscription (any)
-
-![](images/FilterDataType.png)
-
-3. Assign the "DataSet" *Type* to the *Repeater* *ListItem Type* property
+1. Drag a *Repeater* control into the *Grid* control
+2. Assign the "DataSet" *Type* to the *Repeater* *ListItem Type* property
 
 ![](images/RepeaterListItemType.png)
 
-4. For each field in your DataSet
+3. For each field in your DataSet
    1. Drag a *Label* control into the *Grid*
    2. Name the *Label* "*ColumnName*Label"
    3. In the *Label* *Text* property, select the corresponding ListItem property in the dropdown (example shows the "ID" Label)
@@ -174,7 +141,7 @@ To function correctly, the page must contain a number of controls. The final res
 
 ![](images/BindingControlsToRepeater.png)
 
-## Global Scripts
+## Global Script
 1. Create a Global Script called "RepeaterDataGrid"
 2. Add the input parameters below to the Global Script
    1. Columns
