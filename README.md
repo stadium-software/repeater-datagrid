@@ -6,8 +6,7 @@
 - [Version](#version)
 - [Application Setup](#application-setup)
   - [Application Properties](#application-properties)
-- [Connector](#connector)
-  - [StadiumFilterData Queries](#stadiumfilterdata-queries)
+  - [Connector](#connector)
     - ["TotalRecords"](#totalrecords)
     - ["Select"](#select)
   - [Page](#page)
@@ -58,12 +57,10 @@ The repo includes the sample application shown in the video. To run the example 
 # Application Setup
 
 ## Application Properties
-1. Check the *Enable Style Sheet* checkbox in the application properties
+Check the *Enable Style Sheet* checkbox in the application properties
 
-# Connector
+## Connector
 To run the sample, a database connector to the "StadiumFilterData" database and two Queries need to be added
-
-## StadiumFilterData Queries
 
 ### "TotalRecords"
 Create a query called "TotalRecords". The result is used when calculating the total number of pages in the *Repeater*
