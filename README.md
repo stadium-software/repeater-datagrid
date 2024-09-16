@@ -403,12 +403,15 @@ Create a script under the page called "GetData" with the input Parameter:
 
 **"GetData" Script Actions**
 1. Drag a *Variable* to the script and call it "OffsetRows_var"
-2. In the *Variable* *Value* property, paste the following value (including the =)
+2. In the "OffsetRows_var" *Value* property, paste the following value (including the =)
 ```javascript
 = (~.Parameters.Input.State.page - 1) * ~.Parameters.Input.State.pageSize
 ```
 3. Drag the "StadiumFilterData_Select" query to the script and paste the values below into the query input parameters
-   1. sortField: = ~.Parameters.Input.State.sortField
+   1. sortField: 
+   ```javascript
+   = ~.Parameters.Input.State.sortField
+   ```
    2. sortDirection: = ~.Parameters.Input.State.sortDirection
    3. offsetRows: = ~.OffsetRows_var
    4. pageSize: = ~.Parameters.Input.State.pageSize
