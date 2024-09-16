@@ -145,7 +145,7 @@ The page must contain a number of controls
    1. Columns
    2. ContainerClass
    3. EditableGrid
-   4. EventHandler
+   4. EventCallback
    5. State
    6. TotalRecords
 3. Drag a *JavaScript* action into the script
@@ -154,7 +154,7 @@ The page must contain a number of controls
 /* Stadium Script v1.1 Init https://github.com/stadium-software/repeater-datagrid */
 let scope = this;
 let cols = ~.Parameters.Input.Columns;
-let eventHandler = ~.Parameters.Input.EventHandler;
+let eventHandler = ~.Parameters.Input.EventCallback;
 let editMode = ~.Parameters.Input.EditableGrid || false;
 let state = ~.Parameters.Input.State;
 let pageSize = parseInt(state.pageSize);
@@ -463,7 +463,7 @@ Create a script under the page called "Initialise" with the input Parameter:
    1. Columns: The *List* of columns called "ColumnsList"
    2. ContainerClass: The unique class you assigned to the main container (e.g. server-side-datagrid)
    3. EditableGrid: Ignore this property data display ([see Editable Datagrids](#editable-datagrids)). It's a boolean that hides the paging controls and changes header *Links* controls into *Label* controls
-   4. EventHandler ("GetData"): The name of the script that fetches and assigns the data pages to the *Repeater* (in the example application it's called "GetData")
+   4. EventCallback: The name of the script that fetches and assigns the data pages to the *Repeater*. In the example application it's called "GetData"
    5. State: The "State" *Type* created in step 1 of the "Initialise" script
    6. TotalRecords: The "total" result returned by the "TotalRecords" query: 
    ```javascript
