@@ -1,8 +1,6 @@
 # Editable DataGrids <!-- omit in toc -->
 
-The purpose of this DataGrid is to allow for the display of datasets that are too large to be shown in the standard DataGrid. So, a sensible use case for when users would be interested in editing such DataSets seems difficult to imagine. 
-
-However, in case there is a need for this functionality, here are two methods for how this may be achieved: 
+Here are two methods for allowing users to edit data in a *Repeater* DataGrid: 
 
 - [Immediate Processing](#immediate-processing)
   - [Page](#page)
@@ -29,13 +27,11 @@ Use any value from the *Repeater* instance (row) in the event handler
 
 ## Bulk Processing
 
-When users change the data in controls that have a "Change" event, we can process the changed data immediately or store it in a session for later processing. However, TextBoxes do not have event handlers. So, when we add such controls to the *Repeater*, there is no way to know when users change their values and then navigate away from the page by sorting or using the DataGrid paging controls. 
-
-This problem can be overcome by 
+Bulk data editing can be achived by 
 
 1. Disabling the paging and sorting features
-2. Adding a "Save & Next" button above the DataGrid
-3. Processing the page data in the Button.Click event handler
+2. Adding a "Save & Next" button above the DataGrid (perhaps in conjunction with other navigation buttons, such as "Skip Page", for example)
+3. Processing page data in the Button.Click event handler
 4. Navigating the user to the next page after processing the data
 
 ![](images/BulkProcessingView.gif)
@@ -43,7 +39,6 @@ This problem can be overcome by
 The DataGrid script supports an "Edit" mode in which users cannot access paging and sorting controls. This can be invoked by setting the "EditableGrid" input property of the "RepeaterDataGrid" script to 'true'. In "Edit" mode, the DataGrid generates all headings as *Label* controls and does not add paging controls. 
 
 ![](images/EditableGridScriptProperty.png)
-
 
 ### Page
 
