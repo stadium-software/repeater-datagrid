@@ -1,4 +1,7 @@
 # Link Columns
+
+![](images/LinkColumnView.gif)
+
 To add a link columns to the Datagrid: 
 
 1. Add the column to the "ColumnsList" in the "Initialise" script

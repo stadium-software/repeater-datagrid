@@ -1,5 +1,7 @@
 # Selectable Rows
 
+![](images/SelectableRowsView.gif)
+
 ## Setup
 
 To enable users to select rows by checking a checkbox
