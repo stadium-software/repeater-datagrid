@@ -64,7 +64,19 @@ Session.Variables.SelectedRows
 
 ## Checking Checkboxes On Load
 
-To show some checkboxes as checked when the DataGrid is loaded
+Showing some checkboxes as checked when the DataGrid is loaded can be achieved using two methods. 
+
+### Method 1: Adding a boolean to the DataSet
+
+1. Add A "Checked" property to your *DataSet* type
+
+![](images/CheckedInDataType.png)
+
+2. Map the "Checked" property to the *Checkbox* control *Checked* property
+
+![](images/CheckedMappedToCheckboxProp.png)
+
+### Method 2: Assigning from a list
 
 1. Add ID's of the rows to be checked into the "SelectedRows" session variable in the Page.Load event handler
 
