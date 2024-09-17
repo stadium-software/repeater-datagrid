@@ -10,6 +10,9 @@ To enable users to select the page size
 ![](images/RepeaterStateSession.png)
 
 ## Page
+
+![](images/SettableControls.png)
+
 1. Add a *Label* control next to the *DropDown* control
 2. Add the class "page-size-label" to the *Label* classes property
 3. Add the Text "Page Size" to the *Label*
