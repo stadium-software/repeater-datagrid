@@ -5,11 +5,11 @@
 ## Page
 1. Add a "RepeaterItemLoad" event to the *Repeater* control
 
-![](images/RepeaterItemLoadEvent.png)
+![](images/RepeaterItemLoad.png)
 
 ## Event Handler
 
-![](images/RepeaterItemLoadEvent.png)
+![](images/RepeaterItemLoadEvent2.png)
 
 1. In the *Repeater* control event handler
    1. Add a *SetValue * action to remove all condition classes from the control
@@ -22,7 +22,7 @@
          1. Target: NoOfChildren.Classes (or the .Classes property of any other control)
          2. Value: = NoOfChildrenLabel.Classes + " red"
 
-![](images/RepeaterItemLoadDecision.png)
+![](images/CondDecisions.png)
 
 2. Open the *StyleSheet*
 3. Add the class and attributes to the *StyleSheet* as you see fit
