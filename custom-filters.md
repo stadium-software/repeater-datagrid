@@ -96,3 +96,10 @@ Amend the "Initialise" and "GetData" scripts
 
 1. Map the additional query parameters for the two queries to the respective filter fields
 
+**Select Query Input Parameters**
+
+![](images/GetDataSelectParameters.png)
+
+**Totals Query Input Parameters**
+
+![](images/TotalsInputParams.png)
