@@ -9,9 +9,6 @@ Custom filters can be created by
 
 ![](images/CutomFilterView.gif)
 
-## StadiumFilterData Queries (filtered)
-Both, the "TotalRecords" query and the "Select" query require the addition of a "WHERE" clause. The specific filter options provided to the user will determine which parameters are required in the "WHERE" clause of the query. 
-
 ## Page
 The example application provides users with an opportunity to filter the results by a number of criteria
 
@@ -28,6 +25,9 @@ The resulting filter should look like this
    1. Drag a SetValue action for each filter input field 
    2. Set the relevant property of each control in the filter to empty
    3. Call the "Initialise" page script
+
+## StadiumFilterData Queries (filtered)
+Both, the "TotalRecords" query and the "Select" query require the addition of a "WHERE" clause. The specific filter options provided to the user will determine which parameters are required in the "WHERE" clause of the query. 
 
 ### "FilterTotals" Query
 ```sql
