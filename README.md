@@ -123,7 +123,7 @@ Properties
 3. visible (any)
 4. sortable (any)
 
-![](images/)
+![](images/ColumnType.png)
 
 ### State
 Properties
@@ -132,7 +132,7 @@ Properties
 3. sortDirection (any)
 4. sortField (any)
 
-![](images/)
+![](images/Statetype.png)
 
 ### DataSet
 The type must contain a property for each column your DataGrid will contain (visible and invisible). This type will be used in the *Repeater* *ListItem Type* property.
@@ -149,7 +149,7 @@ The "DataSet" type for the sample application as the following properties
 9. Happy (any)
 10. Subscription (any)
 
-![](images/)
+![](images/DataSetType.png)
 
 ## Page
 The page must contain a number of controls
