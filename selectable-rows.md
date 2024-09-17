@@ -15,7 +15,7 @@ To enable users to select rows by checking a checkbox
 = []
 ```
 
-![](images/SetSelectedSessionVar.png)
+![](images/RowSelectInitEmptyList.png)
 
 3. Add a column for a *CheckBox* control to the "ColumnsList" in the "Initialise" script with a sortable property of false
 
@@ -60,4 +60,7 @@ Session.Variables.SelectedRows.splice(Session.Variables.SelectedRows.indexOf(par
 
 To show some checkboxes as checked when the DataGrid is loaded
 
-1. 
+1. Add values to the 
+
+![](images/SetSelectedSessionVar.png)
+
