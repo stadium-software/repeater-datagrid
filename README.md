@@ -294,11 +294,13 @@ function addPaging() {
     goInputContainer.appendChild(goInput);
     goButtonContainer.appendChild(goButton);
     pageInfoContainer.appendChild(pageInfo);
+
     pagingContainer.appendChild(prevButtonContainer);
     pagingContainer.appendChild(nextButtonContainer);
     pagingContainer.appendChild(goInputContainer);
     pagingContainer.appendChild(goButtonContainer);
     pagingContainer.appendChild(pageInfoContainer);
+
     let stackLayout, allStacks = container.querySelectorAll(".stack-layout-container");
     for (let i = 0; i < allStacks.length; i++) {
         if (allStacks[i].contains(grid) && allStacks.length > i) {
@@ -311,6 +313,7 @@ function addPaging() {
     }
     stackLayout.classList.add('paging-stack-layout');
     stackLayout.insertBefore(pagingContainer, stackLayout.firstChild);
+
     prevButton.addEventListener("click", function(){
         handlePaging("previous");
     });
@@ -319,6 +322,14 @@ function addPaging() {
     });
     goButton.addEventListener("click", function(){
         handlePaging("go");
+    });
+    goInput.addEventListener("keypress", function (e) {
+        if ((e.keyCode < 48 || e.keyCode > 57)) {
+            e.preventDefault();
+        }
+        if (e.keyCode === 13) {
+            handlePaging("go");
+        }
     });
 }
 function handlePaging(tp) { 
@@ -391,7 +402,18 @@ function attachStyling() {
     for (let i = 0; i < cellsPerRow; i++) {
         selector.push(".grid-repeater-item:nth-child(" + (cellsPerRow * 2) + "n+" + (i + 1) + ")");
     }
-    let css = `#${contID} {.grid-item:nth-child(${cellsPerRow}n+1) {border-left: 1px solid var(--dg-border-color);}.grid-item:nth-child(${cellsPerRow}n) {border-right: 1px solid var(--dg-border-color);}${selector.join(", ")} {background-color: var(--dg-alternate-row-bg-color, var(--DATA-GRID-ODD-ROW-BACKGROUND-COLOR));}}`;
+    let css = `
+#${contID} {
+    .grid-item:nth-child(${cellsPerRow}n+1) {
+        border-left: 1px solid var(--dg-border-color);
+    }
+    .grid-item:nth-child(${cellsPerRow}n) {
+        border-right: 1px solid var(--dg-border-color);
+    }
+    ${selector.join(", ")} {
+        background-color: var(--dg-alternate-row-bg-color, var(--DATA-GRID-ODD-ROW-BACKGROUND-COLOR));
+    }
+}`;
     let head = document.head || document.getElementsByTagName('head')[0], style = document.createElement('style');
     head.appendChild(style);
     style.type = 'text/css';
