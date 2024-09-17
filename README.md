@@ -35,7 +35,6 @@
   - [Conditional Cell Styling](#conditional-cell-styling)
   - [Custom Filters](#custom-filters)
   - [Editable DataGrids](#editable-datagrids)
-  - [REST API Example](#rest-api-example)
   - [Data Export](#data-export)
 
 # Overview
@@ -600,9 +599,6 @@ To add a loading spinner to the DataGrid implement the [Spinners Module](https:/
 
 ## Editable DataGrids
 [Making columns or the entire DataGrid editable](editable.md)
-
-## REST API Example
-[REST WebService Integration](api-integration.md)
 
 ## Data Export
 [Data Exports](export.md)

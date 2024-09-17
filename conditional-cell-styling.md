@@ -1,37 +1,26 @@
 # Conditional Cell Styling
 
-To conditionally style cells
+![](images/ConsitionalCellFormatView.gif)
 
 ## Page
 1. Add a "RepeaterItemLoad" event to the *Repeater* control
 
-![](images/RepeaterItemLoad.png)
+![](images/RepeaterItemLoadEvent.png)
 
 ## Event Handler
 
 ![](images/RepeaterItemLoadEvent.png)
 
 1. In the *Repeater* control event handler
-   1. Add a *Decision* action
-   2. Set the *Decision* condition you require (e.g. Control.Text > 10)
-      1. Add a *SetValue* action into the condition 
-      2. Add a class to the control *Classes* property
-         1. Set the *Target* property to the *Control.CLasses* property
-         2. Set the *Value* property to an expression like the one below
-
-```javascript
-NoOfChildrenLabel.Classes + ' red-background'
-```
-
-   3. In the *Else* condition
-      1. Add a *SetValue* action into the condition 
-      2. Remove the class from the control *Classes* property
-         1. Set the *Target* property to the *Control.CLasses* property
-         2. Set the *Value* property to an expression like the one below
-
-```javascript
-NoOfChildrenLabel.Classes.replaceAll('red-background', '')
-```
+   1. Add a *SetValue * action to remove all condition classes from the control
+      1. Target: NoOfChildren.Classes (or the .Classes property of any other control)
+      2. Value: = NoOfChildrenLabel.Classes.replaceAll("green").replaceAll("red")
+   4. Add as many *Decisions* as you have conditions
+   2. For each *Decision*
+      1. Set the *Decision* condition you require (e.g. parseInt(NoOfChildrenLabel.Text) > 4)
+      2. In order to add a class of "red", add a *SetValue* action into the "If" condition
+         1. Target: NoOfChildren.Classes (or the .Classes property of any other control)
+         2. Value: = NoOfChildrenLabel.Classes + " red"
 
 ![](images/RepeaterItemLoadDecision.png)
 
@@ -41,11 +30,19 @@ NoOfChildrenLabel.Classes.replaceAll('red-background', '')
 **Example CSS**
 ```CSS
 /*Changes the background color and font styles of a cell*/
-.grid-repeater-item:has(.red-background) {
-	background-color: red;
-	span {
-		color: white;
-		font-weight: bold;
+/*Link Column*/
+#app .stadium-dg-repeater {
+	.grid-repeater-item:has(.red) {
+		background-color: #b82a5c;
+		.label-container {
+			color: white;
+		}
+	}
+	.grid-repeater-item:has(.green) {
+		background-color: #00e9bc;
+		.label-container {
+			color: white;
+		}
 	}
 }
 /*Hides a cell label*/
