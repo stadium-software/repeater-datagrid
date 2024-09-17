@@ -407,7 +407,6 @@ Create a script under the page called "GetData" with the input Parameter:
 
 ![](images/GetDataScript.png)
 
-**Script Actions**
 1. Drag a *Variable* to the script and call it "OffsetRows_var"
 2. In the "OffsetRows_var" *Value* property, paste the following value (including the =) to calculate the offset
 ```javascript
@@ -443,7 +442,6 @@ Create a script under the page called "Initialise" with the input Parameter:
 
 ![](images/InitialiseScript.png)
 
-**Script Actions**
 1. Drag a "State" *Type* into the script
    1. In the *Value* property of the "State" *Type*, assign the script input parameter called "State"
 
