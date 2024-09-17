@@ -1,13 +1,13 @@
 # Custom Filters
 
-![](images/CutomFilterView.gif)
-
 Custom filters can be created by 
 
 1. Adding form controls to the page to enable users to capture filter criteria
 2. Passing user-provided filter criteria to the query or API call
 3. Using the provided values in a "WHERE" clause
 4. Returning filtered datasets in the "initialise" script
+
+![](images/CutomFilterView.gif)
 
 ## StadiumFilterData Queries (filtered)
 Both, the "TotalRecords" query and the "Select" query require the addition of a "WHERE" clause. The specific filter options provided to the user will determine which parameters are required in the "WHERE" clause of the query. 
