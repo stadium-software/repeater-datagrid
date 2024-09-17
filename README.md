@@ -9,16 +9,16 @@
   - [Connector](#connector)
     - ["TotalRecords"](#totalrecords)
     - ["Select"](#select)
+  - [Types](#types)
+    - [Column](#column)
+    - [State](#state)
+    - [DataSet](#dataset)
   - [Page](#page)
     - [Container](#container)
     - [Grid](#grid)
     - [Repeater](#repeater)
     - [Labels](#labels)
   - [Global Script](#global-script)
-  - [Types](#types)
-    - [Column](#column)
-    - [State](#state)
-    - [DataSet](#dataset)
   - [Page Scripts](#page-scripts)
     - ["GetData"](#getdata)
     - ["Initialise" Page Script](#initialise-page-script)
@@ -112,6 +112,44 @@ SELECT ID
   case when @sortField = 'undefined' then ID end ASC
   OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
+
+## Types
+Create the types below
+
+### Column
+Properties
+1. name (any)
+2. header (any)
+3. visible (any)
+4. sortable (any)
+
+![](images/)
+
+### State
+Properties
+1. pageSize (any)
+2. page (any)
+3. sortDirection (any)
+4. sortField (any)
+
+![](images/)
+
+### DataSet
+The type must contain a property for each column your DataGrid will contain (visible and invisible). This type will be used in the *Repeater* *ListItem Type* property.
+
+The "DataSet" type for the sample application as the following properties
+1. ID (any)
+2. FirstName (any)
+3. LastName (any)
+4. NoOfChildren (any)
+5. NoOfPets (any)
+6. StartDate (any)
+7. EndDate (any)
+8. Healthy (any)
+9. Happy (any)
+10. Subscription (any)
+
+![](images/)
 
 ## Page
 The page must contain a number of controls
@@ -362,44 +400,6 @@ function attachStyling() {
     style.appendChild(document.createTextNode(css));
 }
 ```
-
-## Types
-Create the types below
-
-### Column
-Properties
-1. name (any)
-2. header (any)
-3. visible (any)
-4. sortable (any)
-
-![](images/)
-
-### State
-Properties
-1. pageSize (any)
-2. page (any)
-3. sortDirection (any)
-4. sortField (any)
-
-![](images/)
-
-### DataSet
-The type must contain a property for each column your DataGrid will contain (visible and invisible). This type will be used in the *Repeater* *ListItem Type* property.
-
-The "DataSet" type for the sample application as the following properties
-1. ID (any)
-2. FirstName (any)
-3. LastName (any)
-4. NoOfChildren (any)
-5. NoOfPets (any)
-6. StartDate (any)
-7. EndDate (any)
-8. Healthy (any)
-9. Happy (any)
-10. Subscription (any)
-
-![](images/)
 
 ## Page Scripts
 
