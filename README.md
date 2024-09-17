@@ -29,6 +29,7 @@
 - [Additional Features](#additional-features)
   - [Loading Spinners](#loading-spinners)
   - [Link Columns](#link-columns)
+  - [Selectable Rows](#selectable-rows)
   - [Load Specific Page](#load-specific-page)
   - [Selectable Page Size](#selectable-page-size)
   - [Conditional Cell Styling](#conditional-cell-styling)
@@ -530,7 +531,7 @@ Create a script under the page called "Initialise" with the input Parameter:
 ![](images/StateTypeObjectProps.png)
 
 4. Drag the "Initialise" script into the Page.Load event handler
-5. Assign the "State" type to the "State" input parameter
+   1. Assign the "State" type to the "State" input parameter
 
 ## CSS
 The CSS below is required for the correct functioning of the module. Some elements can be [customised](#customising-css) using a variables CSS file. 
@@ -555,11 +556,13 @@ To upgrade the CSS in this module, follow the [steps outlined in this repo](http
 # Additional Features
 
 ## Loading Spinners
-To add a loading spinner to the DataGrid
-1. Implement the [Spinners Module](https://github.com/stadium-software/spinners)
+To add a loading spinner to the DataGrid implement the [Spinners Module](https://github.com/stadium-software/spinners)
 
 ## Link Columns
 [Link Columns](link-columns.md)
+
+## Selectable Rows
+[Selectable Rows](selectable-rows.md)
 
 ## Load Specific Page
 [Loading a specific page](load-specific-page.md)
