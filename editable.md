@@ -4,7 +4,6 @@ You may want users to enable editing of DataGrid fields in two ways
 - [Immediate Processing](#immediate-processing)
   - [Page](#page)
   - [Event Handler](#event-handler)
-  - [Type](#type)
 - [Bulk Processing](#bulk-processing)
 
 ## Immediate Processing
@@ -16,19 +15,12 @@ You may want users to enable editing of DataGrid fields in two ways
 2. Map the correct ListItem Property to the control *value* property
 3. Create the control *Change* Event Handler
 
-![](images/EditableColumnControls.png)
+![](images/SelectedRepeaterItemProperty.png)
 
 ### Event Handler
-Use any value from the *Repeater* instance (row) in the event handler to update the data source 
+Use any value from the *Repeater* instance (row) in the event handler
 
-**Example shows how to add a CheckboxList column and a DropDown column**
-
-![](images/EditableColumns.png)
-
-### Type
-To set the checkbox checked property, add a "checked" property to the "DataSet" type
-
-![](images/FilterDataTypeExtended.png)
+![](images/ExpressionEditorRowValues.png)
 
 ## Bulk Processing
 
