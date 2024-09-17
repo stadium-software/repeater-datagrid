@@ -25,8 +25,11 @@ To enable users to select the page size
 ```
 
 7. Add a *Change* event handler to the *DropDown* control
+
+![](images/SettableChangeEvent.png)
+
 8. Drag a "State" type into the event handler
-9. Set the *Value* property of the type
+9.  Set the *Value* property of the type
 
 ```javascript
 {
