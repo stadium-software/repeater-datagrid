@@ -20,7 +20,7 @@
     - [Labels](#labels)
   - [Global Script](#global-script)
   - [Page Scripts](#page-scripts)
-    - ["GetData"](#getdata)
+    - ["GetData" Page Script](#getdata-page-script)
     - ["Initialise" Page Script](#initialise-page-script)
   - [Page.Load Event Handler](#pageload-event-handler)
   - [CSS](#css)
@@ -401,7 +401,7 @@ function attachStyling() {
 
 ## Page Scripts
 
-### "GetData"
+### "GetData" Page Script
 Create a script under the page called "GetData" with the input Parameter:
 1. State
 
@@ -454,6 +454,9 @@ Create a script under the page called "Initialise" with the input Parameter:
 2. Drag the "TotalRecords" query into the "Initialise" script
 3. Drag the "GetData" script into the "Initialise" script
    1. Assign the "State" type to the "State" input parameter of the "GetData" script
+
+![](images/GetDataInputAssign.png)
+
 4. Drag a *List* into the script and call it "ColumnsList"
 5. Assign the "Column" *Type* to the *Item Type* property
 6. For each column in your *Repeater* / field in your dataset, provide the following
@@ -469,22 +472,22 @@ Create a script under the page called "Initialise" with the input Parameter:
  "header": "ID"
 },{
  "name": "FirstName",
- "header": "FirstName"
+ "header": "First Name"
 },{
  "name": "LastName",
- "header": "LastName"
+ "header": "Last Name"
 },{
  "name": "NoOfChildren",
- "header": "NoOfChildren"
+ "header": "Children"
 },{
  "name": "NoOfPets",
- "header": "NoOfPets"
+ "header": "Pets"
 },{
  "name": "StartDate",
- "header": "StartDate"
+ "header": "Start Date"
 },{
  "name": "EndDate",
- "header": "EndDate"
+ "header": "End Date"
 },{
  "name": "Healthy",
  "header": "Healthy"
