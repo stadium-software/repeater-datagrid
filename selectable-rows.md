@@ -1,6 +1,6 @@
 # Selectable Rows
 
-![](images/SelectableRowsView.gif)
+![](images/SelectedRowsView.gif)
 
 ## Setup
 
