@@ -1,9 +1,11 @@
-# Editable DataGrids
-
+# Editable DataGrids <!-- omit in toc -->
 You may want users to enable editing of DataGrid fields in two ways
 
-1. Immediate Processing
-2. Bulk Processing
+- [Immediate Processing](#immediate-processing)
+  - [Page](#page)
+  - [Event Handler](#event-handler)
+  - [Type](#type)
+- [Bulk Processing](#bulk-processing)
 
 ## Immediate Processing
 
