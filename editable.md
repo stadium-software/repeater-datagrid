@@ -20,7 +20,7 @@ You may want users to enable editing of DataGrid fields in two ways
 ### Event Handler
 Use any value from the *Repeater* instance (row) in the event handler
 
-![](images/ExpressionEditorRowValues.png)
+![](images/ExpressionEditorRow.png)
 
 ## Bulk Processing
 
