@@ -1,6 +1,12 @@
-# Editable Columns
+# Editable DataGrids
 
-To make a column editable
+This can be achieved in two ways
+
+1. Immediate Processing
+
+
+2. Bulk Processing
+
 
 ## Page
 1. Drag form controls into the *Repeater* control (e.g. CheckBox, CheckBoxList, DatePicker, DropDown, RadioButtonList)
