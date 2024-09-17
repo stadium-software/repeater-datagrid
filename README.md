@@ -135,7 +135,7 @@ Properties
 ![](images/Statetype.png)
 
 ### DataSet
-The type must contain a property for each column your DataGrid will contain (visible and invisible). This type will be used in the *Repeater* *ListItem Type* property.
+The type must contain a property for all columns your DataGrid will contain (visible and hidden). This type will be used in the *Repeater* *ListItem Type* property.
 
 The "DataSet" type for the sample application as the following properties
 1. ID (any)
@@ -173,10 +173,8 @@ The page must contain a number of controls
 1. For each field in your DataSet
    1. Drag a *Label* control into the *Repeater*
    2. Name the *Label* "*ColumnName*Label"
-   3. In the *Label* *Text* property, select the corresponding ListItem property in the dropdown (example shows the "ID" Label)
+   3. In the *Label* *Text* property, select the corresponding ListItem property in the dropdown (see screenshot below)
    4. Set the *Visible* property of the *Label* to "false" to hide the column
-
-![](images/RepeaterColumns.png)
 
 ![](images/BindingControlsToRepeater.png)
 
