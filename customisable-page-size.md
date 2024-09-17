@@ -53,7 +53,7 @@ To enable users to select the page size
    1. Target: Session.Variables.RepeaterState
    2. Value: = ~.Parameters.Input.State
 
-![](images/SettablePageSizeInitialiseScript.png)
+![](images/SetRepeaterSessionState.png)
 
 ## Styling
 Add the CSS below to style the drop down
