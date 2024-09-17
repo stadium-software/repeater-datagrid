@@ -57,7 +57,9 @@ Session.Variables.SelectedRows.splice(Session.Variables.SelectedRows.indexOf(par
 ```
 
 ## Accessing Checked Checkboxes
-To get the list of ID's of checked rows, use a *ForEach* to loop through the 
+To get the list of ID's of checked rows, 
+
+1. Use a *ForEach* to loop through the list of seelcted rows in the SelectedRows variable
 ```javascript
 Session.Variables.SelectedRows
 ```
@@ -68,13 +70,18 @@ Showing some checkboxes as checked when the DataGrid is loaded can be achieved u
 
 ### Method 1: Adding a boolean to the DataSet
 
-1. Add A "Checked" property to your *DataSet* type
+1. Add a "Checked" column to your query or dataset
+2. Add a "Checked" property to your *DataSet* type
 
 ![](images/CheckedInDataType.png)
 
-2. Map the "Checked" property to the *Checkbox* control *Checked* property
+3. Map the "Checked" property to the *Checkbox* control *Checked* property
 
 ![](images/CheckedMappedToCheckboxProp.png)
+
+4. Initialise the "SelectedRows" session variable with the selected row ID's
+
+![](images/SetSelectedSessionVar.png)
 
 ### Method 2: Assigning from a list
 
