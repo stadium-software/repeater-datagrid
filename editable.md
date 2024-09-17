@@ -34,7 +34,7 @@ Bulk data editing can be achived by
 3. Processing page data in the Button.Click event handler
 4. Navigating the user to the next page after processing the data
 
-![](images/BulkProcessingView.gif)
+![](images/BulkProcessingView1.gif)
 
 The DataGrid script supports an "Edit" mode in which users cannot access paging and sorting controls. This can be invoked by setting the "EditableGrid" input property of the "RepeaterDataGrid" script to 'true'. In "Edit" mode, the DataGrid generates all headings as *Label* controls and does not add paging controls. 
 
