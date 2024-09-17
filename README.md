@@ -526,10 +526,11 @@ Create a script under the page called "Initialise" with the input Parameter:
    2. page: The initial page to show in the DataGrid
    3. sortDirection: The initial sort direction (asc or desc)
    4. sortField: The initial sort field of the dataset
+
+![](images/StateTypeObjectProps.png)
+
 4. Drag the "Initialise" script into the Page.Load event handler
 5. Assign the "State" type to the "State" input parameter
-
-![](images/InitialisePageLoad.png)
 
 ## CSS
 The CSS below is required for the correct functioning of the module. Some elements can be [customised](#customising-css) using a variables CSS file. 
