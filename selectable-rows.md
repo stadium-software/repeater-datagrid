@@ -56,6 +56,12 @@ Session.Variables.SelectedRows.push(parseInt(IDLabel.Text));
 Session.Variables.SelectedRows.splice(Session.Variables.SelectedRows.indexOf(parseInt(IDLabel.Text)), 1);
 ```
 
+## Accessing Checked Checkboxes
+To get the list of ID's of checked rows, use a *ForEach* to loop through the 
+```javascript
+Session.Variables.SelectedRows
+```
+
 ## Checking Checkboxes On Load
 
 To show some checkboxes as checked when the DataGrid is loaded
@@ -89,3 +95,4 @@ return Session.Variables.SelectedRows.includes(~.Parameters.Input.ListItem.ID);
 8. Drag a *SetValue* action into the "Else" branch of the *Decision*
    1. Target: RowSelectCheckbox.Checked
    2. Value: false
+
