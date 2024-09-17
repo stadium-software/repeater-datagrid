@@ -505,9 +505,9 @@ Create a script under the page called "Initialise" with the input Parameter:
 5. Drag the "RepeaterDataGrid" script into the "Initialise" script and provide the "RepeaterDataGrid" input parameters
    1. Columns: The *List* of columns called "ColumnsList"
    2. ContainerClass: The unique class you assigned to the main container (e.g. server-side-datagrid)
-   3. EditableGrid: Ignore this property for standard data display. It's a boolean that hides the paging controls and changes header *Links* controls into *Label* controls ([see Editable Datagrids](#editable-datagrids))
-   4. EventCallback: The name of the script that fetches and assigns the data pages to the *Repeater*. In the example application this is called "GetData"
-   5. State: The "State" *Type* created in step 1 of the "Initialise" script
+   3. EventCallback: The name of the script that fetches and assigns the data pages to the *Repeater*. In the example application this is called "GetData"
+   4. State: The "State" *Type* created in step 1 of the "Initialise" script
+   5. EditableGrid: Ignore this property for standard data display. It's a boolean that hides the paging controls and changes header *Links* controls into *Label* controls ([see Editable Datagrids](#editable-datagrids))
    6. TotalRecords: The "total" result returned by the "TotalRecords" query: 
 ```javascript
 ~.StadiumFilterData_Totals.FirstResult.total
@@ -516,7 +516,9 @@ Create a script under the page called "Initialise" with the input Parameter:
 ![](images/RepeaterDGScriptInputParams.png)
 
 ## Page.Load Event Handler
-To initialise the *Repeater*:
+
+![](images/PageLoadEv.png)
+
 1. Drag a "State" *Type* into the event handler
 2. Open the *Object Editor* in the dropdown of the "State" *Values* property
 3. Assign values to the properties
