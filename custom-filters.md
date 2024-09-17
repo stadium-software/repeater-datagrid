@@ -20,11 +20,25 @@ The resulting filter should look like this
 
 ## Event Handlers
 1. Add a Click event handler to the "Apply" button
-   1. Drag the "Initialise" page script into the "Apply" button click event handler
+   1. Drag the "State" type into the event handler
+   2. Set the "State" type properties as you see fit
+   3. Drag the "Initialise" page script into the "Apply" button click event handler
+   4. Pass the "State" type into the script input parameter
+
+![](images/ApplyButtonScript.png)
+
 2. In the "Clear" button click event handler
-   1. Drag a SetValue action for each filter input field 
+   1. Drag a *SetValue* action for each filter input field
    2. Set the relevant property of each control in the filter to empty
-   3. Call the "Initialise" page script
+```javascript
+= ''
+```
+   3. Drag the "State" type into the event handler
+   4. Set the "State" type properties as you see fit
+   5. Drag the "Initialise" page script into the event handler
+   6. Pass the "State" type into the script input parameter
+
+![](images/ClearButtonScript.png)
 
 ## StadiumFilterData Queries (filtered)
 Both, the "TotalRecords" query and the "Select" query require the addition of a "WHERE" clause. The specific filter options provided to the user will determine which parameters are required in the "WHERE" clause of the query. 
