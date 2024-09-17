@@ -513,7 +513,7 @@ Create a script under the page called "Initialise" with the input Parameter:
 ~.StadiumFilterData_Totals.FirstResult.total
 ```
 
-![](images/InitialiseScriptParameters.png)
+![](images/RepeaterDGScriptInputParams.png)
 
 ## Page.Load Event Handler
 To initialise the *Repeater*:
