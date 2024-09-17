@@ -10,9 +10,10 @@
     - ["TotalRecords"](#totalrecords)
     - ["Select"](#select)
   - [Page](#page)
-    - [Container (main wrapper)](#container-main-wrapper)
-    - [Grid (DataGrid)](#grid-datagrid)
-    - [Repeater (DataGrid body)](#repeater-datagrid-body)
+    - [Container](#container)
+    - [Grid](#grid)
+    - [Repeater](#repeater)
+    - [Labels](#labels)
   - [Global Script](#global-script)
   - [Types](#types)
     - [Column](#column)
@@ -37,7 +38,7 @@
   - [Data Export](#data-export)
 
 # Overview
-The purpose of this module is to allow for the display of datasets that are too large to be shown in the standard Stadium DataGrid. This module displas individual pages of data in a *Repeater* control that is made to look and function similar to the standard Stadium *DataGrid* control. 
+The purpose of this module is to allow for the display of datasets that are too large to be shown in the standard Stadium DataGrid. This module displays individual pages of data in a *Repeater* control that is made to look and function similar to the standard Stadium *DataGrid* control. 
 
 Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
 
@@ -72,7 +73,7 @@ select count(ID) as total from MyData
 ### "Select"
 Create a query called "Select"
 
-**NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. This is expected and not a problem. You need to set the Type option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below and press the "Fetch Fields & Parameters" button again.**
+**NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. Set the "Type" option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below and press the "Fetch Fields & Parameters" button again.**
 
 ```sql
 SELECT ID
@@ -117,21 +118,22 @@ The page must contain a number of controls
 
 ![](images/AllControls.png)
 
-### Container (main wrapper)
-1. Drag a *Container* control to the page and give it a suitable name (e.g. ServerSideDataGridContainer)
+### Container
+1. Drag a *Container* control to the page and give it a suitable name (e.g. DataGridContainer)
 3. Add a class of your choice to the control *Classes* property to uniquely identify the control in the application (e.g. server-side-datagrid)
 
-### Grid (DataGrid)
+### Grid
 1. Drag a *Grid* control into the *Container* control
 
-### Repeater (DataGrid body)
+### Repeater
 1. Drag a *Repeater* control into the *Grid* control
 2. Assign the "DataSet" *Type* to the *Repeater* *ListItem Type* property
 
 ![](images/RepeaterListItemType.png)
 
-3. For each field in your DataSet
-   1. Drag a *Label* control into the *Grid*
+### Labels
+1. For each field in your DataSet
+   1. Drag a *Label* control into the *Repeater*
    2. Name the *Label* "*ColumnName*Label"
    3. In the *Label* *Text* property, select the corresponding ListItem property in the dropdown (example shows the "ID" Label)
    4. Set the *Visible* property of the *Label* to "false" to hide the column
