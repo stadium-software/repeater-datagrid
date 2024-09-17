@@ -42,7 +42,7 @@ The purpose of this module is to allow for the display of datasets that are too 
 
 Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
 
-https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
+https://github.com/user-attachments/assets/c83d203c-d2de-45a4-bb21-5cca30a8f350
 
 ## Example Application
 The repo includes the sample application shown in the video. 
