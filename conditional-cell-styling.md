@@ -12,7 +12,7 @@
 ![](images/RepeaterItemLoadEvent2.png)
 
 1. In the *Repeater* control event handler
-   1. Add a *SetValue * action to remove all condition classes from the control
+   1. Add a *SetValue* action to remove all condition classes from the control
       1. Target: NoOfChildren.Classes (or the .Classes property of any other control)
       2. Value: = NoOfChildrenLabel.Classes.replaceAll("green").replaceAll("red")
    4. Add as many *Decisions* as you have conditions
@@ -30,7 +30,6 @@
 **Example CSS**
 ```CSS
 /*Changes the background color and font styles of a cell*/
-/*Link Column*/
 #app .stadium-dg-repeater {
 	.grid-repeater-item:has(.red) {
 		background-color: #b82a5c;
