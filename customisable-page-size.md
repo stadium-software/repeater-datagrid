@@ -24,12 +24,14 @@ To enable users to select the page size
 [{"text":"5","value":"5"},{"text":"10","value":"10"},{"text":"20","value":"20"},{"text":"50","value":"50"},{"text":"100","value":"100"}]
 ```
 
-7. Add a *Change* event handler to the *DropDown* control
+## Change Event Handler
+
+1. Add a *Change* event handler to the *DropDown* control
 
 ![](images/SettableChangeEvent.png)
 
-8. Drag a "State" type into the event handler
-9.  Set the *Value* property of the type
+2. Drag a "State" type into the event handler
+3.  Set the *Value* property of the type
 
 ```javascript
 {
@@ -40,10 +42,18 @@ To enable users to select the page size
 }
 ```
 
-10. Drag the "Initialise" script to the event handler
-11. Assign the "State" type as the input parameter of the script
+4. Drag the "Initialise" script to the event handler
+5. Assign the "State" type as the input parameter of the script
 
 ![](images/SettableStateInput.png)
+
+## "GetData" Script
+
+1. Add a *SetValue* action to the "Initialise" script and name it "SetRepeaterSessionState"
+   1. Target: Session.Variables.RepeaterState
+   2. Value: = ~.Parameters.Input.State
+
+![](images/SettablePageSizeInitialiseScript.png)
 
 ## Styling
 Add the CSS below to style the drop down
@@ -67,26 +77,4 @@ Add the CSS below to style the drop down
 	font-style: italic;
 }
 ```
-
-## Change Event Handler
-
-![](images/PageSizeEventHandler.png)
-
-1. Drag the "RepeaterDataGridState" global script into the event handler
-   1. Add the DataGrid class into the script "Classes" input parameter
-2. Drag the "DataGridState" type into the event handler 
-   1. Assign the "RepeaterDataGridState" return value to the type
-3. Drag the "Initialise" script into the event handler
-   1. Pass the selected *DropDown* value into the "Initialise" script "PageSize" input parameter 
-   2. Pass the "SortField" and "SortDirection" values from the "DataGridState" type into the appropriate "Initialise" script input parameters
-
-![](images/InitialiseScriptInputParams.png)
-
-## "GetData" Script
-
-1. Add a *SetValue* action to the "Initialise" script and name it "SetRepeaterSessionState"
-   1. Target: Session.Variables.RepeaterState
-   2. Value: = ~.Parameters.Input.State
-
-![](images/SettablePageSizeInitialiseScript.png)
-
+\
