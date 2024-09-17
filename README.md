@@ -405,6 +405,8 @@ function attachStyling() {
 Create a script under the page called "GetData" with the input Parameter:
 1. State
 
+**Script Actions**
+
 ![](images/GetDataScript.png)
 
 1. Drag a *Variable* to the script and call it "OffsetRows_var"
@@ -439,6 +441,8 @@ Create a script under the page called "GetData" with the input Parameter:
 ### "Initialise" Page Script
 Create a script under the page called "Initialise" with the input Parameter:
 1. State
+
+**Script Actions**
 
 ![](images/InitialiseScript.png)
 
