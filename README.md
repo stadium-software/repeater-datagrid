@@ -37,7 +37,7 @@
   - [Data Export](#data-export)
 
 # Overview
-Using this module, a *Repeater* control can be configured to look and function similar to the standard Stadium *DataGrid* control. 
+The purpose of this module is to allow for the display of datasets that are too large to be shown in the standard Stadium DataGrid. This module displas individual pages of data in a *Repeater* control that is made to look and function similar to the standard Stadium *DataGrid* control. 
 
 Use this module to display data from data sources that contain too many records to display in the standard (client-side) Stadium DataGrid. 
 
@@ -115,10 +115,11 @@ SELECT ID
 ## Page
 The page must contain a number of controls
 
+![](images/AllControls.png)
+
 ### Container (main wrapper)
-1. Drag a *Container* control to the page
-2. Give it a suitable name (e.g. ServerSideDataGridContainer)
-3. Add a class of your choice to the control *Classes* property to uniquely identify the control (e.g. server-side-datagrid)
+1. Drag a *Container* control to the page and give it a suitable name (e.g. ServerSideDataGridContainer)
+3. Add a class of your choice to the control *Classes* property to uniquely identify the control in the application (e.g. server-side-datagrid)
 
 ### Grid (DataGrid)
 1. Drag a *Grid* control into the *Container* control
