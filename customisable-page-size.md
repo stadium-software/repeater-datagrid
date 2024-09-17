@@ -2,6 +2,8 @@
 
 To enable users to select the page size
 
+![](images/SettablePageSizeView.gif)
+
 ## Application
 1. Add an application variable called "RepeaterState" to the application *Variables*
 
