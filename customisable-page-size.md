@@ -4,6 +4,9 @@ To enable users to select the page size
 
 ![](images/SettablePgSize.gif)
 
+## Sample Application
+[SettablePageSize.sapz](Stadium6/SettablePageSize.sapz?raw=true)
+
 ## Application
 1. Add an application variable called "RepeaterState" to the application *Variables*
 

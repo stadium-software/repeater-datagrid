@@ -45,7 +45,10 @@ Use this module to display data from data sources that contain too many records 
 https://github.com/user-attachments/assets/46a9d673-d14d-4329-9574-235980898ac4
 
 ## Example Application
-The repo includes the sample application shown in the video. To run the example application, follow these steps:
+The repo includes the sample application shown in the video. 
+[Basic.sapz](Stadium6/Basic.sapz?raw=true)
+
+To run the example application, follow these steps:
 1. Setup the Database
    1. [Follow these instructions](database-setup.md) to set up the database for the [sample application](Stadium6/RepeaterDataGrid.sapz)
    2. Use the [data scripts](data/data.zip) to populate the *MyData* table with as many records as you wish

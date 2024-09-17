@@ -2,6 +2,11 @@
 
 ![](images/LinkColumnView.gif)
 
+## Sample Application
+[Basic.sapz](Stadium6/Basic.sapz?raw=true)
+
+## Setup
+
 To add a link columns to the Datagrid: 
 
 1. Add the column to the "ColumnsList" in the "Initialise" script

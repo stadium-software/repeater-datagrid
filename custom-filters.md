@@ -9,6 +9,9 @@ Custom filters can be created by
 
 ![](images/CutomFilterView.gif)
 
+## Sample Application
+[CustomFilters.sapz](Stadium6/CustomFilters.sapz?raw=true)
+
 ## Page
 The example application provides users with an opportunity to filter the results by a number of criteria
 
