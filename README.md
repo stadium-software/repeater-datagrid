@@ -409,7 +409,7 @@ Create a script under the page called "GetData" with the input Parameter:
 
 **Script Actions**
 1. Drag a *Variable* to the script and call it "OffsetRows_var"
-2. In the "OffsetRows_var" *Value* property, paste the following value (including the =)
+2. In the "OffsetRows_var" *Value* property, paste the following value (including the =) to calculate the offset
 ```javascript
 = (~.Parameters.Input.State.page - 1) * ~.Parameters.Input.State.pageSize
 ```
@@ -441,11 +441,13 @@ Create a script under the page called "GetData" with the input Parameter:
 Create a script under the page called "Initialise" with the input Parameter:
 1. State
 
+![](images/InitialiseScript.png)
+
 **Script Actions**
 1. Drag a "State" *Type* into the script
    1. In the *Value* property of the "State" *Type*, assign the script input parameter called "State"
 
-![]()
+![](images/StateInputAssignment.png)
 
 2. Drag the "TotalRecords" query into the "Initialise" script
 3. Drag the "GetData" script into the "Initialise" script
@@ -455,16 +457,49 @@ Create a script under the page called "Initialise" with the input Parameter:
 6. For each column in your *Repeater* / field in your dataset, provide the following
    1. name (required): The column name (case sensitive)
    2. header (optional): The header shown for this column. A header value is necessary for users to be able to sort by the column
-   3. visible (optional): Add "false" to hide the column
-   4. sortable (optional): Add "false" to show the heading as an (unclickable) *Label* instead of a *Link*
+   3. visible (optional): Add "false" to hide the column (default is true)
+   4. sortable (optional): Add "false" to show the heading as an (unclickable) *Label* instead of a *Link* (default is true)
 
-![](images/SetRepeaterData.png)
+**Example ColumnsList Value**
+```json
+[{
+ "name": "ID",
+ "header": "ID"
+},{
+ "name": "FirstName",
+ "header": "FirstName"
+},{
+ "name": "LastName",
+ "header": "LastName"
+},{
+ "name": "NoOfChildren",
+ "header": "NoOfChildren"
+},{
+ "name": "NoOfPets",
+ "header": "NoOfPets"
+},{
+ "name": "StartDate",
+ "header": "StartDate"
+},{
+ "name": "EndDate",
+ "header": "EndDate"
+},{
+ "name": "Healthy",
+ "header": "Healthy"
+},{
+ "name": "Happy",
+ "header": "Happy"
+},{
+ "name": "Subscription",
+ "header": "Subscription"
+}]
+```
 
 5.  Drag the "RepeaterDataGrid" script into the "Initialise" script and provide the "RepeaterDataGrid" input parameters
    1. Columns: The *List* of columns called "ColumnsList"
    2. ContainerClass: The unique class you assigned to the main container (e.g. server-side-datagrid)
-   3. EditableGrid: Ignore this property data display ([see Editable Datagrids](#editable-datagrids)). It's a boolean that hides the paging controls and changes header *Links* controls into *Label* controls
-   4. EventCallback: The name of the script that fetches and assigns the data pages to the *Repeater*. In the example application it's called "GetData"
+   3. EditableGrid: Ignore this property for standard data display. It's a boolean that hides the paging controls and changes header *Links* controls into *Label* controls ([see Editable Datagrids](#editable-datagrids))
+   4. EventCallback: The name of the script that fetches and assigns the data pages to the *Repeater*. In the example application this is called "GetData"
    5. State: The "State" *Type* created in step 1 of the "Initialise" script
    6. TotalRecords: The "total" result returned by the "TotalRecords" query: 
    ```javascript
