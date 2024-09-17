@@ -60,7 +60,32 @@ Session.Variables.SelectedRows.splice(Session.Variables.SelectedRows.indexOf(par
 
 To show some checkboxes as checked when the DataGrid is loaded
 
-1. Add values to the 
+1. Add ID's of the rows to be checked into the "SelectedRows" session variable in the Page.Load event handler
 
 ![](images/SetSelectedSessionVar.png)
 
+2. Select the *Repeater* control in the page and add the *Item Load* event handler
+
+![](images/RepeaterItemLoadEventHandlerCreate.png)
+
+3. In the event handler, add logic to determine if a checkbox needs to be checked or not
+
+![](images/RepItemAddEventHandlerActions.png)
+
+4. Add a *Java Script* action into the event handler and name it "InSelectedBoxesList_JS"
+5. Add the script below to the *Code* property of the "InSelectedBoxesList_JS" action
+
+```javascript
+return Session.Variables.SelectedRows.includes(~.Parameters.Input.ListItem.ID);
+```
+
+6. Add a *Decision* below the "InSelectedBoxesList_JS" action
+
+![](images/CheckedBoxesDecision.png)
+
+7. Drag a *SetValue* action into the "If" branch of the *Decision*
+   1. Target: RowSelectCheckbox.Checked
+   2. Value: true
+8. Drag a *SetValue* action into the "Else" branch of the *Decision*
+   1. Target: RowSelectCheckbox.Checked
+   2. Value: false
