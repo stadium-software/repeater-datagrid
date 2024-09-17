@@ -1,7 +1,10 @@
 # Custom Filters
+
+![](images/CutomFilterView.gif)
+
 Custom filters can be created by 
 
-1. Adding input controls to the page to enable users to capture filter criteria
+1. Adding form controls to the page to enable users to capture filter criteria
 2. Passing user-provided filter criteria to the query or API call
 3. Using the provided values in a "WHERE" clause
 4. Returning filtered datasets in the "initialise" script
@@ -10,32 +13,13 @@ Custom filters can be created by
 Both, the "TotalRecords" query and the "Select" query require the addition of a "WHERE" clause. The specific filter options provided to the user will determine which parameters are required in the "WHERE" clause of the query. 
 
 ## Page
-The example application provides users with an opportunity to filter the results by
+The example application provides users with an opportunity to filter the results by a number of criteria
 
-1. ID (TextBox)
-2. FirstName (TextBox)
-3. LastName (TextBox)
-4. NoOfChildren
-   1. From (TextBox)
-   2. To (TextBox)
-5. NoOfPets
-   1. From (TextBox)
-   2. To (TextBox)
-6. StartDate 
-   1. From (DatePicker)
-   2. To (DatePicker)
-7. EndDate
-   1. From (DatePicker)
-   2. To (DatePicker)
-8. Happy (DropDown)
-9. Healthy (RadioButtonList)
-10. Subscriptions (CheckBoxList)
-
-![](images/StadiumFilterControls.png)
+![](images/FilterControlsDesigner.png)
 
 The resulting filter should look like this
 
-![](images/FilterControls.png)
+![](images/FilterControlsRendered.png)
 
 ## Event Handlers
 1. Add a Click event handler to the "Apply" button
@@ -51,18 +35,11 @@ select count(ID) as total from MyData
  WHERE 
 	ID = IsNull(nullif(@ID,''),ID) AND 
 	FirstName like IsNull(nullif('%' + @FirstName + '%',''),FirstName) AND 
-	LastName like IsNull(nullif('%' + @LastName + '%',''),LastName) AND 
 	IsNull(nullif(@Subscription,''),Subscription) like '%' + Subscription + '%' COLLATE Latin1_General_CS_AS  AND 
 	Healthy = IsNull(nullif(@Healthy,''),Healthy) AND 
 	Happy = IsNull(nullif(@Happy,''),Happy) AND 
 	(NoOfChildren >= IsNull(nullif(@fromNoOfChildren,''),0) AND 
-	NoOfChildren <= IsNull(nullif(@toNoOfChildren,''),1000000)) AND 
-	(NoOfPets >= IsNull(nullif(@fromNoOfPets,''),0) AND 
-	NoOfPets <= IsNull(nullif(@toNoOfPets,''),1000000)) AND 
-	(StartDate >= IsNull(nullif(CONVERT(datetime, @fromStartDate, 127),''),'1900-01-01') AND 
-	StartDate <= IsNull(nullif(CONVERT(datetime, @toStartDate, 127),''),'2100-01-01')) AND 
-	(EndDate >= IsNull(nullif(CONVERT(datetime, @fromEndDate, 127),''),'1900-01-01') AND 
-	EndDate <= IsNull(nullif(CONVERT(datetime, @toEndDate, 127),''),'2100-01-01'))
+	NoOfChildren <= IsNull(nullif(@toNoOfChildren,''),1000000))
 ```
 
 ### "FilterSelect" Query
@@ -81,18 +58,11 @@ SELECT ID
   WHERE 
 	ID = IsNull(nullif(@ID,''),ID) AND 
 	FirstName like IsNull(nullif('%' + @FirstName + '%',''),FirstName) AND 
-	LastName like IsNull(nullif('%' + @LastName + '%',''),LastName) AND 
 	IsNull(nullif(@Subscription,''),Subscription) like '%' + Subscription + '%' COLLATE Latin1_General_CS_AS  AND 
 	Healthy = IsNull(nullif(@Healthy,''),Healthy) AND 
 	Happy = IsNull(nullif(@Happy,''),Happy) AND 
 	(NoOfChildren >= IsNull(nullif(@fromNoOfChildren,''),0) AND 
-	NoOfChildren <= IsNull(nullif(@toNoOfChildren,''),1000000)) AND 
-	(NoOfPets >= IsNull(nullif(@fromNoOfPets,''),0) AND 
-	NoOfPets <= IsNull(nullif(@toNoOfPets,''),1000000)) AND 
-	(StartDate >= IsNull(nullif(CONVERT(datetime, @fromStartDate, 127),''),'1900-01-01') AND 
-	StartDate <= IsNull(nullif(CONVERT(datetime, @toStartDate, 127),''),'2100-01-01')) AND 
-	(EndDate >= IsNull(nullif(CONVERT(datetime, @fromEndDate, 127),''),'1900-01-01') AND 
-	EndDate <= IsNull(nullif(CONVERT(datetime, @toEndDate, 127),''),'2100-01-01'))
+	NoOfChildren <= IsNull(nullif(@toNoOfChildren,''),1000000))
   ORDER BY
   case when UPPER(@sortField) = 'ID' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN ID END ASC,
   case when UPPER(@sortField) = 'ID' AND LOWER(@sortDirection) = 'desc' THEN ID END DESC,
@@ -123,13 +93,6 @@ OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 
 ## Page Scripts
 Amend the "Initialise" and "GetData" scripts
-1. Replace the "Select" and "Totals" queries with the "FilterSelect" and "FilterTotals" queries
-2. Map the additional query parameters for the two queries to the respective filter fields
 
-**FilterSelect Query**
+1. Map the additional query parameters for the two queries to the respective filter fields
 
-![](images/InitialiseSelectInputs.png)
-
-**FilterTotals Query**
-
-![](images/InitialiseTotalsInputs.png)
