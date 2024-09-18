@@ -600,7 +600,7 @@ To add a loading spinner to the DataGrid implement the [Spinners Module](https:/
 ## Selectable Rows
 [Selectable Rows](selectable-rows.md)
 
-![](images/SelectableRowsView.gif)
+![](images/SelectableRowsVw.gif)
 
 ## Load Specific Page
 [Loading a specific page](load-specific-page.md)
