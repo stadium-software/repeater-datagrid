@@ -7,7 +7,8 @@
         align-items: center;
         border-bottom: 1px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
 
-        .control-container {
+        .control-container,
+        .control-container.check-box-container.checkbox {
             font-size: var(--dg-item-font-size, var(--DATA-GRID-CELL-FONT-SIZE));
             margin-top: 0;
             vertical-align: -webkit-baseline-middle;
