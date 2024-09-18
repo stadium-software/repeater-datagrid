@@ -35,7 +35,7 @@
   - [Conditional Cell Styling](#conditional-cell-styling)
   - [Custom Filters](#custom-filters)
   - [Editable DataGrids](#editable-datagrids)
-  - [Data Export](#data-export)
+  - [Data Exports](#data-exports)
 
 # Overview
 The purpose of this module is to allow for the display of datasets that are too large to be shown in the standard Stadium DataGrid. This module displays individual pages of data in a *Repeater* control that is made to look and function similar to the standard Stadium *DataGrid* control. 
@@ -595,23 +595,37 @@ To add a loading spinner to the DataGrid implement the [Spinners Module](https:/
 ## Link Columns
 [Link Columns](link-columns.md)
 
+![](images/LinkColumnView.gif)
+
 ## Selectable Rows
 [Selectable Rows](selectable-rows.md)
+
+![](images/SelectableRowsView.gif)
 
 ## Load Specific Page
 [Loading a specific page](load-specific-page.md)
 
+![](images/CustomLoadView.gif)
+
 ## Selectable Page Size
 [Selectable Page Size](customisable-page-size.md)
+
+![](images/SettablePgSize.gif)
 
 ## Conditional Cell Styling
 [Conditional Cell Styling](conditional-cell-styling.md)
 
+![](images/ConsitionalCellFormatView.gif)
+
 ## Custom Filters
 [Custom Filters](custom-filters.md)
+
+![](images/CutomFilterView.gif)
 
 ## Editable DataGrids
 [Making columns or the entire DataGrid editable](editable.md)
 
-## Data Export
+![](images/EditingViewBoth.gif)
+
+## Data Exports
 [Data Exports](export.md)
