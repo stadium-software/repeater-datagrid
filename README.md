@@ -338,22 +338,32 @@ function handlePaging(tp) {
     let nextBtn = container.querySelector(".next-button"),
         prevBtn = container.querySelector(".previous-button"),
         goInpt = container.querySelector(".specific-page-input"),
-        pageInfo = container.querySelector(".page-info span");
-    nextBtn.classList.remove("disabled");
-    prevBtn.classList.remove("disabled");
-    if (tp == "next" && page < totalPages) page++;
-    if (tp == "previous" && page > 1) page--;
-    if (tp == "go") {
+        pageInfo = container.querySelector(".page-info span"),
+        fire = false;
+    if (tp == "next" && page < totalPages) {
+        page++;
+        fire = true;
+    }
+    if (tp == "previous" && page > 1) {
+        page--;
+        fire = true;
+    }
+    if (tp == "go" && goInpt.value) {
         let pgVal = goInpt.value;
         goInpt.value = "";
         if (!isNaN(pgVal) && pgVal >= 1 && pgVal <= totalPages) {
             page = parseInt(pgVal);
+            fire = true;
         }
     }
-    if (page == 1) prevBtn.classList.add("disabled");
-    if (page == totalPages) nextBtn.classList.add("disabled");
-    pageInfo.textContent = getPageLabel();
-    scope[eventHandler]({ sortField: sortField, sortDirection: sortDirection, page: page, pageSize: pageSize });
+    if (fire) {
+        nextBtn.classList.remove("disabled");
+        prevBtn.classList.remove("disabled");
+        if (page == 1) prevBtn.classList.add("disabled");
+        if (page == totalPages) nextBtn.classList.add("disabled");
+        pageInfo.textContent = getPageLabel();
+        scope[eventHandler]({ sortField: sortField, sortDirection: sortDirection, page: page, pageSize: pageSize });
+    }
 }
 function handleSort(e) { 
     let clickedEl = e.target;
