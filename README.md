@@ -120,7 +120,7 @@ SELECT ID
 Create the types below
 
 ### Column
-Properties
+This type is used to define the columns in the DataGrid
 1. name (any)
 2. header (any)
 3. visible (any)
@@ -129,7 +129,7 @@ Properties
 ![](images/ColumnType.png)
 
 ### State
-Properties
+The state of the DataGrid is stored in this type
 1. pageSize (any)
 2. page (any)
 3. sortDirection (any)
@@ -138,7 +138,7 @@ Properties
 ![](images/Statetype.png)
 
 ### DataSet
-The type must contain a property for all columns your DataGrid will contain (visible and hidden). This type will be used in the *Repeater* *ListItem Type* property.
+This type will be used in the *Repeater* *ListItem Type* property. The "DataSet" type must contain properties for all columns the DataGrid you create (visible and hidden). 
 
 The "DataSet" type for the sample application as the following properties
 1. ID (any)
@@ -160,23 +160,27 @@ The page must contain a number of controls
 ![](images/AllControls.png)
 
 ### Container
+A *Container* is the wrapper for all DataGrid controls
 1. Drag a *Container* control to the page and give it a suitable name (e.g. DataGridContainer)
 3. Add a class of your choice to the control *Classes* property to uniquely identify the control in the application (e.g. server-side-datagrid)
 
 ### Grid
+A *Grid* control will create the DataGrid rows and columns
 1. Drag a *Grid* control into the *Container* control
 
 ### Repeater
+A *Repeater* control will contain the data (rows) in the DataGrid
 1. Drag a *Repeater* control into the *Grid* control
 2. Assign the "DataSet" *Type* to the *Repeater* *ListItem Type* property
 
 ![](images/RepeaterListItemType.png)
 
 ### Labels
-1. For each field in your DataSet
+*Label* controls in the *Repeater* represent the columns in the DataGrid
+1. For each column (field) in your DataSet
    1. Drag a *Label* control into the *Repeater*
    2. Name the *Label* "*ColumnName*Label"
-   3. In the *Label* *Text* property, select the corresponding ListItem property in the dropdown (see screenshot below)
+   3. In the *Label* *Text* property, select the corresponding *Repeater ListItem* property in the dropdown (see screenshot below)
    4. Set the *Visible* property of the *Label* to "false" to hide the column
 
 ![](images/BindingControlsToRepeater.png)
