@@ -26,7 +26,7 @@
   - [CSS](#css)
     - [Customising CSS](#customising-css)
     - [CSS Upgrading](#css-upgrading)
-- [Additional Features](#additional-features)
+- [Optional Features](#optional-features)
   - [Loading Spinners](#loading-spinners)
   - [Link Columns](#link-columns)
   - [Selectable Rows](#selectable-rows)
@@ -596,7 +596,7 @@ The CSS below is required for the correct functioning of the module. Some elemen
 ### CSS Upgrading
 To upgrade the CSS in this module, follow the [steps outlined in this repo](https://github.com/stadium-software/samples-upgrading)
 
-# Additional Features
+# Optional Features
 
 ## Loading Spinners
 To add a loading spinner to the DataGrid implement the [Spinners Module](https://github.com/stadium-software/spinners)
