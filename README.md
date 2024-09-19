@@ -9,6 +9,7 @@
   - [Connector](#connector)
     - ["TotalRecords"](#totalrecords)
     - ["Select"](#select)
+  - [Global Script](#global-script)
   - [Types](#types)
     - [Column](#column)
     - [State](#state)
@@ -18,7 +19,6 @@
     - [Grid](#grid)
     - [Repeater](#repeater)
     - [Labels](#labels)
-  - [Global Script](#global-script)
   - [Page Scripts](#page-scripts)
     - ["GetData" Page Script](#getdata-page-script)
     - ["Initialise" Page Script](#initialise-page-script)
@@ -115,75 +115,6 @@ SELECT ID
   case when @sortField = 'undefined' then ID end ASC
   OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
 ```
-
-## Types
-Create the types below
-
-### Column
-This type is used to define the columns in the DataGrid
-1. name (any)
-2. header (any)
-3. visible (any)
-4. sortable (any)
-
-![](images/ColumnType.png)
-
-### State
-The state of the DataGrid is stored in this type
-1. pageSize (any)
-2. page (any)
-3. sortDirection (any)
-4. sortField (any)
-
-![](images/Statetype.png)
-
-### DataSet
-This type will be used in the *Repeater* *ListItem Type* property. The "DataSet" type must contain properties for all columns the DataGrid you create (visible and hidden). 
-
-The "DataSet" type for the sample application as the following properties
-1. ID (any)
-2. FirstName (any)
-3. LastName (any)
-4. NoOfChildren (any)
-5. NoOfPets (any)
-6. StartDate (any)
-7. EndDate (any)
-8. Healthy (any)
-9. Happy (any)
-10. Subscription (any)
-
-![](images/DataSetType.png)
-
-## Page
-The page must contain a number of controls
-
-![](images/AllControls.png)
-
-### Container
-A *Container* is the wrapper for all DataGrid controls
-1. Drag a *Container* control to the page and give it a suitable name (e.g. DataGridContainer)
-3. Add a class of your choice to the control *Classes* property to uniquely identify the control in the application (e.g. server-side-datagrid)
-
-### Grid
-A *Grid* control will create the DataGrid rows and columns
-1. Drag a *Grid* control into the *Container* control
-
-### Repeater
-A *Repeater* control will contain the data (rows) in the DataGrid
-1. Drag a *Repeater* control into the *Grid* control
-2. Assign the "DataSet" *Type* to the *Repeater* *ListItem Type* property
-
-![](images/RepeaterListItemType.png)
-
-### Labels
-*Label* controls in the *Repeater* represent the columns in the DataGrid
-1. For each column (field) in your DataSet
-   1. Drag a *Label* control into the *Repeater*
-   2. Name the *Label* "*ColumnName*Label"
-   3. In the *Label* *Text* property, select the corresponding *Repeater ListItem* property in the dropdown (see screenshot below)
-   4. Set the *Visible* property of the *Label* to "false" to hide the column
-
-![](images/BindingControlsToRepeater.png)
 
 ## Global Script
 1. Create a Global Script called "RepeaterDataGrid"
@@ -437,6 +368,78 @@ function attachStyling() {
     style.appendChild(document.createTextNode(css));
 }
 ```
+
+## Types
+Create three types
+1. Column
+2. State
+3. DataSet
+
+### Column
+This type is used to define the columns in the DataGrid
+1. name (any)
+2. header (any)
+3. visible (any)
+4. sortable (any)
+
+![](images/ColumnType.png)
+
+### State
+The state of the DataGrid is stored in this type
+1. pageSize (any)
+2. page (any)
+3. sortDirection (any)
+4. sortField (any)
+
+![](images/Statetype.png)
+
+### DataSet
+This type will be used in the *Repeater* *ListItem Type* property. The "DataSet" type must contain properties for all columns the DataGrid you create (visible and hidden). 
+
+The "DataSet" type for the sample application as the following properties
+1. ID (any)
+2. FirstName (any)
+3. LastName (any)
+4. NoOfChildren (any)
+5. NoOfPets (any)
+6. StartDate (any)
+7. EndDate (any)
+8. Healthy (any)
+9. Happy (any)
+10. Subscription (any)
+
+![](images/DataSetType.png)
+
+## Page
+The page must contain a number of controls
+
+![](images/AllControls.png)
+
+### Container
+A *Container* is the wrapper for all DataGrid controls
+1. Drag a *Container* control to the page and give it a suitable name (e.g. DataGridContainer)
+3. Add a class of your choice to the control *Classes* property to uniquely identify the control in the application (e.g. server-side-datagrid)
+
+### Grid
+A *Grid* control will create the DataGrid rows and columns
+1. Drag a *Grid* control into the *Container* control
+
+### Repeater
+A *Repeater* control will contain the data (rows) in the DataGrid
+1. Drag a *Repeater* control into the *Grid* control
+2. Assign the "DataSet" *Type* to the *Repeater* *ListItem Type* property
+
+![](images/RepeaterListItemType.png)
+
+### Labels
+*Label* controls in the *Repeater* represent the columns in the DataGrid
+1. For each column (field) in your DataSet
+   1. Drag a *Label* control into the *Repeater*
+   2. Name the *Label* "*ColumnName*Label"
+   3. In the *Label* *Text* property, select the corresponding *Repeater ListItem* property in the dropdown (see screenshot below)
+   4. Set the *Visible* property of the *Label* to "false" to hide the column
+
+![](images/BindingControlsToRepeater.png)
 
 ## Page Scripts
 
