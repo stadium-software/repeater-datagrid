@@ -3,7 +3,7 @@
 ![](images/LinkColumnView.gif)
 
 ## Sample Application
-[Basic.sapz](Stadium6/Basic.sapz?raw=true)
+[Base.sapz](Stadium6/Base.sapz?raw=true)
 
 ## Setup
 

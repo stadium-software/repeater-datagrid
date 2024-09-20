@@ -48,7 +48,7 @@ https://github.com/user-attachments/assets/c83d203c-d2de-45a4-bb21-5cca30a8f350
 
 ## Example Application
 The repo includes the sample application shown in the video. 
-[Basic.sapz](Stadium6/Basic.sapz?raw=true)
+[Base.sapz](Stadium6/Base.sapz?raw=true)
 
 To run the example application, follow these steps:
 1. Setup the Database
@@ -316,7 +316,7 @@ function sort(field, direction) {
     let allHeaders = container.querySelectorAll(".grid-item:not(.grid-repeater-item) .link-container");
     for (let i = 0; i < allHeaders.length; i++) {
         allHeaders[i].classList.remove("dg-asc-sorting", "dg-desc-sorting");
-        if (allHeaders[i].textContent.toLowerCase() == field.toLowerCase()) {
+        if (allHeaders[i].querySelector("a").getAttribute("field").toLowerCase() == field.toLowerCase()) {
             allHeaders[i].classList.add("dg-" + direction + "-sorting");
         }
     }
