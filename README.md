@@ -38,11 +38,11 @@
   - [Data Exports](#data-exports)
 
 # Overview
-The Stadium *DataGrid* loads all records a query or API return into memory as a JSON array of objects. When datasets are large they take a long time to transmit across networks and client machines can run out of memory, causing browsers to freeze or even crash. One solution is to break large datasets into smaller units, here called "pages" of data. 
+The Stadium *DataGrid* loads all records a query or API return into memory as a JSON array of objects. When datasets are large, they take a long time to transmit across networks and client machines can run out of memory, causing browsers to freeze or even crash. One solution is to break large datasets into smaller units, here called "pages" of data. 
 
 This module provides a method for displaying data from sets in individual pages. It enables the display of such pages in a *Grid* and *Repeater* control that is made to look and function similar to the standard Stadium *DataGrid* control. 
 
-When using this module, the queries or WebServices limit the number of records they return to specific slices. This is done using parameters from the DataGrid in conjunction  with the paging techniques the respective databases support. The example below shows how this can works with MSSQL databases. 
+When using this module, the queries or WebServices limit the number of records they return to specific slices. This is done using parameters from the DataGrid in conjunction  with the paging techniques the respective databases support. The example below shows how this works with MSSQL databases. 
 
 https://github.com/user-attachments/assets/c83d203c-d2de-45a4-bb21-5cca30a8f350
 
