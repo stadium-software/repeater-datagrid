@@ -42,7 +42,7 @@ The Stadium *DataGrid* loads all records a query or API return into memory as a 
 
 This module provides a method for displaying data from sets in individual pages. It enables the display of such pages in a *Grid* and *Repeater* control that is made to look and function similar to the standard Stadium *DataGrid* control. 
 
-When using this module, the queries or WebSevices limit the number of records they return to specific slices. This is done using parameters from the DataGrid in conjunciton with the paging techniques the respective databases support. The example below shows how this can works with MSSQL databases. 
+When using this module, the queries or WebServices limit the number of records they return to specific slices. This is done using parameters from the DataGrid in conjunciton with the paging techniques the respective databases support. The example below shows how this can works with MSSQL databases. 
 
 https://github.com/user-attachments/assets/c83d203c-d2de-45a4-bb21-5cca30a8f350
 
