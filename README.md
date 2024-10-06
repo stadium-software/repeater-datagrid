@@ -375,7 +375,7 @@ function attachStyling() {
 
 ## Types
 Create three types
-1. Column
+1. Header
 2. State
 3. DataSet
 
