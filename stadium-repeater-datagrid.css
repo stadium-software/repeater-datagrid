@@ -35,16 +35,16 @@
         border-bottom: 3px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
 
         span {
-            font-weight: bold;
+            font-weight: var(--dg-header-font-weight);
             font-size: var(--dg-header-font-size, var(--DATA-GRID-HEADER-CELL-FONT-SIZE));
-            text-transform: uppercase;
+            text-transform: var(--dg-header-text-transform);
         }
     }
 
     .grid-item:not(.grid-repeater-item) .btn.btn-link {
-        text-transform: uppercase;
-        text-decoration: underline;
-        font-weight: bold;
+        text-transform: var(--dg-header-text-transform);
+        text-decoration: var(--dg-header-link-underline);
+        font-weight: var(--dg-header-font-weight);
         font-size: var(--dg-header-font-size, var(--DATA-GRID-HEADER-CELL-FONT-SIZE));
     }
 

@@ -9,4 +9,8 @@
     --dg-sorting-icon-size: 10px;
 
     --dg-paging-specific-page-textbox-width: 60px;
+
+    --dg-header-text-transform: uppercase;
+    --dg-header-font-weight: bold;
+    --dg-header-link-underline: underline;
 }

@@ -63,6 +63,8 @@ To run the example application, follow these steps:
 
 1.1 Changed global script "Columns" input parameter name to "Headers", "ColumnsList" to "HeadersList" and the "Column" type name to "Header"
 
+1.1.1 (CSS only) Added a few variables to the CSS for better customisation options
+
 # Application Setup
 
 ## Application Properties
