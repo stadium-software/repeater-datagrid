@@ -11,7 +11,7 @@
     - ["Select"](#select)
   - [Global Script](#global-script)
   - [Types](#types)
-    - [Header](#header)
+    - [Column](#column)
     - [State](#state)
     - [DataSet](#dataset)
   - [Page](#page)
@@ -65,7 +65,7 @@ To run the example application, follow these steps:
 
 1.1.1 (CSS only) Added a few variables to the CSS for better customisation options
 
-1.2 Added optional 'Classic Paging' option
+1.2 Added optional 'Classic Paging' option; changed "Headers" back to "Columns", "HeadersList" to "ColumnsList" and the "Header" type name to "Column"
 
 # Application Setup
 
@@ -127,7 +127,7 @@ SELECT ID
 ## Global Script
 1. Create a Global Script called "RepeaterDataGrid"
 2. Add the input parameters below to the Global Script
-   1. Headers
+   1. Columns
    2. ContainerClass
    3. EditableGrid
    4. EventCallback
@@ -423,11 +423,11 @@ function attachStyling() {
 
 ## Types
 Create three types
-1. Header
+1. Column
 2. State
 3. DataSet
 
-### Header
+### Column
 This type is used to define the columns in the DataGrid
 1. name (any)
 2. header (any)
@@ -551,15 +551,15 @@ Create a script under the page called "Initialise" with the input Parameter:
 
 ![](images/GetDataInputAssign.png)
 
-4. Drag a *List* into the script and call it "HeadersList"
-5. Assign the "Header" *Type* to the *Item Type* property
+4. Drag a *List* into the script and call it "ColumnsList"
+5. Assign the "Column" *Type* to the *Item Type* property
 6. Add an entry in this list for **every column** in your *Repeater* DataGrid
    1. name (required): The column name (case sensitive)
    2. header (optional): The header title shown on this column. A value is necessary for users to be able to sort by the column
    3. visible (optional): Add "false" to hide the column (default is true)
    4. sortable (optional): Add "false" to show the heading as an (unclickable) *Label* instead of a *Link* (default is true)
 
-**Example HeadersList Value**
+**Example ColumnsList Value**
 ```json
 [{
  "name": "ID",
@@ -597,7 +597,7 @@ Create a script under the page called "Initialise" with the input Parameter:
 ```
 
 5. Drag the "RepeaterDataGrid" script into the "Initialise" script and provide the "RepeaterDataGrid" input parameters
-   1. Headers: The *List* of headers called "HeadersList"
+   1. Columns: The *List* of columns called "ColumnsList"
    2. ContainerClass: The unique class you assigned to the main container (e.g. server-side-datagrid)
    3. EventCallback: The name of the script that fetches and assigns the data pages to the *Repeater*. In the example application this is called "GetData"
    4. State: The "State" *Type* created in step 1 of the "Initialise" script
