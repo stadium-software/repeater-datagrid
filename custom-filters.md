@@ -2,7 +2,7 @@
 
 Custom filters can be created by 
 
-1. Adding form controls to the page to enable users to capture filter criteria
+1. Adding input controls to the page to enable users to capture filter criteria
 2. Passing user-provided filter criteria to the query or API call
 3. Using the provided values in a "WHERE" clause
 4. Returning filtered datasets in the "initialise" script
