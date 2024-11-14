@@ -6,45 +6,32 @@
         display: flex;
         align-items: center;
         border-bottom: 1px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
+        padding: 5px;
 
-        .control-container,
-        .control-container.check-box-container.checkbox {
+        .control-container {
             font-size: var(--dg-item-font-size, var(--DATA-GRID-CELL-FONT-SIZE));
             margin-top: 0;
             vertical-align: -webkit-baseline-middle;
-            padding: 5px 12px 5px 5px;
-        }
-
-        .label-container {
-            text-wrap: nowrap;
-        }
-        
-        .text-wrap {
-            text-wrap: wrap;
-        }
-    
-        .text-ellipsis {
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
+            padding-right: 12px;
         }
     }
 
     .grid-item:not(.grid-repeater-item) {
         border-top: 1px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
         border-bottom: 3px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
+        padding: 6px;
 
         span {
-            font-weight: var(--dg-header-font-weight);
+            font-weight: bold;
             font-size: var(--dg-header-font-size, var(--DATA-GRID-HEADER-CELL-FONT-SIZE));
-            text-transform: var(--dg-header-text-transform);
+            text-transform: uppercase;
         }
     }
 
     .grid-item:not(.grid-repeater-item) .btn.btn-link {
-        text-transform: var(--dg-header-text-transform);
-        text-decoration: var(--dg-header-link-underline);
-        font-weight: var(--dg-header-font-weight);
+        text-transform: uppercase;
+        text-decoration: underline;
+        font-weight: bold;
         font-size: var(--dg-header-font-size, var(--DATA-GRID-HEADER-CELL-FONT-SIZE));
     }
 
@@ -66,17 +53,12 @@
         background-size: var(--dg-sorting-icon-size, var(--DATA-GRID-SORT-ARROW-ASCDESC-ICON-SIZE));
     }
 
-    .paging-stack-layout {
+    .paging {
         display: flex;
         align-items: center;
         padding: 4px 0;
         border: 1px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
-        width: 100%;
-            
-        .paging {
-            display: inline-flex;
-            align-items: center;
-        }
+
         .control-container {
             margin-top: 0;
             vertical-align: -webkit-baseline-middle;
@@ -123,8 +105,11 @@
                 padding: 0 4px;
             }
         }
-    }
-    .visually-hidden {
-        display: none;
+        .pagination {
+            padding: 2px 6px;
+            a {
+                user-select: none;
+            }
+        }
     }
 }
