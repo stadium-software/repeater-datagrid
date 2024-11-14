@@ -428,7 +428,7 @@ Create three types
 3. DataSet
 
 ### Header
-This type is used to define the headers in the DataGrid
+This type is used to define the columns in the DataGrid
 1. name (any)
 2. header (any)
 3. visible (any)
@@ -553,7 +553,7 @@ Create a script under the page called "Initialise" with the input Parameter:
 
 4. Drag a *List* into the script and call it "HeadersList"
 5. Assign the "Header" *Type* to the *Item Type* property
-6. For each column in your *Repeater* / field in your dataset, provide the following
+6. Add an entry in this list for **every column** in your *Repeater* DataGrid
    1. name (required): The column name (case sensitive)
    2. header (optional): The header title shown on this column. A value is necessary for users to be able to sort by the column
    3. visible (optional): Add "false" to hide the column (default is true)
