@@ -1,4 +1,4 @@
-# DataGrid Repeater <!-- omit in toc -->
+# Server-Side DataGrid Repeater <!-- omit in toc -->
 
 ## Contents <!-- omit in toc -->
 - [Overview](#overview)
@@ -38,9 +38,9 @@
   - [Data Exports](#data-exports)
 
 # Overview
-The Stadium *DataGrid* loads all records a query or API return into memory as a JSON array of objects. When datasets are large, they take a long time to transmit across networks and client machines can run out of memory, causing browsers to freeze or even crash. One solution is to break large datasets into smaller units, here called "pages" of data. 
+The Stadium *DataGrid* loads all records a query or API return into memory as a JSON array of objects. When datasets are large, they take a long time to transmit across networks and client machines can run out of memory, causing browsers to freeze or even crash. One solution is to break large datasets into smaller units, here called "pages" of data. This cannot be achieved using the DataGrid control. 
 
-This module provides a method for displaying data from sets in individual pages. It enables the display of such pages in a *Grid* and *Repeater* control that is made to look and function similar to the standard Stadium *DataGrid* control. 
+An alternative to the DataGrid for the display of datasets is the Repeater control. This module provides a method for displaying data from sets in individual pages in the Repeater control that is made to look and function similar to the standard Stadium *DataGrid* control. Use this module when you want to give users access to datasets that are too large for the standard DataGrids. 
 
 When using this module, the queries or WebServices limit the number of records they return to specific slices. This is done using parameters from the DataGrid in conjunction  with the paging techniques the respective databases support. The example below shows how this works with MSSQL databases. 
 
@@ -135,7 +135,7 @@ SELECT ID
    6. TotalRecords
    7. PagingType
 3. Drag a *JavaScript* action into the script
-4. Add the Javascript below into the JavaScript code property
+4. Add the Javascript below unchanged into the JavaScript code property
 ```javascript
 /* Stadium Script v1.2 Init https://github.com/stadium-software/repeater-datagrid */
 let scope = this;
@@ -643,6 +643,7 @@ The CSS below is required for the correct functioning of the module. Some elemen
 1. Open the CSS file called [*stadium-repeater-datagrid-variables.css*](stadium-repeater-datagrid-variables.css) from this repo
 2. Adjust the variables in the *:root* element as you see fit
 3. Overwrite the file in the CSS folder of your application with the customised file
+4. Do not change any CSS other than the variables provided in the *-variables.css file
 
 ### CSS Upgrading
 To upgrade the CSS in this module, follow the [steps outlined in this repo](https://github.com/stadium-software/samples-upgrading)
