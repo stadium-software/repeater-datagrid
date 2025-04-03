@@ -11,7 +11,7 @@ Here are two methods for allowing users to edit data in a *Repeater* DataGrid:
   - [Button.Click Event Handler](#buttonclick-event-handler)
 
 ## Sample Application
-[Editable.sapz](Stadium6/Editable.sapz?raw=true)
+[ServerSideRepeaterDataGrid.sapz](Stadium6/ServerSideRepeaterDataGrid.sapz?raw=true)
 
 ## Immediate Processing
 

@@ -24,9 +24,10 @@
     - ["Initialise" Page Script](#initialise-page-script)
   - [Page.Load Event Handler](#pageload-event-handler)
   - [CSS](#css)
+    - [Before v6.12](#before-v612)
+    - [v6.12+](#v612)
     - [Customising CSS](#customising-css)
-    - [CSS Upgrading](#css-upgrading)
-- [Optional Extensions](#optional-extensions)
+  - [Upgrading Stadium Repos](#upgrading-stadium-repos)
   - [Loading Spinners](#loading-spinners)
   - [Link Columns](#link-columns)
   - [Selectable Rows](#selectable-rows)
@@ -48,13 +49,13 @@ https://github.com/user-attachments/assets/c83d203c-d2de-45a4-bb21-5cca30a8f350
 
 ## Example Application
 The repo includes the sample application shown in the video. 
-[Base.sapz](Stadium6/Base.sapz?raw=true)
+[ServerSideRepeaterDataGrid.sapz](Stadium6/ServerSideRepeaterDataGrid.sapz?raw=true)
 
 To run the example application, follow these steps:
 1. Setup the Database
-   1. [Follow these instructions](database-setup.md) to set up the database for the [sample application](Stadium6/RepeaterDataGrid.sapz)
+   1. [Follow these instructions](database-setup.md) to set up the database for the [sample application](Stadium6/ServerSideRepeaterDataGrid.sapz)
    2. Use the [data scripts](data/data.zip) to populate the *MyData* table with as many records as you wish
-2. Open the [sample application](Stadium6/RepeaterDataGrid.sapz)
+2. Open the [sample application](Stadium6/ServerSideRepeaterDataGrid.sapz)
    1. Amend the database connector
    2. Hit the *Preview* button
 
@@ -66,6 +67,8 @@ To run the example application, follow these steps:
 1.1.1 (CSS only) Added a few variables to the CSS for better customisation options
 
 1.2 Added optional 'Classic Paging' option; changed "Headers" back to "Columns", "HeadersList" to "ColumnsList" and the "Header" type name to "Column"
+
+1.3 Upgraded readme to 6.12+; converted px to rem; fixed sorting indicator bug; adjusted various display properties
 
 # Application Setup
 
@@ -137,7 +140,7 @@ SELECT ID
 3. Drag a *JavaScript* action into the script
 4. Add the Javascript below unchanged into the JavaScript code property
 ```javascript
-/* Stadium Script v1.2 Init https://github.com/stadium-software/repeater-datagrid */
+/* Stadium Script v1.3 Init https://github.com/stadium-software/repeater-datagrid */
 let scope = this;
 let cols = ~.Parameters.Input.Columns;
 let eventHandler = ~.Parameters.Input.EventCallback;
@@ -163,9 +166,8 @@ if (container.length == 0) {
 } else if (container.length > 1) {
     console.error("The class '" + containerClass + "' is assigned to multiple containers");
     return false;
-} else { 
-    container = container[0];
 }
+container = container[0];
 container.classList.add("stadium-dg-repeater");
 let grid = container.querySelectorAll(".grid-layout");
 if (grid.length == 0) {
@@ -174,9 +176,8 @@ if (grid.length == 0) {
 } else if (grid.length > 1) {
     console.error("The container '" + containerClass + "' must contain only one Grid control");
     return false;
-} else { 
-    grid = grid[0];
 }
+grid = grid[0];
 let contID = container.id;
 let cellsPerRow = cols.length;
 if (document.getElementById(contID + "_stylesheet")) document.getElementById(contID + "_stylesheet").remove();
@@ -363,13 +364,11 @@ function handleSort(e) {
 }
 function sort(field, direction) {
     if (!["asc", "desc"].includes(direction.toLowerCase())) direction = "asc";
-    let allHeaders = container.querySelectorAll(".grid-item:not(.grid-repeater-item) .link-container");
+    let allHeaders = container.querySelectorAll(".repeater-header .link-container");
     for (let i = 0; i < allHeaders.length; i++) {
         allHeaders[i].classList.remove("dg-asc-sorting", "dg-desc-sorting");
-        if (allHeaders[i].textContent.toLowerCase() == field.toLowerCase()) {
-            allHeaders[i].classList.add("dg-" + direction + "-sorting");
-        }
     }
+    grid.querySelector(".repeater-header .link-container:has(.btn-link[field='" + field + "'])").classList.add("dg-" + direction + "-sorting");
     sortDirection = direction;
     sortField = field;
     scope[eventHandler]({ sortField: field, sortDirection: direction, page: page, pageSize: pageSize });
@@ -404,10 +403,10 @@ function attachStyling() {
     let css = `
 #${contID} {
     .grid-item:nth-child(${cellsPerRow}n+1) {
-        border-left: 1px solid var(--dg-border-color);
+        border-left: 1px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR, #ccc));
     }
     .grid-item:nth-child(${cellsPerRow}n) {
-        border-right: 1px solid var(--dg-border-color);
+        border-right: 1px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR, #ccc));
     }
     ${selector.join(", ")} {
         background-color: var(--dg-alternate-row-bg-color, var(--DATA-GRID-ODD-ROW-BACKGROUND-COLOR));
@@ -628,27 +627,42 @@ Create a script under the page called "Initialise" with the input Parameter:
    1. Assign the "State" type to the "State" input parameter
 
 ## CSS
-The CSS below is required for the correct functioning of the module. Some elements can be [customised](#customising-css) using a variables CSS file. 
+The CSS below is required for the correct functioning of the module. Variables exposed in the [*css-file-variables.css*](css-file-variables.css) file can be [customised](#customising-css).
 
-**Stadium 6.6 or higher**
+### Before v6.12
 1. Create a folder called "CSS" inside of your Embedded Files in your application
-2. Drag the two CSS files from this repo [*stadium-repeater-datagrid-variables.css*](stadium-repeater-datagrid-variables.css) and [*stadium-repeater-datagrid.css*](stadium-repeater-datagrid.css) into that folder
+2. Drag the two CSS files from this repo [*css-file-variables.css*](css-file-variables.css) and [*css-file.css*](css-file.css) into that folder
 3. Paste the link tags below into the *head* property of your application
 ```html
-<link rel="stylesheet" href="{EmbeddedFiles}/CSS/stadium-repeater-datagrid.css">
-<link rel="stylesheet" href="{EmbeddedFiles}/CSS/stadium-repeater-datagrid-variables.css">
+<link rel="stylesheet" href="{EmbeddedFiles}/CSS/css-file.css">
+<link rel="stylesheet" href="{EmbeddedFiles}/CSS/css-file-variables.css">
+``` 
+
+### v6.12+
+1. Create a folder called "CSS" inside of your Embedded Files in your application
+2. Drag the CSS files from this repo [*css-file.css*](css-file.css) into that folder
+3. Paste the link tag below into the *head* property of your application
+```html
+<link rel="stylesheet" href="{EmbeddedFiles}/CSS/css-file.css">
 ``` 
 
 ### Customising CSS
-1. Open the CSS file called [*stadium-repeater-datagrid-variables.css*](stadium-repeater-datagrid-variables.css) from this repo
+1. Open the CSS file called [*css-file-variables.css*](css-file-variables.css) from this repo
 2. Adjust the variables in the *:root* element as you see fit
-3. Overwrite the file in the CSS folder of your application with the customised file
-4. Do not change any CSS other than the variables provided in the *-variables.css file
+3. Stadium 6.12+ users can comment out any variable they do **not** want to customise
+4. Add the [*css-file-variables.css*](css-file-variables.css) to the "CSS" folder in the EmbeddedFiles (overwrite)
+5. Paste the link tag below into the *head* property of your application (if you don't already have it there)
+```html
+<link rel="stylesheet" href="{EmbeddedFiles}/CSS/css-file-variables.css">
+``` 
+6. Add the file to the "CSS" inside of your Embedded Files in your application
 
-### CSS Upgrading
-To upgrade the CSS in this module, follow the [steps outlined in this repo](https://github.com/stadium-software/samples-upgrading)
+**NOTE: Do not change any of the CSS in the 'css-file.css' file**
 
-# Optional Extensions
+## Upgrading Stadium Repos
+Stadium Repos are not static. They change as additional features are added and bugs are fixed. Using the right method to work with Stadium Repos allows for upgrading them in a controlled manner. 
+
+How to use and update application repos is described here: [Working with Stadium Repos](https://github.com/stadium-software/samples-upgrading)# Optional Extensions
 
 ## Loading Spinners
 To add a loading spinner to the DataGrid implement the [Spinners Module](https://github.com/stadium-software/spinners)

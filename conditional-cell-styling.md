@@ -3,7 +3,7 @@
 ![](images/ConsitionalCellFormatView.gif)
 
 ## Sample Application
-[CondCellFormatting.sapz](Stadium6/CondCellFormatting.sapz?raw=true)
+[ServerSideRepeaterDataGrid.sapz](Stadium6/ServerSideRepeaterDataGrid.sapz?raw=true)
 
 ## Page
 1. Add a "RepeaterItemLoad" event to the *Repeater* control

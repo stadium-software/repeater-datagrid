@@ -4,9 +4,9 @@
 
 ## Sample Application
 Two separate sample applications depict this functionality
-1. [Base.sapz](Stadium6/Base.sapz?raw=true) contains the [Method 2: Assigning from a list](#method-2-assigning-from-a-list) option described below
+1. [ServerSideRepeaterDataGrid.sapz](Stadium6/ServerSideRepeaterDataGrid.sapz?raw=true) contains the [Method 2: Assigning from a list](#method-2-assigning-from-a-list) option described below
 
-2. [Selectable-DataSet.sapz](Stadium6/Selectable-DataSet.sapz?raw=true) contains the [Method 1: Adding a boolean to the DataSet](#method-1-adding-a-boolean-to-the-dataset)
+2. [ServerSideRepeaterDataGrid.sapz](Stadium6/ServerSideRepeaterDataGrid.sapz?raw=true) contains the [Method 1: Adding a boolean to the DataSet](#method-1-adding-a-boolean-to-the-dataset)
 
 ## Setup
 

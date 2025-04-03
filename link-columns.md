@@ -3,7 +3,7 @@
 ![](images/LinkColumnView.gif)
 
 ## Sample Application
-[Base.sapz](Stadium6/Base.sapz?raw=true)
+[ServerSideRepeaterDataGrid.sapz](Stadium6/ServerSideRepeaterDataGrid.sapz?raw=true)
 
 ## Setup
 
