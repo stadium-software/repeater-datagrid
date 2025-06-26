@@ -70,6 +70,8 @@ To run the example application, follow these steps:
 
 1.3 Upgraded readme to 6.12+; converted px to rem; fixed sorting indicator bug; adjusted various display properties
 
+1.3.1 Slight update CSS update (paging buttons backgrounds)
+
 # Application Setup
 
 ## Application Properties
