@@ -47,6 +47,27 @@ When using this module, the queries or WebServices limit the number of records t
 
 https://github.com/user-attachments/assets/c83d203c-d2de-45a4-bb21-5cca30a8f350
 
+# Basic Setup Overview
+
+1. Create your [Connectors](#connector) and DataSources (Queries or WebServices)
+2. Add the [RepeaterDataGrid](#global-script) script
+2. Add the [types](#types)
+3. Add the [controls](#page) to your Page
+4. Create the [Page Scripts](#page-scripts)
+5. Create the [Page.Load](#pageload-event-handler) event handler
+6. Add the [CSS](#css) to your Embedded files and reference them in the application  header property
+
+Check out these advanced features
+
+1. [Loading Spinners](#loading-spinners)
+2. [Selectable Rows](#selectable-rows)
+3. [Load Specific Page](#load-specific-page)
+4. [Selectable Page Size](#selectable-page-size)
+5. [Conditional Cell Styling](#conditional-cell-styling)
+5. [Custom Filters](#custom-filters)
+5. [Editable DataGrids](#editable-datagrids)
+5. [Data Exports](#data-exports)
+
 ## Example Application
 The repo includes the sample application shown in the video. 
 [ServerSideRepeaterDataGrid.sapz](Stadium6/ServerSideRepeaterDataGrid.sapz?raw=true)
