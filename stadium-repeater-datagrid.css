@@ -20,7 +20,6 @@
             color: var(--DATA-GRID-CELL-FONT-COLOR, var(--BODY-FONT-COLOR, #333));
         }
     }
-
     .grid-item:has(> .control-container.visually-hidden),
     .grid-item:has(> .control-container[style='display: none;']) {
         padding: 0;
@@ -29,13 +28,11 @@
     .control-container.visually-hidden {
         padding: 0;
     }
-
     .repeater-header {
         border-top: 0.1rem solid var(--dg-border-color, var(--DATA-GRID-HEADER-CELL-BORDER-COLOR, #ccc));
         border-bottom: 0.3rem solid var(--dg-border-color, var(--DATA-GRID-HEADER-CELL-BORDER-COLOR, #ccc));
         padding: var(--dg-header-topbottom-padding, var(--DATA-GRID-HEADER-CELL-TOPBOTTOM-PADDING, 0.8rem)) var(--dg-header-rightleft-padding, var(--DATA-GRID-HEADER-CELL-RIGHTLEFT-PADDING, 0.8rem));
         background-color: var(--DATA-GRID-HEADER-ROW-BACKGROUND-COLOR, #fff);
-
         .btn.btn-link, 
         span {
             text-transform: var(--dg-header-text-transform, var(--DATA-GRID-HEADER-CELL-TEXT-TRANSFORM, uppercase));
