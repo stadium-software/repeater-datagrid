@@ -2,9 +2,6 @@
 
 ![](images/LinkColumnView.gif)
 
-## Sample Application
-[ServerSideRepeaterDataGrid.sapz](Stadium6/ServerSideRepeaterDataGrid.sapz?raw=true)
-
 ## Setup
 
 To add a link columns to the Datagrid: 
@@ -19,7 +16,3 @@ To add a link columns to the Datagrid:
 
 2. Create the control *Click* Event Handler
 3. In the *Click* Event Handler, you have access to all the controls in that *Repeater* row in the *Controls* group in the properties dropdown
-
-**Example shows how to access the ID.Label Text Property in a EditImage.Click event handler**
-
-![](images/AccessColumnValues.png)

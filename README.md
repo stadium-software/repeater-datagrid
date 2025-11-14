@@ -1,42 +1,34 @@
 # Server-Side DataGrid Repeater <!-- omit in toc -->
 
 ## Contents <!-- omit in toc -->
-- [Overview](#overview)
-  - [Example Application](#example-application)
-- [Version](#version)
-- [Application Setup](#application-setup)
-  - [Application Properties](#application-properties)
-  - [Connector](#connector)
-    - ["TotalRecords"](#totalrecords)
-    - ["Select"](#select)
-  - [Global Script](#global-script)
-  - [Types](#types)
-    - [Column](#column)
-    - [State](#state)
-    - [DataSet](#dataset)
-  - [Page](#page)
-    - [Container](#container)
-    - [Grid](#grid)
-    - [Repeater](#repeater)
-    - [Labels](#labels)
-  - [Page Scripts](#page-scripts)
-    - ["GetData" Page Script](#getdata-page-script)
-    - ["Initialise" Page Script](#initialise-page-script)
-  - [Page.Load Event Handler](#pageload-event-handler)
-  - [CSS](#css)
-    - [Before v6.12](#before-v612)
-    - [v6.12+](#v612)
-    - [Customising CSS](#customising-css)
-  - [Upgrading Stadium Repos](#upgrading-stadium-repos)
-  - [Loading Spinners](#loading-spinners)
-  - [Link Columns](#link-columns)
-  - [Selectable Rows](#selectable-rows)
-  - [Load Specific Page](#load-specific-page)
-  - [Selectable Page Size](#selectable-page-size)
-  - [Conditional Cell Styling](#conditional-cell-styling)
-  - [Custom Filters](#custom-filters)
-  - [Editable DataGrids](#editable-datagrids)
-  - [Data Exports](#data-exports)
+1. [Overview](#overview)
+2. [Basic Setup Overview](#basic-setup-overview)
+3. [Version](#version)
+4. [Application Setup](#application-setup)
+   1. [Application Properties](#application-properties)
+   2. [Connector](#connector)
+   3. [RepeaterDataGrid Global Script](#repeaterdatagrid-global-script)
+   4. [RepeaterDataGridGetState Global Script](#repeaterdatagridgetstate-global-script)
+   5. [RepeaterDataGridSetData Global Script](#repeaterdatagridsetdata-global-script)
+   6. [Types](#types)
+      1. [Column](#column)
+         1. [Type Import](#type-import)
+      2. [State](#state)
+         1. [Type Import](#type-import-1)
+      3. [DataSet](#dataset)
+      4. [Page](#page)
+         1. [Type Import](#type-import-2)
+   7. [Page](#page-1)
+      1. [Container](#container)
+      2. [Grid](#grid)
+      3. [Repeater](#repeater)
+      4. [Various Controls](#various-controls)
+   8. [Page Scripts](#page-scripts)
+      1. [Script Actions](#script-actions)
+   9. [Page.Load Event Handler](#pageload-event-handler)
+   10. [Advanced Features](#advanced-features)
+   11. [CSS](#css)
+   12. [Upgrading Stadium Repos](#upgrading-stadium-repos)
 
 # Overview
 The Stadium *DataGrid* loads all records a query or API return into memory as a JSON array of objects. When datasets are large, they take a long time to transmit across networks and client machines can run out of memory, causing browsers to freeze or even crash. One solution is to break large datasets into smaller units, here called "pages" of data. This cannot be achieved using the DataGrid control. 
@@ -50,48 +42,16 @@ https://github.com/user-attachments/assets/c83d203c-d2de-45a4-bb21-5cca30a8f350
 # Basic Setup Overview
 
 1. Create your [Connectors](#connector) and DataSources (Queries or WebServices)
-2. Add the [RepeaterDataGrid](#global-script) script
-2. Add the [types](#types)
-3. Add the [controls](#page) to your Page
-4. Create the [Page Scripts](#page-scripts)
-5. Create the [Page.Load](#pageload-event-handler) event handler
-6. Add the [CSS](#css) to your Embedded files and reference them in the application  header property
-
-Check out these advanced features
-
-1. [Loading Spinners](#loading-spinners)
-2. [Selectable Rows](#selectable-rows)
-3. [Load Specific Page](#load-specific-page)
-4. [Selectable Page Size](#selectable-page-size)
-5. [Conditional Cell Styling](#conditional-cell-styling)
-5. [Custom Filters](#custom-filters)
-5. [Editable DataGrids](#editable-datagrids)
-5. [Data Exports](#data-exports)
-
-## Example Application
-The repo includes the sample application shown in the video. 
-[ServerSideRepeaterDataGrid.sapz](Stadium6/ServerSideRepeaterDataGrid.sapz?raw=true)
-
-To run the example application, follow these steps:
-1. Setup the Database
-   1. [Follow these instructions](database-setup.md) to set up the database for the [sample application](Stadium6/ServerSideRepeaterDataGrid.sapz)
-   2. Use the [data scripts](data/data.zip) to populate the *MyData* table with as many records as you wish
-2. Open the [sample application](Stadium6/ServerSideRepeaterDataGrid.sapz)
-   1. Amend the database connector
-   2. Hit the *Preview* button
+2. Add the [RepeaterDataGrid Global Script](#repeaterdatagrid-global-script) script
+3. Add the [RepeaterDataGridGetState Global Script](#repeaterdatagridgetstate-global-script)
+4. Add the [RepeaterDataGridSetData Global Script](#repeaterdatagridsetdata-global-script)
+5. Add the [types](#types)
+6. Add the [controls](#page) to your Page
+7. Create a [Page Script](#page-scripts)
+8. Create the [Page.Load](#pageload-event-handler) event handler
 
 # Version
-1.0 initial
-
-1.1 Changed global script "Columns" input parameter name to "Headers", "ColumnsList" to "HeadersList" and the "Column" type name to "Header"
-
-1.1.1 (CSS only) Added a few variables to the CSS for better customisation options
-
-1.2 Added optional 'Classic Paging' option; changed "Headers" back to "Columns", "HeadersList" to "ColumnsList" and the "Header" type name to "Column"
-
-1.3 Upgraded readme to 6.12+; converted px to rem; fixed sorting indicator bug; adjusted various display properties
-
-1.3.1 Slight update CSS update (paging buttons backgrounds)
+2.0 Simplified all scripts and enhanced the sample application
 
 # Application Setup
 
@@ -99,84 +59,44 @@ To run the example application, follow these steps:
 Check the *Enable Style Sheet* checkbox in the application properties
 
 ## Connector
-To run the sample, a database connector to the "StadiumFilterData" database and two Queries need to be added
+This module requires two queries or end points
 
-### "TotalRecords"
-Create a query called "TotalRecords". The result is used when calculating the total number of pages in the *Repeater*
-```sql
-select count(ID) as total from MyData
-```
+1. TotalRecords
 
-### "Select"
-Create a query called "Select"
+Returns an integer that represents the total number of records (used to set the pages count and control the page navigation buttons)
 
-**NOTE: When pasting this SQL into Stadium and pressing the "Fetch Fields & Parameters" button, an error will pop up. Set the "Type" option for the parameters called "offsetRows" and "pageSize" to "Int64" as shown below and press the "Fetch Fields & Parameters" button again.**
+1. Data
 
-```sql
-SELECT ID
-      ,FirstName
-      ,LastName
-      ,NoOfChildren
-      ,NoOfPets
-      ,StartDate
-      ,EndDate
-      ,Healthy
-      ,Happy
-      ,Subscription
-  FROM dbo.MyData
-  ORDER BY
-  case when UPPER(@sortField) = 'ID' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN ID END ASC,
-  case when UPPER(@sortField) = 'ID' AND LOWER(@sortDirection) = 'desc' THEN ID END DESC,
-  case when LOWER(@sortField) = 'FirstName' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN FirstName END ASC,
-  case when LOWER(@sortField) = 'FirstName' AND LOWER(@sortDirection) = 'desc' THEN FirstName END DESC,
-  case when LOWER(@sortField) = 'LastName' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN LastName END ASC,
-  case when LOWER(@sortField) = 'LastName' AND LOWER(@sortDirection) = 'desc' THEN LastName END DESC,
-  case when LOWER(@sortField) = 'NoOfChildren' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN NoOfChildren END ASC,
-  case when LOWER(@sortField) = 'NoOfChildren' AND LOWER(@sortDirection) = 'desc' THEN NoOfChildren END DESC,
-  case when LOWER(@sortField) = 'NoOfPets' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN NoOfPets END ASC,
-  case when LOWER(@sortField) = 'NoOfPets' AND LOWER(@sortDirection) = 'desc' THEN NoOfPets END DESC,
-  case when LOWER(@sortField) = 'StartDate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN StartDate END ASC,
-  case when LOWER(@sortField) = 'StartDate' AND LOWER(@sortDirection) = 'desc' THEN StartDate END DESC,
-  case when LOWER(@sortField) = 'EndDate' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN EndDate END ASC,
-  case when LOWER(@sortField) = 'EndDate' AND LOWER(@sortDirection) = 'desc' THEN EndDate END DESC,
-  case when LOWER(@sortField) = 'Healthy' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Healthy END ASC,
-  case when LOWER(@sortField) = 'Healthy' AND LOWER(@sortDirection) = 'desc' THEN Healthy END DESC,
-  case when LOWER(@sortField) = 'Happy' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Happy END ASC,
-  case when LOWER(@sortField) = 'Happy' AND LOWER(@sortDirection) = 'desc' THEN Happy END DESC,
-  case when LOWER(@sortField) = 'Subscription' AND (LOWER(@sortDirection) = 'asc' OR @sortDirection = '') THEN Subscription END ASC,
-  case when LOWER(@sortField) = 'Subscription' AND LOWER(@sortDirection) = 'desc' THEN Subscription END DESC,
-  case when @sortField = '' then ID end ASC,
-  case when @sortField = 'undefined' then ID end ASC
-  OFFSET @offsetRows ROWS FETCH NEXT @pageSize ROWS ONLY
-```
+Returns a set of records for a DataGrid page
 
-## Global Script
+## RepeaterDataGrid Global Script
 1. Create a Global Script called "RepeaterDataGrid"
 2. Add the input parameters below to the Global Script
-   1. Columns
-   2. ContainerClass
-   3. EditableGrid
-   4. EventCallback
+   1. ContainerClass
+   2. EventCallback
+   3. Headers
+   4. PagingType
    5. State
    6. TotalRecords
-   7. PagingType
 3. Drag a *JavaScript* action into the script
 4. Add the Javascript below unchanged into the JavaScript code property
 ```javascript
-/* Stadium Script v1.3 Init https://github.com/stadium-software/repeater-datagrid */
+/* Stadium Script v2.0 https://github.com/stadium-software/repeater-datagrid */
 let scope = this;
-let cols = ~.Parameters.Input.Columns;
+loadCSS();
+let cols = ~.Parameters.Input.Headers;
 let eventHandler = ~.Parameters.Input.EventCallback;
+let pagingType = ~.Parameters.Input.PagingType || "default";
+pagingType = pagingType.toLowerCase();
 let state = ~.Parameters.Input.State;
 let pageSize = parseInt(state.pageSize);
 let sortField = state.sortField;
 let sortDirection = state.sortDirection;
-let pagingType = ~.Parameters.Input.PagingType || "default";
-let pagers = 10;
 let page = parseInt(state.page);
 let totalRecords = parseInt(~.Parameters.Input.TotalRecords);
 if (isNaN(page)) page = 1;
 let totalPages = Math.ceil(totalRecords / pageSize);
+let pagers = 10;
 let containerClass = ~.Parameters.Input.ContainerClass;
 if (!containerClass) {
      console.error("The ContainerClass parameter is required");
@@ -191,7 +111,7 @@ if (container.length == 0) {
     return false;
 }
 container = container[0];
-container.classList.add("stadium-dg-repeater");
+container.classList.add("stadium-server-side-dg-repeater");
 let grid = container.querySelectorAll(".grid-layout");
 if (grid.length == 0) {
     console.error("The container '" + containerClass + "' must contain a Grid control");
@@ -199,14 +119,30 @@ if (grid.length == 0) {
 } else if (grid.length > 1) {
     console.error("The container '" + containerClass + "' must contain only one Grid control");
     return false;
+} else { 
+    grid = grid[0];
 }
-grid = grid[0];
+let infinitePaging = false;
+if (pagingType == "infinite") {
+    infinitePaging = true;
+}
+if (infinitePaging) {
+    var infiniteObserver = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            page++;
+            callBack(page);
+        }
+    }, {
+            rootMargin: '0px 0px 100px 0px'
+    });
+}
 let contID = container.id;
 let cellsPerRow = cols.length;
 if (document.getElementById(contID + "_stylesheet")) document.getElementById(contID + "_stylesheet").remove();
 attachStyling();
 addHeaders(cols);
 addPaging();
+writeCookie();
 let cells = container.querySelectorAll(".grid-repeater-item");
 let rowNo = 1, cellCounter = 0;
 for (let i = 0; i < cells.length; i++) {
@@ -218,6 +154,10 @@ for (let i = 0; i < cells.length; i++) {
     }
 }
 /*----------------------------------------------------------------------------------------------*/
+function callBack(page) { 
+    let st = { sortField: sortField, sortDirection: sortDirection, page: page, pageSize: pageSize };
+    scope[eventHandler](st);
+}
 function addHeaders(c) { 
     let headers = container.querySelectorAll(".repeater-header");
     for (let i = 0; i < headers.length; i++) {
@@ -246,19 +186,19 @@ function addHeaders(c) {
 function addPaging() { 
     if (container.querySelector(".paging")) container.querySelector(".paging").remove();
     let pagingContainer = createTag("div", ["layout-control", "container-layout", "paging", "inline-block-element"], []);
-    if (pagingType.toLowerCase() == "classic") {
+    if (pagingType == "classic") {
         let pagingButtonsContainer = createTag("ul", ["pagination"], []);
         let pagingButtons = addClassicPagingButtons(pagingButtonsContainer, page);
         pagingContainer.appendChild(pagingButtons);
-    } else {
+    } else if (pagingType == "default") {
         let prevButtonContainer = createTag("div", ["control-container", "button-container", "previous-button"], []);
-        let prevButton = createTag("div", ["btn", "btn-lg", "btn-default"], [], "<<");
+        let prevButton = createTag("button", ["btn", "btn-lg", "btn-default"], [], "<<");
         let nextButtonContainer = createTag("div", ["control-container", "button-container", "next-button"], []);
-        let nextButton = createTag("div", ["btn", "btn-lg", "btn-default"], [], ">>");
+        let nextButton = createTag("button", ["btn", "btn-lg", "btn-default"], [], ">>");
         let goInputContainer = createTag("div", ["control-container", "text-box-container", "specific-page"], []);
-        let goInput = createTag("input", ["form-control", "error-border", "text-box-input", "specific-page-input"], [{name: "type", value: "text"}]);
+        let goInput = createTag("input", ["form-control", "error-border", "text-box-input", "specific-page-input"], [{ name: "type", value: "text" }]);
         let goButtonContainer = createTag("div", ["control-container", "button-container", "specific-page-go"], []);
-        let goButton = createTag("div", ["btn", "btn-lg", "btn-default"], [], "Go");
+        let goButton = createTag("button", ["btn", "btn-lg", "btn-default"], [], "Go");
         let pageInfoContainer = createTag("div", ["control-container", "label-container", "page-info"]);
         let pageInfo = createTag("span", [], [], getPageLabel());
         if (page == 1) prevButtonContainer.classList.add("disabled");
@@ -275,17 +215,24 @@ function addPaging() {
         pagingContainer.appendChild(goButtonContainer);
         pagingContainer.appendChild(pageInfoContainer);
 
-        prevButton.addEventListener("click", function(){
+        prevButton.addEventListener("click", function () {
             handlePaging("previous");
         });
-        nextButton.addEventListener("click", function(){
+        nextButton.addEventListener("click", function () {
             handlePaging("next");
         });
-        goButton.addEventListener("click", function(){
+        goButton.addEventListener("click", function () {
             handlePaging("go");
         });
+        goInput.addEventListener("keypress", function (e) {
+            if ((e.keyCode < 48 || e.keyCode > 57)) {
+                e.preventDefault();
+            }
+            if (e.keyCode === 13) {
+                handlePaging("go");
+            }
+        });
     }
-
     let stackLayout, allStacks = container.querySelectorAll(".stack-layout-container");
     for (let i = 0; i < allStacks.length; i++) {
         if (allStacks[i].contains(grid) && allStacks.length > i) {
@@ -298,27 +245,41 @@ function addPaging() {
     }
     stackLayout.classList.add('paging-stack-layout');
     stackLayout.insertBefore(pagingContainer, stackLayout.firstChild);
+    if (infinitePaging) {
+        infiniteObserver.observe(container.querySelector(".paging"));
+    }
 }
 function handlePaging(tp) { 
     let nextBtn = container.querySelector(".next-button"),
         prevBtn = container.querySelector(".previous-button"),
         goInpt = container.querySelector(".specific-page-input"),
-        pageInfo = container.querySelector(".page-info span");
-    nextBtn.classList.remove("disabled");
-    prevBtn.classList.remove("disabled");
-    if (tp == "next" && page < totalPages) page++;
-    if (tp == "previous" && page > 1) page--;
-    if (tp == "go") {
+        pageInfo = container.querySelector(".page-info span"),
+        fire = false;
+    if (tp == "next" && page < totalPages) {
+        page++;
+        fire = true;
+    }
+    if (tp == "previous" && page > 1) {
+        page--;
+        fire = true;
+    }
+    if (tp == "go" && goInpt.value) {
         let pgVal = goInpt.value;
         goInpt.value = "";
         if (!isNaN(pgVal) && pgVal >= 1 && pgVal <= totalPages) {
             page = parseInt(pgVal);
+            fire = true;
         }
     }
-    if (page == 1) prevBtn.classList.add("disabled");
-    if (page == totalPages) nextBtn.classList.add("disabled");
-    pageInfo.textContent = getPageLabel();
-    scope[eventHandler]({ sortField: sortField, sortDirection: sortDirection, page: page, pageSize: pageSize });
+    if (fire) {
+        nextBtn.classList.remove("disabled");
+        prevBtn.classList.remove("disabled");
+        if (page == 1) prevBtn.classList.add("disabled");
+        if (page == totalPages) nextBtn.classList.add("disabled");
+        pageInfo.textContent = getPageLabel();
+        callBack(page);
+        writeCookie();
+    }
 }
 function addClassicPagingButtons(parent, currentPage) {
     currentPage = currentPage - 1;
@@ -374,7 +335,7 @@ function handleClassicPaging(ev) {
         page = Number(pg);
         elParent.classList.add("active");
     }
-    scope[eventHandler]({ sortField: sortField, sortDirection: sortDirection, page: page, pageSize: pageSize });
+    callBack(page);
 }
 function handleSort(e) { 
     let clickedEl = e.target;
@@ -387,14 +348,20 @@ function handleSort(e) {
 }
 function sort(field, direction) {
     if (!["asc", "desc"].includes(direction.toLowerCase())) direction = "asc";
-    let allHeaders = container.querySelectorAll(".repeater-header .link-container");
+    let allHeaders = container.querySelectorAll(".grid-item:not(.grid-repeater-item) .link-container");
     for (let i = 0; i < allHeaders.length; i++) {
         allHeaders[i].classList.remove("dg-asc-sorting", "dg-desc-sorting");
+        if (allHeaders[i].querySelector("a").getAttribute("field").toLowerCase() == field.toLowerCase()) {
+            allHeaders[i].classList.add("dg-" + direction + "-sorting");
+        }
     }
-    grid.querySelector(".repeater-header .link-container:has(.btn-link[field='" + field + "'])").classList.add("dg-" + direction + "-sorting");
     sortDirection = direction;
     sortField = field;
-    scope[eventHandler]({ sortField: field, sortDirection: direction, page: page, pageSize: pageSize });
+    if (infinitePaging) {
+        page = 1;
+    }
+    callBack(page);
+    writeCookie();
 }
 function createTag(type, arrClasses, arrAttributes, text) {
     let el = document.createElement(type);
@@ -418,6 +385,28 @@ function getPageLabel() {
     }
     return pgLabel;
 }
+function writeCookie() {
+    let value = JSON.stringify({
+        "pageSize": pageSize,
+        "page": page,
+        "sortDirection": sortDirection,
+        "sortField": sortField
+    });
+    let options = {
+        secure: true,
+        samesite: "strict",
+        domain: window.location.hostname,
+    };
+    let updatedCookie = encodeURIComponent(contID) + "=" + encodeURIComponent(value);
+    for (let optionKey in options) {
+        updatedCookie += "; " + optionKey;
+        let optionValue = options[optionKey];
+        if (optionValue !== true) {
+            updatedCookie += "=" + optionValue;
+        }
+    }
+    document.cookie = updatedCookie;
+}
 function attachStyling() {
     let selector = [];
     for (let i = 0; i < cellsPerRow; i++) {
@@ -426,10 +415,10 @@ function attachStyling() {
     let css = `
 #${contID} {
     .grid-item:nth-child(${cellsPerRow}n+1) {
-        border-left: 1px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR, #ccc));
+        border-left: 1px solid var(--dg-border-color);
     }
     .grid-item:nth-child(${cellsPerRow}n) {
-        border-right: 1px solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR, #ccc));
+        border-right: 1px solid var(--dg-border-color);
     }
     ${selector.join(", ")} {
         background-color: var(--dg-alternate-row-bg-color, var(--DATA-GRID-ODD-ROW-BACKGROUND-COLOR));
@@ -441,13 +430,281 @@ function attachStyling() {
     style.id = contID + "_stylesheet";
     style.appendChild(document.createTextNode(css));
 }
+function loadCSS() {
+    let moduleID = "stadium-server-side-dg";
+    if (!document.getElementById(moduleID)) {
+        let cssMain = document.createElement("style");
+        cssMain.id = moduleID;
+        cssMain.type = "text/css";
+        cssMain.textContent = `.stadium-server-side-dg-repeater {
+    margin-top: 1rem;
+    align-items: center;
+
+    .control-container.grid-container.grid-layout {
+        padding-right: 0;
+    }
+
+    .grid-item {
+        display: flex;
+        align-items: center;
+        border-bottom: 0.1rem solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR, #ccc));
+        padding: var(--DATA-GRID-CELL-TOPBOTTOM-PADDING, 0.8rem) var(--DATA-GRID-CELL-RIGHTLEFT-PADDING, 0.8rem);
+
+        .control-container {
+            font-size: var(--dg-item-font-size, var(--DATA-GRID-CELL-FONT-SIZE, 1.4rem));
+            margin-top: 0;
+            vertical-align: -webkit-baseline-middle;
+            padding-right: 1rem;
+            color: var(--DATA-GRID-CELL-FONT-COLOR, var(--BODY-FONT-COLOR, #333));
+        }
+    }
+
+    .grid-item:has(> .control-container.visually-hidden),
+    .grid-item:has(> .control-container[style='display: none;']) {
+        padding: 0;
+        margin: 0;
+    }
+
+    .control-container.visually-hidden {
+        padding: 0;
+        display: none;
+    }
+
+    .repeater-header {
+        border-top: 0.1rem solid var(--dg-border-color, var(--DATA-GRID-HEADER-CELL-BORDER-COLOR, #ccc));
+        border-bottom: 0.3rem solid var(--dg-border-color, var(--DATA-GRID-HEADER-CELL-BORDER-COLOR, #ccc));
+        padding: var(--dg-header-topbottom-padding, var(--DATA-GRID-HEADER-CELL-TOPBOTTOM-PADDING, 0.8rem)) var(--dg-header-rightleft-padding, var(--DATA-GRID-HEADER-CELL-RIGHTLEFT-PADDING, 0.8rem));
+        background-color: var(--DATA-GRID-HEADER-ROW-BACKGROUND-COLOR, #fff);
+
+        .btn.btn-link,
+        span {
+            text-transform: var(--dg-header-text-transform, var(--DATA-GRID-HEADER-CELL-TEXT-TRANSFORM, uppercase));
+            font-weight: var(--dg-header-font-weight, var(--DATA-GRID-HEADER-CELL-FONT-WEIGHT, 600));
+            font-size: var(--dg-header-font-size, var(--DATA-GRID-HEADER-CELL-FONT-SIZE, 1.2rem));
+            color: var(--DATA-GRID-HEADER-CELL-FONT-COLOR, #1976d2);
+            line-height: var(--DATA-GRID-HEADER-CELL-LINE-HEIGHT, 1.428571429);
+            white-space: nowrap;
+        }
+
+        .btn.btn-link {
+            text-decoration: var(--dg-header-link-underline, var(--DATA-GRID-HEADER-CELL-TEXT-DECORATION, underline));
+
+            &:hover {
+                text-decoration: var(--dg-header-link-underline, var(--DATA-GRID-HEADER-CELL-HOVER-TEXT-DECORATION, underline));
+                color: var(--DATA-GRID-HEADER-CELL-HOVER-FONT-COLOR, #999)
+            }
+        }
+    }
+
+    .dg-alternate-row {
+        background-color: var(--dg-alternate-row-bg-color, var(--DATA-GRID-ODD-ROW-BACKGROUND-COLOR));
+    }
+
+    .dg-asc-sorting {
+        background-image: var(--dg-sorting-asc-icon, var(--DATA-GRID-SORT-ARROW-ASC-ICON));
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: var(--dg-sorting-icon-size, var(--DATA-GRID-SORT-ARROW-ASCDESC-ICON-SIZE));
+    }
+
+    .dg-desc-sorting {
+        background-image: var(--dg-sorting-desc-icon, var(--DATA-GRID-SORT-ARROW-DESC-ICON));
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: var(--dg-sorting-icon-size, var(--DATA-GRID-SORT-ARROW-ASCDESC-ICON-SIZE));
+    }
+
+    .paging-stack-layout {
+        display: flex;
+        align-items: center;
+        padding: 0.4rem 0;
+        border: 0.1rem solid var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
+
+        .control-container {
+            margin-top: 0;
+            vertical-align: -webkit-baseline-middle;
+            padding-right: 1.2rem;
+        }
+
+        .current-page {
+            font-style: italic;
+        }
+
+        .label-container {
+            margin-left: 0.4rem;
+
+            span {
+                font-size: 1.2rem;
+            }
+        }
+
+        .button-container {
+            padding-right: 0.2rem;
+        }
+
+        .button-container:first-child {
+            padding-left: 0.6rem;
+        }
+
+        .button-container.disabled .btn {
+            background-color: var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
+            border-color: var(--dg-border-color, var(--DATA-GRID-BORDER-COLOR));
+        }
+
+        .btn {
+            width: auto;
+            padding: 0.2rem 0.6rem;
+            font-size: 1.2rem;
+            box-shadow: none;
+            color: var(--DATA-GRID-PAGINATION-ACTIVE-FONT-COLOR);
+            background-color: var(--DATA-GRID-PAGINATION-ACTIVE-BACKGROUND-COLOR);
+            border-color: var(--DATA-GRID-PAGINATION-ACTIVE-BORDER-COLOR);
+        }
+
+        .text-box-container {
+            padding: 0 0.4rem 0 1.2rem;
+
+            .specific-page-input {
+                width: var(--dg-paging-specific-page-textbox-width, 6rem);
+                height: 2.2rem;
+                padding: 0 0.4rem;
+            }
+        }
+
+        .pagination {
+            padding: 0.2rem 0.6rem;
+
+            a {
+                user-select: none;
+                text-decoration: none;
+                color: var(--DATA-GRID-PAGINATION-FONT-COLOR);
+                background-color: var(--DATA-GRID-PAGINATION-BACKGROUND-COLOR);
+                border: 0.1rem solid var(--DATA-GRID-PAGINATION-BORDER-COLOR);
+            }
+
+            .active a,
+            a:hover {
+                color: var(--DATA-GRID-PAGINATION-ACTIVE-FONT-COLOR);
+                background-color: var(--DATA-GRID-PAGINATION-ACTIVE-BACKGROUND-COLOR);
+                border-color: var(--DATA-GRID-PAGINATION-ACTIVE-BORDER-COLOR);
+            }
+        }
+    }
+    .hide {
+        display: none;
+    }
+    .show-inline {
+        display: block;
+    }
+    .nodata {
+        border-right: 1px solid var(--dg-border-color);
+        border-left: 1px solid var(--dg-border-color);
+        padding: 0.4rem 0.6rem;
+    }
+}
+
+html {
+    min-height: 100%;
+    font-size: 62.5%;
+}`;
+        document.head.appendChild(cssMain);
+    }
+}
+```
+
+## RepeaterDataGridGetState Global Script
+1. Create a Global Script called "RepeaterDataGridGetState"
+2. Add the input parameters below to the Global Script
+   1. ContainerClass
+3. Drag a *JavaScript* action into the script
+4. Add the Javascript below unchanged into the JavaScript code property
+```javascript
+/* Stadium Script v2.0 https://github.com/stadium-software/repeater-datagrid-client-side */
+let containerClass = ~.Parameters.Input.ContainerClass;
+if (!containerClass) {
+     console.error("The ContainerClass parameter is required");
+     return false;
+}
+let container = document.querySelectorAll("." + containerClass);
+if (container.length == 0) {
+    console.error("The class '" + containerClass + "' is not assigned to any container");
+    return false;
+} else if (container.length > 1) {
+    console.error("The class '" + containerClass + "' is assigned to multiple containers");
+    return false;
+}
+container = container[0];
+const getCookieValue = (name) => (document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || '');
+let ret = getCookieValue(container.id);
+if (ret)  ret = JSON.parse(decodeURIComponent(ret));
+return ret;
+```
+
+## RepeaterDataGridSetData Global Script
+1. Create a Global Script called "RepeaterDataGridSetData"
+2. Add the input parameters below to the Global Script
+   1. Append
+   2. ContainerClass
+   3. Data
+   4. RepeaterName
+3. Drag a *JavaScript* action into the script
+4. Add the Javascript below unchanged into the JavaScript code property
+```javascript
+/* Stadium Script v2.0 https://github.com/stadium-software/repeater-datagrid */
+let scope = this;
+let containerClass = ~.Parameters.Input.ContainerClass;
+if (!containerClass) {
+     console.error("The ContainerClass parameter is required");
+     return false;
+}
+let container = document.querySelectorAll("." + containerClass);
+if (container.length == 0) {
+    console.error("The class '" + containerClass + "' is not assigned to any container");
+    return false;
+} else if (container.length > 1) {
+    console.error("The class '" + containerClass + "' is assigned to multiple containers");
+    return false;
+}
+container = container[0];
+let repeater = ~.Parameters.Input.RepeaterName;
+if (!repeater) {
+     console.error("The RepeaterName parameter is required");
+     return false;
+}
+let pageData = ~.Parameters.Input.Data || [];
+let append = ~.Parameters.Input.Append;
+let repeaterData = scope[repeater + 'List'];
+if (!repeaterData) repeaterData = [];
+if (append === true) {
+    scope[repeater + 'List'].push.apply(repeaterData, pageData);
+} else { 
+    scope[repeater + 'List'] = pageData;
+}
+attachNoData();
+function attachNoData() {
+    let nodata = container.querySelector(".nodata");
+    if (!nodata) {
+        nodata = document.createElement("div");
+        nodata.classList.add("label-container", "nodata", "hide");
+        let nodataLabel = document.createElement("span");
+        nodataLabel.textContent = "No data found";
+        nodata.appendChild(nodataLabel);
+        container.appendChild(nodata);
+    }
+    if (scope[repeater + 'List'].length == 0) {
+        nodata.classList.remove("hide");
+    } else {
+        nodata.classList.add("hide");
+    }
+}
 ```
 
 ## Types
-Create three types
+Create the following types
 1. Column
 2. State
 3. DataSet
+4. Page (only needed if filtering is a requirement)
 
 ### Column
 This type is used to define the columns in the DataGrid
@@ -458,6 +715,21 @@ This type is used to define the columns in the DataGrid
 
 ![](images/ColumnType.png)
 
+#### Type Import
+1. Right-click on the `Types` node in the `Application Explorer`
+2. In the `Import Type` popup
+    1. Add "Column" into the `Name` input field
+    2. Copy & paste the JSON below into the main input area
+
+```json
+{
+	"name": "",
+	"header": "",
+    "visible": "",
+    "sortable": ""
+}
+```
+
 ### State
 The state of the DataGrid is stored in this type
 1. pageSize (any)
@@ -467,8 +739,23 @@ The state of the DataGrid is stored in this type
 
 ![](images/Statetype.png)
 
+#### Type Import
+1. Right-click on the `Types` node in the `Application Explorer`
+2. In the `Import Type` popup
+    1. Add "State" into the `Name` input field
+    2. Copy & paste the JSON below into the main input area
+
+```json
+{
+	"pageSize": "",
+	"page": "",
+    "sortDirection": "",
+    "sortField": ""
+}
+```
+
 ### DataSet
-This type will be used in the *Repeater* *ListItem Type* property. The "DataSet" type must contain properties for all columns the DataGrid you create (visible and hidden). 
+This type will be used in the *Repeater* *ListItem Type* property. The "DataSet" type must contain properties for all columns the DataGrid you create (visible, hidden, checkboxes, etc.). 
 
 The "DataSet" type for the sample application as the following properties
 1. ID (any)
@@ -483,6 +770,31 @@ The "DataSet" type for the sample application as the following properties
 10. Subscription (any)
 
 ![](images/DataSetType.png)
+
+### Page
+A type containing the state and the filters (only needed if filtering is a requirement)
+1. State (state)
+2. Filters (list)
+
+![](images/PageType.png)
+
+#### Type Import
+1. Right-click on the `Types` node in the `Application Explorer`
+2. In the `Import Type` popup
+    1. Add "Page" into the `Name` input field
+    2. Copy & paste the JSON below into the main input area
+
+```json
+{
+    "Filters":[],
+    "State":{
+        "pageSize":"",
+        "page":"",
+        "sortDirection":"",
+        "sortField":""
+    }
+}
+```
 
 ## Page
 The page must contain a number of controls
@@ -505,83 +817,54 @@ A *Repeater* control will contain the data (rows) in the DataGrid
 
 ![](images/RepeaterListItemType.png)
 
-### Labels
-*Label* controls in the *Repeater* represent the columns in the DataGrid
+### Various Controls
+All controls that represent the columns in the DataGrid
 1. For each column (field) in your DataSet
-   1. Drag a *Label* control into the *Repeater*
-   2. Name the *Label* "*ColumnName*Label"
-   3. In the *Label* *Text* property, select the corresponding *Repeater ListItem* property in the dropdown (see screenshot below)
-   4. Set the *Visible* property of the *Label* to "false" to hide the column
+   1. Drag a control into the *Repeater*
+   2. Bind the control to a corresponding *Repeater ListItem* property in the dropdown (see screenshot below)
 
 ![](images/BindingControlsToRepeater.png)
 
 ## Page Scripts
+1. Create a script on the page that will fetch and assign the data for each DataGrid page 
+2. Add the input Parameter:
+   1. State
 
-### "GetData" Page Script
-Create a script under the page called "GetData" with the input Parameter:
-1. State
+### Script Actions
 
-**Script Actions**
+![](images/ScriptActions.png)
 
-![](images/GetDataScript.png)
+1. Call the endpoint or query that returns the appropriate slice of data to display
+2. Drag the "RepeaterDataGridSetData" script into the page script and complete the input parameters
+   1. Append: Leave blank for normal paging. Set to true when infinite scrolling is used
+   2. ContainerClass: The unique class you assigned to the Container
+   3. Data: The data to be assigned 
+   4. RepeaterName: The name of the Repeater control from the Stadium Designer
 
-1. Drag a *Variable* to the script and call it "OffsetRows_var"
-2. In the "OffsetRows_var" *Value* property, paste the following value (including the =) to calculate the offset
-```javascript
-= (~.Parameters.Input.State.page - 1) * ~.Parameters.Input.State.pageSize
-```
-3. Drag the "StadiumFilterData_Select" query to the script and paste the values below into the query input parameters
-   1. sortField: 
-   ```javascript
-   = ~.Parameters.Input.State.sortField
-   ```
-   2. sortDirection: 
-   ```javascript
-   = ~.Parameters.Input.State.sortDirection
-   ```
-   3. offsetRows: 
-   ```javascript
-   = ~.OffsetRows_var
-   ```
-   4. pageSize: 
-   ```javascript
-   = ~.Parameters.Input.State.pageSize
-   ```
+![](images/RepeaterName.png)
 
-4. Drag a *SetValue* to the script to set the *Repeater* data
-   1. Target: The Repeater List Property
-   2. Source: The data returned by the connector
+## Page.Load Event Handler
 
-![](images/SetRepeaterData.png)
+![](images/Page.Load.png)
 
-### "Initialise" Page Script
-Create a script under the page called "Initialise" with the input Parameter:
-1. State
+1. Drag a "State" type to the event handler
+2. Define the initial loading state
+   1. pageSize: The number of records to show in the DataGrid
+   2. page; The initial page of data to show
+   3. sortDirection: asc or desc
+   4. sortField: The initial dataset property to sort by
+3. Call the Totals end point or query
+4. Drag a `List` into the event handler and assign the `Headers` type to it
 
-**Script Actions**
+![](images/HeadersList.png)
 
-![](images/InitialiseScript.png)
-
-1. Drag a "State" *Type* into the script
-   1. In the *Value* property of the "State" *Type*, assign the script input parameter called "State"
-
-![](images/StateInputAssignment.png)
-
-2. Drag the "TotalRecords" query into the "Initialise" script
-3. Drag the "GetData" script into the "Initialise" script
-   1. Assign the "State" type to the "State" input parameter of the "GetData" script
-
-![](images/GetDataInputAssign.png)
-
-4. Drag a *List* into the script and call it "ColumnsList"
-5. Assign the "Column" *Type* to the *Item Type* property
-6. Add an entry in this list for **every column** in your *Repeater* DataGrid
+5. Add an entry in this list for **every column** in your *Repeater* DataGrid
    1. name (required): The column name (case sensitive)
    2. header (optional): The header title shown on this column. A value is necessary for users to be able to sort by the column
    3. visible (optional): Add "false" to hide the column (default is true)
    4. sortable (optional): Add "false" to show the heading as an (unclickable) *Label* instead of a *Link* (default is true)
 
-**Example ColumnsList Value**
+**Example HeadersList Value**
 ```json
 [{
  "name": "ID",
@@ -618,112 +901,41 @@ Create a script under the page called "Initialise" with the input Parameter:
 }]
 ```
 
-5. Drag the "RepeaterDataGrid" script into the "Initialise" script and provide the "RepeaterDataGrid" input parameters
-   1. Columns: The *List* of columns called "ColumnsList"
-   2. ContainerClass: The unique class you assigned to the main container (e.g. server-side-datagrid)
-   3. EventCallback: The name of the script that fetches and assigns the data pages to the *Repeater*. In the example application this is called "GetData"
-   4. State: The "State" *Type* created in step 1 of the "Initialise" script
-   5. EditableGrid (optional): Ignore this property for standard data display. It's a boolean that hides the paging controls and changes header *Links* controls into *Label* controls ([see Editable Datagrids](#editable-datagrids))
-   6. TotalRecords: The "total" result returned by the "TotalRecords" query: 
-```javascript
-~.StadiumFilterData_Totals.FirstResult.total
-```
-   7. PagingType (optional): Leave blank or enter 'classic' for the standard Stadium DataGrid paging format
+6. Drag the "RepeaterDataGrid" into the script and complete the input parameters
+   1. ContainerClass: The unique class you assigned to the Container
+   2. EventCallback: The name of the page script that assigns the data
+   3. Headers: The list of headers you defined
+   4. PagingType: Leave blank for default paging. Optionally add "Classic" or "infinite"
+   5. State: The State type you created
+   6. TotalRecords: The total number of records in the dataset
+7. Drag the script that fetches and assigns the data (e.g. GetData) to the DataGrid and assign the "State" type to the input parameter
 
-![](images/RepeaterDGScriptInputParams.png)
+## Advanced Features
+Review the sample application for supported advanced features, including:
 
-## Page.Load Event Handler
-
-![](images/PageLoadEv.png)
-
-1. Drag a "State" *Type* into the event handler
-2. Open the *Object Editor* in the dropdown of the "State" *Values* property
-3. Assign values to the properties
-   1. pageSize: The number of items you want to show in each DataGrid page
-   2. page: The initial page to show in the DataGrid
-   3. sortDirection: The initial sort direction (asc or desc)
-   4. sortField: The initial sort field of the dataset
-
-![](images/StateTypeObjectProps.png)
-
-4. Drag the "Initialise" script into the Page.Load event handler
-   1. Assign the "State" type to the "State" input parameter
+1. Link or icon columns
+2. Editable columns
+3. Conditional cell formatting
+4. Custom filters
+5. Data export
+6. Selectable rows
+7. Settable page sizes
 
 ## CSS
-The CSS below is required for the correct functioning of the module. Variables exposed in the [*css-file-variables.css*](css-file-variables.css) file can be [customised](#customising-css).
+Optionally, you can use the variables exposed in the [*stadium-repeater-datagrid-variables.css*](stadium-repeater-datagrid-variables.css) file to customise the look of various aspects of the DataGrid. 
 
-### Before v6.12
-1. Create a folder called "CSS" inside of your Embedded Files in your application
-2. Drag the two CSS files from this repo [*css-file-variables.css*](css-file-variables.css) and [*css-file.css*](css-file.css) into that folder
-3. Paste the link tags below into the *head* property of your application
-```html
-<link rel="stylesheet" href="{EmbeddedFiles}/CSS/css-file.css">
-<link rel="stylesheet" href="{EmbeddedFiles}/CSS/css-file-variables.css">
-``` 
-
-### v6.12+
-1. Create a folder called "CSS" inside of your Embedded Files in your application
-2. Drag the CSS files from this repo [*css-file.css*](css-file.css) into that folder
-3. Paste the link tag below into the *head* property of your application
-```html
-<link rel="stylesheet" href="{EmbeddedFiles}/CSS/css-file.css">
-``` 
-
-### Customising CSS
-1. Open the CSS file called [*css-file-variables.css*](css-file-variables.css) from this repo
+1. Open the CSS file called [*stadium-repeater-datagrid-variables.css*](stadium-repeater-datagrid-variables.css) from this repo
 2. Adjust the variables in the *:root* element as you see fit
 3. Stadium 6.12+ users can comment out any variable they do **not** want to customise
-4. Add the [*css-file-variables.css*](css-file-variables.css) to the "CSS" folder in the EmbeddedFiles (overwrite)
+4. Add the [*stadium-repeater-datagrid-variables.css*](stadium-repeater-datagrid-variables.css) to the "CSS" folder in the EmbeddedFiles (overwrite)
 5. Paste the link tag below into the *head* property of your application (if you don't already have it there)
 ```html
-<link rel="stylesheet" href="{EmbeddedFiles}/CSS/css-file-variables.css">
+<link rel="stylesheet" href="{EmbeddedFiles}/CSS/stadium-repeater-datagrid-variables.css">
 ``` 
-6. Add the file to the "CSS" inside of your Embedded Files in your application
-
-**NOTE: Do not change any of the CSS in the 'css-file.css' file**
+1. Add the file to the "CSS" inside of your Embedded Files in your application
 
 ## Upgrading Stadium Repos
 Stadium Repos are not static. They change as additional features are added and bugs are fixed. Using the right method to work with Stadium Repos allows for upgrading them in a controlled manner. 
 
 How to use and update application repos is described here: [Working with Stadium Repos](https://github.com/stadium-software/samples-upgrading)# Optional Extensions
 
-## Loading Spinners
-To add a loading spinner to the DataGrid implement the [Spinners Module](https://github.com/stadium-software/spinners)
-
-## Link Columns
-[Link Columns](link-columns.md)
-
-![](images/LinkColumnView.gif)
-
-## Selectable Rows
-[Selectable Rows](selectable-rows.md)
-
-![](images/SelectableRowsVw.gif)
-
-## Load Specific Page
-[Loading a specific page](load-specific-page.md)
-
-![](images/CustomLoadView.gif)
-
-## Selectable Page Size
-[Selectable Page Size](customisable-page-size.md)
-
-![](images/SettablePgSize.gif)
-
-## Conditional Cell Styling
-[Conditional Cell Styling](conditional-cell-styling.md)
-
-![](images/ConsitionalCellFormatView.gif)
-
-## Custom Filters
-[Custom Filters](custom-filters.md)
-
-![](images/CutomFilterView.gif)
-
-## Editable DataGrids
-[Making columns or the entire DataGrid editable](editable.md)
-
-![](images/EditingViewBoth.gif)
-
-## Data Exports
-[Data Exports](export.md)
