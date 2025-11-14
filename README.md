@@ -69,6 +69,8 @@ Returns an integer that represents the total number of records (used to set the 
 Returns a set of records for a DataGrid page
 
 ## RepeaterDataGrid Global Script
+Initialises the RepeaterDataGrid
+
 1. Create a Global Script called "RepeaterDataGrid"
 2. Add the input parameters below to the Global Script
    1. ContainerClass
@@ -612,6 +614,8 @@ html {
 ```
 
 ## RepeaterDataGridGetState Global Script
+Returns the current state of the DataGrid
+
 1. Create a Global Script called "RepeaterDataGridGetState"
 2. Add the input parameters below to the Global Script
    1. ContainerClass
@@ -640,6 +644,8 @@ return ret;
 ```
 
 ## RepeaterDataGridSetData Global Script
+Use this to assign data to the DataGrid
+
 1. Create a Global Script called "RepeaterDataGridSetData"
 2. Add the input parameters below to the Global Script
    1. Append
