@@ -1,6 +1,5 @@
 # Server-Side DataGrid Repeater <!-- omit in toc -->
 
-## Contents <!-- omit in toc -->
 1. [Overview](#overview)
 2. [Basic Setup Overview](#basic-setup-overview)
 3. [Version](#version)
